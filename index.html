@@ -79,6 +79,75 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2018/01/22/学习python的Flask框架（一）/" title="" itemprop="url"></a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-01-22T13:25:11.618Z" itemprop="datePublished"> 发表于 2018-01-22</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h4 id="一、安装Python"><a href="#一、安装Python" class="headerlink" title="一、安装Python"></a>一、安装Python</h4><p>在pyhton官网下载3.6版本的Python安装包，网址为：<a href="https://www.python.org/downloads/，下载后安装。" target="_blank" rel="noopener">https://www.python.org/downloads/，下载后安装。</a></p>
+<h4 id="二、安装PyCharm"><a href="#二、安装PyCharm" class="headerlink" title="二、安装PyCharm"></a>二、安装PyCharm</h4><p>PyCharm是一个功能强大，界面友好的编译器。下载网址为：<a href="https://www.jetbrains.com/pycharm/，建议下载专业版，下载完成后安装（Java编写可能需要装jdk）。" target="_blank" rel="noopener">https://www.jetbrains.com/pycharm/，建议下载专业版，下载完成后安装（Java编写可能需要装jdk）。</a></p>
+<h4 id="三、安装virtualenv"><a href="#三、安装virtualenv" class="headerlink" title="三、安装virtualenv"></a>三、安装virtualenv</h4><p>virtualenv是创建不同的虚拟环境供不同的系统使用，项目之间的运行环境保持独立性而相互不受影响的管理工具。</p>
+<p>$ cd \Scripts&gt; pip install virtualenv</p>
+<p>$ &gt;virtulenv venv</p>
+<p>cd venv /scripts </p>
+<p>$&gt;activate</p>
+<h4 id="四、创建项目"><a href="#四、创建项目" class="headerlink" title="四、创建项目"></a>四、创建项目</h4><p>利用PyCharm创建flask项目。</p>
+<ul>
+<li><img src="https://note.youdao.com/yws/public/resource/05dd2b4ef95e01da4fded8d974a1f39c/xmlnote/2ED7E6DEE10A4D4D99E4C7124B9A8945/5966" alt="img"></li>
+</ul>
+<h4 id="五、运行项目"><a href="#五、运行项目" class="headerlink" title="五、运行项目"></a>五、运行项目</h4><p><img src="https://note.youdao.com/yws/public/resource/05dd2b4ef95e01da4fded8d974a1f39c/xmlnote/B6277973D0C1487AB2C344E71436F32F/5970" alt="3"></p>
+<h4 id="六、程序演示"><a href="#六、程序演示" class="headerlink" title="六、程序演示"></a>六、程序演示</h4><ol>
+<li>​</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">from flask import Flask  #导入flask类</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)  #实例化flask对象</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&apos;/&apos;)  #route装饰器函数，定义路由规则，装饰器位于函数之上</span><br><span class="line">def hello_world():#视图函数，处理客户端发起的请求</span><br><span class="line">    return &apos;Hello World!&apos;#返回给浏览器</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:#运行路口</span><br><span class="line">    app.run(debug=True)#启动APP实例 debug调试模式</span><br></pre></td></tr></table></figure>
+<ol>
+<li>Jinja2是Python下一个被广泛应用的模版引擎，他的设计思想来源于Django的模板引擎，并扩展了其语法和一系列强大的功能。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">from flask import Flask,render_template</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&apos;/&apos;)</span><br><span class="line">def hello_world():</span><br><span class="line">    return render_template(&apos;index.html&apos;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    app.run(debug=True)</span><br></pre></td></tr></table></figure>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2018/01/22/hello-world/" title="Hello World" itemprop="url">Hello World</a>
   </h1>
   <p class="article-author">By
