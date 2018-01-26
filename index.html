@@ -79,6 +79,62 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2018/01/26/python画图汇总/" title="" itemprop="url"></a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-01-26T08:28:26.817Z" itemprop="datePublished"> 发表于 2018-01-26</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <hr>
+<h2 id="title-python画图汇总"><a href="#title-python画图汇总" class="headerlink" title="title:python画图汇总"></a>title:python画图汇总</h2><h4 id="一、折线图"><a href="#一、折线图" class="headerlink" title="一、折线图"></a>一、折线图</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">import matplotlib.pyplot as plt #绘图模块</span><br><span class="line">import numpy as np#若导入失败需要pip install安装这两个模块</span><br><span class="line">plt.rcParams[&apos;font.sans-serif&apos;]=[&apos;SimHei&apos;] #用来正常显示中文标签</span><br><span class="line">plt.rcParams[&apos;axes.unicode_minus&apos;]=False </span><br><span class="line">x=np.linspace(-10,10,50)#从1到2区间</span><br><span class="line">y1=2*x</span><br><span class="line">y2=x**2</span><br><span class="line">plt.plot(x, y1, &quot;b-&quot;, linewidth=1,label=&apos;折线&apos;)#linewidth线的宽度，marker为点以什么形式展示，label为线标签</span><br><span class="line">plt.plot(x, y2, &quot;r-&quot;, linewidth=1,label=&apos;曲线&apos;)</span><br><span class="line">plt.savefig(&quot;1.jpg&quot;)#保存照片</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()#展示照片</span><br></pre></td></tr></table></figure>
+<p><img src="http://120.25.221.136/images/line.jpg" alt=""></p>
+<h4 id="二、显示多个画图窗口"><a href="#二、显示多个画图窗口" class="headerlink" title="二、显示多个画图窗口"></a>二、显示多个画图窗口</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import numpy as np</span><br><span class="line">x=np.linspace(-10,10,50)</span><br><span class="line">y1=2*x</span><br><span class="line">y2=x**2</span><br><span class="line">plt.figure()#第一个窗口</span><br><span class="line">plt.plot(x, y1, &quot;b-&quot;)</span><br><span class="line">plt.figure(number=2)</span><br><span class="line">plt.plot(x, y2, &quot;r-&quot;)#第二个窗口</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()#展示照片，出现两个窗口</span><br></pre></td></tr></table></figure>
+<p><img src="http://120.25.221.136/images/multine.png" alt=""></p>
+<h4 id="三、设置坐标轴"><a href="#三、设置坐标轴" class="headerlink" title="三、设置坐标轴"></a>三、设置坐标轴</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import numpy as np</span><br><span class="line">x=np.linspace(1,10,50)</span><br><span class="line">y=2*x</span><br><span class="line">plt.plot(x, y)</span><br><span class="line">plt.ylabel(&apos;y label&apos;)#x标签</span><br><span class="line">plt.xlabel(&apos;x label&apos;)#y标签</span><br><span class="line">plt.yticks([1,10,20],[&apos;low&apos;,&apos;middle&apos;,&apos;high&apos;])</span><br><span class="line">plt.xticks([1,5,10],[&apos;$ bad$&apos;,&apos;$good$&apos;,&apos;$really \ good$&apos;])#将x轴的数字替代</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="http://120.25.221.136/images/label.jpg" alt=""></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2018/01/23/nginx配置简单图片显示/" title="nginx配置简单图片显示" itemprop="url">nginx配置简单图片显示</a>
   </h1>
   <p class="article-author">By
@@ -209,7 +265,7 @@
 <p>$&gt;activate</p>
 <h4 id="四、创建项目"><a href="#四、创建项目" class="headerlink" title="四、创建项目"></a>四、创建项目</h4><p>利用PyCharm创建flask项目。</p>
 <ul>
-<li><img src="https://note.youdao.com/yws/public/resource/05dd2b4ef95e01da4fded8d974a1f39c/xmlnote/2ED7E6DEE10A4D4D99E4C7124B9A8945/5966" alt="img"></li>
+<li><img src="http://120.25.221.136/images/create.png" alt="img"></li>
 </ul>
 <h4 id="五、运行项目"><a href="#五、运行项目" class="headerlink" title="五、运行项目"></a>五、运行项目</h4><p><img src="http://120.25.221.136/images/start.png" alt="3"></p>
 <h4 id="六、程序演示"><a href="#六、程序演示" class="headerlink" title="六、程序演示"></a>六、程序演示</h4><ol>

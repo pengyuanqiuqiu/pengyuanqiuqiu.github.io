@@ -4,27 +4,28 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>学习python的Flask框架（一） | Jianyu</title>
+    <title>Jianyu</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="PengYuan">
     
 
     
-    <meta name="description" content="一、安装Python在pyhton官网下载3.6版本的Python安装包，网址为：https://www.python.org/downloads/，下载后安装。 二、安装PyCharmPyCharm是一个功能强大，界面友好的编译器。下载网址为：https://www.jetbrains.com/pycharm/，建议下载专业版，下载完成后安装（Java编写可能需要装jdk）。 三、安装virtu">
+    <meta name="description" content="title:python画图汇总一、折线图12345678910111213# -*- coding: utf-8 -*-import matplotlib.pyplot as plt #绘图模块import numpy as np#若导入失败需要pip install安装这两个模块plt.rcParams[&amp;apos;font.sans-serif&amp;apos;]=[&amp;apos;SimHei&amp;a">
 <meta property="og:type" content="article">
-<meta property="og:title" content="学习python的Flask框架（一）">
-<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/01/22/学习python的Flask框架（一）/index.html">
+<meta property="og:title" content="Jianyu">
+<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/01/26/python画图汇总/index.html">
 <meta property="og:site_name" content="Jianyu">
-<meta property="og:description" content="一、安装Python在pyhton官网下载3.6版本的Python安装包，网址为：https://www.python.org/downloads/，下载后安装。 二、安装PyCharmPyCharm是一个功能强大，界面友好的编译器。下载网址为：https://www.jetbrains.com/pycharm/，建议下载专业版，下载完成后安装（Java编写可能需要装jdk）。 三、安装virtu">
+<meta property="og:description" content="title:python画图汇总一、折线图12345678910111213# -*- coding: utf-8 -*-import matplotlib.pyplot as plt #绘图模块import numpy as np#若导入失败需要pip install安装这两个模块plt.rcParams[&amp;apos;font.sans-serif&amp;apos;]=[&amp;apos;SimHei&amp;a">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://120.25.221.136/images/create.png">
-<meta property="og:image" content="http://120.25.221.136/images/start.png">
-<meta property="og:updated_time" content="2018-01-26T08:53:07.439Z">
+<meta property="og:image" content="http://120.25.221.136/images/line.jpg">
+<meta property="og:image" content="http://120.25.221.136/images/multine.png">
+<meta property="og:image" content="http://120.25.221.136/images/label.jpg">
+<meta property="og:updated_time" content="2018-01-26T09:45:00.135Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="学习python的Flask框架（一）">
-<meta name="twitter:description" content="一、安装Python在pyhton官网下载3.6版本的Python安装包，网址为：https://www.python.org/downloads/，下载后安装。 二、安装PyCharmPyCharm是一个功能强大，界面友好的编译器。下载网址为：https://www.jetbrains.com/pycharm/，建议下载专业版，下载完成后安装（Java编写可能需要装jdk）。 三、安装virtu">
-<meta name="twitter:image" content="http://120.25.221.136/images/create.png">
+<meta name="twitter:title" content="Jianyu">
+<meta name="twitter:description" content="title:python画图汇总一、折线图12345678910111213# -*- coding: utf-8 -*-import matplotlib.pyplot as plt #绘图模块import numpy as np#若导入失败需要pip install安装这两个模块plt.rcParams[&amp;apos;font.sans-serif&amp;apos;]=[&amp;apos;SimHei&amp;a">
+<meta name="twitter:image" content="http://120.25.221.136/images/line.jpg">
 
     
     <link rel="alternative" href="http://www.163.com/rss/" title="Jianyu" type="application/atom+xml">
@@ -84,14 +85,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/01/22/学习python的Flask框架（一）/" title="学习python的Flask框架（一）" itemprop="url">学习python的Flask框架（一）</a>
+      <a href="/2018/01/26/python画图汇总/" title="" itemprop="url"></a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
 		
   <p class="article-time">
-    <time datetime="2018-01-22T13:25:11.618Z" itemprop="datePublished"> 发表于 2018-01-22</time>
+    <time datetime="2018-01-26T08:28:26.817Z" itemprop="datePublished"> 发表于 2018-01-26</time>
     
   </p>
 </header>
@@ -100,30 +101,17 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、安装Python"><span class="toc-number">1.</span> <span class="toc-text">一、安装Python</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、安装PyCharm"><span class="toc-number">2.</span> <span class="toc-text">二、安装PyCharm</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、安装virtualenv"><span class="toc-number">3.</span> <span class="toc-text">三、安装virtualenv</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#四、创建项目"><span class="toc-number">4.</span> <span class="toc-text">四、创建项目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#五、运行项目"><span class="toc-number">5.</span> <span class="toc-text">五、运行项目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#六、程序演示"><span class="toc-number">6.</span> <span class="toc-text">六、程序演示</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#title-python画图汇总"><span class="toc-number">1.</span> <span class="toc-text">title:python画图汇总</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、折线图"><span class="toc-number">1.0.1.</span> <span class="toc-text">一、折线图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、显示多个画图窗口"><span class="toc-number">1.0.2.</span> <span class="toc-text">二、显示多个画图窗口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、设置坐标轴"><span class="toc-number">1.0.3.</span> <span class="toc-text">三、设置坐标轴</span></a></li></ol></li></ol></li></ol>
 		
 		</div>
 		
-		<h4 id="一、安装Python"><a href="#一、安装Python" class="headerlink" title="一、安装Python"></a>一、安装Python</h4><p>在pyhton官网下载3.6版本的Python安装包，网址为：<a href="https://www.python.org/downloads/，下载后安装。" target="_blank" rel="noopener">https://www.python.org/downloads/，下载后安装。</a></p>
-<h4 id="二、安装PyCharm"><a href="#二、安装PyCharm" class="headerlink" title="二、安装PyCharm"></a>二、安装PyCharm</h4><p>PyCharm是一个功能强大，界面友好的编译器。下载网址为：<a href="https://www.jetbrains.com/pycharm/，建议下载专业版，下载完成后安装（Java编写可能需要装jdk）。" target="_blank" rel="noopener">https://www.jetbrains.com/pycharm/，建议下载专业版，下载完成后安装（Java编写可能需要装jdk）。</a></p>
-<h4 id="三、安装virtualenv"><a href="#三、安装virtualenv" class="headerlink" title="三、安装virtualenv"></a>三、安装virtualenv</h4><p>virtualenv是创建不同的虚拟环境供不同的系统使用，项目之间的运行环境保持独立性而相互不受影响的管理工具。</p>
-<p>$ cd \Scripts&gt; pip install virtualenv</p>
-<p>$ &gt;virtulenv venv</p>
-<p>cd venv /scripts </p>
-<p>$&gt;activate</p>
-<h4 id="四、创建项目"><a href="#四、创建项目" class="headerlink" title="四、创建项目"></a>四、创建项目</h4><p>利用PyCharm创建flask项目。</p>
-<ul>
-<li><img src="http://120.25.221.136/images/create.png" alt="img"></li>
-</ul>
-<h4 id="五、运行项目"><a href="#五、运行项目" class="headerlink" title="五、运行项目"></a>五、运行项目</h4><p><img src="http://120.25.221.136/images/start.png" alt="3"></p>
-<h4 id="六、程序演示"><a href="#六、程序演示" class="headerlink" title="六、程序演示"></a>六、程序演示</h4><ol>
-<li>​</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">from flask import Flask  #导入flask类</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)  #实例化flask对象</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&apos;/&apos;)  #route装饰器函数，定义路由规则，装饰器位于函数之上</span><br><span class="line">def hello_world():#视图函数，处理客户端发起的请求</span><br><span class="line">    return &apos;Hello World!&apos;#返回给浏览器</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:#运行路口</span><br><span class="line">    app.run(debug=True)#启动APP实例 debug调试模式</span><br></pre></td></tr></table></figure>
-<ol>
-<li>Jinja2是Python下一个被广泛应用的模版引擎，他的设计思想来源于Django的模板引擎，并扩展了其语法和一系列强大的功能。</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">from flask import Flask,render_template</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&apos;/&apos;)</span><br><span class="line">def hello_world():</span><br><span class="line">    return render_template(&apos;index.html&apos;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    app.run(debug=True)</span><br></pre></td></tr></table></figure>
+		<hr>
+<h2 id="title-python画图汇总"><a href="#title-python画图汇总" class="headerlink" title="title:python画图汇总"></a>title:python画图汇总</h2><h4 id="一、折线图"><a href="#一、折线图" class="headerlink" title="一、折线图"></a>一、折线图</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">import matplotlib.pyplot as plt #绘图模块</span><br><span class="line">import numpy as np#若导入失败需要pip install安装这两个模块</span><br><span class="line">plt.rcParams[&apos;font.sans-serif&apos;]=[&apos;SimHei&apos;] #用来正常显示中文标签</span><br><span class="line">plt.rcParams[&apos;axes.unicode_minus&apos;]=False </span><br><span class="line">x=np.linspace(-10,10,50)#从1到2区间</span><br><span class="line">y1=2*x</span><br><span class="line">y2=x**2</span><br><span class="line">plt.plot(x, y1, &quot;b-&quot;, linewidth=1,label=&apos;折线&apos;)#linewidth线的宽度，marker为点以什么形式展示，label为线标签</span><br><span class="line">plt.plot(x, y2, &quot;r-&quot;, linewidth=1,label=&apos;曲线&apos;)</span><br><span class="line">plt.savefig(&quot;1.jpg&quot;)#保存照片</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()#展示照片</span><br></pre></td></tr></table></figure>
+<p><img src="http://120.25.221.136/images/line.jpg" alt=""></p>
+<h4 id="二、显示多个画图窗口"><a href="#二、显示多个画图窗口" class="headerlink" title="二、显示多个画图窗口"></a>二、显示多个画图窗口</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import numpy as np</span><br><span class="line">x=np.linspace(-10,10,50)</span><br><span class="line">y1=2*x</span><br><span class="line">y2=x**2</span><br><span class="line">plt.figure()#第一个窗口</span><br><span class="line">plt.plot(x, y1, &quot;b-&quot;)</span><br><span class="line">plt.figure(number=2)</span><br><span class="line">plt.plot(x, y2, &quot;r-&quot;)#第二个窗口</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()#展示照片，出现两个窗口</span><br></pre></td></tr></table></figure>
+<p><img src="http://120.25.221.136/images/multine.png" alt=""></p>
+<h4 id="三、设置坐标轴"><a href="#三、设置坐标轴" class="headerlink" title="三、设置坐标轴"></a>三、设置坐标轴</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import numpy as np</span><br><span class="line">x=np.linspace(1,10,50)</span><br><span class="line">y=2*x</span><br><span class="line">plt.plot(x, y)</span><br><span class="line">plt.ylabel(&apos;y label&apos;)#x标签</span><br><span class="line">plt.xlabel(&apos;x label&apos;)#y标签</span><br><span class="line">plt.yticks([1,10,20],[&apos;low&apos;,&apos;middle&apos;,&apos;high&apos;])</span><br><span class="line">plt.xticks([1,5,10],[&apos;$ bad$&apos;,&apos;$good$&apos;,&apos;$really \ good$&apos;])#将x轴的数字替代</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="http://120.25.221.136/images/label.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -136,7 +124,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://pengyuanqiuqiu.github.io/2018/01/22/学习python的Flask框架（一）/" data-title="学习python的Flask框架（一） | Jianyu" data-tsina="" class="share clearfix">
+	  <div data-url="https://pengyuanqiuqiu.github.io/2018/01/26/python画图汇总/" data-title="Jianyu" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -149,19 +137,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2018/01/23/解决python画图中文乱码问题问题/" title="解决python画图中文乱码问题问题">
-  <strong>上一篇：</strong><br/>
-  <span>
-  解决python画图中文乱码问题问题</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2018/01/22/hello-world/"  title="Hello World">
+<a href="/2018/01/23/nginx配置简单图片显示/"  title="nginx配置简单图片显示">
  <strong>下一篇：</strong><br/> 
- <span>Hello World
+ <span>nginx配置简单图片显示
 </span>
 </a>
 </div>
@@ -178,7 +158,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、安装Python"><span class="toc-number">1.</span> <span class="toc-text">一、安装Python</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、安装PyCharm"><span class="toc-number">2.</span> <span class="toc-text">二、安装PyCharm</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、安装virtualenv"><span class="toc-number">3.</span> <span class="toc-text">三、安装virtualenv</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#四、创建项目"><span class="toc-number">4.</span> <span class="toc-text">四、创建项目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#五、运行项目"><span class="toc-number">5.</span> <span class="toc-text">五、运行项目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#六、程序演示"><span class="toc-number">6.</span> <span class="toc-text">六、程序演示</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#title-python画图汇总"><span class="toc-number">1.</span> <span class="toc-text">title:python画图汇总</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、折线图"><span class="toc-number">1.0.1.</span> <span class="toc-text">一、折线图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、显示多个画图窗口"><span class="toc-number">1.0.2.</span> <span class="toc-text">二、显示多个画图窗口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、设置坐标轴"><span class="toc-number">1.0.3.</span> <span class="toc-text">三、设置坐标轴</span></a></li></ol></li></ol></li></ol>
  
   </div>
 
