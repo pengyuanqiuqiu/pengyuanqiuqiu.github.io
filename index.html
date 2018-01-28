@@ -79,6 +79,92 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2018/01/28/安装saprk/" title="安装spark" itemprop="url">安装spark</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-01-28T07:46:54.036Z" itemprop="datePublished"> 发表于 2018-01-28</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h4 id="一、安装scala"><a href="#一、安装scala" class="headerlink" title="一、安装scala"></a>一、安装scala</h4><p>1.下载<a href="https://downloads.lightbend.com/scala/2.11.8/scala-2.11.8.tgz" target="_blank" rel="noopener">scala-2.11.8.tgz</a>，将它放入主服务器中，建立文件夹，存放路径为/usr/local/hadoop/scala</p>
+<p><img src="../img/1.png" alt=""></p>
+<p>2.解压scala文件，执行tar -zvxf scala-2.11.8.tgz。</p>
+<p>3.配置scala环境变量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vim  /etc/profile</span><br><span class="line">增加scala环境路径，根据你的放置文件路径。</span><br><span class="line">#set scala environment</span><br><span class="line">export SCALA_HOME=/usr/local/hadoop/scala/scala-2.11.8</span><br><span class="line">export PATH=$PATH:$SCALA_HOME/bin</span><br><span class="line"># source /etc/profile #重新激活环境变量</span><br></pre></td></tr></table></figure>
+<p>4.在你的子结点重复上面的步骤，安装scala在子结点中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp -r /usr/local/hadoop/scala/scala-2.11.8  slaver1:/usr/local/hadoop/scala</span><br><span class="line">scp -r /usr/local/hadoop/scala/scala-2.11.8  slaver2:/usr/local/hadoop/scala</span><br></pre></td></tr></table></figure>
+<p>注意：也可以通过别的工具上传再解压，加快速度。</p>
+<p>5.测试安装是否成功，输入scala进入scala编辑环境。</p>
+<p><img src="../img/2.png" alt=""></p>
+<h4 id="二、安装spark"><a href="#二、安装spark" class="headerlink" title="二、安装spark"></a>二、安装spark</h4><p>1.下载<a href="http://www.apache.org/dist/spark/spark-2.2.0/" target="_blank" rel="noopener">spark</a>,在主服务器中上传压缩包并解压，存放路径为/usr/local/hadoop/spark</p>
+<p>2.解压scala文件，执行tar -zvxf spark-2.2.0-bin-hadoop2.7.tgz。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># tar -zvxf spark-2.2.0-bin-hadoop2.7.tgz</span><br></pre></td></tr></table></figure>
+<p>3.在spark目录下的配置文件中，找到spark-env.sh.template文件复制为另一文件改名为spark-env.sh。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp spark-env.sh.template   spark-env.sh</span><br></pre></td></tr></table></figure>
+<p>4.配置spark-env.sh文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">export HADOOP_CONF_DIR=/usr/local/hadoop/hadoop-2.8.0/#hadoop配置文件路径</span><br><span class="line">export JAVA_HOME=/usr/local/hadoop/java/jdk1.8.0_151/#jdk环境变量</span><br><span class="line">export SCALA_HOME=/usr/local/hadoop/scala/scala-2.11.8#scala环境变量</span><br><span class="line">export SPARK_MASTER_IP=你的主服务器内网ip</span><br><span class="line">export SPARK_MASTER_PORT=7077#master启动的端口号</span><br><span class="line">export SPARK_MASTER_WEBUI_PORT=8080#webui的端口号</span><br><span class="line">export SPARK_WORKER_PORT=7078#worker的启动端口号</span><br><span class="line">export SPARK_WORKER_WEBUI_PORT=worker的webUI端口号</span><br><span class="line">export SPARK_WORKER_CORES=1#作业可用的CPU内核数量（默认：所有可用</span><br><span class="line">export SPARK_WORKER_INSTANCES=1</span><br><span class="line">export SPARK_WORKER_MEMORY=2g#作业可使用的内存容量</span><br></pre></td></tr></table></figure>
+<p>5.配置spark-defaults.conf,找到spark-defaults.conf.template文件复制为另一文件改名为spark-defaults.conf.template。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp spark-defaults.conf.template   spark-defaults.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">	</span><br><span class="line">#该参数需要根据用户master节点的实际ip地址进行配置</span><br><span class="line">spark.master=spark://主服务器内网ip:7077</span><br></pre></td></tr></table></figure>
+<p>6.配置slaves,找到slaves.template文件复制为另一文件改名为slaves。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp slaves.template slaves</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#增加从节点</span><br><span class="line">slaver1</span><br><span class="line">slaver2</span><br></pre></td></tr></table></figure>
+<p><img src="../img/3.png" alt=""></p>
+<p>7.配置环境变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#vim  /etc/profile</span><br><span class="line"></span><br><span class="line">#set spark environment</span><br><span class="line">export SPARK_HOME=/usr/local/hadoop/spark/spark-2.2.0-bin-hadoop2.7</span><br><span class="line">export PATH=$PATH:$SPARK_HOME/bin</span><br><span class="line"></span><br><span class="line">#source /etc/profile</span><br></pre></td></tr></table></figure>
+<p>8.在从节点里重复上述步骤。</p>
+<p>9.启动spark（Hadoop是已经启动的），运行下列命令。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#开启</span><br><span class="line">sbin/start-all.sh</span><br><span class="line">或者</span><br><span class="line">sbin/start-master.sh</span><br><span class="line">sbin/start-slaves.sh</span><br><span class="line">#停止</span><br><span class="line">sbin/stop-all.sh</span><br><span class="line">或者</span><br><span class="line">sbin/stop-master.sh</span><br><span class="line">sbin/stop-slaves.sh</span><br></pre></td></tr></table></figure>
+<p><img src="../img/4.png" alt=""></p>
+<p>10.查看执行状态，输入命令jps，可以看到相关信息</p>
+<p>主节点</p>
+<p><img src="../img/5.png" alt=""></p>
+<p>从节点</p>
+<p><img src="../img/6.png" alt=""></p>
+<p>在浏览器中，查看spark集群状态 ，master节点输入网址<a href="http://master:8080/" target="_blank" rel="noopener">http://masterip:8080</a> </p>
+<p><img src="../img/7.png" alt=""></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2018/01/27/Hexo绑定域名/" title="Hexo绑定域名" itemprop="url">Hexo绑定域名</a>
   </h1>
   <p class="article-author">By
@@ -92,13 +178,13 @@
 </header>
     <div class="article-content">
         
-        <h4 id="一、购买域名"><a href="#一、购买域名" class="headerlink" title="一、购买域名"></a>一、购买域名</h4><p>可以在阿里云或者腾讯云购买域名，我的在腾讯云购买，域名为</p>
+        <h4 id="一、购买域名"><a href="#一、购买域名" class="headerlink" title="一、购买域名"></a>一、购买域名</h4><p>可以在阿里云或者腾讯云购买域名，我的在腾讯云购买，域名为[pengyuan.ac.cn</p>
 <h4 id="二、解析域名"><a href="#二、解析域名" class="headerlink" title="二、解析域名"></a>二、解析域名</h4><p>登入腾讯云控制台，如图，找到域名管理，对你绑定的域名进行解析。</p>
 <p><img src="http://120.25.221.136/images/console.png" alt=""></p>
 <h4 id="三、添加解析记录"><a href="#三、添加解析记录" class="headerlink" title="三、添加解析记录"></a>三、添加解析记录</h4><p>点击添加解析，记录类型选A或CNAME，A记录的记录值就是ip地址，github(官方文档)提供了两个IP地址，<code>192.30.252.153和192.30.252.154</code>，这两个IP地址为github的服务器地址，两个都要解析。解析记录设置两个www和@，线路就默认就行，CNAME记录值填你的github博客网址。</p>
 <p><img src="http://120.25.221.136/images/jiexi.png" alt=""></p>
 <p><img src="http://120.25.221.136/images/git.png" alt=""></p>
-<h4 id="四、增加CNAME文件"><a href="#四、增加CNAME文件" class="headerlink" title="四、增加CNAME文件"></a>四、增加CNAME文件</h4><p>在Hexo的目录下的source文件夹下增加cname文件，文件的内容是你的域名我的是</p>
+<h4 id="四、增加CNAME文件"><a href="#四、增加CNAME文件" class="headerlink" title="四、增加CNAME文件"></a>四、增加CNAME文件</h4><p>在Hexo的目录下的source文件夹下增加cname文件，文件的内容是你的域名我的是<a href="pengyuan.ac.cn">pengyuan.ac.cn</a></p>
 <p><img src="http://120.25.221.136/images/cname.png" alt=""></p>
 <p><img src="http://120.25.221.136/images/content.png" alt=""></p>
 <h4 id="最后访问域名，就可以访问成功。"><a href="#最后访问域名，就可以访问成功。" class="headerlink" title="最后访问域名，就可以访问成功。"></a>最后访问域名，就可以访问成功。</h4>

@@ -1,0 +1,501 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>安装spark | Jianyu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="PengYuan">
+    
+
+    
+    <meta name="description" content="一、安装scala1.下载scala-2.11.8.tgz，将它放入主服务器中，建立文件夹，存放路径为/usr/local/hadoop/scala  2.解压scala文件，执行tar -zvxf scala-2.11.8.tgz。 3.配置scala环境变量。 123456vim  /etc/profile增加scala环境路径，根据你的放置文件路径。#set scala environmen">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安装spark">
+<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/01/28/安装saprk/index.html">
+<meta property="og:site_name" content="Jianyu">
+<meta property="og:description" content="一、安装scala1.下载scala-2.11.8.tgz，将它放入主服务器中，建立文件夹，存放路径为/usr/local/hadoop/scala  2.解压scala文件，执行tar -zvxf scala-2.11.8.tgz。 3.配置scala环境变量。 123456vim  /etc/profile增加scala环境路径，根据你的放置文件路径。#set scala environmen">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://pengyuanqiuqiu.github.io/2018/01/28/img/1.png">
+<meta property="og:image" content="https://pengyuanqiuqiu.github.io/2018/01/28/img/2.png">
+<meta property="og:image" content="https://pengyuanqiuqiu.github.io/2018/01/28/img/3.png">
+<meta property="og:image" content="https://pengyuanqiuqiu.github.io/2018/01/28/img/4.png">
+<meta property="og:image" content="https://pengyuanqiuqiu.github.io/2018/01/28/img/5.png">
+<meta property="og:image" content="https://pengyuanqiuqiu.github.io/2018/01/28/img/6.png">
+<meta property="og:image" content="https://pengyuanqiuqiu.github.io/2018/01/28/img/7.png">
+<meta property="og:updated_time" content="2018-01-28T08:52:18.201Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="安装spark">
+<meta name="twitter:description" content="一、安装scala1.下载scala-2.11.8.tgz，将它放入主服务器中，建立文件夹，存放路径为/usr/local/hadoop/scala  2.解压scala文件，执行tar -zvxf scala-2.11.8.tgz。 3.配置scala环境变量。 123456vim  /etc/profile增加scala环境路径，根据你的放置文件路径。#set scala environmen">
+<meta name="twitter:image" content="https://pengyuanqiuqiu.github.io/2018/01/28/img/1.png">
+
+    
+    <link rel="alternative" href="http://www.163.com/rss/" title="Jianyu" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Jianyu" title="Jianyu"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Jianyu">Jianyu</a></h1>
+				<h2 class="blog-motto">Learn more and more</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:pengyuanqiuqiu.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/01/28/安装saprk/" title="安装spark" itemprop="url">安装spark</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-01-28T07:46:54.036Z" itemprop="datePublished"> 发表于 2018-01-28</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、安装scala"><span class="toc-number">1.</span> <span class="toc-text">一、安装scala</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、安装spark"><span class="toc-number">2.</span> <span class="toc-text">二、安装spark</span></a></li></ol>
+		
+		</div>
+		
+		<h4 id="一、安装scala"><a href="#一、安装scala" class="headerlink" title="一、安装scala"></a>一、安装scala</h4><p>1.下载<a href="https://downloads.lightbend.com/scala/2.11.8/scala-2.11.8.tgz" target="_blank" rel="noopener">scala-2.11.8.tgz</a>，将它放入主服务器中，建立文件夹，存放路径为/usr/local/hadoop/scala</p>
+<p><img src="../img/1.png" alt=""></p>
+<p>2.解压scala文件，执行tar -zvxf scala-2.11.8.tgz。</p>
+<p>3.配置scala环境变量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vim  /etc/profile</span><br><span class="line">增加scala环境路径，根据你的放置文件路径。</span><br><span class="line">#set scala environment</span><br><span class="line">export SCALA_HOME=/usr/local/hadoop/scala/scala-2.11.8</span><br><span class="line">export PATH=$PATH:$SCALA_HOME/bin</span><br><span class="line"># source /etc/profile #重新激活环境变量</span><br></pre></td></tr></table></figure>
+<p>4.在你的子结点重复上面的步骤，安装scala在子结点中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp -r /usr/local/hadoop/scala/scala-2.11.8  slaver1:/usr/local/hadoop/scala</span><br><span class="line">scp -r /usr/local/hadoop/scala/scala-2.11.8  slaver2:/usr/local/hadoop/scala</span><br></pre></td></tr></table></figure>
+<p>注意：也可以通过别的工具上传再解压，加快速度。</p>
+<p>5.测试安装是否成功，输入scala进入scala编辑环境。</p>
+<p><img src="../img/2.png" alt=""></p>
+<h4 id="二、安装spark"><a href="#二、安装spark" class="headerlink" title="二、安装spark"></a>二、安装spark</h4><p>1.下载<a href="http://www.apache.org/dist/spark/spark-2.2.0/" target="_blank" rel="noopener">spark</a>,在主服务器中上传压缩包并解压，存放路径为/usr/local/hadoop/spark</p>
+<p>2.解压scala文件，执行tar -zvxf spark-2.2.0-bin-hadoop2.7.tgz。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># tar -zvxf spark-2.2.0-bin-hadoop2.7.tgz</span><br></pre></td></tr></table></figure>
+<p>3.在spark目录下的配置文件中，找到spark-env.sh.template文件复制为另一文件改名为spark-env.sh。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp spark-env.sh.template   spark-env.sh</span><br></pre></td></tr></table></figure>
+<p>4.配置spark-env.sh文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">export HADOOP_CONF_DIR=/usr/local/hadoop/hadoop-2.8.0/#hadoop配置文件路径</span><br><span class="line">export JAVA_HOME=/usr/local/hadoop/java/jdk1.8.0_151/#jdk环境变量</span><br><span class="line">export SCALA_HOME=/usr/local/hadoop/scala/scala-2.11.8#scala环境变量</span><br><span class="line">export SPARK_MASTER_IP=你的主服务器内网ip</span><br><span class="line">export SPARK_MASTER_PORT=7077#master启动的端口号</span><br><span class="line">export SPARK_MASTER_WEBUI_PORT=8080#webui的端口号</span><br><span class="line">export SPARK_WORKER_PORT=7078#worker的启动端口号</span><br><span class="line">export SPARK_WORKER_WEBUI_PORT=worker的webUI端口号</span><br><span class="line">export SPARK_WORKER_CORES=1#作业可用的CPU内核数量（默认：所有可用</span><br><span class="line">export SPARK_WORKER_INSTANCES=1</span><br><span class="line">export SPARK_WORKER_MEMORY=2g#作业可使用的内存容量</span><br></pre></td></tr></table></figure>
+<p>5.配置spark-defaults.conf,找到spark-defaults.conf.template文件复制为另一文件改名为spark-defaults.conf.template。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp spark-defaults.conf.template   spark-defaults.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">	</span><br><span class="line">#该参数需要根据用户master节点的实际ip地址进行配置</span><br><span class="line">spark.master=spark://主服务器内网ip:7077</span><br></pre></td></tr></table></figure>
+<p>6.配置slaves,找到slaves.template文件复制为另一文件改名为slaves。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp slaves.template slaves</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#增加从节点</span><br><span class="line">slaver1</span><br><span class="line">slaver2</span><br></pre></td></tr></table></figure>
+<p><img src="../img/3.png" alt=""></p>
+<p>7.配置环境变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#vim  /etc/profile</span><br><span class="line"></span><br><span class="line">#set spark environment</span><br><span class="line">export SPARK_HOME=/usr/local/hadoop/spark/spark-2.2.0-bin-hadoop2.7</span><br><span class="line">export PATH=$PATH:$SPARK_HOME/bin</span><br><span class="line"></span><br><span class="line">#source /etc/profile</span><br></pre></td></tr></table></figure>
+<p>8.在从节点里重复上述步骤。</p>
+<p>9.启动spark（Hadoop是已经启动的），运行下列命令。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#开启</span><br><span class="line">sbin/start-all.sh</span><br><span class="line">或者</span><br><span class="line">sbin/start-master.sh</span><br><span class="line">sbin/start-slaves.sh</span><br><span class="line">#停止</span><br><span class="line">sbin/stop-all.sh</span><br><span class="line">或者</span><br><span class="line">sbin/stop-master.sh</span><br><span class="line">sbin/stop-slaves.sh</span><br></pre></td></tr></table></figure>
+<p><img src="../img/4.png" alt=""></p>
+<p>10.查看执行状态，输入命令jps，可以看到相关信息</p>
+<p>主节点</p>
+<p><img src="../img/5.png" alt=""></p>
+<p>从节点</p>
+<p><img src="../img/6.png" alt=""></p>
+<p>在浏览器中，查看spark集群状态 ，master节点输入网址<a href="http://master:8080/" target="_blank" rel="noopener">http://masterip:8080</a> </p>
+<p><img src="../img/7.png" alt=""></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://pengyuanqiuqiu.github.io/2018/01/28/安装saprk/" data-title="安装spark | Jianyu" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/01/27/Hexo绑定域名/"  title="Hexo绑定域名">
+ <strong>下一篇：</strong><br/> 
+ <span>Hexo绑定域名
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、安装scala"><span class="toc-number">1.</span> <span class="toc-text">一、安装scala</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、安装spark"><span class="toc-number">2.</span> <span class="toc-text">二、安装spark</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github 名片</p>
+<div class="github-card" data-github="https://github.com/pengyuanqiuqiu" data-theme="medium"></div>
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
+</div>
+
+
+
+  
+
+  
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.nowcoder.com/" target="_blank" title="牛客网">牛客网</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.acmcoder.com/index" target="_blank" title="赛码网">赛码网</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="http://www.163.com/rss/" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="400" class="share_self"  frameborder="0" scrolling="no" src="https://widget.weibo.com/weiboshow/index.php?language=&width=0&height=400&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=2871001534&verifier=2889e96f&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m jianyu. <br/>
+			Let&#39;s go!</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2871001534" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/pengyuanqiuqiu" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		<a href="http://www.zhihu.com/people/peng-yuan-19-57?utm_source=qq&amp;utm_medium=social" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:987219258@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by © 2018 
+		
+		<a href="https://pengyuanqiuqiu.github.io/" target="_blank" title="PengYuan">PengYuan</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
