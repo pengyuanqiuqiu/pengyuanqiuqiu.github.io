@@ -4,24 +4,26 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>剑指Offer编程集合 | Jianyu</title>
+    <title>学习tensorflow | Jianyu</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="PengYuan">
     
 
     
-    <meta name="description" content="注意：所有题目使用Python语言实现 一、用两个栈实现队列题目描述：用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型。 1234567891011121314151617# -*- coding:utf-8 -*-class Solution:    def __init__(self):        self.stack1 = [] #定义两个空数组">
+    <meta name="description" content="环境：环境为Windows7，64位，python 3.6 pip安装因为之前已经装好python和pip只需要输入： 12# CPU 版的C:\&amp;gt; pip3 install --upgrade tensorflow 装好之后测试是否安装成功。 1import tensorflow">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指Offer编程集合">
-<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/02/02/剑指Offer编程题Python编写/index.html">
+<meta property="og:title" content="学习tensorflow">
+<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/03/02/学习tensorflow/index.html">
 <meta property="og:site_name" content="Jianyu">
-<meta property="og:description" content="注意：所有题目使用Python语言实现 一、用两个栈实现队列题目描述：用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型。 1234567891011121314151617# -*- coding:utf-8 -*-class Solution:    def __init__(self):        self.stack1 = [] #定义两个空数组">
+<meta property="og:description" content="环境：环境为Windows7，64位，python 3.6 pip安装因为之前已经装好python和pip只需要输入： 12# CPU 版的C:\&amp;gt; pip3 install --upgrade tensorflow 装好之后测试是否安装成功。 1import tensorflow">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-02-05T13:35:20.612Z">
+<meta property="og:image" content="http://120.25.221.136/images/tensorsucess.png">
+<meta property="og:updated_time" content="2018-03-02T14:03:08.645Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指Offer编程集合">
-<meta name="twitter:description" content="注意：所有题目使用Python语言实现 一、用两个栈实现队列题目描述：用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型。 1234567891011121314151617# -*- coding:utf-8 -*-class Solution:    def __init__(self):        self.stack1 = [] #定义两个空数组">
+<meta name="twitter:title" content="学习tensorflow">
+<meta name="twitter:description" content="环境：环境为Windows7，64位，python 3.6 pip安装因为之前已经装好python和pip只需要输入： 12# CPU 版的C:\&amp;gt; pip3 install --upgrade tensorflow 装好之后测试是否安装成功。 1import tensorflow">
+<meta name="twitter:image" content="http://120.25.221.136/images/tensorsucess.png">
 
     
     <link rel="alternative" href="http://www.163.com/rss/" title="Jianyu" type="application/atom+xml">
@@ -81,14 +83,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/02/02/剑指Offer编程题Python编写/" title="剑指Offer编程集合" itemprop="url">剑指Offer编程集合</a>
+      <a href="/2018/03/02/学习tensorflow/" title="学习tensorflow" itemprop="url">学习tensorflow</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
 		
   <p class="article-time">
-    <time datetime="2018-02-02T08:32:35.488Z" itemprop="datePublished"> 发表于 2018-02-02</time>
+    <time datetime="2018-03-02T13:46:04.615Z" itemprop="datePublished"> 发表于 2018-03-02</time>
     
   </p>
 </header>
@@ -97,16 +99,16 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、用两个栈实现队列"><span class="toc-number">1.</span> <span class="toc-text">一、用两个栈实现队列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、斐波那契数列"><span class="toc-number">2.</span> <span class="toc-text">二、斐波那契数列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、数值的整数次方"><span class="toc-number">3.</span> <span class="toc-text">三、数值的整数次方</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#pip安装"><span class="toc-number">1.</span> <span class="toc-text">pip安装</span></a></li></ol>
 		
 		</div>
 		
-		<p>注意：所有题目使用Python语言实现</p>
-<h4 id="一、用两个栈实现队列"><a href="#一、用两个栈实现队列" class="headerlink" title="一、用两个栈实现队列"></a>一、<a href="https://www.nowcoder.com/practice/54275ddae22f475981afa2244dd448c6?tpId=13&amp;tqId=11158&amp;tPage=1&amp;rp=1&amp;ru=/ta/coding-interviews&amp;qru=/ta/coding-interviews/question-ranking" target="_blank" rel="noopener">用两个栈实现队列</a></h4><p>题目描述：用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">class Solution:</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.stack1 = [] #定义两个空数组</span><br><span class="line">        self.stack2 = []</span><br><span class="line">    def push(self, node):</span><br><span class="line">        self.stack1.append(node)#往数组中加入数据</span><br><span class="line">    def pop(self):</span><br><span class="line">        if self.stack1 == []:#判断栈1是否为空，若为空说明为空栈</span><br><span class="line">            return None</span><br><span class="line">        else:#否则利用两个数组实现先进先出</span><br><span class="line">            for i in range(0, len(self.stack1)):</span><br><span class="line">                self.stack2.append(self.stack1.pop())</span><br><span class="line">            res = self.stack2.pop()</span><br><span class="line">            while self.stack2:</span><br><span class="line">                self.stack1.append(self.stack2.pop())</span><br><span class="line">            return res</span><br></pre></td></tr></table></figure>
-<h4 id="二、斐波那契数列"><a href="#二、斐波那契数列" class="headerlink" title="二、斐波那契数列"></a>二、<a href="https://www.nowcoder.net/practice/c6c7742f5ba7442aada113136ddea0c3?tpId=13&amp;tqId=11160&amp;tPage=1&amp;rp=1&amp;ru=/ta/coding-interviews&amp;qru=/ta/coding-interviews/question-ranking" target="_blank" rel="noopener">斐波那契数列</a></h4><p>题目描述：大家都知道斐波那契数列，现在要求输入一个整数n，请你输出斐波那契数列的第n项。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">class Solution:</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.res=0</span><br><span class="line">        self.a=0</span><br><span class="line">        self.b=1</span><br><span class="line">    def Fibonacci(self, n):</span><br><span class="line">        if n&gt;1:</span><br><span class="line">            for i in range(2,n+1):</span><br><span class="line">                self.res=self.a+self.b</span><br><span class="line">                temp=self.b</span><br><span class="line">                self.b=self.res</span><br><span class="line">                self.a=temp</span><br><span class="line">        elif n==1:</span><br><span class="line">            return 1</span><br><span class="line">        elif n==0:</span><br><span class="line">            return 0</span><br><span class="line">        return self.res</span><br></pre></td></tr></table></figure>
-<h4 id="三、数值的整数次方"><a href="#三、数值的整数次方" class="headerlink" title="三、数值的整数次方"></a>三、<a href="https://www.nowcoder.net/practice/1a834e5e3e1a4b7ba251417554e07c00?tpId=13&amp;tqId=11165&amp;tPage=1&amp;rp=1&amp;ru=/ta/coding-interviews&amp;qru=/ta/coding-interviews/question-ranking" target="_blank" rel="noopener">数值的整数次方</a></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">class Solution:</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.res=1</span><br><span class="line">    def Power(self, base, exponent):</span><br><span class="line">        if exponent&gt;=0:</span><br><span class="line">            for i in range(1,exponent+1):</span><br><span class="line">                self.res=self.res*base</span><br><span class="line">        else:</span><br><span class="line">            for i in range(1,abs(exponent)+1):</span><br><span class="line">                self.res=self.res*(1/base)</span><br><span class="line">        return self.res</span><br><span class="line">注意：指数分为正整数与负整数，考虑不同情况。</span><br></pre></td></tr></table></figure>
+		<p>环境：环境为Windows7，64位，python 3.6</p>
+<h4 id="pip安装"><a href="#pip安装" class="headerlink" title="pip安装"></a><strong>pip安装</strong></h4><p>因为之前已经装好python和pip只需要输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># CPU 版的</span><br><span class="line">C:\&gt; pip3 install --upgrade tensorflow</span><br></pre></td></tr></table></figure>
+<p>装好之后测试是否安装成功。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow</span><br></pre></td></tr></table></figure>
+<p><img src="http://120.25.221.136/images/tensorsucess.png" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -119,7 +121,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://pengyuanqiuqiu.github.io/2018/02/02/剑指Offer编程题Python编写/" data-title="剑指Offer编程集合 | Jianyu" data-tsina="" class="share clearfix">
+	  <div data-url="https://pengyuanqiuqiu.github.io/2018/03/02/学习tensorflow/" data-title="学习tensorflow | Jianyu" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -132,19 +134,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2018/03/02/学习tensorflow/" title="学习tensorflow">
-  <strong>上一篇：</strong><br/>
-  <span>
-  学习tensorflow</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2018/01/29/hadoop安装hive/"  title="Hadoop安装hive详细过程">
+<a href="/2018/02/02/剑指Offer编程题Python编写/"  title="剑指Offer编程集合">
  <strong>下一篇：</strong><br/> 
- <span>Hadoop安装hive详细过程
+ <span>剑指Offer编程集合
 </span>
 </a>
 </div>
@@ -161,7 +155,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、用两个栈实现队列"><span class="toc-number">1.</span> <span class="toc-text">一、用两个栈实现队列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、斐波那契数列"><span class="toc-number">2.</span> <span class="toc-text">二、斐波那契数列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、数值的整数次方"><span class="toc-number">3.</span> <span class="toc-text">三、数值的整数次方</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#pip安装"><span class="toc-number">1.</span> <span class="toc-text">pip安装</span></a></li></ol>
  
   </div>
 
