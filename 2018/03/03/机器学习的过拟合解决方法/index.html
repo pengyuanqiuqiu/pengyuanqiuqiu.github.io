@@ -4,26 +4,26 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>学习tensorflow | Jianyu</title>
+    <title>机器学习的过拟合解决方法 | Jianyu</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="PengYuan">
     
 
     
-    <meta name="description" content="环境：环境为Windows7，64位，python 3.6 pip安装因为之前已经装好python和pip只需要输入： 12# CPU 版的C:\&amp;gt; pip3 install --upgrade tensorflow 装好之后测试是否安装成功。 1import tensorflow">
+    <meta name="description" content="定义：简单理解就是训练样本的得到的输出和期望输出基本一致，但是样本输出和测试样本的期望输出相差却很大 ，为了得到一致假设而使假设变得过度复杂称为过拟合，如图：  解决方法：1. 增加数据量数据量增加会将模型适应更多的数据集，对测试集验证的更加准确。 2.正则化拟合发生时，往往会出现拟合函数在训练数据点上的“曲率”很大。而这些“曲率”是由模型的参数近似表达出来的，因此通过对大值参数的惩罚来抑制这种曲">
 <meta property="og:type" content="article">
-<meta property="og:title" content="学习tensorflow">
-<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/03/02/学习tensorflow/index.html">
+<meta property="og:title" content="机器学习的过拟合解决方法">
+<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/03/03/机器学习的过拟合解决方法/index.html">
 <meta property="og:site_name" content="Jianyu">
-<meta property="og:description" content="环境：环境为Windows7，64位，python 3.6 pip安装因为之前已经装好python和pip只需要输入： 12# CPU 版的C:\&amp;gt; pip3 install --upgrade tensorflow 装好之后测试是否安装成功。 1import tensorflow">
+<meta property="og:description" content="定义：简单理解就是训练样本的得到的输出和期望输出基本一致，但是样本输出和测试样本的期望输出相差却很大 ，为了得到一致假设而使假设变得过度复杂称为过拟合，如图：  解决方法：1. 增加数据量数据量增加会将模型适应更多的数据集，对测试集验证的更加准确。 2.正则化拟合发生时，往往会出现拟合函数在训练数据点上的“曲率”很大。而这些“曲率”是由模型的参数近似表达出来的，因此通过对大值参数的惩罚来抑制这种曲">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://120.25.221.136/images/tensorsucess.png">
-<meta property="og:updated_time" content="2018-03-02T14:03:08.645Z">
+<meta property="og:image" content="http://120.25.221.136/images/overfitting.png">
+<meta property="og:updated_time" content="2018-03-04T06:50:01.065Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="学习tensorflow">
-<meta name="twitter:description" content="环境：环境为Windows7，64位，python 3.6 pip安装因为之前已经装好python和pip只需要输入： 12# CPU 版的C:\&amp;gt; pip3 install --upgrade tensorflow 装好之后测试是否安装成功。 1import tensorflow">
-<meta name="twitter:image" content="http://120.25.221.136/images/tensorsucess.png">
+<meta name="twitter:title" content="机器学习的过拟合解决方法">
+<meta name="twitter:description" content="定义：简单理解就是训练样本的得到的输出和期望输出基本一致，但是样本输出和测试样本的期望输出相差却很大 ，为了得到一致假设而使假设变得过度复杂称为过拟合，如图：  解决方法：1. 增加数据量数据量增加会将模型适应更多的数据集，对测试集验证的更加准确。 2.正则化拟合发生时，往往会出现拟合函数在训练数据点上的“曲率”很大。而这些“曲率”是由模型的参数近似表达出来的，因此通过对大值参数的惩罚来抑制这种曲">
+<meta name="twitter:image" content="http://120.25.221.136/images/overfitting.png">
 
     
     <link rel="alternative" href="http://www.163.com/rss/" title="Jianyu" type="application/atom+xml">
@@ -83,14 +83,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/03/02/学习tensorflow/" title="学习tensorflow" itemprop="url">学习tensorflow</a>
+      <a href="/2018/03/03/机器学习的过拟合解决方法/" title="机器学习的过拟合解决方法" itemprop="url">机器学习的过拟合解决方法</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
 		
   <p class="article-time">
-    <time datetime="2018-03-02T13:46:04.615Z" itemprop="datePublished"> 发表于 2018-03-02</time>
+    <time datetime="2018-03-03T12:38:06.757Z" itemprop="datePublished"> 发表于 2018-03-03</time>
     
   </p>
 </header>
@@ -99,16 +99,26 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#pip安装"><span class="toc-number">1.</span> <span class="toc-text">pip安装</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方法："><span class="toc-number">1.</span> <span class="toc-text">解决方法：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-增加数据量"><span class="toc-number">1.1.</span> <span class="toc-text">1. 增加数据量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-正则化"><span class="toc-number">1.2.</span> <span class="toc-text">2.正则化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Dropout"><span class="toc-number">1.3.</span> <span class="toc-text">3.Dropout</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<p>环境：环境为Windows7，64位，python 3.6</p>
-<h4 id="pip安装"><a href="#pip安装" class="headerlink" title="pip安装"></a><strong>pip安装</strong></h4><p>因为之前已经装好python和pip只需要输入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># CPU 版的</span><br><span class="line">C:\&gt; pip3 install --upgrade tensorflow</span><br></pre></td></tr></table></figure>
-<p>装好之后测试是否安装成功。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow</span><br></pre></td></tr></table></figure>
-<p><img src="http://120.25.221.136/images/tensorsucess.png" alt=""></p>
+		<p>定义：简单理解就是训练样本的得到的输出和期望输出基本一致，但是样本输出和测试样本的期望输出相差却很大 ，为了得到一致假设而使假设变得过度复杂称为过拟合，如图：</p>
+<p><img src="http://120.25.221.136/images/overfitting.png" alt=""></p>
+<h3 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h3><h4 id="1-增加数据量"><a href="#1-增加数据量" class="headerlink" title="1. 增加数据量"></a>1. 增加数据量</h4><p>数据量增加会将模型适应更多的数据集，对测试集验证的更加准确。</p>
+<h4 id="2-正则化"><a href="#2-正则化" class="headerlink" title="2.正则化"></a>2.正则化</h4><p>拟合发生时，往往会出现拟合函数在训练数据点上的“曲率”很大。而这些“曲率”是由模型的参数近似表达出来的，因此通过对大值参数的惩罚来抑制这种曲率的发生。</p>
+<p><strong>正则化的作用：</strong></p>
+<ul>
+<li>L1正则化可以产生稀疏权值矩阵，即产生一个稀疏模型，可以用于特征选择</li>
+<li>L2正则化可以防止模型过拟合（overfitting）；一定程度上，L1也可以防止过拟合</li>
+</ul>
+<p><strong>L1正则化和L2正则化的说明如下：</strong></p>
+<ul>
+<li>L1正则化是指权值向量w中各个元素的<strong>绝对值之和</strong>，通常表示为||w||1</li>
+<li>L2正则化是指权值向量w中各个元素的<strong>平方和然后再求平方根</strong>（可以看到Ridge回归的L2正则化项有平方符号），通常表示为||w||2</li>
+</ul>
+<h4 id="3-Dropout"><a href="#3-Dropout" class="headerlink" title="3.Dropout"></a>3.Dropout</h4><p>在一次循环中我们先随机选择神经层中的一些单元并将其临时隐藏，然后再进行该次循环中神经网络的训练和优化过程。在下一次循环中，我们又将隐藏另外一些神经元，如此直至训练结束。</p>
+<p>#### </p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -121,7 +131,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://pengyuanqiuqiu.github.io/2018/03/02/学习tensorflow/" data-title="学习tensorflow | Jianyu" data-tsina="" class="share clearfix">
+	  <div data-url="https://pengyuanqiuqiu.github.io/2018/03/03/机器学习的过拟合解决方法/" data-title="机器学习的过拟合解决方法 | Jianyu" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -134,19 +144,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2018/03/03/机器学习的过拟合解决方法/" title="机器学习的过拟合解决方法">
-  <strong>上一篇：</strong><br/>
-  <span>
-  机器学习的过拟合解决方法</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2018/02/02/剑指Offer编程题Python编写/"  title="剑指Offer编程集合">
+<a href="/2018/03/02/学习tensorflow/"  title="学习tensorflow">
  <strong>下一篇：</strong><br/> 
- <span>剑指Offer编程集合
+ <span>学习tensorflow
 </span>
 </a>
 </div>
@@ -163,7 +165,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#pip安装"><span class="toc-number">1.</span> <span class="toc-text">pip安装</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方法："><span class="toc-number">1.</span> <span class="toc-text">解决方法：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-增加数据量"><span class="toc-number">1.1.</span> <span class="toc-text">1. 增加数据量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-正则化"><span class="toc-number">1.2.</span> <span class="toc-text">2.正则化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Dropout"><span class="toc-number">1.3.</span> <span class="toc-text">3.Dropout</span></a></li></ol></li></ol>
  
   </div>
 
