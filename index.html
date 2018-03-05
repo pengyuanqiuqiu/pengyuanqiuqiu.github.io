@@ -107,7 +107,6 @@
 <li>L2正则化是指权值向量w中各个元素的<strong>平方和然后再求平方根</strong>（可以看到Ridge回归的L2正则化项有平方符号），通常表示为||w||2</li>
 </ul>
 <h4 id="3-Dropout"><a href="#3-Dropout" class="headerlink" title="3.Dropout"></a>3.Dropout</h4><p>在一次循环中我们先随机选择神经层中的一些单元并将其临时隐藏，然后再进行该次循环中神经网络的训练和优化过程。在下一次循环中，我们又将隐藏另外一些神经元，如此直至训练结束。</p>
-<p>#### </p>
 
         
         
@@ -321,6 +320,7 @@
 <p><img src="http://120.25.221.136/images/error2.png" alt=""></p>
 <p>解决方法：是因为namenode节点没有运行，需要重新启动Hadoop即可。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#sbin/start-all.sh</span><br></pre></td></tr></table></figure>
+<h4 id="Mysql作为Hive的metastore原因："><a href="#Mysql作为Hive的metastore原因：" class="headerlink" title="Mysql作为Hive的metastore原因："></a><strong>Mysql作为Hive的metastore原因：</strong></h4><p>hive 默认使用 derby 作为映射表（SQL 操作映射为MapReduce Job，将SQL中创建的表映射为 hdfs 的文件/文件夹，字段映射为其中的行），但 derby 的一大缺陷在于它不允许多个客户端同时执行sql操作还可存放于 mysql 中来访问Hive。</p>
 
         
         
