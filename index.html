@@ -79,7 +79,7 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/03/14/运行pyspark遇到的问题/" title="" itemprop="url"></a>
+      <a href="/2018/03/14/运行pyspark遇到的问题/" title="运行pyspark遇到的问题" itemprop="url">运行pyspark遇到的问题</a>
   </h1>
   <p class="article-author">By
        
@@ -92,8 +92,7 @@
 </header>
     <div class="article-content">
         
-        <p>title: 运行pyspark遇到的问题</p>
-<p>环境：spark-2.3.0-bin-hadoop2.7,python3.6</p>
+        <p>环境：spark-2.3.0-bin-hadoop2.7,python3.6</p>
 <p>问题：Unable to load native-hadoop library for your platform… using builtin-java classes where applicable<br>Stopping namenodes …</p>
 <p>解决方法：是因为不能加载本地库，在Java的$JAVA_HOME/jre/lib/amd64目录下缺少libhadoop.so和libsnappy.so文件。</p>
 <p>libhadoop.so可以在Hadoop目录下的Hadoop\lib\native找到，将它放入上述jre目录下。</p>
