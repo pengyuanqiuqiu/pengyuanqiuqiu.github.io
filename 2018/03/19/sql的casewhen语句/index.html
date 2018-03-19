@@ -4,27 +4,27 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>运行pyspark遇到的问题 | Jianyu</title>
+    <title>sql的casewhen语句 | Jianyu</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="PengYuan">
     
 
     
-    <meta name="description" content="环境：spark-2.3.0-bin-hadoop2.7,python3.6 问题：Unable to load native-hadoop library for your platform… using builtin-java classes where applicableStopping namenodes … 解决方法：是因为不能加载本地库，在Java的$JAVA_HOME/jre/l">
+    <meta name="description" content="背景：面试阿里时面试官给了sql语句的题目，结果回答不出来，连听都没听过，尴尬。问了才知道使用case when 语句。 行转列利用max(case when  then) 建一张成绩表，要求将所有门成绩转为一行，不同学科作为不同的属性列。  1234567#建表sqlcreate table score    (          name varchar(30) null,       cou">
 <meta property="og:type" content="article">
-<meta property="og:title" content="运行pyspark遇到的问题">
-<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/03/14/运行pyspark遇到的问题/index.html">
+<meta property="og:title" content="sql的casewhen语句">
+<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/03/19/sql的casewhen语句/index.html">
 <meta property="og:site_name" content="Jianyu">
-<meta property="og:description" content="环境：spark-2.3.0-bin-hadoop2.7,python3.6 问题：Unable to load native-hadoop library for your platform… using builtin-java classes where applicableStopping namenodes … 解决方法：是因为不能加载本地库，在Java的$JAVA_HOME/jre/l">
+<meta property="og:description" content="背景：面试阿里时面试官给了sql语句的题目，结果回答不出来，连听都没听过，尴尬。问了才知道使用case when 语句。 行转列利用max(case when  then) 建一张成绩表，要求将所有门成绩转为一行，不同学科作为不同的属性列。  1234567#建表sqlcreate table score    (          name varchar(30) null,       cou">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://120.25.221.136/images/libhadoop.png">
-<meta property="og:image" content="http://120.25.221.136/images/libsnappy.png">
-<meta property="og:updated_time" content="2018-03-19T12:17:00.495Z">
+<meta property="og:image" content="http://120.25.221.136/images/casewhen.png">
+<meta property="og:image" content="http://120.25.221.136/images/case2.png">
+<meta property="og:updated_time" content="2018-03-19T12:19:33.982Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="运行pyspark遇到的问题">
-<meta name="twitter:description" content="环境：spark-2.3.0-bin-hadoop2.7,python3.6 问题：Unable to load native-hadoop library for your platform… using builtin-java classes where applicableStopping namenodes … 解决方法：是因为不能加载本地库，在Java的$JAVA_HOME/jre/l">
-<meta name="twitter:image" content="http://120.25.221.136/images/libhadoop.png">
+<meta name="twitter:title" content="sql的casewhen语句">
+<meta name="twitter:description" content="背景：面试阿里时面试官给了sql语句的题目，结果回答不出来，连听都没听过，尴尬。问了才知道使用case when 语句。 行转列利用max(case when  then) 建一张成绩表，要求将所有门成绩转为一行，不同学科作为不同的属性列。  1234567#建表sqlcreate table score    (          name varchar(30) null,       cou">
+<meta name="twitter:image" content="http://120.25.221.136/images/casewhen.png">
 
     
     <link rel="alternative" href="http://www.163.com/rss/" title="Jianyu" type="application/atom+xml">
@@ -84,14 +84,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/03/14/运行pyspark遇到的问题/" title="运行pyspark遇到的问题" itemprop="url">运行pyspark遇到的问题</a>
+      <a href="/2018/03/19/sql的casewhen语句/" title="sql的casewhen语句" itemprop="url">sql的casewhen语句</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
 		
   <p class="article-time">
-    <time datetime="2018-03-14T08:54:38.033Z" itemprop="datePublished"> 发表于 2018-03-14</time>
+    <time datetime="2018-03-19T11:12:37.960Z" itemprop="datePublished"> 发表于 2018-03-19</time>
     
   </p>
 </header>
@@ -100,19 +100,39 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#行转列"><span class="toc-number">1.</span> <span class="toc-text">行转列</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#利用max-case-when-then"><span class="toc-number">1.1.</span> <span class="toc-text">利用max(case when  then)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#总结"><span class="toc-number">1.2.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<p>环境：spark-2.3.0-bin-hadoop2.7,python3.6</p>
-<p>问题：Unable to load native-hadoop library for your platform… using builtin-java classes where applicable<br>Stopping namenodes …</p>
-<p>解决方法：是因为不能加载本地库，在Java的$JAVA_HOME/jre/lib/amd64目录下缺少libhadoop.so和libsnappy.so文件。</p>
-<p>libhadoop.so可以在Hadoop目录下的Hadoop\lib\native找到，将它放入上述jre目录下。</p>
-<p><img src="http://120.25.221.136/images/libhadoop.png" alt=""></p>
-<p>可以从<a href="https://code.google.com/p/snappy/下载源码，通过编译源码安装，" target="_blank" rel="noopener">https://code.google.com/p/snappy/下载源码，通过编译源码安装，</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf snappy-1.1.1.tar.gz</span><br><span class="line"></span><br><span class="line">cd snappy-1.1.1</span><br><span class="line"></span><br><span class="line">./configure</span><br><span class="line"></span><br><span class="line">make</span><br><span class="line"></span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
-<p>安装完成之后，在usr/local/lib目录下找到libsnappy.so，放入jre目录下。重启spark就可以解决问题。</p>
-<p><img src="http://120.25.221.136/images/libsnappy.png" alt=""></p>
+		<p>背景：面试阿里时面试官给了sql语句的题目，结果回答不出来，连听都没听过，尴尬。问了才知道使用case when 语句。</p>
+<h4 id="行转列"><a href="#行转列" class="headerlink" title="行转列"></a>行转列</h4><h5 id="利用max-case-when-then"><a href="#利用max-case-when-then" class="headerlink" title="利用max(case when  then)"></a>利用max(case when  then)</h5><ul>
+<li>建一张成绩表，要求将所有门成绩转为一行，不同学科作为不同的属性列。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#建表sql</span><br><span class="line">create table score    </span><br><span class="line">(       </span><br><span class="line">   name varchar(30) null,    </span><br><span class="line">   coursename varchar(10) null,    </span><br><span class="line">   score int null   </span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#插入数据</span><br><span class="line">insert into score values (&apos;张三&apos;,&apos;语文&apos;,80);   </span><br><span class="line">insert into score values (&apos;张三&apos;,&apos;数学&apos;,98);    </span><br><span class="line">insert into score values (&apos;张三&apos;,&apos;英语&apos;,65);    </span><br><span class="line">insert into score values (&apos;李四&apos;,&apos;语文&apos;,70);    </span><br><span class="line">insert into score values (&apos;李四&apos;,&apos;数学&apos;,80);    </span><br><span class="line">insert into score values (&apos;李四&apos;,&apos;英语&apos;,90);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#case when sql</span><br><span class="line">select</span><br><span class="line">    name as &apos;姓名&apos; ,     </span><br><span class="line">    max(case coursename when &apos;语文&apos; then score else 0 end) &apos;语文&apos;,     </span><br><span class="line">    max(case coursename when &apos;数学&apos; then score else 0 end) &apos;数学&apos;,     </span><br><span class="line">    max(case coursename when &apos;英语&apos; then score else 0 end) &apos;英语&apos;     </span><br><span class="line">from score     </span><br><span class="line">group by name</span><br></pre></td></tr></table></figure>
+<p>运行结果投如下图所示</p>
+<p><img src="http://120.25.221.136/images/casewhen.png" alt=""></p>
+<ul>
+<li><p>将课程分类</p>
+<p>​</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#case when sql</span><br><span class="line"></span><br><span class="line">select </span><br><span class="line">      name as &apos;姓名&apos;,</span><br><span class="line">      case</span><br><span class="line">          when coursename=&apos;数学&apos; then &apos;理科&apos;</span><br><span class="line">          else &apos;文科&apos;</span><br><span class="line">      end as &apos;科别&apos;,</span><br><span class="line">      sum(score) as &apos;总分&apos;</span><br><span class="line">from score</span><br><span class="line">group by </span><br><span class="line">      name,</span><br><span class="line">      case</span><br><span class="line">          when coursename=&apos;数学&apos; then &apos;理科&apos;</span><br><span class="line">          else &apos;文科&apos;</span><br><span class="line">      end</span><br></pre></td></tr></table></figure>
+<p><img src="http://120.25.221.136/images/case2.png" alt=""></p>
+</li>
+</ul>
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><p>case when具有两种形式：</p>
+<ol>
+<li><p>简单case函数</p>
+<p>CASE sex </p>
+<pre><code>WHEN &apos;1&apos; THEN &apos;男&apos; 
+WHEN &apos;2&apos; THEN &apos;女&apos; 
+</code></pre><p>ELSE ‘其他’ END </p>
+<p>2.case搜索函数</p>
+<p>CASE WHEN sex = ‘1’ THEN ‘男’ </p>
+<pre><code>WHEN sex = &apos;2&apos; THEN &apos;女&apos; 
+</code></pre><p>ELSE ‘其他’ END </p>
+</li>
+</ol>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -125,7 +145,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://pengyuanqiuqiu.github.io/2018/03/14/运行pyspark遇到的问题/" data-title="运行pyspark遇到的问题 | Jianyu" data-tsina="" class="share clearfix">
+	  <div data-url="https://pengyuanqiuqiu.github.io/2018/03/19/sql的casewhen语句/" data-title="sql的casewhen语句 | Jianyu" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -138,19 +158,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2018/03/19/sql的casewhen语句/" title="sql的casewhen语句">
-  <strong>上一篇：</strong><br/>
-  <span>
-  sql的casewhen语句</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2018/03/03/机器学习的过拟合解决方法/"  title="机器学习的过拟合解决方法">
+<a href="/2018/03/14/运行pyspark遇到的问题/"  title="运行pyspark遇到的问题">
  <strong>下一篇：</strong><br/> 
- <span>机器学习的过拟合解决方法
+ <span>运行pyspark遇到的问题
 </span>
 </a>
 </div>
@@ -167,7 +179,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#行转列"><span class="toc-number">1.</span> <span class="toc-text">行转列</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#利用max-case-when-then"><span class="toc-number">1.1.</span> <span class="toc-text">利用max(case when  then)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#总结"><span class="toc-number">1.2.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
  
   </div>
 
