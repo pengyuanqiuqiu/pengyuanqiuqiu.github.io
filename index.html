@@ -92,8 +92,8 @@
 </header>
     <div class="article-content">
         
-        <hr>
-<h2 id="title-运行pyspark"><a href="#title-运行pyspark" class="headerlink" title="title:运行pyspark"></a>title:运行pyspark</h2><p>环境：spark-2.3.0-bin-hadoop2.7,python3.6</p>
+        <p>title: 运行pyspark遇到的问题</p>
+<p>环境：spark-2.3.0-bin-hadoop2.7,python3.6</p>
 <p>问题：Unable to load native-hadoop library for your platform… using builtin-java classes where applicable<br>Stopping namenodes …</p>
 <p>解决方法：是因为不能加载本地库，在Java的$JAVA_HOME/jre/lib/amd64目录下缺少libhadoop.so和libsnappy.so文件。</p>
 <p>libhadoop.so可以在Hadoop目录下的Hadoop\lib\native找到，将它放入上述jre目录下。</p>
@@ -221,6 +221,10 @@
 <p>装好之后测试是否安装成功。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow</span><br></pre></td></tr></table></figure>
 <p><img src="http://120.25.221.136/images/tensorsucess.png" alt=""></p>
+<p>运行遇到问题：Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX AVX2</p>
+<p>解决方法：没有支持cuda的gpu，通过加上警告级别，忽视警告。</p>
+<p>在python文件加入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line">os.environ[&apos;TF_CPP_MIN_LOG_LEVEL&apos;] = &apos;2&apos;</span><br></pre></td></tr></table></figure>
 
         
         
@@ -630,7 +634,7 @@
 		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
 		
   <p class="article-time">
-    <time datetime="2018-01-23T09:30:44.670Z" itemprop="datePublished"> 发表于 2018-01-23</time>
+    <time datetime="2018-01-23T09:30:44.671Z" itemprop="datePublished"> 发表于 2018-01-23</time>
     
   </p>
 </header>
@@ -683,7 +687,7 @@
 		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
 		
   <p class="article-time">
-    <time datetime="2018-01-23T09:21:42.107Z" itemprop="datePublished"> 发表于 2018-01-23</time>
+    <time datetime="2018-01-23T09:21:42.108Z" itemprop="datePublished"> 发表于 2018-01-23</time>
     
   </p>
 </header>
