@@ -79,6 +79,101 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2018/03/30/解读逻辑回归/" title="解读逻辑回归" itemprop="url">解读逻辑回归</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-03-30T07:47:58.402Z" itemprop="datePublished"> 发表于 2018-03-30</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h4 id="1-定义"><a href="#1-定义" class="headerlink" title="1.定义"></a>1.定义</h4><p>logistic regression是统计学习中经典的分类算法。</p>
+<p>线性回归的模型公式为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>将线性回归转化为分类问题，利用sigmod激活函数转化为0到1之间的概率问题。</p>
+<p><img src="http://120.25.221.136/images/logistic/sigmod.jpg" alt=""></p>
+<p><img src="http://120.25.221.136/images/logistic/sigmodpicture.png" alt=""></p>
+<p>logistic的分类函数为：</p>
+<p><img src="http://120.25.221.136/images/logistic/exchange.png" alt=""></p>
+<p>从公式中可以发现</p>
+<p>y=1   ——》z&gt;0<br>y=0  ——-》 z&lt;0</p>
+<h4 id="2-代价函数"><a href="#2-代价函数" class="headerlink" title="2.代价函数"></a>2.代价函数</h4><p>在之前的线性回归模型，给出代价函数为：</p>
+<p><img src="http://120.25.221.136/images/logistic/cost.png" alt=""></p>
+<p>而将sigmod函数袋鼠上面的公式中，代价函数是一个非凸函数，不能取得全局最小值，智能取得局部最小值，所以不能使用上面的代价函数。</p>
+<p><img src="http://120.25.221.136/images/logistic/nonconvex.png" alt=""></p>
+<p><img src="http://120.25.221.136/images/logistic/newcost.png" alt=""></p>
+<p>将公式用一个表示：</p>
+<p><img src="http://120.25.221.136/images/logistic/newcost2.png" alt=""></p>
+<p>新的代价公式为：</p>
+<p><img src="http://120.25.221.136/images/logistic/newcost4.png" alt=""></p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>优点：</p>
+<ul>
+<li><p>计算简单，广泛应用与工业。</p>
+</li>
+<li><p>输出的概率值，预测的结果为0至1的概率。</p>
+<p>​</p>
+</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>样本量大的时候性能可能不好。</li>
+<li>不能多分类。</li>
+<li>容易欠拟合，一般准确度不太高</li>
+</ul>
+<h4 id="附加"><a href="#附加" class="headerlink" title="附加"></a>附加</h4><p>sigmod为什么这么被青睐？</p>
+<p>原因：</p>
+<ul>
+<li><p>能求导</p>
+<p>​</p>
+</li>
+</ul>
+<p><img src="http://120.25.221.136/images/logistic/qiudao.jpg" alt=""></p>
+<ul>
+<li><p>引入非线性</p>
+<p>值为0-1之间</p>
+</li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2018/03/22/机器学习的降维为特征选择的区别/" title="特征选择和降维的区别" itemprop="url">特征选择和降维的区别</a>
   </h1>
   <p class="article-author">By
@@ -256,7 +351,7 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/03/19/sql的casewhen语句/" title="sql的casewhen语句" itemprop="url">sql的casewhen语句</a>
+      <a href="/2018/03/19/sql/" title="sql" itemprop="url">sql</a>
   </h1>
   <p class="article-author">By
        
@@ -270,7 +365,7 @@
     <div class="article-content">
         
         <p>背景：面试阿里时面试官给了sql语句的题目，结果回答不出来，连听都没听过，尴尬。问了才知道使用case when 语句。</p>
-<h4 id="行转列"><a href="#行转列" class="headerlink" title="行转列"></a>行转列</h4><h5 id="利用max-case-when-then"><a href="#利用max-case-when-then" class="headerlink" title="利用max(case when  then)"></a>利用max(case when  then)</h5><ul>
+<h4 id="case-when行转列"><a href="#case-when行转列" class="headerlink" title="case when行转列"></a>case when行转列</h4><h5 id="利用max-case-when-then"><a href="#利用max-case-when-then" class="headerlink" title="利用max(case when  then)"></a>利用max(case when  then)</h5><ul>
 <li>建一张成绩表，要求将所有门成绩转为一行，不同学科作为不同的属性列。</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#建表sql</span><br><span class="line">create table score    </span><br><span class="line">(       </span><br><span class="line">   name varchar(30) null,    </span><br><span class="line">   coursename varchar(10) null,    </span><br><span class="line">   score int null   </span><br><span class="line">);</span><br></pre></td></tr></table></figure>
@@ -295,9 +390,40 @@ WHEN &apos;2&apos; THEN &apos;女&apos;
 <p>2.case搜索函数</p>
 <p>CASE WHEN sex = ‘1’ THEN ‘男’ </p>
 <pre><code>WHEN sex = &apos;2&apos; THEN &apos;女&apos; 
-</code></pre><p>ELSE ‘其他’ END </p>
+</code></pre><p>ELSE ‘其他’ END \</p>
+<h4 id="union与union-all的区别"><a href="#union与union-all的区别" class="headerlink" title="union与union all的区别"></a>union与union all的区别</h4><p>UNION用的比较多union all是直接连接，取到得是所有值，记录可能有重复   union 是取唯一值，记录没有重复  。</p>
+<p>1、UNION 的语法如下：</p>
+<pre><code>[SQL 语句 1]
+ UNION
+[SQL 语句 2]
+</code></pre><p>2、UNION ALL 的语法如下：</p>
+<pre><code>[SQL 语句 1]
+ UNION ALL
+[SQL 语句 2]
+</code></pre><p>效率：<br>UNION和UNION ALL关键字都是将两个结果集合并为一个，但这两者从使用和效率上来说都有所不同。</p>
+<p>1、对重复结果的处理：UNION在进行表链接后会筛选掉重复的记录，Union All不会去除重复记录。</p>
+<p>2、对排序的处理：Union将会按照字段的顺序进行排序；UNION ALL只是简单的将两个结果合并后就返回。</p>
+<p>从效率上说，UNION ALL 要比UNION快很多，所以，如果可以确认合并的两个结果集中不包含重复数据且不需要排序时的话，那么就使用UNION ALL。</p>
+<p>总结<br>UNION去重且同时进行默认规则的排序</p>
+<p>UNION ALL不去重不排序</p>
+<h4 id="join的使用"><a href="#join的使用" class="headerlink" title="join的使用"></a>join的使用</h4><p>SQL join 用于把来自两个或多个表的行结合起来。类型包括：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">INNER JOIN：如果表中有至少一个匹配，则返回行</span><br><span class="line">LEFT JOIN：即使右表中没有匹配，也从左表返回所有的行</span><br><span class="line">RIGHT JOIN：即使左表中没有匹配，也从右表返回所有的行</span><br><span class="line">FULL JOIN：只要其中一个表中存在匹配，则返回行</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">###两张表</span><br><span class="line">+----+--------------+---------------------------+-------+---------+</span><br><span class="line">| id | name         | url                       | alexa | country |</span><br><span class="line">+----+--------------+---------------------------+-------+---------+</span><br><span class="line">| 1  | Google       | https://www.google.cm/    | 1     | USA     |</span><br><span class="line">| 2  | 淘宝          | https://www.taobao.com/   | 13    | CN      |</span><br><span class="line">| 3  | 菜鸟教程      | http://www.runoob.com/    | 4689  | CN      |</span><br><span class="line">| 4  | 微博          | http://weibo.com/         | 20    | CN      |</span><br><span class="line">| 5  | Facebook     | https://www.facebook.com/ | 3     | USA     |</span><br><span class="line">| 7  | stackoverflow | http://stackoverflow.com/ |   0 | IND     |</span><br><span class="line">+----+---------------+---------------------------+-------+---------+</span><br><span class="line">mysql&gt; SELECT * FROM access_log;</span><br><span class="line">+-----+---------+-------+------------+</span><br><span class="line">| aid | site_id | count | date       |</span><br><span class="line">+-----+---------+-------+------------+</span><br><span class="line">|   1 |       1 |    45 | 2016-05-10 |</span><br><span class="line">|   2 |       3 |   100 | 2016-05-13 |</span><br><span class="line">|   3 |       1 |   230 | 2016-05-14 |</span><br><span class="line">|   4 |       2 |    10 | 2016-05-14 |</span><br><span class="line">|   5 |       5 |   205 | 2016-05-14 |</span><br><span class="line">|   6 |       4 |    13 | 2016-05-15 |</span><br><span class="line">|   7 |       3 |   220 | 2016-05-15 |</span><br><span class="line">|   8 |       5 |   545 | 2016-05-16 |</span><br><span class="line">|   9 |       3 |   201 | 2016-05-17 |</span><br><span class="line">+-----+---------+-------+------------+</span><br><span class="line">9 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<h5 id="INNER-JOIN"><a href="#INNER-JOIN" class="headerlink" title="INNER JOIN"></a>INNER JOIN</h5><p>SELECT <em>column_name(s)</em><br>FROM <em>table1</em><br>INNER JOIN <em>table2</em><br>ON <em>table1.column_name</em>=<em>table2.column_name</em>;</p>
+<p><img src="http://120.25.221.136/images/sql/img_innerjoin.jpg" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT Websites.name, access_log.count, access_log.date</span><br><span class="line">FROM Websites</span><br><span class="line">INNER JOIN access_log</span><br><span class="line">ON Websites.id=access_log.site_id</span><br><span class="line">ORDER BY access_log.count;</span><br></pre></td></tr></table></figure>
+<p><img src="http://120.25.221.136/images/sql/inner-join1.jpg" alt=""></p>
 </li>
 </ol>
+<h5 id="LEFT-JOIN"><a href="#LEFT-JOIN" class="headerlink" title="LEFT  JOIN"></a>LEFT  JOIN</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT column_name(s)</span><br><span class="line">FROM table1</span><br><span class="line">LEFT JOIN table2</span><br><span class="line">ON table1.column_name=table2.column_name;</span><br></pre></td></tr></table></figure>
+<p><img src="http://120.25.221.136/images/sql/img_leftjoin.gif" alt=""></p>
+<p><img src="http://120.25.221.136/images/sql/left-join1.jpg" alt=""></p>
+<h5 id="RIGHT-JOIN"><a href="#RIGHT-JOIN" class="headerlink" title="RIGHT JOIN"></a>RIGHT JOIN</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT column_name(s)</span><br><span class="line">FROM table1</span><br><span class="line">RIGHT JOIN table2</span><br><span class="line">ON table1.column_name=table2.column_name;</span><br></pre></td></tr></table></figure>
+<p><img src="http://120.25.221.136/images/sql/img_rightjoin.gif" alt=""></p>
+<p><img src="http://120.25.221.136/images/sql/right-join1.jpg" alt=""></p>
+<h5 id="FULL-OUTER-JOIN（MYSQL）"><a href="#FULL-OUTER-JOIN（MYSQL）" class="headerlink" title="FULL OUTER JOIN（MYSQL）"></a>FULL OUTER JOIN（MYSQL）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT column_name(s)</span><br><span class="line">FROM table1</span><br><span class="line">FULL OUTER JOIN table2</span><br><span class="line">ON table1.column_name=table2.column_name;</span><br></pre></td></tr></table></figure>
+<p><img src="http://120.25.221.136/images/sql/img_fulljoin.gif" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT Websites.name, access_log.count, access_log.date</span><br><span class="line">FROM Websites</span><br><span class="line">FULL OUTER JOIN access_log</span><br><span class="line">ON Websites.id=access_log.site_id</span><br><span class="line">ORDER BY access_log.count DESC;</span><br></pre></td></tr></table></figure>
 
         
         
@@ -727,64 +853,6 @@ WHEN &apos;2&apos; THEN &apos;女&apos;
 <p>在浏览器中，查看spark集群状态 ，master节点输入网址<a href="http://master:8080/" target="_blank" rel="noopener">http://masterip:8080</a> </p>
 <p><img src="../img/7.png" alt=""></p>
 
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/01/27/Hexo绑定域名/" title="Hexo绑定域名" itemprop="url">Hexo绑定域名</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
-		
-  <p class="article-time">
-    <time datetime="2018-01-27T09:09:15.496Z" itemprop="datePublished"> 发表于 2018-01-27</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h4 id="一、购买域名"><a href="#一、购买域名" class="headerlink" title="一、购买域名"></a>一、购买域名</h4><p>可以在阿里云或者腾讯云购买域名，我的在腾讯云购买，域名为[pengyuan.ac.cn</p>
-<h4 id="二、解析域名"><a href="#二、解析域名" class="headerlink" title="二、解析域名"></a>二、解析域名</h4><p>登入腾讯云控制台，如图，找到域名管理，对你绑定的域名进行解析。</p>
-<p><img src="http://120.25.221.136/images/console.png" alt=""></p>
-<h4 id="三、添加解析记录"><a href="#三、添加解析记录" class="headerlink" title="三、添加解析记录"></a>三、添加解析记录</h4><p>点击添加解析，记录类型选A或CNAME，A记录的记录值就是ip地址，github(官方文档)提供了两个IP地址，<code>192.30.252.153和192.30.252.154</code>，这两个IP地址为github的服务器地址，两个都要解析。解析记录设置两个www和@，线路就默认就行，CNAME记录值填你的github博客网址。</p>
-<p><img src="http://120.25.221.136/images/jiexi.png" alt=""></p>
-<p><img src="http://120.25.221.136/images/git.png" alt=""></p>
-<h4 id="四、增加CNAME文件"><a href="#四、增加CNAME文件" class="headerlink" title="四、增加CNAME文件"></a>四、增加CNAME文件</h4><p>在Hexo的目录下的source文件夹下增加cname文件，文件的内容是你的域名我的是<a href="pengyuan.ac.cn">pengyuan.ac.cn</a></p>
-<p><img src="http://120.25.221.136/images/cname.png" alt=""></p>
-<p><img src="http://120.25.221.136/images/content.png" alt=""></p>
-<h4 id="最后访问域名，就可以访问成功。"><a href="#最后访问域名，就可以访问成功。" class="headerlink" title="最后访问域名，就可以访问成功。"></a>最后访问域名，就可以访问成功。</h4>
         
         
         <p class="article-more-link">

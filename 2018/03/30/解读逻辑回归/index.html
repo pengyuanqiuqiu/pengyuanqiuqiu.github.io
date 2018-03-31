@@ -4,27 +4,34 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>运行pyspark遇到的问题 | Jianyu</title>
+    <title>解读逻辑回归 | Jianyu</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="PengYuan">
     
 
     
-    <meta name="description" content="环境：spark-2.3.0-bin-hadoop2.7,python3.6 问题：Unable to load native-hadoop library for your platform… using builtin-java classes where applicableStopping namenodes … 解决方法：是因为不能加载本地库，在Java的$JAVA_HOME/jre/l">
+    <meta name="description" content="1.定义logistic regression是统计学习中经典的分类算法。 线性回归的模型公式为 12 将线性回归转化为分类问题，利用sigmod激活函数转化为0到1之间的概率问题。   logistic的分类函数为：  从公式中可以发现 y=1   ——》z&amp;gt;0y=0  ——-》 z&amp;lt;0 2.代价函数在之前的线性回归模型，给出代价函数为：  而将sigmod函数袋鼠上面的公式中，代价">
 <meta property="og:type" content="article">
-<meta property="og:title" content="运行pyspark遇到的问题">
-<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/03/14/运行pyspark遇到的问题/index.html">
+<meta property="og:title" content="解读逻辑回归">
+<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/03/30/解读逻辑回归/index.html">
 <meta property="og:site_name" content="Jianyu">
-<meta property="og:description" content="环境：spark-2.3.0-bin-hadoop2.7,python3.6 问题：Unable to load native-hadoop library for your platform… using builtin-java classes where applicableStopping namenodes … 解决方法：是因为不能加载本地库，在Java的$JAVA_HOME/jre/l">
+<meta property="og:description" content="1.定义logistic regression是统计学习中经典的分类算法。 线性回归的模型公式为 12 将线性回归转化为分类问题，利用sigmod激活函数转化为0到1之间的概率问题。   logistic的分类函数为：  从公式中可以发现 y=1   ——》z&amp;gt;0y=0  ——-》 z&amp;lt;0 2.代价函数在之前的线性回归模型，给出代价函数为：  而将sigmod函数袋鼠上面的公式中，代价">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://120.25.221.136/images/libhadoop.png">
-<meta property="og:image" content="http://120.25.221.136/images/libsnappy.png">
-<meta property="og:updated_time" content="2018-03-19T12:17:00.495Z">
+<meta property="og:image" content="http://120.25.221.136/images/logistic/sigmod.jpg">
+<meta property="og:image" content="http://120.25.221.136/images/logistic/sigmodpicture.png">
+<meta property="og:image" content="http://120.25.221.136/images/logistic/exchange.png">
+<meta property="og:image" content="http://120.25.221.136/images/logistic/cost.png">
+<meta property="og:image" content="http://120.25.221.136/images/logistic/nonconvex.png">
+<meta property="og:image" content="http://120.25.221.136/images/logistic/newcost.png">
+<meta property="og:image" content="http://120.25.221.136/images/logistic/newcost2.png">
+<meta property="og:image" content="http://120.25.221.136/images/logistic/newcost4.png">
+<meta property="og:image" content="http://120.25.221.136/images/logistic/qiudao.jpg">
+<meta property="og:updated_time" content="2018-03-31T06:13:39.198Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="运行pyspark遇到的问题">
-<meta name="twitter:description" content="环境：spark-2.3.0-bin-hadoop2.7,python3.6 问题：Unable to load native-hadoop library for your platform… using builtin-java classes where applicableStopping namenodes … 解决方法：是因为不能加载本地库，在Java的$JAVA_HOME/jre/l">
-<meta name="twitter:image" content="http://120.25.221.136/images/libhadoop.png">
+<meta name="twitter:title" content="解读逻辑回归">
+<meta name="twitter:description" content="1.定义logistic regression是统计学习中经典的分类算法。 线性回归的模型公式为 12 将线性回归转化为分类问题，利用sigmod激活函数转化为0到1之间的概率问题。   logistic的分类函数为：  从公式中可以发现 y=1   ——》z&amp;gt;0y=0  ——-》 z&amp;lt;0 2.代价函数在之前的线性回归模型，给出代价函数为：  而将sigmod函数袋鼠上面的公式中，代价">
+<meta name="twitter:image" content="http://120.25.221.136/images/logistic/sigmod.jpg">
 
     
     <link rel="alternative" href="http://www.163.com/rss/" title="Jianyu" type="application/atom+xml">
@@ -84,14 +91,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/03/14/运行pyspark遇到的问题/" title="运行pyspark遇到的问题" itemprop="url">运行pyspark遇到的问题</a>
+      <a href="/2018/03/30/解读逻辑回归/" title="解读逻辑回归" itemprop="url">解读逻辑回归</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
 		
   <p class="article-time">
-    <time datetime="2018-03-14T08:54:38.033Z" itemprop="datePublished"> 发表于 2018-03-14</time>
+    <time datetime="2018-03-30T07:47:58.402Z" itemprop="datePublished"> 发表于 2018-03-30</time>
     
   </p>
 </header>
@@ -100,19 +107,56 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-定义"><span class="toc-number">1.</span> <span class="toc-text">1.定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-代价函数"><span class="toc-number">2.</span> <span class="toc-text">2.代价函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#附加"><span class="toc-number">4.</span> <span class="toc-text">附加</span></a></li></ol>
 		
 		</div>
 		
-		<p>环境：spark-2.3.0-bin-hadoop2.7,python3.6</p>
-<p>问题：Unable to load native-hadoop library for your platform… using builtin-java classes where applicable<br>Stopping namenodes …</p>
-<p>解决方法：是因为不能加载本地库，在Java的$JAVA_HOME/jre/lib/amd64目录下缺少libhadoop.so和libsnappy.so文件。</p>
-<p>libhadoop.so可以在Hadoop目录下的Hadoop\lib\native找到，将它放入上述jre目录下。</p>
-<p><img src="http://120.25.221.136/images/libhadoop.png" alt=""></p>
-<p>可以从<a href="https://code.google.com/p/snappy/下载源码，通过编译源码安装，" target="_blank" rel="noopener">https://code.google.com/p/snappy/下载源码，通过编译源码安装，</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf snappy-1.1.1.tar.gz</span><br><span class="line"></span><br><span class="line">cd snappy-1.1.1</span><br><span class="line"></span><br><span class="line">./configure</span><br><span class="line"></span><br><span class="line">make</span><br><span class="line"></span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
-<p>安装完成之后，在usr/local/lib目录下找到libsnappy.so，放入jre目录下。重启spark就可以解决问题。</p>
-<p><img src="http://120.25.221.136/images/libsnappy.png" alt=""></p>
+		<h4 id="1-定义"><a href="#1-定义" class="headerlink" title="1.定义"></a>1.定义</h4><p>logistic regression是统计学习中经典的分类算法。</p>
+<p>线性回归的模型公式为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>将线性回归转化为分类问题，利用sigmod激活函数转化为0到1之间的概率问题。</p>
+<p><img src="http://120.25.221.136/images/logistic/sigmod.jpg" alt=""></p>
+<p><img src="http://120.25.221.136/images/logistic/sigmodpicture.png" alt=""></p>
+<p>logistic的分类函数为：</p>
+<p><img src="http://120.25.221.136/images/logistic/exchange.png" alt=""></p>
+<p>从公式中可以发现</p>
+<p>y=1   ——》z&gt;0<br>y=0  ——-》 z&lt;0</p>
+<h4 id="2-代价函数"><a href="#2-代价函数" class="headerlink" title="2.代价函数"></a>2.代价函数</h4><p>在之前的线性回归模型，给出代价函数为：</p>
+<p><img src="http://120.25.221.136/images/logistic/cost.png" alt=""></p>
+<p>而将sigmod函数袋鼠上面的公式中，代价函数是一个非凸函数，不能取得全局最小值，智能取得局部最小值，所以不能使用上面的代价函数。</p>
+<p><img src="http://120.25.221.136/images/logistic/nonconvex.png" alt=""></p>
+<p><img src="http://120.25.221.136/images/logistic/newcost.png" alt=""></p>
+<p>将公式用一个表示：</p>
+<p><img src="http://120.25.221.136/images/logistic/newcost2.png" alt=""></p>
+<p>新的代价公式为：</p>
+<p><img src="http://120.25.221.136/images/logistic/newcost4.png" alt=""></p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>优点：</p>
+<ul>
+<li><p>计算简单，广泛应用与工业。</p>
+</li>
+<li><p>输出的概率值，预测的结果为0至1的概率。</p>
+<p>​</p>
+</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>样本量大的时候性能可能不好。</li>
+<li>不能多分类。</li>
+<li>容易欠拟合，一般准确度不太高</li>
+</ul>
+<h4 id="附加"><a href="#附加" class="headerlink" title="附加"></a>附加</h4><p>sigmod为什么这么被青睐？</p>
+<p>原因：</p>
+<ul>
+<li><p>能求导</p>
+<p>​</p>
+</li>
+</ul>
+<p><img src="http://120.25.221.136/images/logistic/qiudao.jpg" alt=""></p>
+<ul>
+<li><p>引入非线性</p>
+<p>值为0-1之间</p>
+</li>
+</ul>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -125,7 +169,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://pengyuanqiuqiu.github.io/2018/03/14/运行pyspark遇到的问题/" data-title="运行pyspark遇到的问题 | Jianyu" data-tsina="" class="share clearfix">
+	  <div data-url="https://pengyuanqiuqiu.github.io/2018/03/30/解读逻辑回归/" data-title="解读逻辑回归 | Jianyu" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -138,19 +182,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2018/03/19/sql/" title="sql">
-  <strong>上一篇：</strong><br/>
-  <span>
-  sql</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2018/03/03/机器学习的过拟合解决方法/"  title="机器学习的过拟合解决方法">
+<a href="/2018/03/22/机器学习的降维为特征选择的区别/"  title="特征选择和降维的区别">
  <strong>下一篇：</strong><br/> 
- <span>机器学习的过拟合解决方法
+ <span>特征选择和降维的区别
 </span>
 </a>
 </div>
@@ -167,7 +203,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-定义"><span class="toc-number">1.</span> <span class="toc-text">1.定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-代价函数"><span class="toc-number">2.</span> <span class="toc-text">2.代价函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#附加"><span class="toc-number">4.</span> <span class="toc-text">附加</span></a></li></ol>
  
   </div>
 
