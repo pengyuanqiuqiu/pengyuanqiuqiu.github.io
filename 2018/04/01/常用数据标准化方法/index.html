@@ -4,34 +4,27 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>解读逻辑回归 | Jianyu</title>
+    <title>Jianyu</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="PengYuan">
     
 
     
-    <meta name="description" content="1.定义logistic regression是统计学习中经典的分类算法。 线性回归的模型公式为 12 将线性回归转化为分类问题，利用sigmod激活函数转化为0到1之间的概率问题。   logistic的分类函数为：  从公式中可以发现 y=1   ——》z&amp;gt;0y=0  ——-》 z&amp;lt;0 2.代价函数在之前的线性回归模型，给出代价函数为：  而将sigmod函数袋鼠上面的公式中，代价">
+    <meta name="description" content="title:常用数据标准化方法  标准化原因数据标准化一般在数据预处理阶段。  引入数据标准化是指在不同评价指标中，其量纲或量纲单位往往不一样，变化区间不在一个数量级（如经度、纬度和时间戳），若不归一化会造成某些指标被忽视，影响到分析结果。  加快寻找最优解(加快收敛速度)  归一化有可能提高精度     标准化方法min-max标准化$$x*=x-min/max-min$$ 说明：max为样本">
 <meta property="og:type" content="article">
-<meta property="og:title" content="解读逻辑回归">
-<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/03/30/解读逻辑回归/index.html">
+<meta property="og:title" content="Jianyu">
+<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/04/01/常用数据标准化方法/index.html">
 <meta property="og:site_name" content="Jianyu">
-<meta property="og:description" content="1.定义logistic regression是统计学习中经典的分类算法。 线性回归的模型公式为 12 将线性回归转化为分类问题，利用sigmod激活函数转化为0到1之间的概率问题。   logistic的分类函数为：  从公式中可以发现 y=1   ——》z&amp;gt;0y=0  ——-》 z&amp;lt;0 2.代价函数在之前的线性回归模型，给出代价函数为：  而将sigmod函数袋鼠上面的公式中，代价">
+<meta property="og:description" content="title:常用数据标准化方法  标准化原因数据标准化一般在数据预处理阶段。  引入数据标准化是指在不同评价指标中，其量纲或量纲单位往往不一样，变化区间不在一个数量级（如经度、纬度和时间戳），若不归一化会造成某些指标被忽视，影响到分析结果。  加快寻找最优解(加快收敛速度)  归一化有可能提高精度     标准化方法min-max标准化$$x*=x-min/max-min$$ 说明：max为样本">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://120.25.221.136/images/logistic/sigmod.jpg">
-<meta property="og:image" content="http://120.25.221.136/images/logistic/sigmodpicture.png">
-<meta property="og:image" content="http://120.25.221.136/images/logistic/exchange.png">
-<meta property="og:image" content="http://120.25.221.136/images/logistic/cost.png">
-<meta property="og:image" content="http://120.25.221.136/images/logistic/nonconvex.png">
-<meta property="og:image" content="http://120.25.221.136/images/logistic/newcost.png">
-<meta property="og:image" content="http://120.25.221.136/images/logistic/newcost2.png">
-<meta property="og:image" content="http://120.25.221.136/images/logistic/newcost4.png">
-<meta property="og:image" content="http://120.25.221.136/images/logistic/qiudao.jpg">
-<meta property="og:updated_time" content="2018-03-31T06:13:39.198Z">
+<meta property="og:image" content="http://120.25.221.136/images/standlize/standardlize.jpg">
+<meta property="og:image" content="http://120.25.221.136/images/standlize/afterstandard.jpg">
+<meta property="og:updated_time" content="2018-04-01T11:45:31.058Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="解读逻辑回归">
-<meta name="twitter:description" content="1.定义logistic regression是统计学习中经典的分类算法。 线性回归的模型公式为 12 将线性回归转化为分类问题，利用sigmod激活函数转化为0到1之间的概率问题。   logistic的分类函数为：  从公式中可以发现 y=1   ——》z&amp;gt;0y=0  ——-》 z&amp;lt;0 2.代价函数在之前的线性回归模型，给出代价函数为：  而将sigmod函数袋鼠上面的公式中，代价">
-<meta name="twitter:image" content="http://120.25.221.136/images/logistic/sigmod.jpg">
+<meta name="twitter:title" content="Jianyu">
+<meta name="twitter:description" content="title:常用数据标准化方法  标准化原因数据标准化一般在数据预处理阶段。  引入数据标准化是指在不同评价指标中，其量纲或量纲单位往往不一样，变化区间不在一个数量级（如经度、纬度和时间戳），若不归一化会造成某些指标被忽视，影响到分析结果。  加快寻找最优解(加快收敛速度)  归一化有可能提高精度     标准化方法min-max标准化$$x*=x-min/max-min$$ 说明：max为样本">
+<meta name="twitter:image" content="http://120.25.221.136/images/standlize/standardlize.jpg">
 
     
     <link rel="alternative" href="http://www.163.com/rss/" title="Jianyu" type="application/atom+xml">
@@ -91,14 +84,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/03/30/解读逻辑回归/" title="解读逻辑回归" itemprop="url">解读逻辑回归</a>
+      <a href="/2018/04/01/常用数据标准化方法/" title="" itemprop="url"></a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
 		
   <p class="article-time">
-    <time datetime="2018-03-30T07:47:58.402Z" itemprop="datePublished"> 发表于 2018-03-30</time>
+    <time datetime="2018-04-01T06:28:19.368Z" itemprop="datePublished"> 发表于 2018-04-01</time>
     
   </p>
 </header>
@@ -107,56 +100,30 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-定义"><span class="toc-number">1.</span> <span class="toc-text">1.定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-代价函数"><span class="toc-number">2.</span> <span class="toc-text">2.代价函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#附加"><span class="toc-number">4.</span> <span class="toc-text">附加</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#标准化原因"><span class="toc-number">1.</span> <span class="toc-text">标准化原因</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#标准化方法"><span class="toc-number">2.</span> <span class="toc-text">标准化方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#min-max标准化"><span class="toc-number">2.1.</span> <span class="toc-text">min-max标准化</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Z-score标准化方法"><span class="toc-number">2.2.</span> <span class="toc-text">Z-score标准化方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#归一标准化"><span class="toc-number">2.3.</span> <span class="toc-text">归一标准化</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<h4 id="1-定义"><a href="#1-定义" class="headerlink" title="1.定义"></a>1.定义</h4><p>logistic regression是统计学习中经典的分类算法。</p>
-<p>线性回归的模型公式为</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>将线性回归转化为分类问题，利用sigmod激活函数转化为0到1之间的概率问题。</p>
-<p><img src="http://120.25.221.136/images/logistic/sigmod.jpg" alt=""></p>
-<p><img src="http://120.25.221.136/images/logistic/sigmodpicture.png" alt=""></p>
-<p>logistic的分类函数为：</p>
-<p><img src="http://120.25.221.136/images/logistic/exchange.png" alt=""></p>
-<p>从公式中可以发现</p>
-<p>y=1   ——》z&gt;0<br>y=0  ——-》 z&lt;0</p>
-<h4 id="2-代价函数"><a href="#2-代价函数" class="headerlink" title="2.代价函数"></a>2.代价函数</h4><p>在之前的线性回归模型，给出代价函数为：</p>
-<p><img src="http://120.25.221.136/images/logistic/cost.png" alt=""></p>
-<p>而将sigmod函数袋鼠上面的公式中，代价函数是一个非凸函数，不能取得全局最小值，智能取得局部最小值，所以不能使用上面的代价函数。</p>
-<p><img src="http://120.25.221.136/images/logistic/nonconvex.png" alt=""></p>
-<p><img src="http://120.25.221.136/images/logistic/newcost.png" alt=""></p>
-<p>将公式用一个表示：</p>
-<p><img src="http://120.25.221.136/images/logistic/newcost2.png" alt=""></p>
-<p>新的代价公式为：</p>
-<p><img src="http://120.25.221.136/images/logistic/newcost4.png" alt=""></p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>优点：</p>
+		<hr>
+<p>title:常用数据标准化方法</p>
+<hr>
+<h4 id="标准化原因"><a href="#标准化原因" class="headerlink" title="标准化原因"></a>标准化原因</h4><p>数据标准化一般在数据预处理阶段。</p>
 <ul>
-<li><p>计算简单，广泛应用与工业。</p>
+<li><p>引入数据标准化是指在不同评价指标中，其量纲或量纲单位往往不一样，变化区间不在一个数量级（如经度、纬度和时间戳），若不归一化会造成某些指标被忽视，影响到分析结果。</p>
 </li>
-<li><p>输出的概率值，预测的结果为0至1的概率。</p>
-<p>​</p>
+<li><p>加快寻找最优解(加快收敛速度)</p>
+</li>
+<li><p>归一化有可能提高精度</p>
+<p><img src="http://120.25.221.136/images/standlize/standardlize.jpg" alt="标准化前"></p>
 </li>
 </ul>
-<p>缺点：</p>
-<ul>
-<li>样本量大的时候性能可能不好。</li>
-<li>不能多分类。</li>
-<li>容易欠拟合，一般准确度不太高</li>
-</ul>
-<h4 id="附加"><a href="#附加" class="headerlink" title="附加"></a>附加</h4><p>sigmod为什么这么被青睐？</p>
-<p>原因：</p>
-<ul>
-<li><p>能求导</p>
-<p>​</p>
-</li>
-</ul>
-<p><img src="http://120.25.221.136/images/logistic/qiudao.jpg" alt=""></p>
-<ul>
-<li><p>引入非线性</p>
-<p>值为0-1之间</p>
-</li>
-</ul>
+<p><img src="http://120.25.221.136/images/standlize/afterstandard.jpg" alt="标准化前"></p>
+<h4 id="标准化方法"><a href="#标准化方法" class="headerlink" title="标准化方法"></a>标准化方法</h4><h5 id="min-max标准化"><a href="#min-max标准化" class="headerlink" title="min-max标准化"></a>min-max标准化</h5><p>$$<br>x*=x-min/max-min<br>$$</p>
+<p>说明：max为样本数据的最大值，min为最小值</p>
+<p>问题：当有新数据加入时需要重新进行归一化、</p>
+<h5 id="Z-score标准化方法"><a href="#Z-score标准化方法" class="headerlink" title="Z-score标准化方法"></a>Z-score标准化方法</h5><p>$$<br>x*=(x-μ)/σ<br>$$</p>
+<p>说明：μ为样本中的平均值，σ为样本标准差。</p>
+<h5 id="归一标准化"><a href="#归一标准化" class="headerlink" title="归一标准化"></a>归一标准化</h5><p>$$<br>y_i=\frac{x_i}{\sum_1^n{x_i}}<br>$$</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -169,7 +136,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://pengyuanqiuqiu.github.io/2018/03/30/解读逻辑回归/" data-title="解读逻辑回归 | Jianyu" data-tsina="" class="share clearfix">
+	  <div data-url="https://pengyuanqiuqiu.github.io/2018/04/01/常用数据标准化方法/" data-title="Jianyu" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -183,18 +150,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2018/03/31/L1与L2正则化的区别/" title="L1与L2正则化的区别">
+ <a href="/2018/04/04/Flask部署/" title="">
   <strong>上一篇：</strong><br/>
   <span>
-  L1与L2正则化的区别</span>
+  (no title)</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2018/03/22/机器学习的降维为特征选择的区别/"  title="特征选择和降维的区别">
+<a href="/2018/03/31/L1与L2正则化的区别/"  title="L1与L2正则化的区别">
  <strong>下一篇：</strong><br/> 
- <span>特征选择和降维的区别
+ <span>L1与L2正则化的区别
 </span>
 </a>
 </div>
@@ -211,7 +178,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-定义"><span class="toc-number">1.</span> <span class="toc-text">1.定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-代价函数"><span class="toc-number">2.</span> <span class="toc-text">2.代价函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#附加"><span class="toc-number">4.</span> <span class="toc-text">附加</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#标准化原因"><span class="toc-number">1.</span> <span class="toc-text">标准化原因</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#标准化方法"><span class="toc-number">2.</span> <span class="toc-text">标准化方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#min-max标准化"><span class="toc-number">2.1.</span> <span class="toc-text">min-max标准化</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Z-score标准化方法"><span class="toc-number">2.2.</span> <span class="toc-text">Z-score标准化方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#归一标准化"><span class="toc-number">2.3.</span> <span class="toc-text">归一标准化</span></a></li></ol></li></ol>
  
   </div>
 
