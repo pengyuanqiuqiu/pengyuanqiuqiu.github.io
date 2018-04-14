@@ -79,6 +79,65 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2018/03/02/学习tensorflow/" title="学习tensorflow" itemprop="url">学习tensorflow</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-03-02T13:46:04.615Z" itemprop="datePublished"> 发表于 2018-03-02</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>环境：环境为Windows7，64位，python 3.6</p>
+<h4 id="pip安装"><a href="#pip安装" class="headerlink" title="pip安装"></a><strong>pip安装</strong></h4><p>因为之前已经装好python和pip只需要输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># CPU 版的</span><br><span class="line">C:\&gt; pip3 install --upgrade tensorflow</span><br></pre></td></tr></table></figure>
+<p>装好之后测试是否安装成功。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow</span><br></pre></td></tr></table></figure>
+<p><img src="http://120.25.221.136/images/tensorsucess.png" alt=""></p>
+<p>运行遇到问题：Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX AVX2</p>
+<p>解决方法：没有支持cuda的gpu，通过加上警告级别，忽视警告。</p>
+<p>在python文件加入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line">os.environ[&apos;TF_CPP_MIN_LOG_LEVEL&apos;] = &apos;2&apos;</span><br></pre></td></tr></table></figure>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2018/02/02/剑指Offer编程题Python编写/" title="剑指Offer编程集合" itemprop="url">剑指Offer编程集合</a>
   </h1>
   <p class="article-author">By
@@ -102,6 +161,8 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">a = input()</span><br><span class="line">dic=&#123;&#125;</span><br><span class="line">num=[str(n) for n in a.split()]</span><br><span class="line">str=&apos;&apos;.join(num)</span><br><span class="line">for i in str:</span><br><span class="line">    dic[i] = 0</span><br><span class="line">for i in str:</span><br><span class="line">    if i.isalpha():</span><br><span class="line">        dic[i] += 1</span><br><span class="line">        if dic[i] == 3:</span><br><span class="line">            print(i)</span><br><span class="line">            break</span><br></pre></td></tr></table></figure>
 <h4 id="五、求1-2-3-…-n"><a href="#五、求1-2-3-…-n" class="headerlink" title="五、求1+2+3+…+n"></a>五、<a href="https://www.nowcoder.com/practice/7a0da8fc483247ff8800059e12d7caf1?tpId=13&amp;tqId=11200&amp;tPage=3&amp;rp=3&amp;ru=/ta/coding-interviews&amp;qru=/ta/coding-interviews/question-ranking" target="_blank" rel="noopener">求1+2+3+…+n</a></h4><p>题目描述：求1+2+3+…+n，要求不能使用乘除法、for、while、if、else、switch、case等关键字及条件判断语句（A?B:C）。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">class Solution:</span><br><span class="line">    def Sum_Solution(self, n):</span><br><span class="line"></span><br><span class="line">        if n&gt;1:</span><br><span class="line">            return n + self.Sum_Solution(n - 1)</span><br><span class="line">        else:</span><br><span class="line">            return 1</span><br></pre></td></tr></table></figure>
+<h4 id="六、一个数组的值先从小到大递增后从大到小递减，找出最大的值"><a href="#六、一个数组的值先从小到大递增后从大到小递减，找出最大的值" class="headerlink" title="六、一个数组的值先从小到大递增后从大到小递减，找出最大的值"></a>六、一个数组的值先从小到大递增后从大到小递减，找出最大的值</h4><p>题目描述：一个数组的值先从小到大递增后从大到小递减，找出最大的值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">使用迭代</span><br><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">def sortList(array):</span><br><span class="line">    length=len(array)-1 </span><br><span class="line">    end=length-1</span><br><span class="line">    start=0</span><br><span class="line">    middle=int(start+(end-start)/2)</span><br><span class="line">    while(middle&gt;0and middle&lt;length-1):</span><br><span class="line">        print(middle)</span><br><span class="line">        if array[middle]&gt;array[middle-1] and array[middle]&gt;array[middle+1]:</span><br><span class="line">            return array[middle]</span><br><span class="line">        elif array[middle]&lt;array[middle-1]:</span><br><span class="line">            end=middle-1</span><br><span class="line">            middle = int(start+(end-start)/2)</span><br><span class="line">        else:</span><br><span class="line">            start = middle +1</span><br><span class="line">            middle =int(start+(end-start)/2)</span><br><span class="line">    return -1</span><br></pre></td></tr></table></figure>
 
         
         

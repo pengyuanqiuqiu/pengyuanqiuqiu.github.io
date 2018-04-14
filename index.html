@@ -79,6 +79,119 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2018/04/07/理解softmax/" title="理解softmax&lt;转自http://kubicode.me/2016/11/27/Machine%20Learning/Something-for-Softmax/&gt;" itemprop="url">理解softmax&lt;转自http://kubicode.me/2016/11/27/Machine%20Learning/Something-for-Softmax/&gt;</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-04-07T07:23:59.807Z" itemprop="datePublished"> 发表于 2018-04-07</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h4 id="Softmax-介绍"><a href="#Softmax-介绍" class="headerlink" title="Softmax 介绍"></a>Softmax 介绍</h4><p>多分类是机器学习中一类非常常见的任务，比如将0~9某个字写到图片上，使用多分类的方法来识别这个图片上写的到底是几(<code>MNIST手写体识别</code>)，对于多分类任务常用的机器学习方法有:</p>
+<ol>
+<li>借助<code>二分类</code>，使用<a href="http://kubicode.me/2015/08/30/Machine%20Learning/Multiclass-Classification/#One-Vs-All" target="_blank" rel="noopener">One vs All</a>或者<a href="http://kubicode.me/2015/08/30/Machine%20Learning/Multiclass-Classification/#One-Vs-One" target="_blank" rel="noopener">One vs One</a>来完成多分类</li>
+<li>使用<a href="http://kubicode.me/2015/08/16/Machine%20Learning/Algorithm-Summary-for-Interview/#%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF" target="_blank" rel="noopener">朴素贝叶斯</a>来完成多分类</li>
+<li>决策树类模型~</li>
+<li><a href="http://kubicode.me/2016/12/12/Machine%20Learning/Maximum-Entropy-Model/" target="_blank" rel="noopener">最大熵模型</a></li>
+<li>。。。</li>
+</ol>
+<p>同时本文要说到的<code>Softmax</code>是一个是<code>Logistic</code>模型上的一个扩展，可以轻松的完成多分类任务，它是一个有监督的学习，不过可以和相当热门的神经网络可以轻松结合起来.</p>
+<h4 id="Logistic回顾"><a href="#Logistic回顾" class="headerlink" title="Logistic回顾"></a>Logistic回顾</h4><p><code>Logistic</code>模型是一个非常基础而又高效的<code>二分类</code>模型，并且由于其最终值会归一化到0~1，因此也很多场景下也会作为<code>回归</code>模型使用，比如<code>ctr预估</code>。<br><code>Logistic</code>的输入数据是<br>$$<br>{(x1,y1),(x2,y2)…(xm,ym)}<br>$$<br>其中xi为输入的特征向量，yi即为要训练的目标，在<code>二分类</code>中，一般yi∈{0,1}，则<code>Logistic</code>的算分函数为</p>
+<p>使用最大似然法进行参数估计,其似然函数为<br>∏hθ(xi)yi×(1−hθ(xi))(1−yi)</p>
+<p>对其进行负的对数转换之后则最终的损失函数为<br>J(θ)=−1mm∑i=1[yiloghθ(xi)+(1−yi)log(1−hθ(xi))]</p>
+<p>在<code>Logistic</code>模型中我们可以发现我们最终需要求的是θ向量.</p>
+<h4 id="Softmax-模型"><a href="#Softmax-模型" class="headerlink" title="Softmax 模型"></a>Softmax 模型</h4><p>在<code>Softmax</code>模型中，其输入也是类似向量的设计<br>{(x1,y1),(x2,y2)…(xm,ym)}</p>
+<p>只是这个的yi∈{1,2,…k}有k个类别，而最终要求的应该是这个值<br>P(y=kj|x)</p>
+<p>也就是类别</p>
+<p>kj</p>
+<p>可能的概率，也就是会形成一个</p>
+<p>k</p>
+<p>维的输出</p>
+<p>hθ(xi)=[P(yi=1|θ1,xi)P(yi=2|θ2,xi)…P(yi=k|θk,xi)]=1∑ks=1eθTsxi[eθT1xieθT2xi…eθTkxi]</p>
+<p>则我们整个模型最终要求的是一个θ<code>矩阵</code>(注意,在<code>Logistic</code>中求是一个向量),矩阵的每一行θi其实就是与输入参数x相乘的向量~</p>
+<blockquote>
+<p>注意:分子1∑ks=1eθTsxi是为了让最终所有类别的概率之和为<code>1</code></p>
+</blockquote>
+<p>每个类别j的概率为:<br>pj=eθTjx∑ks=1eθTsx</p>
+<h4 id="Softmax的损失函数"><a href="#Softmax的损失函数" class="headerlink" title="Softmax的损失函数"></a>Softmax的损失函数</h4><p>同样,<code>Softmax</code>使用最大似然法进行参数的估计,则似然函数为<br>m∏ik∏j=1pI{yi=kj}j</p>
+<blockquote>
+<p>其中I{yi=kj}为二值函数，当且仅当yi==kj时为1，否则为0</p>
+</blockquote>
+<p>对其<code>取负的对数</code>可以得到其损失函数:<br>J(θ)=−1m[m∑i=1k∑j=1I{yi=kj}logpj]</p>
+<p>假设我们使用梯度下降法对损失函数进行优化，因此对θ进行求导,在求导之前先算下面这个:<br>δpjδθi={eθTjxδθj∑ks=1eθTsx−∑ks=1eθTsxδθjeθTjx(∑ks=1eθTsx)2=xpj(1−pj)ifi=jeθTjxδθi∑ks=1eθTsx−∑ks=1eθTsxδθieθTjx(∑ks=1eθTsx)2=xpipjifi≠j</p>
+<p>有了上面的基础之后，我们对于J(θ)进行求导，就可以得到如下的梯度:</p>
+<p>▽θjJ(θ)=−1m[m∑i=1k∑j=1I{yi=kj}1pjδpjδθj]=−1m[m∑i=1(I{yi=ki}1pixipi(1−pi)−k∑j=1,j≠iI{yi=kj}1pjxipipj)]=−1m[m∑i=1xi(I{yi=ki}(1−pi)−k∑j=1,j≠iI{yi=kj}pi)]=−1m[m∑i=1xi(I{yi=ki}−I{yi=ki}pi−k∑j=1,j≠iI{yi=kj}pi)]=−1m[m∑i=1xi(I{yi=kj}−k∑j=1I{yi=kj}pi)]=−1m[m∑i=1xi(I{yi=kj}−pi)]</p>
+<p>注意有:</p>
+<ul>
+<li>∑kj=1I{yi=kj}=1 ,因为样本必定会落到一个类别上</li>
+<li>同时上面式子里面红色的j是因为左侧分离出来,其中分离的条件是i=j</li>
+</ul>
+<p>上面的梯度最终将会是一个向量的形式,δJ(θ)δθj,l表示第j的类别的第l个特征的梯度方式，有了该梯度了之后，最终可以得到如下的参数更新:<br>θj=θj−α▽θjJ(θ)j∈{1,…k}</p>
+<p>到了这一步，整体看到就和二分类的<code>Logistic</code>很像了，上面是使用梯度下降法的求解，当然还可以使用类似<code>L-BFGS</code>算法进行优化~<br>另外关于其<code>L1</code>和<code>L2</code>的正则项也是可以参考<code>Logistic</code></p>
+<h4 id="Softmax与Logistic的联系"><a href="#Softmax与Logistic的联系" class="headerlink" title="Softmax与Logistic的联系"></a>Softmax与Logistic的联系</h4><p>在<code>Softmax</code>的k=2时(其实就是二分类了)，再来观察<code>Softmax</code>的一些式子</p>
+<h4 id="算分函数"><a href="#算分函数" class="headerlink" title="算分函数"></a>算分函数</h4><p>hθ(xi)=1eθT1xi+eθT2xi[eθT1xieθT2xi]=1e(θ1−θ1)Txi+e(θ2−θ1)Txi[e(θ1−θ1)Txie(θ2−θ1)Txi]=[11+e(θ2−θ1)Txie(θ2−θ1)Txi1+e(θ2−θ1)Txi]=[11+e(θ2−θ1)Txi1−11+e(θ2−θ1)Txi]</p>
+<blockquote>
+<p>在上面第一到第二步减去θ1任成立的原因是，<code>Softmax</code>的参数过多，是一个大矩阵，里面存在着冗余的参数:<br>hθj(xi)=eθjxi∑ks=1eθsxi=e(θj−ϕ)xi∑ks=1e(θs−ϕ)xi=eθjxie−ϕxi∑ks=1eθsxie−ϕxi=eθjxi∑ks=1eθsxi</p>
+<p>因此，参数矩阵中减去同一个</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; 向量</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<p>并不会影响最终的优化结果~关于参数过度化问题可以参考</p>
+<p>这里</p>
+</blockquote>
+<p>所以当k=2时<code>Softmax</code>的算分函数其实就是<code>Logistic</code>的变形~</p>
+<h4 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h4><p><code>Softmax</code>的损失函数为</p>
+<blockquote>
+<p>因为:I{yi=k1}+I{yi=k2}=1 以及 p1+p2=1</p>
+</blockquote>
+<p>最终也就变成了<code>Logistic</code>的损失函数形式了</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ol>
+<li><code>Softmax</code>模型其实是<code>Logistic</code>对于多分类上面的扩展</li>
+<li><code>Softmax</code>最终产出的每一类的概率之和为1</li>
+<li><code>Softmax</code>其实并不是一个损失函数（因为看到很多文章中都会很自然的写道<code>Softmax损失函数</code>）,它自己求优化时还是使用者交叉熵的这一套</li>
+</ol>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2018/04/04/Flask部署/" title="" itemprop="url"></a>
   </h1>
   <p class="article-author">By
@@ -93,7 +206,9 @@
     <div class="article-content">
         
         <hr>
-<h2 id="title-Flask部署"><a href="#title-Flask部署" class="headerlink" title="title:Flask部署"></a>title:Flask部署</h2><h3 id="技术"><a href="#技术" class="headerlink" title="技术"></a>技术</h3><h4 id="Flask，Tornado和nginx"><a href="#Flask，Tornado和nginx" class="headerlink" title="Flask，Tornado和nginx"></a>Flask，Tornado和nginx</h4><p>Flask是Python的一个轻型的web框架，具有上手快，结构简单的优点，所以利用它来进行小型项目接口开发。</p>
+<p>title:Flask部署</p>
+<hr>
+<h4 id="Flask，Tornado和nginx"><a href="#Flask，Tornado和nginx" class="headerlink" title="Flask，Tornado和nginx"></a>Flask，Tornado和nginx</h4><p>Flask是Python的一个轻型的web框架，具有上手快，结构简单的优点，所以利用它来进行小型项目接口开发。</p>
 <p>但在开发环境下并发性较大，所以Flask内置的服务器不能很好的处理，所以需要采用一个强大、健壮的web服务器来处理复杂的情况，利用tornado和niginx来部署。</p>
 <p>Tornado性能比django和Flask高很多是因为Tornado在底层io处理机制上和django以及Flask有着根本的区别。Tornado拥有wsgi容器。</p>
 <p><img src="http://120.25.221.136/images/bushu/bushu1.png" alt=""></p>
@@ -738,65 +853,6 @@ WHEN &apos;2&apos; THEN &apos;女&apos;
 <li>L2正则化是指权值向量w中各个元素的<strong>平方和然后再求平方根</strong>（可以看到Ridge回归的L2正则化项有平方符号），通常表示为||w||2</li>
 </ul>
 <h4 id="3-Dropout"><a href="#3-Dropout" class="headerlink" title="3.Dropout"></a>3.Dropout</h4><p>在一次循环中我们先随机选择神经层中的一些单元并将其临时隐藏，然后再进行该次循环中神经网络的训练和优化过程。在下一次循环中，我们又将隐藏另外一些神经元，如此直至训练结束。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/03/02/学习tensorflow/" title="学习tensorflow" itemprop="url">学习tensorflow</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
-		
-  <p class="article-time">
-    <time datetime="2018-03-02T13:46:04.615Z" itemprop="datePublished"> 发表于 2018-03-02</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>环境：环境为Windows7，64位，python 3.6</p>
-<h4 id="pip安装"><a href="#pip安装" class="headerlink" title="pip安装"></a><strong>pip安装</strong></h4><p>因为之前已经装好python和pip只需要输入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># CPU 版的</span><br><span class="line">C:\&gt; pip3 install --upgrade tensorflow</span><br></pre></td></tr></table></figure>
-<p>装好之后测试是否安装成功。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow</span><br></pre></td></tr></table></figure>
-<p><img src="http://120.25.221.136/images/tensorsucess.png" alt=""></p>
-<p>运行遇到问题：Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX AVX2</p>
-<p>解决方法：没有支持cuda的gpu，通过加上警告级别，忽视警告。</p>
-<p>在python文件加入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line">os.environ[&apos;TF_CPP_MIN_LOG_LEVEL&apos;] = &apos;2&apos;</span><br></pre></td></tr></table></figure>
 
         
         
