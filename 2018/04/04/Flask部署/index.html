@@ -4,25 +4,25 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Jianyu</title>
+    <title>Falsk部署 | Jianyu</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="PengYuan">
     
 
     
-    <meta name="description" content="title:Flask部署Flask，Tornado和nginxFlask是Python的一个轻型的web框架，具有上手快，结构简单的优点，所以利用它来进行小型项目接口开发。 但在开发环境下并发性较大，所以Flask内置的服务器不能很好的处理，所以需要采用一个强大、健壮的web服务器来处理复杂的情况，利用tornado和niginx来部署。 Tornado性能比django和Flask高很多是因">
+    <meta name="description" content="Flask，Tornado和nginxFlask是Python的一个轻型的web框架，具有上手快，结构简单的优点，所以利用它来进行小型项目接口开发。 但在开发环境下并发性较大，所以Flask内置的服务器不能很好的处理，所以需要采用一个强大、健壮的web服务器来处理复杂的情况，利用tornado和niginx来部署。 Tornado性能比django和Flask高很多是因为Tornado在底层io处">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Jianyu">
+<meta property="og:title" content="Falsk部署">
 <meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/04/04/Flask部署/index.html">
 <meta property="og:site_name" content="Jianyu">
-<meta property="og:description" content="title:Flask部署Flask，Tornado和nginxFlask是Python的一个轻型的web框架，具有上手快，结构简单的优点，所以利用它来进行小型项目接口开发。 但在开发环境下并发性较大，所以Flask内置的服务器不能很好的处理，所以需要采用一个强大、健壮的web服务器来处理复杂的情况，利用tornado和niginx来部署。 Tornado性能比django和Flask高很多是因">
+<meta property="og:description" content="Flask，Tornado和nginxFlask是Python的一个轻型的web框架，具有上手快，结构简单的优点，所以利用它来进行小型项目接口开发。 但在开发环境下并发性较大，所以Flask内置的服务器不能很好的处理，所以需要采用一个强大、健壮的web服务器来处理复杂的情况，利用tornado和niginx来部署。 Tornado性能比django和Flask高很多是因为Tornado在底层io处">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://120.25.221.136/images/bushu/bushu1.png">
-<meta property="og:updated_time" content="2018-04-14T06:10:34.488Z">
+<meta property="og:updated_time" content="2018-04-14T06:17:37.863Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jianyu">
-<meta name="twitter:description" content="title:Flask部署Flask，Tornado和nginxFlask是Python的一个轻型的web框架，具有上手快，结构简单的优点，所以利用它来进行小型项目接口开发。 但在开发环境下并发性较大，所以Flask内置的服务器不能很好的处理，所以需要采用一个强大、健壮的web服务器来处理复杂的情况，利用tornado和niginx来部署。 Tornado性能比django和Flask高很多是因">
+<meta name="twitter:title" content="Falsk部署">
+<meta name="twitter:description" content="Flask，Tornado和nginxFlask是Python的一个轻型的web框架，具有上手快，结构简单的优点，所以利用它来进行小型项目接口开发。 但在开发环境下并发性较大，所以Flask内置的服务器不能很好的处理，所以需要采用一个强大、健壮的web服务器来处理复杂的情况，利用tornado和niginx来部署。 Tornado性能比django和Flask高很多是因为Tornado在底层io处">
 <meta name="twitter:image" content="http://120.25.221.136/images/bushu/bushu1.png">
 
     
@@ -83,7 +83,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/04/04/Flask部署/" title="" itemprop="url"></a>
+      <a href="/2018/04/04/Flask部署/" title="Falsk部署" itemprop="url">Falsk部署</a>
   </h1>
   <p class="article-author">By
        
@@ -99,12 +99,11 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#title-Flask部署"><span class="toc-number">1.</span> <span class="toc-text">title:Flask部署</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Flask，Tornado和nginx"><span class="toc-number">1.0.1.</span> <span class="toc-text">Flask，Tornado和nginx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#增加Tornado功能"><span class="toc-number">1.0.2.</span> <span class="toc-text">增加Tornado功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置Nginx转发到Flask"><span class="toc-number">1.0.3.</span> <span class="toc-text">配置Nginx转发到Flask</span></a></li></ol></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Flask，Tornado和nginx"><span class="toc-number">1.</span> <span class="toc-text">Flask，Tornado和nginx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#增加Tornado功能"><span class="toc-number">2.</span> <span class="toc-text">增加Tornado功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置Nginx转发到Flask"><span class="toc-number">3.</span> <span class="toc-text">配置Nginx转发到Flask</span></a></li></ol>
 		
 		</div>
 		
-		<hr>
-<h2 id="title-Flask部署"><a href="#title-Flask部署" class="headerlink" title="title:Flask部署"></a>title:Flask部署</h2><h4 id="Flask，Tornado和nginx"><a href="#Flask，Tornado和nginx" class="headerlink" title="Flask，Tornado和nginx"></a>Flask，Tornado和nginx</h4><p>Flask是Python的一个轻型的web框架，具有上手快，结构简单的优点，所以利用它来进行小型项目接口开发。</p>
+		<h4 id="Flask，Tornado和nginx"><a href="#Flask，Tornado和nginx" class="headerlink" title="Flask，Tornado和nginx"></a>Flask，Tornado和nginx</h4><p>Flask是Python的一个轻型的web框架，具有上手快，结构简单的优点，所以利用它来进行小型项目接口开发。</p>
 <p>但在开发环境下并发性较大，所以Flask内置的服务器不能很好的处理，所以需要采用一个强大、健壮的web服务器来处理复杂的情况，利用tornado和niginx来部署。</p>
 <p>Tornado性能比django和Flask高很多是因为Tornado在底层io处理机制上和django以及Flask有着根本的区别。Tornado拥有wsgi容器。</p>
 <p><img src="http://120.25.221.136/images/bushu/bushu1.png" alt=""></p>
@@ -134,7 +133,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://pengyuanqiuqiu.github.io/2018/04/04/Flask部署/" data-title="Jianyu" data-tsina="" class="share clearfix">
+	  <div data-url="https://pengyuanqiuqiu.github.io/2018/04/04/Flask部署/" data-title="Falsk部署 | Jianyu" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -149,9 +148,9 @@
  
 
 <div class="next">
-<a href="/2018/04/01/常用数据标准化方法/"  title="">
+<a href="/2018/04/01/常用数据标准化方法/"  title="常用的数据标准化方法">
  <strong>下一篇：</strong><br/> 
- <span>(no title)
+ <span>常用的数据标准化方法
 </span>
 </a>
 </div>
@@ -168,7 +167,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#title-Flask部署"><span class="toc-number">1.</span> <span class="toc-text">title:Flask部署</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Flask，Tornado和nginx"><span class="toc-number">1.0.1.</span> <span class="toc-text">Flask，Tornado和nginx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#增加Tornado功能"><span class="toc-number">1.0.2.</span> <span class="toc-text">增加Tornado功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置Nginx转发到Flask"><span class="toc-number">1.0.3.</span> <span class="toc-text">配置Nginx转发到Flask</span></a></li></ol></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Flask，Tornado和nginx"><span class="toc-number">1.</span> <span class="toc-text">Flask，Tornado和nginx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#增加Tornado功能"><span class="toc-number">2.</span> <span class="toc-text">增加Tornado功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置Nginx转发到Flask"><span class="toc-number">3.</span> <span class="toc-text">配置Nginx转发到Flask</span></a></li></ol>
  
   </div>
 

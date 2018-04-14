@@ -4,26 +4,26 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Jianyu</title>
+    <title>常用的数据标准化方法 | Jianyu</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="PengYuan">
     
 
     
-    <meta name="description" content="title:常用的数据标准化方法标准化原因数据标准化一般在数据预处理阶段。  引入数据标准化是指在不同评价指标中，其量纲或量纲单位往往不一样，变化区间不在一个数量级（如经度、纬度和时间戳），若不归一化会造成某些指标被忽视，影响到分析结果。  加快寻找最优解(加快收敛速度)  归一化有可能提高精度     标准化方法min-max标准化$$x*=x-min/max-min$$ 说明：max为样本数">
+    <meta name="description" content="标准化原因数据标准化一般在数据预处理阶段。  引入数据标准化是指在不同评价指标中，其量纲或量纲单位往往不一样，变化区间不在一个数量级（如经度、纬度和时间戳），若不归一化会造成某些指标被忽视，影响到分析结果。  加快寻找最优解(加快收敛速度)  归一化有可能提高精度     标准化方法min-max标准化$$x*=x-min/max-min$$ 说明：max为样本数据的最大值，min为最小值 问题：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Jianyu">
+<meta property="og:title" content="常用的数据标准化方法">
 <meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/04/01/常用数据标准化方法/index.html">
 <meta property="og:site_name" content="Jianyu">
-<meta property="og:description" content="title:常用的数据标准化方法标准化原因数据标准化一般在数据预处理阶段。  引入数据标准化是指在不同评价指标中，其量纲或量纲单位往往不一样，变化区间不在一个数量级（如经度、纬度和时间戳），若不归一化会造成某些指标被忽视，影响到分析结果。  加快寻找最优解(加快收敛速度)  归一化有可能提高精度     标准化方法min-max标准化$$x*=x-min/max-min$$ 说明：max为样本数">
+<meta property="og:description" content="标准化原因数据标准化一般在数据预处理阶段。  引入数据标准化是指在不同评价指标中，其量纲或量纲单位往往不一样，变化区间不在一个数量级（如经度、纬度和时间戳），若不归一化会造成某些指标被忽视，影响到分析结果。  加快寻找最优解(加快收敛速度)  归一化有可能提高精度     标准化方法min-max标准化$$x*=x-min/max-min$$ 说明：max为样本数据的最大值，min为最小值 问题：">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://120.25.221.136/images/standlize/standardlize.jpg">
 <meta property="og:image" content="http://120.25.221.136/images/standlize/afterstandard.jpg">
-<meta property="og:updated_time" content="2018-04-05T11:51:17.387Z">
+<meta property="og:updated_time" content="2018-04-14T06:17:00.369Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jianyu">
-<meta name="twitter:description" content="title:常用的数据标准化方法标准化原因数据标准化一般在数据预处理阶段。  引入数据标准化是指在不同评价指标中，其量纲或量纲单位往往不一样，变化区间不在一个数量级（如经度、纬度和时间戳），若不归一化会造成某些指标被忽视，影响到分析结果。  加快寻找最优解(加快收敛速度)  归一化有可能提高精度     标准化方法min-max标准化$$x*=x-min/max-min$$ 说明：max为样本数">
+<meta name="twitter:title" content="常用的数据标准化方法">
+<meta name="twitter:description" content="标准化原因数据标准化一般在数据预处理阶段。  引入数据标准化是指在不同评价指标中，其量纲或量纲单位往往不一样，变化区间不在一个数量级（如经度、纬度和时间戳），若不归一化会造成某些指标被忽视，影响到分析结果。  加快寻找最优解(加快收敛速度)  归一化有可能提高精度     标准化方法min-max标准化$$x*=x-min/max-min$$ 说明：max为样本数据的最大值，min为最小值 问题：">
 <meta name="twitter:image" content="http://120.25.221.136/images/standlize/standardlize.jpg">
 
     
@@ -84,7 +84,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/04/01/常用数据标准化方法/" title="" itemprop="url"></a>
+      <a href="/2018/04/01/常用数据标准化方法/" title="常用的数据标准化方法" itemprop="url">常用的数据标准化方法</a>
   </h1>
   <p class="article-author">By
        
@@ -100,12 +100,11 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#title-常用的数据标准化方法"><span class="toc-number">1.</span> <span class="toc-text">title:常用的数据标准化方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#标准化原因"><span class="toc-number">1.0.1.</span> <span class="toc-text">标准化原因</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#标准化方法"><span class="toc-number">1.0.2.</span> <span class="toc-text">标准化方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#min-max标准化"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">min-max标准化</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Z-score标准化方法"><span class="toc-number">1.0.2.2.</span> <span class="toc-text">Z-score标准化方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#归一标准化"><span class="toc-number">1.0.2.3.</span> <span class="toc-text">归一标准化</span></a></li></ol></li></ol></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#标准化原因"><span class="toc-number">1.</span> <span class="toc-text">标准化原因</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#标准化方法"><span class="toc-number">2.</span> <span class="toc-text">标准化方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#min-max标准化"><span class="toc-number">2.1.</span> <span class="toc-text">min-max标准化</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Z-score标准化方法"><span class="toc-number">2.2.</span> <span class="toc-text">Z-score标准化方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#归一标准化"><span class="toc-number">2.3.</span> <span class="toc-text">归一标准化</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<hr>
-<h2 id="title-常用的数据标准化方法"><a href="#title-常用的数据标准化方法" class="headerlink" title="title:常用的数据标准化方法"></a>title:常用的数据标准化方法</h2><h4 id="标准化原因"><a href="#标准化原因" class="headerlink" title="标准化原因"></a>标准化原因</h4><p>数据标准化一般在数据预处理阶段。</p>
+		<h4 id="标准化原因"><a href="#标准化原因" class="headerlink" title="标准化原因"></a>标准化原因</h4><p>数据标准化一般在数据预处理阶段。</p>
 <ul>
 <li><p>引入数据标准化是指在不同评价指标中，其量纲或量纲单位往往不一样，变化区间不在一个数量级（如经度、纬度和时间戳），若不归一化会造成某些指标被忽视，影响到分析结果。</p>
 </li>
@@ -134,7 +133,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://pengyuanqiuqiu.github.io/2018/04/01/常用数据标准化方法/" data-title="Jianyu" data-tsina="" class="share clearfix">
+	  <div data-url="https://pengyuanqiuqiu.github.io/2018/04/01/常用数据标准化方法/" data-title="常用的数据标准化方法 | Jianyu" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -148,10 +147,10 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2018/04/04/Flask部署/" title="">
+ <a href="/2018/04/04/Flask部署/" title="Falsk部署">
   <strong>上一篇：</strong><br/>
   <span>
-  (no title)</span>
+  Falsk部署</span>
 </a>
 </div>
 
@@ -176,7 +175,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#title-常用的数据标准化方法"><span class="toc-number">1.</span> <span class="toc-text">title:常用的数据标准化方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#标准化原因"><span class="toc-number">1.0.1.</span> <span class="toc-text">标准化原因</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#标准化方法"><span class="toc-number">1.0.2.</span> <span class="toc-text">标准化方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#min-max标准化"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">min-max标准化</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Z-score标准化方法"><span class="toc-number">1.0.2.2.</span> <span class="toc-text">Z-score标准化方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#归一标准化"><span class="toc-number">1.0.2.3.</span> <span class="toc-text">归一标准化</span></a></li></ol></li></ol></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#标准化原因"><span class="toc-number">1.</span> <span class="toc-text">标准化原因</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#标准化方法"><span class="toc-number">2.</span> <span class="toc-text">标准化方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#min-max标准化"><span class="toc-number">2.1.</span> <span class="toc-text">min-max标准化</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Z-score标准化方法"><span class="toc-number">2.2.</span> <span class="toc-text">Z-score标准化方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#归一标准化"><span class="toc-number">2.3.</span> <span class="toc-text">归一标准化</span></a></li></ol></li></ol>
  
   </div>
 
