@@ -4,27 +4,26 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>比较SVM与LR | Jianyu</title>
+    <title>K-means算法的改进 | Jianyu</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="PengYuan">
     
 
     
-    <meta name="description" content="1.相同点 都属于二分类算法  属于监督学习  属于判别模型  应用广泛   2.不同点 损失函数的定义不一样 SVM的损失函数为  LR的损失函数为     LR产生分类结果概率，SVM产生分类结果 SVM的损失函数自带结构风险最小化，LR为经验风险最小化 SVM使用核函数进行特征映射解决非线性分类，LR使用sigmod函数实现非线性分类 SVM需要将数据进行归一化，LR不需要  小总结 对于小">
+    <meta name="description" content="K-means的介绍K-means算法是很典型的基于距离的聚类算法，采用距离作为相似性的评价指标，即认为两个对象的距离越近，其相似度就越大。该算法认为簇是由距离靠近的对象组成的，因此把得到紧凑且独立的簇作为最终目标。 算法流程 算法的缺点 对离群点和孤立点敏感  K的选值不好确定  初始聚类中心的选择  聚类的效果是球状   算法的改进 改进1 在聚类前将离群点或者孤立点利用LOF算法去除，这样可">
 <meta property="og:type" content="article">
-<meta property="og:title" content="比较SVM与LR">
-<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/04/14/比较svm与LR/index.html">
+<meta property="og:title" content="K-means算法的改进">
+<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/05/01/Kmeans的改进/index.html">
 <meta property="og:site_name" content="Jianyu">
-<meta property="og:description" content="1.相同点 都属于二分类算法  属于监督学习  属于判别模型  应用广泛   2.不同点 损失函数的定义不一样 SVM的损失函数为  LR的损失函数为     LR产生分类结果概率，SVM产生分类结果 SVM的损失函数自带结构风险最小化，LR为经验风险最小化 SVM使用核函数进行特征映射解决非线性分类，LR使用sigmod函数实现非线性分类 SVM需要将数据进行归一化，LR不需要  小总结 对于小">
+<meta property="og:description" content="K-means的介绍K-means算法是很典型的基于距离的聚类算法，采用距离作为相似性的评价指标，即认为两个对象的距离越近，其相似度就越大。该算法认为簇是由距离靠近的对象组成的，因此把得到紧凑且独立的簇作为最终目标。 算法流程 算法的缺点 对离群点和孤立点敏感  K的选值不好确定  初始聚类中心的选择  聚类的效果是球状   算法的改进 改进1 在聚类前将离群点或者孤立点利用LOF算法去除，这样可">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://120.25.221.136/images/logistic/cost.png">
-<meta property="og:image" content="http://120.25.221.136/images/lRvssvm/lrcost3.png">
-<meta property="og:updated_time" content="2018-04-14T08:17:42.094Z">
+<meta property="og:image" content="http://120.25.221.136/images/kmeans/kmeans.png">
+<meta property="og:updated_time" content="2018-05-01T06:41:18.854Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="比较SVM与LR">
-<meta name="twitter:description" content="1.相同点 都属于二分类算法  属于监督学习  属于判别模型  应用广泛   2.不同点 损失函数的定义不一样 SVM的损失函数为  LR的损失函数为     LR产生分类结果概率，SVM产生分类结果 SVM的损失函数自带结构风险最小化，LR为经验风险最小化 SVM使用核函数进行特征映射解决非线性分类，LR使用sigmod函数实现非线性分类 SVM需要将数据进行归一化，LR不需要  小总结 对于小">
-<meta name="twitter:image" content="http://120.25.221.136/images/logistic/cost.png">
+<meta name="twitter:title" content="K-means算法的改进">
+<meta name="twitter:description" content="K-means的介绍K-means算法是很典型的基于距离的聚类算法，采用距离作为相似性的评价指标，即认为两个对象的距离越近，其相似度就越大。该算法认为簇是由距离靠近的对象组成的，因此把得到紧凑且独立的簇作为最终目标。 算法流程 算法的缺点 对离群点和孤立点敏感  K的选值不好确定  初始聚类中心的选择  聚类的效果是球状   算法的改进 改进1 在聚类前将离群点或者孤立点利用LOF算法去除，这样可">
+<meta name="twitter:image" content="http://120.25.221.136/images/kmeans/kmeans.png">
 
     
     <link rel="alternative" href="http://www.163.com/rss/" title="Jianyu" type="application/atom+xml">
@@ -84,14 +83,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/04/14/比较svm与LR/" title="比较SVM与LR" itemprop="url">比较SVM与LR</a>
+      <a href="/2018/05/01/Kmeans的改进/" title="K-means算法的改进" itemprop="url">K-means算法的改进</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
 		
   <p class="article-time">
-    <time datetime="2018-04-14T07:45:32.028Z" itemprop="datePublished"> 发表于 2018-04-14</time>
+    <time datetime="2018-05-01T06:16:52.407Z" itemprop="datePublished"> 发表于 2018-05-01</time>
     
   </p>
 </header>
@@ -100,36 +99,31 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-相同点"><span class="toc-number">1.</span> <span class="toc-text">1.相同点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-不同点"><span class="toc-number">2.</span> <span class="toc-text">2.不同点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#小总结"><span class="toc-number">3.</span> <span class="toc-text">小总结</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#K-means的介绍"><span class="toc-number">1.</span> <span class="toc-text">K-means的介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#算法流程"><span class="toc-number">2.</span> <span class="toc-text">算法流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#算法的缺点"><span class="toc-number">3.</span> <span class="toc-text">算法的缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#算法的改进"><span class="toc-number">4.</span> <span class="toc-text">算法的改进</span></a></li></ol>
 		
 		</div>
 		
-		<h3 id="1-相同点"><a href="#1-相同点" class="headerlink" title="1.相同点"></a>1.相同点</h3><ul>
-<li><p>都属于二分类算法</p>
+		<h3 id="K-means的介绍"><a href="#K-means的介绍" class="headerlink" title="K-means的介绍"></a>K-means的介绍</h3><p>K-means算法是很典型的基于距离的<a href="https://baike.baidu.com/item/%E8%81%9A%E7%B1%BB" target="_blank" rel="noopener">聚类</a>算法，采用距离作为相似性的评价指标，即认为两个对象的距离越近，其相似度就越大。该算法认为簇是由距离靠近的对象组成的，因此把得到紧凑且独立的簇作为最终目标。</p>
+<h3 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h3><p><img src="http://120.25.221.136/images/kmeans/kmeans.png" alt=""></p>
+<h3 id="算法的缺点"><a href="#算法的缺点" class="headerlink" title="算法的缺点"></a>算法的缺点</h3><ol>
+<li><p>对离群点和孤立点敏感</p>
 </li>
-<li><p>属于监督学习</p>
+<li><p>K的选值不好确定</p>
 </li>
-<li><p>属于判别模型</p>
+<li><p>初始聚类中心的选择</p>
 </li>
-<li><p>应用广泛</p>
+<li><p>聚类的效果是球状</p>
 </li>
-</ul>
-<h3 id="2-不同点"><a href="#2-不同点" class="headerlink" title="2.不同点"></a>2.不同点</h3><ul>
-<li><p>损失函数的定义不一样</p>
-<p>SVM的损失函数为</p>
-<p><img src="http://120.25.221.136/images/logistic/cost.png" alt=""></p>
-<p>LR的损失函数为</p>
-<p><img src="http://120.25.221.136/images/lRvssvm/lrcost3.png" alt=""></p>
+</ol>
+<h3 id="算法的改进"><a href="#算法的改进" class="headerlink" title="算法的改进"></a>算法的改进</h3><ul>
+<li><p>改进1</p>
+<p>在聚类前将离群点或者孤立点利用LOF算法去除，这样可以减少离群点对聚类效果的影响。</p>
 </li>
-</ul>
-<ul>
-<li>LR产生分类结果概率，SVM产生分类结果</li>
-<li>SVM的损失函数自带结构风险最小化，LR为经验风险最小化</li>
-<li>SVM使用核函数进行特征映射解决非线性分类，LR使用sigmod函数实现非线性分类</li>
-<li>SVM需要将数据进行归一化，LR不需要</li>
-</ul>
-<h3 id="小总结"><a href="#小总结" class="headerlink" title="小总结"></a>小总结</h3><ul>
-<li>对于小规模的数据，SVM的效果优于LR。LR可以在线训练。</li>
+<li><p>改进2</p>
+<p>利用粗聚类算法如canopy算法进行初始聚类，利用这些簇的中心作为初始聚类中心点，也可考虑k值的选取。</p>
+</li>
+<li><p>改进3<br>在初始选取聚类中心时尽量选取距离教长的点作为聚类中心。</p>
+</li>
 </ul>
   
 	</div>
@@ -143,7 +137,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://pengyuanqiuqiu.github.io/2018/04/14/比较svm与LR/" data-title="比较SVM与LR | Jianyu" data-tsina="" class="share clearfix">
+	  <div data-url="https://pengyuanqiuqiu.github.io/2018/05/01/Kmeans的改进/" data-title="K-means算法的改进 | Jianyu" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -156,19 +150,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2018/04/24/安装dlib/" title="python安装dlib">
-  <strong>上一篇：</strong><br/>
-  <span>
-  python安装dlib</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2018/04/04/Flask部署/"  title="Falsk部署">
+<a href="/2018/04/30/KNN算法/"  title="KNN算法">
  <strong>下一篇：</strong><br/> 
- <span>Falsk部署
+ <span>KNN算法
 </span>
 </a>
 </div>
@@ -185,7 +171,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-相同点"><span class="toc-number">1.</span> <span class="toc-text">1.相同点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-不同点"><span class="toc-number">2.</span> <span class="toc-text">2.不同点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#小总结"><span class="toc-number">3.</span> <span class="toc-text">小总结</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#K-means的介绍"><span class="toc-number">1.</span> <span class="toc-text">K-means的介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#算法流程"><span class="toc-number">2.</span> <span class="toc-text">算法流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#算法的缺点"><span class="toc-number">3.</span> <span class="toc-text">算法的缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#算法的改进"><span class="toc-number">4.</span> <span class="toc-text">算法的改进</span></a></li></ol>
  
   </div>
 

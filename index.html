@@ -79,6 +79,213 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2018/05/01/Kmeans的改进/" title="K-means算法的改进" itemprop="url">K-means算法的改进</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-05-01T06:16:52.407Z" itemprop="datePublished"> 发表于 2018-05-01</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h3 id="K-means的介绍"><a href="#K-means的介绍" class="headerlink" title="K-means的介绍"></a>K-means的介绍</h3><p>K-means算法是很典型的基于距离的<a href="https://baike.baidu.com/item/%E8%81%9A%E7%B1%BB" target="_blank" rel="noopener">聚类</a>算法，采用距离作为相似性的评价指标，即认为两个对象的距离越近，其相似度就越大。该算法认为簇是由距离靠近的对象组成的，因此把得到紧凑且独立的簇作为最终目标。</p>
+<h3 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h3><p><img src="http://120.25.221.136/images/kmeans/kmeans.png" alt=""></p>
+<h3 id="算法的缺点"><a href="#算法的缺点" class="headerlink" title="算法的缺点"></a>算法的缺点</h3><ol>
+<li><p>对离群点和孤立点敏感</p>
+</li>
+<li><p>K的选值不好确定</p>
+</li>
+<li><p>初始聚类中心的选择</p>
+</li>
+<li><p>聚类的效果是球状</p>
+</li>
+</ol>
+<h3 id="算法的改进"><a href="#算法的改进" class="headerlink" title="算法的改进"></a>算法的改进</h3><ul>
+<li><p>改进1</p>
+<p>在聚类前将离群点或者孤立点利用LOF算法去除，这样可以减少离群点对聚类效果的影响。</p>
+</li>
+<li><p>改进2</p>
+<p>利用粗聚类算法如canopy算法进行初始聚类，利用这些簇的中心作为初始聚类中心点，也可考虑k值的选取。</p>
+</li>
+<li><p>改进3<br>在初始选取聚类中心时尽量选取距离教长的点作为聚类中心。</p>
+</li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/04/30/KNN算法/" title="KNN算法" itemprop="url">KNN算法</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-04-30T12:59:54.326Z" itemprop="datePublished"> 发表于 2018-04-30</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h3 id="算法介绍"><a href="#算法介绍" class="headerlink" title="算法介绍"></a>算法介绍</h3><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><p>KNN（K-nearest neighbor-K近邻），为有监督的非线性分类算法。如果一个样本在特征空间中的k个最相似(即特征空间中最邻近)的样本中的大多数属于某一个类别，则该样本也属于这个类别，其中K通常是不大于20的整数。KNN算法中，所选择的邻居都是已经正确分类的对象。该方法在定类决策上只依据最邻近的一个或者几个样本的类别来决定待分样本所属的类别。</p>
+<p>给出一个栗子：</p>
+<p>在下图中的绿色圆圈不知道自己属于那个类别，是属于三角形还是正方形，所以我们设定k=3有两个三角形一个正方形多以我们判断绿色圆球为三角形，如果k=5，绿色圆圈为正方形。</p>
+<p><img src="http://120.25.221.136/images/knn/knn.jpg" alt=""></p>
+<h3 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h3><ul>
+<li>计算距离</li>
+<li>选择距离最小的K个点</li>
+<li>排序</li>
+</ul>
+<h3 id="算法优缺点"><a href="#算法优缺点" class="headerlink" title="算法优缺点"></a>算法优缺点</h3><p>优点</p>
+<ul>
+<li><p>理论成熟，思想简单</p>
+</li>
+<li><p>适应于非线性分类</p>
+</li>
+<li><p>训练时间复杂度为o(n)</p>
+</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li><p>如果数据量大复杂度较大，计算时间长</p>
+</li>
+<li><p>样本不平衡，不仅有分布不平衡还有数量不平衡的问题</p>
+</li>
+<li><p>空间复杂度较高</p>
+<h3 id="算法特点"><a href="#算法特点" class="headerlink" title="算法特点"></a>算法特点</h3></li>
+</ul>
+<ol>
+<li><p>KNN属于惰性学习</p>
+<p>没有训练的过程，在分裂的时候直接进行计算</p>
+</li>
+</ol>
+<p>2.KNN的K选值的问题（一般选择奇数大小的值，适用于投票法）<br>   k的选值不一样得出的分类结果可能不一样</p>
+<p>  ​</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/04/24/安装dlib/" title="python安装dlib" itemprop="url">python安装dlib</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-04-24T13:04:50.851Z" itemprop="datePublished"> 发表于 2018-04-24</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>放在site-packages文件夹中，执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install dlib-19.6.0-cp36-cp36m-win_amd64.whl</span><br></pre></td></tr></table></figure>
+<p>前提是你的pip是最新版哦，否则执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m pip install --upgrade pip</span><br></pre></td></tr></table></figure>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2018/04/14/比较svm与LR/" title="比较SVM与LR" itemprop="url">比较SVM与LR</a>
   </h1>
   <p class="article-author">By
@@ -609,241 +816,9 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/03/19/sql/" title="sql" itemprop="url">sql</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
-		
-  <p class="article-time">
-    <time datetime="2018-03-19T11:12:37.960Z" itemprop="datePublished"> 发表于 2018-03-19</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>背景：面试阿里时面试官给了sql语句的题目，结果回答不出来，连听都没听过，尴尬。问了才知道使用case when 语句。</p>
-<h4 id="case-when行转列"><a href="#case-when行转列" class="headerlink" title="case when行转列"></a>case when行转列</h4><h5 id="利用max-case-when-then"><a href="#利用max-case-when-then" class="headerlink" title="利用max(case when  then)"></a>利用max(case when  then)</h5><ul>
-<li>建一张成绩表，要求将所有门成绩转为一行，不同学科作为不同的属性列。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#建表sql</span><br><span class="line">create table score    </span><br><span class="line">(       </span><br><span class="line">   name varchar(30) null,    </span><br><span class="line">   coursename varchar(10) null,    </span><br><span class="line">   score int null   </span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#插入数据</span><br><span class="line">insert into score values (&apos;张三&apos;,&apos;语文&apos;,80);   </span><br><span class="line">insert into score values (&apos;张三&apos;,&apos;数学&apos;,98);    </span><br><span class="line">insert into score values (&apos;张三&apos;,&apos;英语&apos;,65);    </span><br><span class="line">insert into score values (&apos;李四&apos;,&apos;语文&apos;,70);    </span><br><span class="line">insert into score values (&apos;李四&apos;,&apos;数学&apos;,80);    </span><br><span class="line">insert into score values (&apos;李四&apos;,&apos;英语&apos;,90);</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#case when sql</span><br><span class="line">select</span><br><span class="line">    name as &apos;姓名&apos; ,     </span><br><span class="line">    max(case coursename when &apos;语文&apos; then score else 0 end) &apos;语文&apos;,     </span><br><span class="line">    max(case coursename when &apos;数学&apos; then score else 0 end) &apos;数学&apos;,     </span><br><span class="line">    max(case coursename when &apos;英语&apos; then score else 0 end) &apos;英语&apos;     </span><br><span class="line">from score     </span><br><span class="line">group by name</span><br></pre></td></tr></table></figure>
-<p>运行结果投如下图所示</p>
-<p><img src="http://120.25.221.136/images/casewhen.png" alt=""></p>
-<ul>
-<li><p>将课程分类</p>
-<p>​</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#case when sql</span><br><span class="line"></span><br><span class="line">select </span><br><span class="line">      name as &apos;姓名&apos;,</span><br><span class="line">      case</span><br><span class="line">          when coursename=&apos;数学&apos; then &apos;理科&apos;</span><br><span class="line">          else &apos;文科&apos;</span><br><span class="line">      end as &apos;科别&apos;,</span><br><span class="line">      sum(score) as &apos;总分&apos;</span><br><span class="line">from score</span><br><span class="line">group by </span><br><span class="line">      name,</span><br><span class="line">      case</span><br><span class="line">          when coursename=&apos;数学&apos; then &apos;理科&apos;</span><br><span class="line">          else &apos;文科&apos;</span><br><span class="line">      end</span><br></pre></td></tr></table></figure>
-<p><img src="http://120.25.221.136/images/case2.png" alt=""></p>
-</li>
-</ul>
-<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><p>case when具有两种形式：</p>
-<ol>
-<li><p>简单case函数</p>
-<p>CASE sex </p>
-<pre><code>WHEN &apos;1&apos; THEN &apos;男&apos; 
-WHEN &apos;2&apos; THEN &apos;女&apos; 
-</code></pre><p>ELSE ‘其他’ END </p>
-<p>2.case搜索函数</p>
-<p>CASE WHEN sex = ‘1’ THEN ‘男’ </p>
-<pre><code>WHEN sex = &apos;2&apos; THEN &apos;女&apos; 
-</code></pre><p>ELSE ‘其他’ END \</p>
-<h4 id="union与union-all的区别"><a href="#union与union-all的区别" class="headerlink" title="union与union all的区别"></a>union与union all的区别</h4><p>UNION用的比较多union all是直接连接，取到得是所有值，记录可能有重复   union 是取唯一值，记录没有重复  。</p>
-<p>1、UNION 的语法如下：</p>
-<pre><code>[SQL 语句 1]
- UNION
-[SQL 语句 2]
-</code></pre><p>2、UNION ALL 的语法如下：</p>
-<pre><code>[SQL 语句 1]
- UNION ALL
-[SQL 语句 2]
-</code></pre><p>效率：<br>UNION和UNION ALL关键字都是将两个结果集合并为一个，但这两者从使用和效率上来说都有所不同。</p>
-<p>1、对重复结果的处理：UNION在进行表链接后会筛选掉重复的记录，Union All不会去除重复记录。</p>
-<p>2、对排序的处理：Union将会按照字段的顺序进行排序；UNION ALL只是简单的将两个结果合并后就返回。</p>
-<p>从效率上说，UNION ALL 要比UNION快很多，所以，如果可以确认合并的两个结果集中不包含重复数据且不需要排序时的话，那么就使用UNION ALL。</p>
-<p>总结<br>UNION去重且同时进行默认规则的排序</p>
-<p>UNION ALL不去重不排序</p>
-<h4 id="join的使用"><a href="#join的使用" class="headerlink" title="join的使用"></a>join的使用</h4><p>SQL join 用于把来自两个或多个表的行结合起来。类型包括：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">INNER JOIN：如果表中有至少一个匹配，则返回行</span><br><span class="line">LEFT JOIN：即使右表中没有匹配，也从左表返回所有的行</span><br><span class="line">RIGHT JOIN：即使左表中没有匹配，也从右表返回所有的行</span><br><span class="line">FULL JOIN：只要其中一个表中存在匹配，则返回行</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">###两张表</span><br><span class="line">+----+--------------+---------------------------+-------+---------+</span><br><span class="line">| id | name         | url                       | alexa | country |</span><br><span class="line">+----+--------------+---------------------------+-------+---------+</span><br><span class="line">| 1  | Google       | https://www.google.cm/    | 1     | USA     |</span><br><span class="line">| 2  | 淘宝          | https://www.taobao.com/   | 13    | CN      |</span><br><span class="line">| 3  | 菜鸟教程      | http://www.runoob.com/    | 4689  | CN      |</span><br><span class="line">| 4  | 微博          | http://weibo.com/         | 20    | CN      |</span><br><span class="line">| 5  | Facebook     | https://www.facebook.com/ | 3     | USA     |</span><br><span class="line">| 7  | stackoverflow | http://stackoverflow.com/ |   0 | IND     |</span><br><span class="line">+----+---------------+---------------------------+-------+---------+</span><br><span class="line">mysql&gt; SELECT * FROM access_log;</span><br><span class="line">+-----+---------+-------+------------+</span><br><span class="line">| aid | site_id | count | date       |</span><br><span class="line">+-----+---------+-------+------------+</span><br><span class="line">|   1 |       1 |    45 | 2016-05-10 |</span><br><span class="line">|   2 |       3 |   100 | 2016-05-13 |</span><br><span class="line">|   3 |       1 |   230 | 2016-05-14 |</span><br><span class="line">|   4 |       2 |    10 | 2016-05-14 |</span><br><span class="line">|   5 |       5 |   205 | 2016-05-14 |</span><br><span class="line">|   6 |       4 |    13 | 2016-05-15 |</span><br><span class="line">|   7 |       3 |   220 | 2016-05-15 |</span><br><span class="line">|   8 |       5 |   545 | 2016-05-16 |</span><br><span class="line">|   9 |       3 |   201 | 2016-05-17 |</span><br><span class="line">+-----+---------+-------+------------+</span><br><span class="line">9 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
-<h5 id="INNER-JOIN"><a href="#INNER-JOIN" class="headerlink" title="INNER JOIN"></a>INNER JOIN</h5><p>SELECT <em>column_name(s)</em><br>FROM <em>table1</em><br>INNER JOIN <em>table2</em><br>ON <em>table1.column_name</em>=<em>table2.column_name</em>;</p>
-<p><img src="http://120.25.221.136/images/sql/img_innerjoin.jpg" alt=""></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT Websites.name, access_log.count, access_log.date</span><br><span class="line">FROM Websites</span><br><span class="line">INNER JOIN access_log</span><br><span class="line">ON Websites.id=access_log.site_id</span><br><span class="line">ORDER BY access_log.count;</span><br></pre></td></tr></table></figure>
-<p><img src="http://120.25.221.136/images/sql/inner-join1.jpg" alt=""></p>
-</li>
-</ol>
-<h5 id="LEFT-JOIN"><a href="#LEFT-JOIN" class="headerlink" title="LEFT  JOIN"></a>LEFT  JOIN</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT column_name(s)</span><br><span class="line">FROM table1</span><br><span class="line">LEFT JOIN table2</span><br><span class="line">ON table1.column_name=table2.column_name;</span><br></pre></td></tr></table></figure>
-<p><img src="http://120.25.221.136/images/sql/img_leftjoin.gif" alt=""></p>
-<p><img src="http://120.25.221.136/images/sql/left-join1.jpg" alt=""></p>
-<h5 id="RIGHT-JOIN"><a href="#RIGHT-JOIN" class="headerlink" title="RIGHT JOIN"></a>RIGHT JOIN</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT column_name(s)</span><br><span class="line">FROM table1</span><br><span class="line">RIGHT JOIN table2</span><br><span class="line">ON table1.column_name=table2.column_name;</span><br></pre></td></tr></table></figure>
-<p><img src="http://120.25.221.136/images/sql/img_rightjoin.gif" alt=""></p>
-<p><img src="http://120.25.221.136/images/sql/right-join1.jpg" alt=""></p>
-<h5 id="FULL-OUTER-JOIN（MYSQL）"><a href="#FULL-OUTER-JOIN（MYSQL）" class="headerlink" title="FULL OUTER JOIN（MYSQL）"></a>FULL OUTER JOIN（MYSQL）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT column_name(s)</span><br><span class="line">FROM table1</span><br><span class="line">FULL OUTER JOIN table2</span><br><span class="line">ON table1.column_name=table2.column_name;</span><br></pre></td></tr></table></figure>
-<p><img src="http://120.25.221.136/images/sql/img_fulljoin.gif" alt=""></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT Websites.name, access_log.count, access_log.date</span><br><span class="line">FROM Websites</span><br><span class="line">FULL OUTER JOIN access_log</span><br><span class="line">ON Websites.id=access_log.site_id</span><br><span class="line">ORDER BY access_log.count DESC;</span><br></pre></td></tr></table></figure>
-<h5 id="union和join的区别"><a href="#union和join的区别" class="headerlink" title="union和join的区别"></a>union和join的区别</h5><p>join 是两张表做交连后里面条件相同的部分记录产生一个记录集，<br>union是产生的两个记录集(字段要一样的)并在一起，成为一个新的记录集 。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/03/14/运行pyspark遇到的问题/" title="运行pyspark遇到的问题" itemprop="url">运行pyspark遇到的问题</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
-		
-  <p class="article-time">
-    <time datetime="2018-03-14T08:54:38.033Z" itemprop="datePublished"> 发表于 2018-03-14</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>环境：spark-2.3.0-bin-hadoop2.7,python3.6</p>
-<p>问题：Unable to load native-hadoop library for your platform… using builtin-java classes where applicable<br>Stopping namenodes …</p>
-<p>解决方法：是因为不能加载本地库，在Java的$JAVA_HOME/jre/lib/amd64目录下缺少libhadoop.so和libsnappy.so文件。</p>
-<p>libhadoop.so可以在Hadoop目录下的Hadoop\lib\native找到，将它放入上述jre目录下。</p>
-<p><img src="http://120.25.221.136/images/libhadoop.png" alt=""></p>
-<p>可以从<a href="https://code.google.com/p/snappy/下载源码，通过编译源码安装，" target="_blank" rel="noopener">https://code.google.com/p/snappy/下载源码，通过编译源码安装，</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf snappy-1.1.1.tar.gz</span><br><span class="line"></span><br><span class="line">cd snappy-1.1.1</span><br><span class="line"></span><br><span class="line">./configure</span><br><span class="line"></span><br><span class="line">make</span><br><span class="line"></span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
-<p>安装完成之后，在usr/local/lib目录下找到libsnappy.so，放入jre目录下。重启spark就可以解决问题。</p>
-<p><img src="http://120.25.221.136/images/libsnappy.png" alt=""></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/03/03/机器学习的过拟合解决方法/" title="机器学习的过拟合解决方法" itemprop="url">机器学习的过拟合解决方法</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
-		
-  <p class="article-time">
-    <time datetime="2018-03-03T12:38:06.757Z" itemprop="datePublished"> 发表于 2018-03-03</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>定义：简单理解就是训练样本的得到的输出和期望输出基本一致，但是样本输出和测试样本的期望输出相差却很大 ，为了得到一致假设而使假设变得过度复杂称为过拟合，如图：</p>
-<p><img src="http://120.25.221.136/images/overfitting.png" alt=""></p>
-<h3 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h3><h4 id="1-增加数据量"><a href="#1-增加数据量" class="headerlink" title="1. 增加数据量"></a>1. 增加数据量</h4><p>数据量增加会将模型适应更多的数据集，对测试集验证的更加准确。</p>
-<h4 id="2-正则化"><a href="#2-正则化" class="headerlink" title="2.正则化"></a>2.正则化</h4><p>拟合发生时，往往会出现拟合函数在训练数据点上的“曲率”很大。而这些“曲率”是由模型的参数近似表达出来的，因此通过对大值参数的惩罚来抑制这种曲率的发生。</p>
-<p><strong>正则化的作用：</strong></p>
-<ul>
-<li>L1正则化可以产生稀疏权值矩阵，即产生一个稀疏模型，可以用于特征选择</li>
-<li>L2正则化可以防止模型过拟合（overfitting）；一定程度上，L1也可以防止过拟合</li>
-</ul>
-<p><strong>L1正则化和L2正则化的说明如下：</strong></p>
-<ul>
-<li>L1正则化是指权值向量w中各个元素的<strong>绝对值之和</strong>，通常表示为||w||1</li>
-<li>L2正则化是指权值向量w中各个元素的<strong>平方和然后再求平方根</strong>（可以看到Ridge回归的L2正则化项有平方符号），通常表示为||w||2</li>
-</ul>
-<h4 id="3-Dropout"><a href="#3-Dropout" class="headerlink" title="3.Dropout"></a>3.Dropout</h4><p>在一次循环中我们先随机选择神经层中的一些单元并将其临时隐藏，然后再进行该次循环中神经网络的训练和优化过程。在下一次循环中，我们又将隐藏另外一些神经元，如此直至训练结束。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
   </nav>
 
 </div>

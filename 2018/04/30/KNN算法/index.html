@@ -4,27 +4,26 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>比较SVM与LR | Jianyu</title>
+    <title>KNN算法 | Jianyu</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="PengYuan">
     
 
     
-    <meta name="description" content="1.相同点 都属于二分类算法  属于监督学习  属于判别模型  应用广泛   2.不同点 损失函数的定义不一样 SVM的损失函数为  LR的损失函数为     LR产生分类结果概率，SVM产生分类结果 SVM的损失函数自带结构风险最小化，LR为经验风险最小化 SVM使用核函数进行特征映射解决非线性分类，LR使用sigmod函数实现非线性分类 SVM需要将数据进行归一化，LR不需要  小总结 对于小">
+    <meta name="description" content="算法介绍Create a new postKNN（K-nearest neighbor-K近邻），为有监督的非线性分类算法。如果一个样本在特征空间中的k个最相似(即特征空间中最邻近)的样本中的大多数属于某一个类别，则该样本也属于这个类别，其中K通常是不大于20的整数。KNN算法中，所选择的邻居都是已经正确分类的对象。该方法在定类决策上只依据最邻近的一个或者几个样本的类别来决定待分样本所属的类别。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="比较SVM与LR">
-<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/04/14/比较svm与LR/index.html">
+<meta property="og:title" content="KNN算法">
+<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/04/30/KNN算法/index.html">
 <meta property="og:site_name" content="Jianyu">
-<meta property="og:description" content="1.相同点 都属于二分类算法  属于监督学习  属于判别模型  应用广泛   2.不同点 损失函数的定义不一样 SVM的损失函数为  LR的损失函数为     LR产生分类结果概率，SVM产生分类结果 SVM的损失函数自带结构风险最小化，LR为经验风险最小化 SVM使用核函数进行特征映射解决非线性分类，LR使用sigmod函数实现非线性分类 SVM需要将数据进行归一化，LR不需要  小总结 对于小">
+<meta property="og:description" content="算法介绍Create a new postKNN（K-nearest neighbor-K近邻），为有监督的非线性分类算法。如果一个样本在特征空间中的k个最相似(即特征空间中最邻近)的样本中的大多数属于某一个类别，则该样本也属于这个类别，其中K通常是不大于20的整数。KNN算法中，所选择的邻居都是已经正确分类的对象。该方法在定类决策上只依据最邻近的一个或者几个样本的类别来决定待分样本所属的类别。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://120.25.221.136/images/logistic/cost.png">
-<meta property="og:image" content="http://120.25.221.136/images/lRvssvm/lrcost3.png">
-<meta property="og:updated_time" content="2018-04-14T08:17:42.094Z">
+<meta property="og:image" content="http://120.25.221.136/images/knn/knn.jpg">
+<meta property="og:updated_time" content="2018-05-01T06:21:50.182Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="比较SVM与LR">
-<meta name="twitter:description" content="1.相同点 都属于二分类算法  属于监督学习  属于判别模型  应用广泛   2.不同点 损失函数的定义不一样 SVM的损失函数为  LR的损失函数为     LR产生分类结果概率，SVM产生分类结果 SVM的损失函数自带结构风险最小化，LR为经验风险最小化 SVM使用核函数进行特征映射解决非线性分类，LR使用sigmod函数实现非线性分类 SVM需要将数据进行归一化，LR不需要  小总结 对于小">
-<meta name="twitter:image" content="http://120.25.221.136/images/logistic/cost.png">
+<meta name="twitter:title" content="KNN算法">
+<meta name="twitter:description" content="算法介绍Create a new postKNN（K-nearest neighbor-K近邻），为有监督的非线性分类算法。如果一个样本在特征空间中的k个最相似(即特征空间中最邻近)的样本中的大多数属于某一个类别，则该样本也属于这个类别，其中K通常是不大于20的整数。KNN算法中，所选择的邻居都是已经正确分类的对象。该方法在定类决策上只依据最邻近的一个或者几个样本的类别来决定待分样本所属的类别。">
+<meta name="twitter:image" content="http://120.25.221.136/images/knn/knn.jpg">
 
     
     <link rel="alternative" href="http://www.163.com/rss/" title="Jianyu" type="application/atom+xml">
@@ -84,14 +83,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/04/14/比较svm与LR/" title="比较SVM与LR" itemprop="url">比较SVM与LR</a>
+      <a href="/2018/04/30/KNN算法/" title="KNN算法" itemprop="url">KNN算法</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
 		
   <p class="article-time">
-    <time datetime="2018-04-14T07:45:32.028Z" itemprop="datePublished"> 发表于 2018-04-14</time>
+    <time datetime="2018-04-30T12:59:54.326Z" itemprop="datePublished"> 发表于 2018-04-30</time>
     
   </p>
 </header>
@@ -100,37 +99,44 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-相同点"><span class="toc-number">1.</span> <span class="toc-text">1.相同点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-不同点"><span class="toc-number">2.</span> <span class="toc-text">2.不同点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#小总结"><span class="toc-number">3.</span> <span class="toc-text">小总结</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#算法介绍"><span class="toc-number">1.</span> <span class="toc-text">算法介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">2.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#算法步骤"><span class="toc-number">3.</span> <span class="toc-text">算法步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#算法优缺点"><span class="toc-number">4.</span> <span class="toc-text">算法优缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#算法特点"><span class="toc-number">5.</span> <span class="toc-text">算法特点</span></a></li></ol>
 		
 		</div>
 		
-		<h3 id="1-相同点"><a href="#1-相同点" class="headerlink" title="1.相同点"></a>1.相同点</h3><ul>
-<li><p>都属于二分类算法</p>
-</li>
-<li><p>属于监督学习</p>
-</li>
-<li><p>属于判别模型</p>
-</li>
-<li><p>应用广泛</p>
-</li>
+		<h3 id="算法介绍"><a href="#算法介绍" class="headerlink" title="算法介绍"></a>算法介绍</h3><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><p>KNN（K-nearest neighbor-K近邻），为有监督的非线性分类算法。如果一个样本在特征空间中的k个最相似(即特征空间中最邻近)的样本中的大多数属于某一个类别，则该样本也属于这个类别，其中K通常是不大于20的整数。KNN算法中，所选择的邻居都是已经正确分类的对象。该方法在定类决策上只依据最邻近的一个或者几个样本的类别来决定待分样本所属的类别。</p>
+<p>给出一个栗子：</p>
+<p>在下图中的绿色圆圈不知道自己属于那个类别，是属于三角形还是正方形，所以我们设定k=3有两个三角形一个正方形多以我们判断绿色圆球为三角形，如果k=5，绿色圆圈为正方形。</p>
+<p><img src="http://120.25.221.136/images/knn/knn.jpg" alt=""></p>
+<h3 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h3><ul>
+<li>计算距离</li>
+<li>选择距离最小的K个点</li>
+<li>排序</li>
 </ul>
-<h3 id="2-不同点"><a href="#2-不同点" class="headerlink" title="2.不同点"></a>2.不同点</h3><ul>
-<li><p>损失函数的定义不一样</p>
-<p>SVM的损失函数为</p>
-<p><img src="http://120.25.221.136/images/logistic/cost.png" alt=""></p>
-<p>LR的损失函数为</p>
-<p><img src="http://120.25.221.136/images/lRvssvm/lrcost3.png" alt=""></p>
-</li>
-</ul>
+<h3 id="算法优缺点"><a href="#算法优缺点" class="headerlink" title="算法优缺点"></a>算法优缺点</h3><p>优点</p>
 <ul>
-<li>LR产生分类结果概率，SVM产生分类结果</li>
-<li>SVM的损失函数自带结构风险最小化，LR为经验风险最小化</li>
-<li>SVM使用核函数进行特征映射解决非线性分类，LR使用sigmod函数实现非线性分类</li>
-<li>SVM需要将数据进行归一化，LR不需要</li>
+<li><p>理论成熟，思想简单</p>
+</li>
+<li><p>适应于非线性分类</p>
+</li>
+<li><p>训练时间复杂度为o(n)</p>
+</li>
 </ul>
-<h3 id="小总结"><a href="#小总结" class="headerlink" title="小总结"></a>小总结</h3><ul>
-<li>对于小规模的数据，SVM的效果优于LR。LR可以在线训练。</li>
+<p>缺点</p>
+<ul>
+<li><p>如果数据量大复杂度较大，计算时间长</p>
+</li>
+<li><p>样本不平衡，不仅有分布不平衡还有数量不平衡的问题</p>
+</li>
+<li><p>空间复杂度较高</p>
+<h3 id="算法特点"><a href="#算法特点" class="headerlink" title="算法特点"></a>算法特点</h3></li>
 </ul>
+<ol>
+<li><p>KNN属于惰性学习</p>
+<p>没有训练的过程，在分裂的时候直接进行计算</p>
+</li>
+</ol>
+<p>2.KNN的K选值的问题（一般选择奇数大小的值，适用于投票法）<br>   k的选值不一样得出的分类结果可能不一样</p>
+<p>  ​</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -143,7 +149,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://pengyuanqiuqiu.github.io/2018/04/14/比较svm与LR/" data-title="比较SVM与LR | Jianyu" data-tsina="" class="share clearfix">
+	  <div data-url="https://pengyuanqiuqiu.github.io/2018/04/30/KNN算法/" data-title="KNN算法 | Jianyu" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -157,18 +163,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2018/04/24/安装dlib/" title="python安装dlib">
+ <a href="/2018/05/01/Kmeans的改进/" title="K-means算法的改进">
   <strong>上一篇：</strong><br/>
   <span>
-  python安装dlib</span>
+  K-means算法的改进</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2018/04/04/Flask部署/"  title="Falsk部署">
+<a href="/2018/04/24/安装dlib/"  title="python安装dlib">
  <strong>下一篇：</strong><br/> 
- <span>Falsk部署
+ <span>python安装dlib
 </span>
 </a>
 </div>
@@ -185,7 +191,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-相同点"><span class="toc-number">1.</span> <span class="toc-text">1.相同点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-不同点"><span class="toc-number">2.</span> <span class="toc-text">2.不同点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#小总结"><span class="toc-number">3.</span> <span class="toc-text">小总结</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#算法介绍"><span class="toc-number">1.</span> <span class="toc-text">算法介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">2.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#算法步骤"><span class="toc-number">3.</span> <span class="toc-text">算法步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#算法优缺点"><span class="toc-number">4.</span> <span class="toc-text">算法优缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#算法特点"><span class="toc-number">5.</span> <span class="toc-text">算法特点</span></a></li></ol>
  
   </div>
 
