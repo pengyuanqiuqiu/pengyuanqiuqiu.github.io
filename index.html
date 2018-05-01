@@ -79,6 +79,64 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2018/05/01/损失函数/" title="机器学习之损失函数" itemprop="url">机器学习之损失函数</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-05-01T07:12:43.265Z" itemprop="datePublished"> 发表于 2018-05-01</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>如何在训练过程中表现出优化的步骤，评价训练的好坏？答案就是减少损失函数（代价损失函数）也就是我们常说的优化目标。那么接下来介绍一下常见的损失函数。</p>
+<h3 id="损失函数分类"><a href="#损失函数分类" class="headerlink" title="损失函数分类"></a>损失函数分类</h3><ol>
+<li>0-1损失函数（感知机）<br>$$<br>L(Y,f(X))=\left{ \begin{aligned}&amp;1,\quad Y\ne f(X)\&amp; 0,\quad Y=f(X) \end{aligned} \right.<br>$$<br>含义为：预测成功时损失为0，预测失败时损失为1。</li>
+</ol>
+<p>2.平方损失函数（线性回归）<br>$$<br>L(Y,f(X))=(Y-f(X))^2<br>$$<br>​       含义为：取预测差值的平方。</p>
+<p>3.绝对损失函数<br>$$<br>L(Y,f(X))=|Y-f(X)|<br>$$<br>​    含义为：取预测差值的绝对值。</p>
+<p>4.对数损失函数（交叉熵损失函数）（LR回归）<br>$$<br>L(Y,P(Y|X))=-logP(Y|X)<br>$$<br>​    含义为：P(Y|X)通俗的解释就是：在当前模型的基础上，对于样本X，其预测值为Y，也就是预测正确的概率。由于概率之间的同时满足需要使用乘法，为了将其转化为加法，我们将其取对数。最后由于是损失函数，所以预测正确的概率越高，其损失值应该是越小，log里面的值一定小于1，所以需要取反。</p>
+<p>5.指数损失函数（Adaboost）</p>
+<p>指数误差，在<code>boosting</code>算法中比较常见:<br>$$<br>\begin{equation}<br>L(Y|f(X)) = exp[-yf(x)]<br>\end{equation}<br>$$<br>6.Hinge损失函数（SVM）<br>$$<br>\begin{equation}<br>\min<em>{w,b}\sum</em>{i}^{N}(1 - y<em>{i}(wx</em>{i}+b))+\lambda ||w^{2}||<br>\end{equation}<br>$$</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2018/05/01/Kmeans的改进/" title="K-means算法的改进" itemprop="url">K-means算法的改进</a>
   </h1>
   <p class="article-author">By
@@ -678,114 +736,6 @@
 <li>基于惩罚项的特征选择法</li>
 <li>基于树模型的特征选择法</li>
 </ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/03/21/机器学习笔记/" title="机器学习笔记" itemprop="url">机器学习笔记</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
-		
-  <p class="article-time">
-    <time datetime="2018-03-21T07:34:13.465Z" itemprop="datePublished"> 发表于 2018-03-21</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h3 id="机器学习的数据不平衡解决方法"><a href="#机器学习的数据不平衡解决方法" class="headerlink" title="机器学习的数据不平衡解决方法"></a>机器学习的数据不平衡解决方法</h3><p>理解：简单理解就是训练样本的得到的输出和期望输出基本一致，但是样本输出和测试样本的期望输出相差却很大 ，为了得到一致假设而使假设变得过度复杂称为过拟合。</p>
-<h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>数据不平衡指的是分类任务中不同类别的训练数据样本数目差别很大，失去一般性。如，一个样本中正例998个，负例2个，就会导致无论什么模型结果的准确率都会很高，现实生活中，样本应该平均分布。</p>
-<h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><h5 id="采样"><a href="#采样" class="headerlink" title="采样"></a>采样</h5><p>上采样：上采样是把小众类复制多份</p>
-<p>缺点：造成过拟合现象发生</p>
-<p>下采样：下采样是从大众类中剔除一些样本，或者说只从大众类中选取部分样本</p>
-<p>缺点：模拟数据量小，学习到总体模型的一部分。</p>
-<h5 id="加权"><a href="#加权" class="headerlink" title="加权"></a>加权</h5><p>通过加权的方式来解决数据不平衡问题，即对不同类别分错的代价不同，如下图：</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>1</th>
-<th>2</th>
-<th>…</th>
-<th>k</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>0</td>
-<td>C(1,2)</td>
-<td>…</td>
-<td>C(1,k)</td>
-</tr>
-<tr>
-<td>2</td>
-<td>C(2,1)</td>
-<td>0</td>
-<td>…</td>
-<td>…</td>
-</tr>
-<tr>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-</tr>
-<tr>
-<td>k</td>
-<td>C(k,1)</td>
-<td>C(k,2)</td>
-<td>…</td>
-<td>0</td>
-</tr>
-</tbody>
-</table>
-<p>横向是真实分类情况，纵向是预测分类情况，C(i,j)是把真实类别为j的样本预测为i时的损失，我们需要根据实际情况来设定它的值。</p>
-<h5 id="转化为一分类问题"><a href="#转化为一分类问题" class="headerlink" title="转化为一分类问题"></a>转化为一分类问题</h5><p>对于二分类问题，如果正负样本分布比例极不平衡，我们可以换一个完全不同的角度来看待问题：把它看做一分类（One Class Learning）或异常检测（Novelty Detection）问题。这类方法的重点不在于捕捉类间的差别，而是为其中一类进行建模。</p>
-<h3 id="多分类学习"><a href="#多分类学习" class="headerlink" title="多分类学习"></a>多分类学习</h3><p>理解：在现实生活中经常遇到多分类问题，而学习的分类模型大多为二分类模型，如LR，SVM。接下来基于策略，利用二分类解决多分类问题。</p>
-<p>策略：”拆解法”，将多分类问题拆分为多个二分类任务求解。</p>
-<p>经典的拆分策略分为：</p>
-<h5 id="一对一（one-vs-one）"><a href="#一对一（one-vs-one）" class="headerlink" title="一对一（one vs one）"></a>一对一（one vs one）</h5><p>将N个类别两两配对，产生，即N（N-1）/2个分类结果，最终结果通过投票产生，投票是把被预测的最多的类别作为最终分类结果。</p>
-<h5 id="一对其余（one-vs-rest）"><a href="#一对其余（one-vs-rest）" class="headerlink" title="一对其余（one vs rest）"></a>一对其余（one vs rest）</h5><p>每次将一个类的样例作为正样本，其他的作为负样本，训练N个分类器。选择预测置信度最大的标记类别作为分类结果。以上两种策略如图所示.</p>
-<p><img src="http://120.25.221.136/images/duofenlei.png" alt=""></p>
-<h5 id="多对多（Many-vs-Many）"><a href="#多对多（Many-vs-Many）" class="headerlink" title="多对多（Many vs Many）"></a>多对多（Many vs Many）</h5><p>每次将若干个类作为正样本，若干个类作为负样本，，MvM的正负样本设计必须有特殊的设计，最常用的是ECOC（Error Correcting Output Codes）分为编码阶段与解码阶段。</p>
-<p>编码阶段：对N个类别进行M次划分，每次将一部分类划分为正类，一部分类划分为反类，编码矩阵有两种形式：二元码和三元码，前者只有正类和反类，后者除了正类和和反类还有停用类，在解码阶段，各分类器的预测结果联合起来形成测试示例的编码，该编码与各类所对应的编码进行比较，将距离最小的编码所对应的类别作为预测结果。</p>
-<p><img src="http://120.25.221.136/images/ecos.png" alt=""></p>
 
         
         
