@@ -4,24 +4,26 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>二叉树的深度以及判断是否为平衡二叉树 | Jianyu</title>
+    <title>斐波拉切数列 | Jianyu</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="PengYuan">
     
 
     
-    <meta name="description" content="引言：昨天下午58面试什么都不用说，直接两个算法题。一脸懵逼，过程太艰难，题目不会做，自己太渣。感谢面试官让我终于清醒，认识到没有好好努力，认识到自己到底有多差。好好补算法，时间太短，尽力！！！ 二叉树的深度题目描述：输入一棵二叉树，求该树的深度。从根结点到叶结点依次经过的结点（含根、叶结点）形成树的一条路径，最长路径的长度为树的深度。 使用递归，选最长路径 12345678910111213#">
+    <meta name="description" content="什么是斐波那契数列？ 是一个经典数列，它的形式为：0,1,1,2,3,5,8…，特点是除了第一项和第二项，每一项的值等于前两项的值的和。 现在我们要解决第n个数的值？ 在西方，最先研究这个数列的人是比萨的列奥那多（意大利人斐波那契Leonardo Fibonacci），他描述兔子生长的数目时用上了这数列:   第一个月初有一对刚诞生的兔子 第二个月之后（第三个月初）它们可以生育 每月每对可生育的兔">
 <meta property="og:type" content="article">
-<meta property="og:title" content="二叉树的深度以及判断是否为平衡二叉树">
-<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/05/03/二叉树的深度/index.html">
+<meta property="og:title" content="斐波拉切数列">
+<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/05/04/斐波拉切数列/index.html">
 <meta property="og:site_name" content="Jianyu">
-<meta property="og:description" content="引言：昨天下午58面试什么都不用说，直接两个算法题。一脸懵逼，过程太艰难，题目不会做，自己太渣。感谢面试官让我终于清醒，认识到没有好好努力，认识到自己到底有多差。好好补算法，时间太短，尽力！！！ 二叉树的深度题目描述：输入一棵二叉树，求该树的深度。从根结点到叶结点依次经过的结点（含根、叶结点）形成树的一条路径，最长路径的长度为树的深度。 使用递归，选最长路径 12345678910111213#">
+<meta property="og:description" content="什么是斐波那契数列？ 是一个经典数列，它的形式为：0,1,1,2,3,5,8…，特点是除了第一项和第二项，每一项的值等于前两项的值的和。 现在我们要解决第n个数的值？ 在西方，最先研究这个数列的人是比萨的列奥那多（意大利人斐波那契Leonardo Fibonacci），他描述兔子生长的数目时用上了这数列:   第一个月初有一对刚诞生的兔子 第二个月之后（第三个月初）它们可以生育 每月每对可生育的兔">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-05-03T11:15:25.960Z">
+<meta property="og:image" content="http://120.25.221.136/images/feibolaqie/feibolaqie.png">
+<meta property="og:updated_time" content="2018-05-04T10:50:26.284Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="二叉树的深度以及判断是否为平衡二叉树">
-<meta name="twitter:description" content="引言：昨天下午58面试什么都不用说，直接两个算法题。一脸懵逼，过程太艰难，题目不会做，自己太渣。感谢面试官让我终于清醒，认识到没有好好努力，认识到自己到底有多差。好好补算法，时间太短，尽力！！！ 二叉树的深度题目描述：输入一棵二叉树，求该树的深度。从根结点到叶结点依次经过的结点（含根、叶结点）形成树的一条路径，最长路径的长度为树的深度。 使用递归，选最长路径 12345678910111213#">
+<meta name="twitter:title" content="斐波拉切数列">
+<meta name="twitter:description" content="什么是斐波那契数列？ 是一个经典数列，它的形式为：0,1,1,2,3,5,8…，特点是除了第一项和第二项，每一项的值等于前两项的值的和。 现在我们要解决第n个数的值？ 在西方，最先研究这个数列的人是比萨的列奥那多（意大利人斐波那契Leonardo Fibonacci），他描述兔子生长的数目时用上了这数列:   第一个月初有一对刚诞生的兔子 第二个月之后（第三个月初）它们可以生育 每月每对可生育的兔">
+<meta name="twitter:image" content="http://120.25.221.136/images/feibolaqie/feibolaqie.png">
 
     
     <link rel="alternative" href="http://www.163.com/rss/" title="Jianyu" type="application/atom+xml">
@@ -81,14 +83,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/05/03/二叉树的深度/" title="二叉树的深度以及判断是否为平衡二叉树" itemprop="url">二叉树的深度以及判断是否为平衡二叉树</a>
+      <a href="/2018/05/04/斐波拉切数列/" title="斐波拉切数列" itemprop="url">斐波拉切数列</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
 		
   <p class="article-time">
-    <time datetime="2018-05-03T08:45:08.983Z" itemprop="datePublished"> 发表于 2018-05-03</time>
+    <time datetime="2018-05-04T08:23:12.222Z" itemprop="datePublished"> 发表于 2018-05-04</time>
     
   </p>
 </header>
@@ -97,16 +99,29 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#二叉树的深度"><span class="toc-number">1.</span> <span class="toc-text">二叉树的深度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#是否为平衡二叉树"><span class="toc-number">2.</span> <span class="toc-text">是否为平衡二叉树</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#递归法"><span class="toc-number">1.</span> <span class="toc-text">递归法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#循环法"><span class="toc-number">2.</span> <span class="toc-text">循环法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#尾递归法"><span class="toc-number">3.</span> <span class="toc-text">尾递归法</span></a></li></ol>
 		
 		</div>
 		
-		<p>引言：昨天下午58面试什么都不用说，直接两个算法题。一脸懵逼，过程太艰难，题目不会做，自己太渣。感谢面试官让我终于清醒，认识到没有好好努力，认识到自己到底有多差。好好补算法，时间太短，尽力！！！</p>
-<h4 id="二叉树的深度"><a href="#二叉树的深度" class="headerlink" title="二叉树的深度"></a>二叉树的深度</h4><p>题目描述：输入一棵二叉树，求该树的深度。从根结点到叶结点依次经过的结点（含根、叶结点）形成树的一条路径，最长路径的长度为树的深度。</p>
-<p>使用递归，选最长路径</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, x):</span></span><br><span class="line"><span class="comment">#         self.val = x</span></span><br><span class="line"><span class="comment">#         self.left = None</span></span><br><span class="line"><span class="comment">#         self.right = None</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">TreeDepth</span><span class="params">(self, pRoot)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> pRoot <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        left=self.TreeDepth(pRoot.left)</span><br><span class="line">        right=self.TreeDepth(pRoot.right)</span><br><span class="line">        <span class="keyword">return</span> max(left,right)+<span class="number">1</span></span><br></pre></td></tr></table></figure>
-<h4 id="是否为平衡二叉树"><a href="#是否为平衡二叉树" class="headerlink" title="是否为平衡二叉树"></a>是否为平衡二叉树</h4><p>题目描述：输入一棵二叉树，判断该二叉树是否是平衡二叉树。判断规则是该二叉树的左右子树的深度相差不超过1，只有当树的所有子树满足平衡条件，该树才能称为平衡二叉树。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, x):</span></span><br><span class="line"><span class="comment">#         self.val = x</span></span><br><span class="line"><span class="comment">#         self.left = None</span></span><br><span class="line"><span class="comment">#         self.right = None</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">TreeDepth</span><span class="params">(self, pRoot)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> pRoot <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        left=self.TreeDepth(pRoot.left)</span><br><span class="line">        right=self.TreeDepth(pRoot.right)</span><br><span class="line">        <span class="keyword">return</span> max(left,right)+<span class="number">1</span> </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">IsBalanced_Solution</span><span class="params">(self, pRoot)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> pRoot <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">        left=self.TreeDepth(pRoot.left)</span><br><span class="line">        right=self.TreeDepth(pRoot.right)</span><br><span class="line">        <span class="keyword">if</span> abs(left-right)&gt;<span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">True</span></span><br></pre></td></tr></table></figure>
+		<p>什么是斐波那契数列？</p>
+<p>是一个经典数列，它的形式为：0,1,1,2,3,5,8…，特点是除了第一项和第二项，每一项的值等于前两项的值的和。</p>
+<p>现在我们要解决第n个数的值？</p>
+<p>在西方，最先研究这个数列的人是比萨的列奥那多（意大利人斐波那契Leonardo Fibonacci），<br>他描述兔子生长的数目时用上了这数列:</p>
+<blockquote>
+<ul>
+<li>第一个月初有一对刚诞生的兔子</li>
+<li>第二个月之后（第三个月初）它们可以生育</li>
+<li>每月每对可生育的兔子会诞生下一对新兔子</li>
+<li>兔子永不死去</li>
+</ul>
+</blockquote>
+<h4 id="递归法"><a href="#递归法" class="headerlink" title="递归法"></a>递归法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Fibonacci_Recursion_tool</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> n==<span class="number">0</span>:</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">	<span class="keyword">if</span> n==<span class="number">1</span>:</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">	<span class="keyword">return</span> feibo(n<span class="number">-1</span>)+feibo(n<span class="number">-2</span>)</span><br><span class="line"><span class="comment">####递归法随着n的增大，运算时间很长，复杂度很高</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://120.25.221.136/images/feibolaqie/feibolaqie.png" alt=""></p>
+<p>时间复杂度为o(2^n)</p>
+<h4 id="循环法"><a href="#循环法" class="headerlink" title="循环法"></a>循环法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Fibonacci_Recursion_tool</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> n&lt;=<span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> n</span><br><span class="line">    start=<span class="number">0</span>,end=<span class="number">1</span>,res=<span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span>(n&gt;<span class="number">1</span>):</span><br><span class="line">        res=start+end</span><br><span class="line">        start=end</span><br><span class="line">        end=res</span><br><span class="line">        n=n<span class="number">-1</span></span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">    <span class="comment">###复杂度降为o(n)</span></span><br></pre></td></tr></table></figure>
+<p>数组法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Fibonacci_Recursion_tool</span><span class="params">(n)</span>:</span></span><br><span class="line">    res=[<span class="number">0</span>,<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>,n+<span class="number">1</span>):</span><br><span class="line">        res.append(res[i<span class="number">-1</span>]+res[i<span class="number">-2</span>])</span><br><span class="line">    <span class="keyword">return</span> res[n]</span><br><span class="line">    <span class="comment">###复杂度降为o(n)</span></span><br></pre></td></tr></table></figure>
+<h4 id="尾递归法"><a href="#尾递归法" class="headerlink" title="尾递归法"></a>尾递归法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Fibonacci_Recursion_tool</span><span class="params">(n)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">fib_iter</span><span class="params">(n,x, y)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> x</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> fib_iter(n<span class="number">-1</span>, y, x+y)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> fib_iter(n, <span class="number">0</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -119,7 +134,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://pengyuanqiuqiu.github.io/2018/05/03/二叉树的深度/" data-title="二叉树的深度以及判断是否为平衡二叉树 | Jianyu" data-tsina="" class="share clearfix">
+	  <div data-url="https://pengyuanqiuqiu.github.io/2018/05/04/斐波拉切数列/" data-title="斐波拉切数列 | Jianyu" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -132,19 +147,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2018/05/04/斐波拉切数列/" title="斐波拉切数列">
-  <strong>上一篇：</strong><br/>
-  <span>
-  斐波拉切数列</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2018/05/01/损失函数/"  title="机器学习之损失函数">
+<a href="/2018/05/03/二叉树的深度/"  title="二叉树的深度以及判断是否为平衡二叉树">
  <strong>下一篇：</strong><br/> 
- <span>机器学习之损失函数
+ <span>二叉树的深度以及判断是否为平衡二叉树
 </span>
 </a>
 </div>
@@ -161,7 +168,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#二叉树的深度"><span class="toc-number">1.</span> <span class="toc-text">二叉树的深度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#是否为平衡二叉树"><span class="toc-number">2.</span> <span class="toc-text">是否为平衡二叉树</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#递归法"><span class="toc-number">1.</span> <span class="toc-text">递归法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#循环法"><span class="toc-number">2.</span> <span class="toc-text">循环法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#尾递归法"><span class="toc-number">3.</span> <span class="toc-text">尾递归法</span></a></li></ol>
  
   </div>
 

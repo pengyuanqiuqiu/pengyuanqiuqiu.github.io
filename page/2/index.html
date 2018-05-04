@@ -79,6 +79,101 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2018/03/30/解读逻辑回归/" title="解读逻辑回归" itemprop="url">解读逻辑回归</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-03-30T07:47:58.402Z" itemprop="datePublished"> 发表于 2018-03-30</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h4 id="1-定义"><a href="#1-定义" class="headerlink" title="1.定义"></a>1.定义</h4><p>logistic regression是统计学习中经典的分类算法。</p>
+<p>线性回归的模型公式为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>将线性回归转化为分类问题，利用sigmod激活函数转化为0到1之间的概率问题。</p>
+<p><img src="http://120.25.221.136/images/logistic/sigmod.jpg" alt=""></p>
+<p><img src="http://120.25.221.136/images/logistic/sigmodpicture.png" alt=""></p>
+<p>logistic的分类函数为：</p>
+<p><img src="http://120.25.221.136/images/logistic/exchange.png" alt=""></p>
+<p>从公式中可以发现</p>
+<p>y=1   ——》z&gt;0<br>y=0  ——-》 z&lt;0</p>
+<h4 id="2-代价函数"><a href="#2-代价函数" class="headerlink" title="2.代价函数"></a>2.代价函数</h4><p>在之前的线性回归模型，给出代价函数为：</p>
+<p><img src="http://120.25.221.136/images/logistic/cost.png" alt=""></p>
+<p>而将sigmod函数袋鼠上面的公式中，代价函数是一个非凸函数，不能取得全局最小值，智能取得局部最小值，所以不能使用上面的代价函数。</p>
+<p><img src="http://120.25.221.136/images/logistic/nonconvex.png" alt=""></p>
+<p><img src="http://120.25.221.136/images/logistic/newcost.png" alt=""></p>
+<p>将公式用一个表示：</p>
+<p><img src="http://120.25.221.136/images/logistic/newcost2.png" alt=""></p>
+<p>新的代价公式为：</p>
+<p><img src="http://120.25.221.136/images/logistic/newcost4.png" alt=""></p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>优点：</p>
+<ul>
+<li><p>计算简单，广泛应用与工业。</p>
+</li>
+<li><p>输出的概率值，预测的结果为0至1的概率。</p>
+<p>​</p>
+</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>样本量大的时候性能可能不好。</li>
+<li>不能多分类。</li>
+<li>容易欠拟合，一般准确度不太高</li>
+</ul>
+<h4 id="附加"><a href="#附加" class="headerlink" title="附加"></a>附加</h4><p>sigmod为什么这么被青睐？</p>
+<p>原因：</p>
+<ul>
+<li><p>能求导</p>
+<p>​</p>
+</li>
+</ul>
+<p><img src="http://120.25.221.136/images/logistic/qiudao.jpg" alt=""></p>
+<ul>
+<li><p>引入非线性</p>
+<p>值为0-1之间</p>
+</li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2018/03/22/机器学习的降维为特征选择的区别/" title="特征选择和降维的区别" itemprop="url">特征选择和降维的区别</a>
   </h1>
   <p class="article-author">By
@@ -767,64 +862,6 @@ WHEN &apos;2&apos; THEN &apos;女&apos;
 <p>在浏览器中，查看spark集群状态 ，master节点输入网址<a href="http://master:8080/" target="_blank" rel="noopener">http://masterip:8080</a> </p>
 <p><img src="../img/7.png" alt=""></p>
 
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/01/27/Hexo绑定域名/" title="Hexo绑定域名" itemprop="url">Hexo绑定域名</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
-		
-  <p class="article-time">
-    <time datetime="2018-01-27T09:09:15.496Z" itemprop="datePublished"> 发表于 2018-01-27</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h4 id="一、购买域名"><a href="#一、购买域名" class="headerlink" title="一、购买域名"></a>一、购买域名</h4><p>可以在阿里云或者腾讯云购买域名，我的在腾讯云购买，域名为[pengyuan.ac.cn</p>
-<h4 id="二、解析域名"><a href="#二、解析域名" class="headerlink" title="二、解析域名"></a>二、解析域名</h4><p>登入腾讯云控制台，如图，找到域名管理，对你绑定的域名进行解析。</p>
-<p><img src="http://120.25.221.136/images/console.png" alt=""></p>
-<h4 id="三、添加解析记录"><a href="#三、添加解析记录" class="headerlink" title="三、添加解析记录"></a>三、添加解析记录</h4><p>点击添加解析，记录类型选A或CNAME，A记录的记录值就是ip地址，github(官方文档)提供了两个IP地址，<code>192.30.252.153和192.30.252.154</code>，这两个IP地址为github的服务器地址，两个都要解析。解析记录设置两个www和@，线路就默认就行，CNAME记录值填你的github博客网址。</p>
-<p><img src="http://120.25.221.136/images/jiexi.png" alt=""></p>
-<p><img src="http://120.25.221.136/images/git.png" alt=""></p>
-<h4 id="四、增加CNAME文件"><a href="#四、增加CNAME文件" class="headerlink" title="四、增加CNAME文件"></a>四、增加CNAME文件</h4><p>在Hexo的目录下的source文件夹下增加cname文件，文件的内容是你的域名我的是<a href="pengyuan.ac.cn">pengyuan.ac.cn</a></p>
-<p><img src="http://120.25.221.136/images/cname.png" alt=""></p>
-<p><img src="http://120.25.221.136/images/content.png" alt=""></p>
-<h4 id="最后访问域名，就可以访问成功。"><a href="#最后访问域名，就可以访问成功。" class="headerlink" title="最后访问域名，就可以访问成功。"></a>最后访问域名，就可以访问成功。</h4>
         
         
         <p class="article-more-link">
