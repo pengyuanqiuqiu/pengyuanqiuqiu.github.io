@@ -4,24 +4,24 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>机器学习之损失函数 | Jianyu</title>
+    <title>栈的压入、弹出序列 | Jianyu</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="PengYuan">
     
 
     
-    <meta name="description" content="如何在训练过程中表现出优化的步骤，评价训练的好坏？答案就是减少损失函数（代价损失函数）也就是我们常说的优化目标。那么接下来介绍一下常见的损失函数。 损失函数分类 0-1损失函数（感知机）$$L(Y,f(X))=\left{ \begin{aligned}&amp;amp;1,\quad Y\ne f(X)\&amp;amp; 0,\quad Y=f(X) \end{aligned} \right.$$含义为：预测">
+    <meta name="description" content="题目描述输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否为该栈的弹出顺序。假设压入栈的所有数字均不相等。例如序列1,2,3,4,5是某栈的压入顺序，序列4，5,3,2,1是该压栈序列对应的一个弹出序列，但4,3,5,1,2就不可能是该压栈序列的弹出序列。（注意：这两个序列的长度是相等的） 利用一个辅助的数组来模仿栈的压入 12345678910111213141516171819">
 <meta property="og:type" content="article">
-<meta property="og:title" content="机器学习之损失函数">
-<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/05/01/损失函数/index.html">
+<meta property="og:title" content="栈的压入、弹出序列">
+<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/05/04/栈的压入、弹出序列/index.html">
 <meta property="og:site_name" content="Jianyu">
-<meta property="og:description" content="如何在训练过程中表现出优化的步骤，评价训练的好坏？答案就是减少损失函数（代价损失函数）也就是我们常说的优化目标。那么接下来介绍一下常见的损失函数。 损失函数分类 0-1损失函数（感知机）$$L(Y,f(X))=\left{ \begin{aligned}&amp;amp;1,\quad Y\ne f(X)\&amp;amp; 0,\quad Y=f(X) \end{aligned} \right.$$含义为：预测">
+<meta property="og:description" content="题目描述输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否为该栈的弹出顺序。假设压入栈的所有数字均不相等。例如序列1,2,3,4,5是某栈的压入顺序，序列4，5,3,2,1是该压栈序列对应的一个弹出序列，但4,3,5,1,2就不可能是该压栈序列的弹出序列。（注意：这两个序列的长度是相等的） 利用一个辅助的数组来模仿栈的压入 12345678910111213141516171819">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-05-05T13:29:41.871Z">
+<meta property="og:updated_time" content="2018-05-04T13:22:51.838Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="机器学习之损失函数">
-<meta name="twitter:description" content="如何在训练过程中表现出优化的步骤，评价训练的好坏？答案就是减少损失函数（代价损失函数）也就是我们常说的优化目标。那么接下来介绍一下常见的损失函数。 损失函数分类 0-1损失函数（感知机）$$L(Y,f(X))=\left{ \begin{aligned}&amp;amp;1,\quad Y\ne f(X)\&amp;amp; 0,\quad Y=f(X) \end{aligned} \right.$$含义为：预测">
+<meta name="twitter:title" content="栈的压入、弹出序列">
+<meta name="twitter:description" content="题目描述输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否为该栈的弹出顺序。假设压入栈的所有数字均不相等。例如序列1,2,3,4,5是某栈的压入顺序，序列4，5,3,2,1是该压栈序列对应的一个弹出序列，但4,3,5,1,2就不可能是该压栈序列的弹出序列。（注意：这两个序列的长度是相等的） 利用一个辅助的数组来模仿栈的压入 12345678910111213141516171819">
 
     
     <link rel="alternative" href="http://www.163.com/rss/" title="Jianyu" type="application/atom+xml">
@@ -81,14 +81,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/05/01/损失函数/" title="机器学习之损失函数" itemprop="url">机器学习之损失函数</a>
+      <a href="/2018/05/04/栈的压入、弹出序列/" title="栈的压入、弹出序列" itemprop="url">栈的压入、弹出序列</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
 		
   <p class="article-time">
-    <time datetime="2018-05-01T07:12:43.265Z" itemprop="datePublished"> 发表于 2018-05-01</time>
+    <time datetime="2018-05-04T13:13:38.060Z" itemprop="datePublished"> 发表于 2018-05-04</time>
     
   </p>
 </header>
@@ -97,19 +97,13 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#损失函数分类"><span class="toc-number">1.</span> <span class="toc-text">损失函数分类</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#题目描述"><span class="toc-number">1.</span> <span class="toc-text">题目描述</span></a></li></ol>
 		
 		</div>
 		
-		<p>如何在训练过程中表现出优化的步骤，评价训练的好坏？答案就是减少损失函数（代价损失函数）也就是我们常说的优化目标。那么接下来介绍一下常见的损失函数。</p>
-<h3 id="损失函数分类"><a href="#损失函数分类" class="headerlink" title="损失函数分类"></a>损失函数分类</h3><ol>
-<li>0-1损失函数（感知机）<br>$$<br>L(Y,f(X))=\left{ \begin{aligned}&amp;1,\quad Y\ne f(X)\&amp; 0,\quad Y=f(X) \end{aligned} \right.<br>$$<br>含义为：预测成功时损失为0，预测失败时损失为1。</li>
-</ol>
-<p>2.平方损失函数（线性回归）<br>$$<br>L(Y,f(X))=(Y-f(X))^2<br>$$<br>​       含义为：取预测差值的平方。</p>
-<p>3.绝对损失函数<br>$$<br>L(Y,f(X))=|Y-f(X)|<br>$$<br>​    含义为：取预测差值的绝对值。</p>
-<p>4.对数损失函数（交叉熵损失函数）（LR回归）<br>$$<br>L(Y,P(Y|X))=-logP(Y|X)<br>$$<br>​    含义为：P(Y|X)通俗的解释就是：在当前模型的基础上，对于样本X，其预测值为Y，也就是预测正确的概率。由于概率之间的同时满足需要使用乘法，为了将其转化为加法，我们将其取对数。最后由于是损失函数，所以预测正确的概率越高，其损失值应该是越小，log里面的值一定小于1，所以需要取反。</p>
-<p>5.指数损失函数（Adaboost）</p>
-<p>指数误差，在<code>boosting</code>算法中比较常见:<br>$$<br>\begin{equation}<br>L(Y|f(X)) = exp[-yf(x)]<br>\end{equation}<br>$$<br>6.Hinge损失函数（SVM）<br>$$<br>\begin{equation}<br>\min<em>{w,b}\sum</em>{i}^{N}(1 - y<em>{i}(wx</em>{i}+b))+\lambda ||w^{2}||<br>\end{equation}<br>$$</p>
+		<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否为该栈的弹出顺序。假设压入栈的所有数字均不相等。例如序列1,2,3,4,5是某栈的压入顺序，序列4，5,3,2,1是该压栈序列对应的一个弹出序列，但4,3,5,1,2就不可能是该压栈序列的弹出序列。（注意：这两个序列的长度是相等的）</p>
+<p>利用一个辅助的数组来模仿栈的压入</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">IsPopOrder</span><span class="params">(self, pushV, popV)</span>:</span></span><br><span class="line">        a=[] <span class="comment">####辅助栈</span></span><br><span class="line">        c=<span class="number">0</span>   </span><br><span class="line">        <span class="keyword">if</span> len(pushV)!=len(popV) <span class="keyword">or</span> len(pushV)==<span class="number">0</span>: <span class="comment">###判断是否是空</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(pushV)): <span class="comment">###开始循环加入到辅助</span></span><br><span class="line">            a.append(pushV[i])</span><br><span class="line">            <span class="comment">###将加进去的数值与弹出栈的数值是否相等</span></span><br><span class="line">            <span class="keyword">while</span> len(a)&gt;<span class="number">0</span>:</span><br><span class="line">                <span class="keyword">if</span>  a[len(a)<span class="number">-1</span>]==popV[<span class="number">0</span>]:<span class="comment">###</span></span><br><span class="line">                    c=c+<span class="number">1</span></span><br><span class="line">                    print(a[len(a)<span class="number">-1</span>])</span><br><span class="line">                    popV.pop(<span class="number">0</span>)</span><br><span class="line">                    a.pop()</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> len(popV)==<span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">False</span></span><br></pre></td></tr></table></figure>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -122,7 +116,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://pengyuanqiuqiu.github.io/2018/05/01/损失函数/" data-title="机器学习之损失函数 | Jianyu" data-tsina="" class="share clearfix">
+	  <div data-url="https://pengyuanqiuqiu.github.io/2018/05/04/栈的压入、弹出序列/" data-title="栈的压入、弹出序列 | Jianyu" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -136,18 +130,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2018/05/03/二叉树的深度/" title="二叉树的深度以及判断是否为平衡二叉树">
+ <a href="/2018/05/04/数组中值出现一次的数字/" title="数组中值出现一次的数字">
   <strong>上一篇：</strong><br/>
   <span>
-  二叉树的深度以及判断是否为平衡二叉树</span>
+  数组中值出现一次的数字</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2018/05/01/Kmeans的改进/"  title="K-means算法的改进">
+<a href="/2018/05/04/斐波拉切数列/"  title="斐波拉切数列">
  <strong>下一篇：</strong><br/> 
- <span>K-means算法的改进
+ <span>斐波拉切数列
 </span>
 </a>
 </div>
@@ -164,7 +158,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#损失函数分类"><span class="toc-number">1.</span> <span class="toc-text">损失函数分类</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#题目描述"><span class="toc-number">1.</span> <span class="toc-text">题目描述</span></a></li></ol>
  
   </div>
 

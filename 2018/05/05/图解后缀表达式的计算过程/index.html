@@ -4,24 +4,31 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>机器学习之损失函数 | Jianyu</title>
+    <title>图解后缀表达式的计算过程(转) | Jianyu</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="PengYuan">
     
 
     
-    <meta name="description" content="如何在训练过程中表现出优化的步骤，评价训练的好坏？答案就是减少损失函数（代价损失函数）也就是我们常说的优化目标。那么接下来介绍一下常见的损失函数。 损失函数分类 0-1损失函数（感知机）$$L(Y,f(X))=\left{ \begin{aligned}&amp;amp;1,\quad Y\ne f(X)\&amp;amp; 0,\quad Y=f(X) \end{aligned} \right.$$含义为：预测">
+    <meta name="description" content="为了解释后缀表达式的好处，我们先来看看，计算机如何应用后缀表达式计算出最终的结果20的。 后缀表达式：9 3 1-3*+ 10 2/+ 规则：从左到右遍历表达式的每个数字和符号，遇到是数字就进栈，遇到是符号，就将处于栈顶两个数字出栈，进行运算，运算结果进栈，一直到最终获得结果。 下面是详细的步骤：  初始化一个空栈。此桟用来对要运算的数字进出使用。 后缀表达式中前三个都是数字，所以9、3、1进栈。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="机器学习之损失函数">
-<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/05/01/损失函数/index.html">
+<meta property="og:title" content="图解后缀表达式的计算过程(转)">
+<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/05/05/图解后缀表达式的计算过程/index.html">
 <meta property="og:site_name" content="Jianyu">
-<meta property="og:description" content="如何在训练过程中表现出优化的步骤，评价训练的好坏？答案就是减少损失函数（代价损失函数）也就是我们常说的优化目标。那么接下来介绍一下常见的损失函数。 损失函数分类 0-1损失函数（感知机）$$L(Y,f(X))=\left{ \begin{aligned}&amp;amp;1,\quad Y\ne f(X)\&amp;amp; 0,\quad Y=f(X) \end{aligned} \right.$$含义为：预测">
+<meta property="og:description" content="为了解释后缀表达式的好处，我们先来看看，计算机如何应用后缀表达式计算出最终的结果20的。 后缀表达式：9 3 1-3*+ 10 2/+ 规则：从左到右遍历表达式的每个数字和符号，遇到是数字就进栈，遇到是符号，就将处于栈顶两个数字出栈，进行运算，运算结果进栈，一直到最终获得结果。 下面是详细的步骤：  初始化一个空栈。此桟用来对要运算的数字进出使用。 后缀表达式中前三个都是数字，所以9、3、1进栈。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-05-05T13:29:41.871Z">
+<meta property="og:image" content="http://www.nowamagic.net/librarys/images/201210/2012_10_22_02.jpg">
+<meta property="og:image" content="http://www.nowamagic.net/librarys/images/201210/2012_10_22_03.jpg">
+<meta property="og:image" content="http://www.nowamagic.net/librarys/images/201210/2012_10_22_04.jpg">
+<meta property="og:image" content="http://www.nowamagic.net/librarys/images/201210/2012_10_22_05.jpg">
+<meta property="og:image" content="http://www.nowamagic.net/librarys/images/201210/2012_10_22_06.jpg">
+<meta property="og:image" content="https://img-blog.csdn.net/20160911225209660?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2018-05-05T14:33:45.450Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="机器学习之损失函数">
-<meta name="twitter:description" content="如何在训练过程中表现出优化的步骤，评价训练的好坏？答案就是减少损失函数（代价损失函数）也就是我们常说的优化目标。那么接下来介绍一下常见的损失函数。 损失函数分类 0-1损失函数（感知机）$$L(Y,f(X))=\left{ \begin{aligned}&amp;amp;1,\quad Y\ne f(X)\&amp;amp; 0,\quad Y=f(X) \end{aligned} \right.$$含义为：预测">
+<meta name="twitter:title" content="图解后缀表达式的计算过程(转)">
+<meta name="twitter:description" content="为了解释后缀表达式的好处，我们先来看看，计算机如何应用后缀表达式计算出最终的结果20的。 后缀表达式：9 3 1-3*+ 10 2/+ 规则：从左到右遍历表达式的每个数字和符号，遇到是数字就进栈，遇到是符号，就将处于栈顶两个数字出栈，进行运算，运算结果进栈，一直到最终获得结果。 下面是详细的步骤：  初始化一个空栈。此桟用来对要运算的数字进出使用。 后缀表达式中前三个都是数字，所以9、3、1进栈。">
+<meta name="twitter:image" content="http://www.nowamagic.net/librarys/images/201210/2012_10_22_02.jpg">
 
     
     <link rel="alternative" href="http://www.163.com/rss/" title="Jianyu" type="application/atom+xml">
@@ -81,14 +88,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/05/01/损失函数/" title="机器学习之损失函数" itemprop="url">机器学习之损失函数</a>
+      <a href="/2018/05/05/图解后缀表达式的计算过程/" title="图解后缀表达式的计算过程(转)" itemprop="url">图解后缀表达式的计算过程(转)</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
 		
   <p class="article-time">
-    <time datetime="2018-05-01T07:12:43.265Z" itemprop="datePublished"> 发表于 2018-05-01</time>
+    <time datetime="2018-05-05T14:27:27.922Z" itemprop="datePublished"> 发表于 2018-05-05</time>
     
   </p>
 </header>
@@ -97,19 +104,49 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#损失函数分类"><span class="toc-number">1.</span> <span class="toc-text">损失函数分类</span></a></li></ol>
+			
 		
 		</div>
 		
-		<p>如何在训练过程中表现出优化的步骤，评价训练的好坏？答案就是减少损失函数（代价损失函数）也就是我们常说的优化目标。那么接下来介绍一下常见的损失函数。</p>
-<h3 id="损失函数分类"><a href="#损失函数分类" class="headerlink" title="损失函数分类"></a>损失函数分类</h3><ol>
-<li>0-1损失函数（感知机）<br>$$<br>L(Y,f(X))=\left{ \begin{aligned}&amp;1,\quad Y\ne f(X)\&amp; 0,\quad Y=f(X) \end{aligned} \right.<br>$$<br>含义为：预测成功时损失为0，预测失败时损失为1。</li>
+		<p>为了解释后缀表达式的好处，我们先来看看，计算机如何应用<a href="http://www.nowamagic.net/librarys/veda/tag/%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F" target="_blank" rel="noopener">后缀表达式</a>计算出最终的结果20的。</p>
+<p>后缀表达式：9 3 1-3*+ 10 2/+</p>
+<p>规则：从左到右遍历表达式的每个数字和符号，遇到是数字就进栈，遇到是符号，就将处于栈顶两个数字出栈，进行运算，运算结果进栈，一直到最终获得结果。</p>
+<p>下面是详细的步骤：</p>
+<ol>
+<li>初始化一个空<a href="http://www.nowamagic.net/librarys/veda/tag/%E6%A0%88" target="_blank" rel="noopener">栈</a>。此桟用来对要运算的数字进出使用。</li>
+<li>后缀表达式中前三个都是数字，所以9、3、1进栈。</li>
 </ol>
-<p>2.平方损失函数（线性回归）<br>$$<br>L(Y,f(X))=(Y-f(X))^2<br>$$<br>​       含义为：取预测差值的平方。</p>
-<p>3.绝对损失函数<br>$$<br>L(Y,f(X))=|Y-f(X)|<br>$$<br>​    含义为：取预测差值的绝对值。</p>
-<p>4.对数损失函数（交叉熵损失函数）（LR回归）<br>$$<br>L(Y,P(Y|X))=-logP(Y|X)<br>$$<br>​    含义为：P(Y|X)通俗的解释就是：在当前模型的基础上，对于样本X，其预测值为Y，也就是预测正确的概率。由于概率之间的同时满足需要使用乘法，为了将其转化为加法，我们将其取对数。最后由于是损失函数，所以预测正确的概率越高，其损失值应该是越小，log里面的值一定小于1，所以需要取反。</p>
-<p>5.指数损失函数（Adaboost）</p>
-<p>指数误差，在<code>boosting</code>算法中比较常见:<br>$$<br>\begin{equation}<br>L(Y|f(X)) = exp[-yf(x)]<br>\end{equation}<br>$$<br>6.Hinge损失函数（SVM）<br>$$<br>\begin{equation}<br>\min<em>{w,b}\sum</em>{i}^{N}(1 - y<em>{i}(wx</em>{i}+b))+\lambda ||w^{2}||<br>\end{equation}<br>$$</p>
+<p><img src="http://www.nowamagic.net/librarys/images/201210/2012_10_22_02.jpg" alt="img"></p>
+<ol>
+<li>接下来是减号“-”，所以将栈中的1出栈作为减数，3出栈作为被减数，并运算3-1得到2，再将2进栈。</li>
+<li>接着是数字3进栈。</li>
+</ol>
+<p><img src="http://www.nowamagic.net/librarys/images/201210/2012_10_22_03.jpg" alt="img"></p>
+<ol>
+<li>后面是乘法“*”，也就意味着栈中3和2出栈，2与3相乘，得到6，并将6进栈。</li>
+<li>下面是加法“+”，所以找中6和9出找，9与6相加，得到15，将15进栈。</li>
+</ol>
+<p><img src="http://www.nowamagic.net/librarys/images/201210/2012_10_22_04.jpg" alt="img"></p>
+<ol>
+<li>接着是10与2两数字进栈。</li>
+<li>接下来是符号因此，栈顶的2与10出栈，10与2相除，得到5，将5进栈。</li>
+</ol>
+<p><img src="http://www.nowamagic.net/librarys/images/201210/2012_10_22_05.jpg" alt="img"></p>
+<ol>
+<li>最后一个是符号“+”，所以15与5出找并相加，得到20，将20进栈。</li>
+<li>结果是20出栈，栈变为空。</li>
+</ol>
+<p><img src="http://www.nowamagic.net/librarys/images/201210/2012_10_22_06.jpg" alt="img"></p>
+<p>一、后缀表达式——-操作符位于操作数之后的表达式。（也叫逆波兰表达式）</p>
+<p>举个例子：</p>
+<p>中缀表达式 —– 9+(6+5)*2-7</p>
+<p>后缀表达式 —– 9 6 5 + 2 * + 7 -</p>
+<p>PS：文章末尾会附有中缀表达式转为后缀表达式的规则</p>
+<p>二、后缀表达式的计算</p>
+<p>简单来讲，后缀表达式的计算就是从左到右扫描表达式，遇到数字就将其压入栈，遇到操作符表示可以计算，这时取出栈顶的两个元素进行操作，然后再次将结果压入栈，最后栈里会留下一个元素，该元素就是运行结果（详解看图）</p>
+<p><img src="https://img-blog.csdn.net/20160911225209660?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="img"></p>
+<p>三、思路</p>
+<p>大体思路就是：需要一个结构体来存放标识符（标记这个数据是数字还是操作符），除此之外，就是需要一个结构体数组了，数组里边存放的是具体内容。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -122,7 +159,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://pengyuanqiuqiu.github.io/2018/05/01/损失函数/" data-title="机器学习之损失函数 | Jianyu" data-tsina="" class="share clearfix">
+	  <div data-url="https://pengyuanqiuqiu.github.io/2018/05/05/图解后缀表达式的计算过程/" data-title="图解后缀表达式的计算过程(转) | Jianyu" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -136,18 +173,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2018/05/03/二叉树的深度/" title="二叉树的深度以及判断是否为平衡二叉树">
+ <a href="/2018/05/05/将中缀表达式转化为后缀表达式/" title="将中缀表达式转化为后缀表达式(转)">
   <strong>上一篇：</strong><br/>
   <span>
-  二叉树的深度以及判断是否为平衡二叉树</span>
+  将中缀表达式转化为后缀表达式(转)</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2018/05/01/Kmeans的改进/"  title="K-means算法的改进">
+<a href="/2018/05/05/字符串的排列/"  title="字符串的排列">
  <strong>下一篇：</strong><br/> 
- <span>K-means算法的改进
+ <span>字符串的排列
 </span>
 </a>
 </div>
@@ -164,7 +201,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#损失函数分类"><span class="toc-number">1.</span> <span class="toc-text">损失函数分类</span></a></li></ol>
+ 
  
   </div>
 
