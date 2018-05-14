@@ -79,6 +79,114 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2018/01/23/nginx配置简单图片显示/" title="nginx配置简单图片显示" itemprop="url">nginx配置简单图片显示</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-01-23T09:30:44.671Z" itemprop="datePublished"> 发表于 2018-01-23</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h5 id="配置conf文件"><a href="#配置conf文件" class="headerlink" title="配置conf文件"></a>配置conf文件</h5><p>在/usr/local/nginx/conf目录下修改nginx.conf文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"> server &#123;</span><br><span class="line"> listen 80;</span><br><span class="line"> server_name _;</span><br><span class="line"> access_log /data/wwwlogs/access_nginx.log combined;</span><br><span class="line"> root /data/wwwroot/default;</span><br><span class="line"> index index.html index.htm index.php;</span><br><span class="line"> location /nginx_status &#123;</span><br><span class="line">   stub_status on;</span><br><span class="line">   access_log off;</span><br><span class="line">   allow 127.0.0.1;</span><br><span class="line">   deny all;</span><br><span class="line">   &#125;</span><br><span class="line"> location ~ [^/]\.php(/|$) &#123;</span><br><span class="line">   #fastcgi_pass remote_php_ip:9000;</span><br><span class="line">   fastcgi_pass unix:/dev/shm/php-cgi.sock;</span><br><span class="line">   fastcgi_index index.php;</span><br><span class="line">   include fastcgi.conf;</span><br><span class="line">   &#125;</span><br><span class="line"> location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|flv|mp4|ico)$ &#123;</span><br><span class="line">   expires 30d;//浏览器缓存时间长度</span><br><span class="line">root /data/wwwroot/default;//放置路径</span><br><span class="line">   access_log off;//日志无</span><br><span class="line">proxy_temp_path /data/wwwroot/default;//图片访问路径</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>配置成功可，重载nginx，nginx -s reload  ，最后成功访问图片。</p>
+<p><img src="http://120.25.221.136/images/jietu.png" alt=""></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/01/23/解决python画图中文乱码问题问题/" title="解决python画图中文乱码问题问题" itemprop="url">解决python画图中文乱码问题问题</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-01-23T09:21:42.108Z" itemprop="datePublished"> 发表于 2018-01-23</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h5 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h5><p>如下图，画图出现乱码。</p>
+<p><img src="http://120.25.221.136/images/luanma.png" alt=""></p>
+<h5 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h5><p>Matplotlib缺少中文配置所导致。</p>
+<h5 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h5><p>指定matploylib的字体。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.rcParams[&apos;font.sans-serif&apos;]=[&apos;SimHei&apos;] #用来正常显示中文标签</span><br><span class="line">plt.rcParams[&apos;axes.unicode_minus&apos;]=False #用来正常显示负号</span><br></pre></td></tr></table></figure>
+<p><img src="http://120.25.221.136/images/normal.png" alt=""></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2018/01/22/学习python的Flask框架（一）/" title="学习python的Flask框架（一）" itemprop="url">学习python的Flask框架（一）</a>
   </h1>
   <p class="article-author">By
