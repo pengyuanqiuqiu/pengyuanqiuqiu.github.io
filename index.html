@@ -79,6 +79,68 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2018/05/31/python定义私有变量/" title="python定义私有变量" itemprop="url">python定义私有变量</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-05-31T12:09:32.565Z" itemprop="datePublished"> 发表于 2018-05-31</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <ul>
+<li><h2 id="python对象销毁-垃圾回收"><a href="#python对象销毁-垃圾回收" class="headerlink" title="python对象销毁(垃圾回收)"></a>python对象销毁(垃圾回收)</h2><p>Python 使用了引用计数这一简单技术来跟踪和回收垃圾。</p>
+<p>在 Python 内部记录着所有使用中的对象各有多少引用。</p>
+<p>一个内部跟踪变量，称为一个引用计数器。</p>
+<p>当对象被创建时， 就创建了一个引用计数， 当这个对象不再需要时， 也就是说， 这个对象的引用计数变为0 时， 它被垃圾回收。但是回收不是”立即”的， 由解释器在适当的时机，将垃圾对象占用的内存空间回收。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a = 40      # 创建对象  &lt;40&gt;</span><br><span class="line">b = a       # 增加引用， &lt;40&gt; 的计数</span><br><span class="line">c = [b]     # 增加引用.  &lt;40&gt; 的计数</span><br><span class="line"></span><br><span class="line">del a       # 减少引用 &lt;40&gt; 的计数</span><br><span class="line">b = 100     # 减少引用 &lt;40&gt; 的计数</span><br><span class="line">c[0] = -1   # 减少引用 &lt;40&gt; 的计数</span><br></pre></td></tr></table></figure>
+<p>垃圾回收机制不仅针对引用计数为0的对象，同样也可以处理循环引用的情况。循环引用指的是，两个对象相互引用，但是没有其他变量引用他们。这种情况下，仅使用引用计数是不够的。Python 的垃圾收集器实际上是一个引用计数器和一个循环垃圾收集器。作为引用计数的补充， 垃圾收集器也会留心被分配的总量很大（及未通过引用计数销毁的那些）的对象。 在这种情况下， 解释器会暂停下来， 试图清理所有未引用的循环。</p>
+</li>
+</ul>
+<h3 id="类的私有属性"><a href="#类的私有属性" class="headerlink" title="类的私有属性"></a>类的私有属性</h3><p><strong>__private_attrs</strong>：两个下划线开头，声明该属性为私有，不能在类的外部被使用或直接访问。在类内部的方法中使用时 <strong>self.__private_attrs</strong>。</p>
+<h3 id="类的方法"><a href="#类的方法" class="headerlink" title="类的方法"></a>类的方法</h3><p>在类的内部，使用 def 关键字可以为类定义一个方法，与一般函数定义不同，类方法必须包含参数 self,且为第一个参数</p>
+<h3 id="类的私有方法"><a href="#类的私有方法" class="headerlink" title="类的私有方法"></a>类的私有方法</h3><p><strong>__private_method</strong>：两个下划线开头，声明该方法为私有方法，不能在类地外部调用。在类的内部调用 <strong>self.__private_methods</strong></p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">JustCounter</span>:</span></span><br><span class="line">    __secretCount = <span class="number">0</span>  <span class="comment"># 私有变量</span></span><br><span class="line">    publicCount = <span class="number">0</span>    <span class="comment"># 公开变量</span></span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">count</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.__secretCount += <span class="number">1</span></span><br><span class="line">        self.publicCount += <span class="number">1</span></span><br><span class="line">        <span class="keyword">print</span> self.__secretCount</span><br><span class="line"> </span><br><span class="line">counter = JustCounter()</span><br><span class="line">counter.count()</span><br><span class="line">counter.count()</span><br><span class="line"><span class="keyword">print</span> counter.publicCount</span><br><span class="line"><span class="keyword">print</span> counter.__secretCount  <span class="comment"># 报错，实例不能访问私有变量</span></span><br></pre></td></tr></table></figure>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2018/05/30/平方损失函数为什么用平方形式/" title="平方损失函数为什么用平方形式" itemprop="url">平方损失函数为什么用平方形式</a>
   </h1>
   <p class="article-author">By
@@ -715,58 +777,6 @@
 <h5 id="思路一"><a href="#思路一" class="headerlink" title="思路一"></a>思路一</h5><p>python数组自带count函数。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="comment"># 返回[a,b] 其中ab是出现一次的两个数字</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">FindNumsAppearOnce</span><span class="params">(self, array)</span>:</span></span><br><span class="line">        res=[]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> array:</span><br><span class="line">            <span class="keyword">if</span> array.count(i)==<span class="number">1</span>:</span><br><span class="line">                res.append(i)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
 <h5 id="思路二"><a href="#思路二" class="headerlink" title="思路二"></a>思路二</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">###利用hashmap的方式，利用字典存放数字及个数</span></span><br><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">FindNumsAppearOnce</span><span class="params">(self, array)</span>:</span></span><br><span class="line">		hashMap = &#123;&#125;</span><br><span class="line">		<span class="keyword">for</span> i <span class="keyword">in</span> array:</span><br><span class="line">			<span class="keyword">if</span> str(i) <span class="keyword">in</span> hashMap:</span><br><span class="line">				hashMap[str(i)] += <span class="number">1</span></span><br><span class="line">			<span class="keyword">else</span>:</span><br><span class="line">				hashMap[str(i)] = <span class="number">1</span></span><br><span class="line">		res = []</span><br><span class="line">		<span class="keyword">for</span> k <span class="keyword">in</span> hashMap.keys():</span><br><span class="line">			<span class="keyword">if</span> hashMap[k] == <span class="number">1</span>:</span><br><span class="line">				res.append(int(k))</span><br><span class="line">		<span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/05/04/栈的压入、弹出序列/" title="栈的压入、弹出序列" itemprop="url">栈的压入、弹出序列</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
-		
-  <p class="article-time">
-    <time datetime="2018-05-04T13:13:38.060Z" itemprop="datePublished"> 发表于 2018-05-04</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否为该栈的弹出顺序。假设压入栈的所有数字均不相等。例如序列1,2,3,4,5是某栈的压入顺序，序列4，5,3,2,1是该压栈序列对应的一个弹出序列，但4,3,5,1,2就不可能是该压栈序列的弹出序列。（注意：这两个序列的长度是相等的）</p>
-<p>利用一个辅助的数组来模仿栈的压入</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">IsPopOrder</span><span class="params">(self, pushV, popV)</span>:</span></span><br><span class="line">        a=[] <span class="comment">####辅助栈</span></span><br><span class="line">        c=<span class="number">0</span>   </span><br><span class="line">        <span class="keyword">if</span> len(pushV)!=len(popV) <span class="keyword">or</span> len(pushV)==<span class="number">0</span>: <span class="comment">###判断是否是空</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(pushV)): <span class="comment">###开始循环加入到辅助</span></span><br><span class="line">            a.append(pushV[i])</span><br><span class="line">            <span class="comment">###将加进去的数值与弹出栈的数值是否相等</span></span><br><span class="line">            <span class="keyword">while</span> len(a)&gt;<span class="number">0</span>:</span><br><span class="line">                <span class="keyword">if</span>  a[len(a)<span class="number">-1</span>]==popV[<span class="number">0</span>]:<span class="comment">###</span></span><br><span class="line">                    c=c+<span class="number">1</span></span><br><span class="line">                    print(a[len(a)<span class="number">-1</span>])</span><br><span class="line">                    popV.pop(<span class="number">0</span>)</span><br><span class="line">                    a.pop()</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> len(popV)==<span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">False</span></span><br></pre></td></tr></table></figure>
 
         
         
