@@ -79,6 +79,139 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2018/04/04/Flask部署/" title="Falsk部署" itemprop="url">Falsk部署</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-04-04T13:23:29.492Z" itemprop="datePublished"> 发表于 2018-04-04</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h4 id="Flask，Tornado和nginx"><a href="#Flask，Tornado和nginx" class="headerlink" title="Flask，Tornado和nginx"></a>Flask，Tornado和nginx</h4><p>Flask是Python的一个轻型的web框架，具有上手快，结构简单的优点，所以利用它来进行小型项目接口开发。</p>
+<p>但在开发环境下并发性较大，所以Flask内置的服务器不能很好的处理，所以需要采用一个强大、健壮的web服务器来处理复杂的情况，利用tornado和niginx来部署。</p>
+<p>Tornado性能比django和Flask高很多是因为Tornado在底层io处理机制上和django以及Flask有着根本的区别。Tornado拥有wsgi容器。</p>
+<p><img src="http://120.25.221.136/images/bushu/bushu1.png" alt=""></p>
+<ul>
+<li>在Flask的入口程序，代码为：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#coding=utf-8</span><br><span class="line">#!/usr/bin/python</span><br><span class="line"></span><br><span class="line">from somewhere import app  #somewhere 表示的包含Flask的实例，如app = Flask(__name__)</span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line"></span><br><span class="line">    app.run(debug=True)</span><br></pre></td></tr></table></figure>
+<h4 id="增加Tornado功能"><a href="#增加Tornado功能" class="headerlink" title="增加Tornado功能"></a>增加Tornado功能</h4><ul>
+<li>增加程序Tornado_server.py托管Flask。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">from tornado.wsgi import WSGIContainer</span><br><span class="line">from tornado.httpserver import HTTPServer  </span><br><span class="line">from tornado.ioloop import IOLoop</span><br><span class="line">from  manager import app</span><br><span class="line">from tornado.options import define, options,parse_command_line</span><br><span class="line"></span><br><span class="line">parse_command_line()</span><br><span class="line">container = WSGIContainer(app)</span><br><span class="line">http_server = HTTPServer(container)</span><br><span class="line">http_server.listen(5000)#对应flask的端口</span><br><span class="line">IOLoop.instance().start()</span><br><span class="line">define(&quot;log_file_prefix&quot;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>运行Tornado_server.py（注意：运行时发现并没有显示是否运行成功，还没摸透）</p>
+<h4 id="配置Nginx转发到Flask"><a href="#配置Nginx转发到Flask" class="headerlink" title="配置Nginx转发到Flask"></a>配置Nginx转发到Flask</h4></li>
+</ul>
+<p>配置文件为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">	listen 80 default_server;</span><br><span class="line">	listen [::]:80 default_server ipv6only=on;</span><br><span class="line"></span><br><span class="line">	root /usr/share/nginx/html;</span><br><span class="line">	index index.html index.htm;</span><br><span class="line"></span><br><span class="line">	# Make site accessible from http://localhost/</span><br><span class="line">	server_name localhost;</span><br><span class="line"></span><br><span class="line">	location / &#123;</span><br><span class="line">		# First attempt to serve request as file, then</span><br><span class="line">		# as directory, then fall back to displaying a 404.</span><br><span class="line">		#try_files $uri $uri/ =404;</span><br><span class="line">		# Uncomment to enable naxsi on this location</span><br><span class="line">		# include /etc/nginx/naxsi.rules</span><br><span class="line">		 proxy_pass http://127.0.0.1:5000;###转发功能 </span><br><span class="line">	&#125;</span><br><span class="line">	#error_page 404 /404.html;</span><br><span class="line">	# redirect server error pages to the static page /50x.html</span><br><span class="line">	#</span><br><span class="line">	#error_page 500 502 503 504 /50x.html;</span><br><span class="line">	#location = /50x.html &#123;</span><br><span class="line">	#	root /usr/share/nginx/html;</span><br><span class="line">	#&#125;</span><br><span class="line"></span><br><span class="line">	# pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000</span><br><span class="line">	#</span><br><span class="line">	#location ~ \.php$ &#123;</span><br><span class="line">	#	fastcgi_split_path_info ^(.+\.php)(/.+)$;</span><br><span class="line">	#	# NOTE: You should have &quot;cgi.fix_pathinfo = 0;&quot; in php.ini</span><br><span class="line">	#</span><br><span class="line">	#	# With php5-cgi alone:</span><br><span class="line">	#	fastcgi_pass 127.0.0.1:9000;</span><br><span class="line">	#	# With php5-fpm:</span><br><span class="line">	#	fastcgi_pass unix:/var/run/php5-fpm.sock;</span><br><span class="line">	#	fastcgi_index index.php;</span><br><span class="line">	#	include fastcgi_params;</span><br><span class="line">	#&#125;</span><br><span class="line"></span><br><span class="line">	# deny access to .htaccess files, if Apache&apos;s document root</span><br><span class="line">	# concurs with nginx&apos;s one</span><br><span class="line">	#</span><br><span class="line">	#location ~ /\.ht &#123;</span><br><span class="line">	#	deny all;</span><br><span class="line">	#&#125;</span><br><span class="line">        location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|flv|mp4|ico)$ &#123;#####静态文件</span><br><span class="line">         expires 30d;</span><br><span class="line">         root /home/jin/data;</span><br><span class="line">         access_log off;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/04/01/常用数据标准化方法/" title="常用的数据标准化方法" itemprop="url">常用的数据标准化方法</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-04-01T06:28:19.368Z" itemprop="datePublished"> 发表于 2018-04-01</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h4 id="标准化原因"><a href="#标准化原因" class="headerlink" title="标准化原因"></a>标准化原因</h4><p>数据标准化一般在数据预处理阶段。</p>
+<ul>
+<li><p>引入数据标准化是指在不同评价指标中，其量纲或量纲单位往往不一样，变化区间不在一个数量级（如经度、纬度和时间戳），若不归一化会造成某些指标被忽视，影响到分析结果。</p>
+</li>
+<li><p>加快寻找最优解(加快收敛速度)</p>
+</li>
+<li><p>归一化有可能提高精度</p>
+<p><img src="http://120.25.221.136/images/standlize/standardlize.jpg" alt="标准化前"></p>
+</li>
+</ul>
+<p><img src="http://120.25.221.136/images/standlize/afterstandard.jpg" alt="标准化前"></p>
+<h4 id="标准化方法"><a href="#标准化方法" class="headerlink" title="标准化方法"></a>标准化方法</h4><h5 id="min-max标准化"><a href="#min-max标准化" class="headerlink" title="min-max标准化"></a>min-max标准化</h5><p>$$<br>x*=x-min/max-min<br>$$</p>
+<p>说明：max为样本数据的最大值，min为最小值</p>
+<p>问题：当有新数据加入时需要重新进行归一化、</p>
+<h5 id="Z-score标准化方法"><a href="#Z-score标准化方法" class="headerlink" title="Z-score标准化方法"></a>Z-score标准化方法</h5><p>$$<br>x*=(x-μ)/σ<br>$$</p>
+<p>说明：μ为样本中的平均值，σ为样本标准差。</p>
+<h5 id="归一标准化"><a href="#归一标准化" class="headerlink" title="归一标准化"></a>归一标准化</h5><p>$$<br>y_i=\frac{x_i}{\sum_1^n{x_i}}<br>$$</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2018/03/31/L1与L2正则化的区别/" title="L1与L2正则化的区别" itemprop="url">L1与L2正则化的区别</a>
   </h1>
   <p class="article-author">By
@@ -661,174 +794,6 @@ WHEN &apos;2&apos; THEN &apos;女&apos;
 <p>解决方法：没有支持cuda的gpu，通过加上警告级别，忽视警告。</p>
 <p>在python文件加入：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line">os.environ[&apos;TF_CPP_MIN_LOG_LEVEL&apos;] = &apos;2&apos;</span><br></pre></td></tr></table></figure>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/02/02/剑指Offer编程题Python编写/" title="剑指Offer编程集合" itemprop="url">剑指Offer编程集合</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
-		
-  <p class="article-time">
-    <time datetime="2018-02-02T08:32:35.488Z" itemprop="datePublished"> 发表于 2018-02-02</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>注意：所有题目使用Python语言实现</p>
-<h4 id="一、用两个栈实现队列"><a href="#一、用两个栈实现队列" class="headerlink" title="一、用两个栈实现队列"></a>一、<a href="https://www.nowcoder.com/practice/54275ddae22f475981afa2244dd448c6?tpId=13&amp;tqId=11158&amp;tPage=1&amp;rp=1&amp;ru=/ta/coding-interviews&amp;qru=/ta/coding-interviews/question-ranking" target="_blank" rel="noopener">用两个栈实现队列</a></h4><p>题目描述：用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">class Solution:</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.stack1 = [] #定义两个空数组</span><br><span class="line">        self.stack2 = []</span><br><span class="line">    def push(self, node):</span><br><span class="line">        self.stack1.append(node)#往数组中加入数据</span><br><span class="line">    def pop(self):</span><br><span class="line">        if self.stack1 == []:#判断栈1是否为空，若为空说明为空栈</span><br><span class="line">            return None</span><br><span class="line">        else:#否则利用两个数组实现先进先出</span><br><span class="line">            for i in range(0, len(self.stack1)):</span><br><span class="line">                self.stack2.append(self.stack1.pop())</span><br><span class="line">            res = self.stack2.pop()</span><br><span class="line">            while self.stack2:</span><br><span class="line">                self.stack1.append(self.stack2.pop())</span><br><span class="line">            return res</span><br></pre></td></tr></table></figure>
-<h4 id="二、斐波那契数列"><a href="#二、斐波那契数列" class="headerlink" title="二、斐波那契数列"></a>二、<a href="https://www.nowcoder.net/practice/c6c7742f5ba7442aada113136ddea0c3?tpId=13&amp;tqId=11160&amp;tPage=1&amp;rp=1&amp;ru=/ta/coding-interviews&amp;qru=/ta/coding-interviews/question-ranking" target="_blank" rel="noopener">斐波那契数列</a></h4><p>题目描述：大家都知道斐波那契数列，现在要求输入一个整数n，请你输出斐波那契数列的第n项。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">class Solution:</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.res=0</span><br><span class="line">        self.a=0</span><br><span class="line">        self.b=1</span><br><span class="line">    def Fibonacci(self, n):</span><br><span class="line">        if n&gt;1:</span><br><span class="line">            for i in range(2,n+1):</span><br><span class="line">                self.res=self.a+self.b</span><br><span class="line">                temp=self.b</span><br><span class="line">                self.b=self.res</span><br><span class="line">                self.a=temp</span><br><span class="line">        elif n==1:</span><br><span class="line">            return 1</span><br><span class="line">        elif n==0:</span><br><span class="line">            return 0</span><br><span class="line">        return self.res</span><br></pre></td></tr></table></figure>
-<h4 id="三、数值的整数次方"><a href="#三、数值的整数次方" class="headerlink" title="三、数值的整数次方"></a>三、<a href="https://www.nowcoder.net/practice/1a834e5e3e1a4b7ba251417554e07c00?tpId=13&amp;tqId=11165&amp;tPage=1&amp;rp=1&amp;ru=/ta/coding-interviews&amp;qru=/ta/coding-interviews/question-ranking" target="_blank" rel="noopener">数值的整数次方</a></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">class Solution:</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.res=1</span><br><span class="line">    def Power(self, base, exponent):</span><br><span class="line">        if exponent&gt;=0:</span><br><span class="line">            for i in range(1,exponent+1):</span><br><span class="line">                self.res=self.res*base</span><br><span class="line">        else:</span><br><span class="line">            for i in range(1,abs(exponent)+1):</span><br><span class="line">                self.res=self.res*(1/base)</span><br><span class="line">        return self.res</span><br><span class="line">注意：指数分为正整数与负整数，考虑不同情况。</span><br></pre></td></tr></table></figure>
-<h4 id="四、统计字符"><a href="#四、统计字符" class="headerlink" title="四、统计字符"></a>四、<a href="https://www.nowcoder.com/practice/e3f67da21c3f45bfb091cf0cabb9bb0f?tpId=85&amp;&amp;tqId=29889&amp;rp=1&amp;ru=/activity/oj&amp;qru=/ta/2017test/question-ranking" target="_blank" rel="noopener">统计字符</a></h4><p>题目描述：给定一个英文字符串,请写一段代码找出这个字符串中首先出现三次的那个英文字符。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">a = input()</span><br><span class="line">dic=&#123;&#125;</span><br><span class="line">num=[str(n) for n in a.split()]</span><br><span class="line">str=&apos;&apos;.join(num)</span><br><span class="line">for i in str:</span><br><span class="line">    dic[i] = 0</span><br><span class="line">for i in str:</span><br><span class="line">    if i.isalpha():</span><br><span class="line">        dic[i] += 1</span><br><span class="line">        if dic[i] == 3:</span><br><span class="line">            print(i)</span><br><span class="line">            break</span><br></pre></td></tr></table></figure>
-<h4 id="五、求1-2-3-…-n"><a href="#五、求1-2-3-…-n" class="headerlink" title="五、求1+2+3+…+n"></a>五、<a href="https://www.nowcoder.com/practice/7a0da8fc483247ff8800059e12d7caf1?tpId=13&amp;tqId=11200&amp;tPage=3&amp;rp=3&amp;ru=/ta/coding-interviews&amp;qru=/ta/coding-interviews/question-ranking" target="_blank" rel="noopener">求1+2+3+…+n</a></h4><p>题目描述：求1+2+3+…+n，要求不能使用乘除法、for、while、if、else、switch、case等关键字及条件判断语句（A?B:C）。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">class Solution:</span><br><span class="line">    def Sum_Solution(self, n):</span><br><span class="line"></span><br><span class="line">        if n&gt;1:</span><br><span class="line">            return n + self.Sum_Solution(n - 1)</span><br><span class="line">        else:</span><br><span class="line">            return 1</span><br></pre></td></tr></table></figure>
-<h4 id="六、一个数组的值先从小到大递增后从大到小递减，找出最大的值"><a href="#六、一个数组的值先从小到大递增后从大到小递减，找出最大的值" class="headerlink" title="六、一个数组的值先从小到大递增后从大到小递减，找出最大的值"></a>六、一个数组的值先从小到大递增后从大到小递减，找出最大的值</h4><p>题目描述：一个数组的值先从小到大递增后从大到小递减，找出最大的值。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">使用迭代</span><br><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">def sortList(array):</span><br><span class="line">    length=len(array)-1 </span><br><span class="line">    end=length-1</span><br><span class="line">    start=0</span><br><span class="line">    middle=int(start+(end-start)/2)</span><br><span class="line">    while(middle&gt;0and middle&lt;length-1):</span><br><span class="line">        print(middle)</span><br><span class="line">        if array[middle]&gt;array[middle-1] and array[middle]&gt;array[middle+1]:</span><br><span class="line">            return array[middle]</span><br><span class="line">        elif array[middle]&lt;array[middle-1]:</span><br><span class="line">            end=middle-1</span><br><span class="line">            middle = int(start+(end-start)/2)</span><br><span class="line">        else:</span><br><span class="line">            start = middle +1</span><br><span class="line">            middle =int(start+(end-start)/2)</span><br><span class="line">    return -1</span><br></pre></td></tr></table></figure>
-<h4 id="七、在有序数组中找到两个数和为n的数"><a href="#七、在有序数组中找到两个数和为n的数" class="headerlink" title="七、在有序数组中找到两个数和为n的数"></a>七、在有序数组中找到两个数和为n的数</h4><p>题目描述：在给定的有序数组中寻找两个之和为n的两个元素。因为数组有序，所以原理是用两个指针，一个指向起始，一个指向末尾，然后判断当前两个元素之和与目标sum的大小关系。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">def serarh(array,n):</span><br><span class="line">	start=0</span><br><span class="line">	end=len(array)-1</span><br><span class="line">	result=[]</span><br><span class="line">	while start&lt;end:</span><br><span class="line">		if array[start]+array[end]==n:</span><br><span class="line">			result.append((array[start],array[end]))</span><br><span class="line">			start=start+1</span><br><span class="line">			end=end-1</span><br><span class="line">		elif array[start]+array[end]&gt;n:</span><br><span class="line">			end=end+1</span><br><span class="line">		elif array[start]+array[end]&lt;n:</span><br><span class="line">			start=start+1</span><br><span class="line">	print(result)</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">	a=[1,2,3,4,5,6,7,8,9,10,11,12,13,15,17,18,19,20]</span><br><span class="line">	serarh(a,50)</span><br></pre></td></tr></table></figure>
-<p># </p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/01/29/hadoop安装hive/" title="Hadoop安装hive详细过程" itemprop="url">Hadoop安装hive详细过程</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
-		
-  <p class="article-time">
-    <time datetime="2018-01-29T08:16:46.707Z" itemprop="datePublished"> 发表于 2018-01-29</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>环境：主节点和两个从节点都为腾讯云CentOS 7.0 64位<br>Hadoop版本为hadoop-2.8.0。</p>
-<p>说明：安装hive前提是要先安装hadoop集群，并且hive只需要再hadoop的namenode节点集群里安装即可(需要再所有namenode上安装)，可以不在datanode节点的机器上安装，在本文中有Hadoop的命令的前提是Hadoop是已经运行着。</p>
-<h4 id="一、下载hive"><a href="#一、下载hive" class="headerlink" title="一、下载hive"></a>一、下载hive</h4><p>1.下载<a href="http://mirrors.shu.edu.cn/apache/hive/hive-2.3.2/" target="_blank" rel="noopener">hive-2.3.2</a>放入主服务器中建立hive文件夹，并执行tar -zvxf apache-hive-2.3.2-bin.tar.gz解压。<img src="http://120.25.221.136/images/hivemirror.png" alt=""></p>
-<p><img src="http://120.25.221.136/images/hivepack.png" alt=""></p>
-<p>2.配置环境变量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line">#在profile文件中增加下列配置，每个人安装路径不一样，要灵活变化</span><br><span class="line">#set hive environment</span><br><span class="line">export HIVE_HOME=/usr/local/hadoop/hive/apache-hive-2.3.2-bin</span><br><span class="line">export PATH=$PATH:$HIVE_HOME/bin</span><br></pre></td></tr></table></figure>
-<p>3.在hive的安装路径下，/usr/local/hadoop/hive/apache-hive-2.3.2-bin/conf找到 hive-default.xml.template改名为hive-site.xml。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp   hive-default.xml.template   hive-site.xml</span><br></pre></td></tr></table></figure>
-<p>因为在 hive-site.xml的配置中有。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;name&gt;hive.metastore.warehouse.dir&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;/user/hive/warehouse&lt;/value&gt;</span><br><span class="line">   &lt;name&gt;hive.exec.scratchdir&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;/tmp/hive&lt;/value&gt;</span><br></pre></td></tr></table></figure>
-<p>所有需要Hadoop的HDFS中建立文件夹。</p>
-<p>在Hadoop的安装目录中，执行。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bin/hadoop   fs   -mkdir   -p   /user/hive/warehouse</span><br><span class="line">bin/hadoop   fs   -chmod   777   /user/hive/warehouse</span><br><span class="line">bin/hadoop   fs   -mkdir  -p   /tmp/hive/</span><br><span class="line">bin/hadoop   fs   -chmod  777   /tmp/hive</span><br><span class="line">bin/hadoop   fs   -ls   /user/hive/</span><br></pre></td></tr></table></figure>
-<p>在浏览器中可以查看到建立的文件，如图。</p>
-<p><img src="http://120.25.221.136/images/webbo.png" alt=""></p>
-<p><img src="http://120.25.221.136/images/file.png" alt=""></p>
-<p>4.修改配置文件hive-site.xml， 将hive-site.xml文件中的{system:java.io.tmpdir}替换为hive的临时目录，例如我替换为/opt/hive/tmp，将{system:user.name}都替换为root，注意，需要将配置文件中所有的都替换掉，更改后的一张截图。</p>
-<p><img src="http://120.25.221.136/images/change.png" alt=""></p>
-<p>5.增加下列配置到hive-site.xml中，其中的数据库为你想要连接的数据库的ip.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">    &lt;name&gt;javax.jdo.option.ConnectionURL&lt;/name&gt; </span><br><span class="line">    &lt;value&gt;jdbc:mysql://ip:3306/hive?createDatabaseIfNotExist=true&lt;/value&gt;</span><br><span class="line">    &lt;description&gt;JDBC connect string for a JDBC metastore&lt;/description&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;javax.jdo.option.ConnectionDriverName&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;com.mysql.jdbc.Driver&lt;/value&gt;</span><br><span class="line">    &lt;description&gt;Driver class name for a JDBC metastore&lt;/description&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;javax.jdo.option.ConnectionUserName&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;root&lt;/value&gt;</span><br><span class="line">    &lt;description&gt;username to use against metastore database&lt;/description&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;javax.jdo.option.ConnectionPassword&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;2012213405&lt;/value&gt;</span><br><span class="line">    &lt;description&gt;password to use against metastore database&lt;/description&gt;</span><br><span class="line">  &lt;/property&gt;</span><br></pre></td></tr></table></figure>
-<p>6.在hive的安装路径下，/usr/local/hadoop/hive/apache-hive-2.3.2-bin/conf找到 hive-env.sh.template改名为hive-env.sh。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp    hive-env.sh.template    hive-env.sh</span><br></pre></td></tr></table></figure>
-<p>在内容中去掉三个环境设置，增加自己的安装环境变量。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Set HADOOP_HOME to point to a specific hadoop install directory</span><br><span class="line"> HADOOP_HOME=/usr/local/hadoop/hadoop-2.8.0</span><br><span class="line"></span><br><span class="line"># Hive Configuration Directory can be controlled by:</span><br><span class="line"> export HIVE_CONF_DIR=/usr/local/hadoop/hive/apache-hive-2.3.2-bin/conf</span><br><span class="line"></span><br><span class="line"># Folder containing extra libraries required for hive compilation/execution can be controlled by:</span><br><span class="line"> export HIVE_AUX_JARS_PATH=/usr/local/hadoop/hive/apache-hive-2.3.2-bin/lib</span><br></pre></td></tr></table></figure>
-<h4 id="二、下载mysql-connector-java"><a href="#二、下载mysql-connector-java" class="headerlink" title="二、下载mysql-connector-java"></a>二、下载<a href="https://dev.mysql.com/downloads/connector/j/5.0.html" target="_blank" rel="noopener">mysql-connector-java</a></h4><p>连接MySQL，作为默认的元数据库，下载完成之后，在主服务器中建立文件夹mysql-connector，上传文件，并解压。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#tar -zxvf mysql-connector-java-5.1.45.tar.gz</span><br></pre></td></tr></table></figure>
-<p><img src="http://120.25.221.136/images/mysqlconn.png" alt=""></p>
-<p><img src="http://120.25.221.136/images/mysqlco.png" alt=""></p>
-<p>将解压后的mysql-connector-java-5.1.45-bin.jar，放入到hive的lib文件下，我的是/usr/local/hadoop/hive/apache-hive-2.3.2-bin/lib。</p>
-<p><img src="http://120.25.221.136/images/mysqlbin.png" alt=""></p>
-<p><img src="http://120.25.221.136/images/changeconn.png" alt=""></p>
-<h4 id="三、启动和测试"><a href="#三、启动和测试" class="headerlink" title="三、启动和测试"></a>三、启动和测试</h4><p>在hive的安装的bin路径下在，执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#schematool -initSchema -dbType mysql</span><br></pre></td></tr></table></figure>
-<p><img src="http://120.25.221.136/images/startest.png" alt=""></p>
-<p>在连接的MySQL中创建了hive数据库和多张表。</p>
-<p><img src="http://120.25.221.136/images/table.png" alt=""></p>
-<p>在bin路径下执行启动hive的命令。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#./hive</span><br></pre></td></tr></table></figure>
-<p><img src="http://120.25.221.136/images/starthive.png" alt=""></p>
-<p>在hive环境下，执行hql语句，与sql语句很相像。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">show databases;</span><br><span class="line">create database db_hive_edu;</span><br><span class="line">use database db_hive_edu;</span><br><span class="line">create  table  student(id int,name string)  row  format  delimited  fields   terminated  by  &apos;\t&apos;;</span><br></pre></td></tr></table></figure>
-<p>创建student.txt,里面是id和name的内容，之间用tab键隔开。</p>
-<p><img src="http://120.25.221.136/images/datatab.png" alt=""></p>
-<p><img src="http://120.25.221.136/images/hsql.png" alt=""></p>
-<p><img src="http://120.25.221.136/images/insert.png" alt=""></p>
-<p><img src="http://120.25.221.136/images/load.png" alt=""></p>
-<p>用MySQL查询可以查询到建立的student表。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT  * FROM  hive.TBLS</span><br></pre></td></tr></table></figure>
-<p><img src="http://120.25.221.136/images/tablename.png" alt=""></p>
-<p>遇到问题：启动hive的时候报错。</p>
-<p><img src="http://120.25.221.136/images/error1.png" alt=""></p>
-<p><img src="http://120.25.221.136/images/error2.png" alt=""></p>
-<p>解决方法：是因为namenode节点没有运行，需要重新启动Hadoop即可。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#sbin/start-all.sh</span><br></pre></td></tr></table></figure>
-<h4 id="Mysql作为Hive的metastore原因："><a href="#Mysql作为Hive的metastore原因：" class="headerlink" title="Mysql作为Hive的metastore原因："></a><strong>Mysql作为Hive的metastore原因：</strong></h4><p>hive 默认使用 derby 作为映射表（SQL 操作映射为MapReduce Job，将SQL中创建的表映射为 hdfs 的文件/文件夹，字段映射为其中的行），但 derby 的一大缺陷在于它不允许多个客户端同时执行sql操作还可存放于 mysql 中来访问Hive。</p>
 
         
         
