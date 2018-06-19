@@ -79,6 +79,174 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2018/06/19/交叉验证的原因/" title="交叉验证" itemprop="url">交叉验证</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-06-19T12:32:46.224Z" itemprop="datePublished"> 发表于 2018-06-19</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><ul>
+<li>训练过程中模型在训练集表现的很好，但在训练数据外的话对数据的拟合程度并不高，造成过拟合现象。素银使用交叉验证评估模型的预测能力，在一定的程度上减少过拟合，拥有更好的泛化能力。</li>
+<li>在有限的数据中尽可能的获取更多的有效信息。</li>
+</ul>
+<h3 id="交叉验证的思想"><a href="#交叉验证的思想" class="headerlink" title="交叉验证的思想"></a>交叉验证的思想</h3><p>将原始数据进行分组，一部分作为训练集一部分作为测试集，首先用训练集对模型进行训练,再利用验证集来测试模型的泛化误差。</p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><ul>
+<li><p>留出法</p>
+<p>在机器学习任务中，拿到数据后，我们首先会将原始数据集分为三部分：<strong>训练集、验证集和测试集</strong>。<br>训练集用于训练模型，验证集用于模型的参数选择配置，测试集对于模型来说是未知数据，用于评估模型的泛化能力。</p>
+</li>
+</ul>
+<ul>
+<li>k 折交叉验证（k-fold cross validation）</li>
+</ul>
+<p>​        k 折交叉验证通过对 k 个不同分组训练的结果进行平均来减少方差，因此模型的性能对数据的划分就不那么敏感。</p>
+<ul>
+<li>第一步，不重复抽样将原始数据随机分为 k 份。</li>
+<li>第二步，每一次挑选其中 1 份作为测试集，剩余 k-1 份作为训练集用于模型训练。</li>
+<li>第三步，重复第二步 k 次，这样每个子集都有一次机会作为测试集，其余机会作为训练集。</li>
+<li>在每个训练集上训练后得到一个模型，</li>
+<li>用这个模型在相应的测试集上测试，计算并保存模型的评估指标，</li>
+<li>第四步，计算 k 组测试结果的平均值作为模型精度的估计，并作为当前 k 折交叉验证下模型的性能指标。</li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/06/19/MapReduce详解Shuffle(copy,sort,merge)过程/" title="MapReduce:详解Shuffle(copy,sort,merge)过程(转)" itemprop="url">MapReduce:详解Shuffle(copy,sort,merge)过程(转)</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-06-19T11:23:28.266Z" itemprop="datePublished"> 发表于 2018-06-19</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>Shuffle过程是MapReduce的核心，也被称为奇迹发生的地方。要想理解MapReduce， Shuffle是必须要了解的。我看过很多相关的资料，但每次看完都云里雾里的绕着，很难理清大致的逻辑，反而越搅越混。前段时间在做MapReduce job 性能调优的工作，需要深入代码研究MapReduce的运行机制，这才对Shuffle探了个究竟。考虑到之前我在看相关资料而看不懂时很恼火，所以在这里我尽最大的可能试着把Shuffle说清楚，让每一位想了解它原理的朋友都能有所收获。如果你对这篇文章有任何疑问或建议请留言到后面，谢谢！ </p>
+<p>​        Shuffle的正常意思是洗牌或弄乱，可能大家更熟悉的是Java API里的Collections.shuffle(List)方法，它会随机地打乱参数list里的元素顺序。如果你不知道MapReduce里Shuffle是什么，那么请看这张图：</p>
+<p><img src="http://dl.iteye.com/upload/attachment/456531/4df193f5-e56e-308f-9689-eac035dd8a2b.png" alt="img"></p>
+<p>这张是官方对Shuffle过程的描述。但我可以肯定的是，单从这张图你基本不可能明白Shuffle的过程，因为它与事实相差挺多，细节也是错乱的。后面我会具体描述Shuffle的事实情况，所以这里你只要清楚Shuffle的大致范围就成－怎样把map task的输出结果有效地传送到reduce端。也可以这样理解， Shuffle描述着数据从map task输出到reduce task输入的这段过程。 </p>
+<p>​        在Hadoop这样的集群环境中，大部分map task与reduce task的执行是在不同的节点上。当然很多情况下Reduce执行时需要跨节点去拉取其它节点上的map task结果。如果集群正在运行的job有很多，那么task的正常执行对集群内部的网络资源消耗会很严重。这种网络消耗是正常的，我们不能限制，能做的就是最大化地减少不必要的消耗。还有在节点内，相比于内存，磁盘IO对job完成时间的影响也是可观的。从最基本的要求来说，我们对Shuffle过程的期望可以有： </p>
+<ul>
+<li>完整地从map task端拉取数据到reduce 端。</li>
+<li>在跨节点拉取数据时，尽可能地减少对带宽的不必要消耗。</li>
+<li>减少磁盘IO对task执行的影响。</li>
+</ul>
+<p>​        OK，看到这里时，大家可以先停下来想想，如果是自己来设计这段Shuffle过程，那么你的设计目标是什么。我想能优化的地方主要在于减少拉取数据的量及尽量使用内存而不是磁盘。 </p>
+<p>​        我的分析是基于Hadoop0.21.0的源码，如果与你所认识的Shuffle过程有差别，不吝指出。我会以WordCount为例，并假设它有8个map task和3个reduce task。从上图看出，Shuffle过程横跨map与reduce两端，所以下面我也会分两部分来展开。 </p>
+<p>​        先看看map端的情况，如下图：</p>
+<p><img src="http://dl.iteye.com/upload/attachment/456529/641c4f01-6c9d-322c-b428-9981866d86a6.jpg" alt="img"></p>
+<p>​        上图可能是某个map task的运行情况。拿它与官方图的左半边比较，会发现很多不一致。官方图没有清楚地说明partition， sort与combiner到底作用在哪个阶段。我画了这张图，希望让大家清晰地了解从map数据输入到map端所有数据准备好的全过程。 </p>
+<p>​        整个流程我分了四步。简单些可以这样说，每个map task都有一个内存缓冲区，存储着map的输出结果，当缓冲区快满的时候需要将缓冲区的数据以一个临时文件的方式存放到磁盘，当整个map task结束后再对磁盘中这个map task产生的所有临时文件做合并，生成最终的正式输出文件，然后等待reduce task来拉数据。 </p>
+<p>​        当然这里的每一步都可能包含着多个步骤与细节，下面我对细节来一一说明： </p>
+<ol>
+<li><p>在map task执行时，它的输入数据来源于HDFS的block，当然在MapReduce概念中，map task只读取split。Split与block的对应关系可能是多对一，默认是一对一。在WordCount例子里，假设map的输入数据都是像“aaa”这样的字符串。 </p>
+</li>
+<li><p>在经过mapper的运行后，我们得知mapper的输出是这样一个key/value对： key是“aaa”， value是数值1。因为当前map端只做加1的操作，在reduce task里才去合并结果集。前面我们知道这个job有3个reduce task，到底当前的“aaa”应该交由哪个reduce去做呢，是需要现在决定的。 </p>
+</li>
+</ol>
+<p>​        MapReduce提供Partitioner接口，它的作用就是根据key或value及reduce的数量来决定当前的这对输出数据最终应该交由哪个reduce task处理。默认对key hash后再以reduce task数量取模。默认的取模方式只是为了平均reduce的处理能力，如果用户自己对Partitioner有需求，可以订制并设置到job上。 </p>
+<p>​        在我们的例子中，“aaa”经过Partitioner后返回0，也就是这对值应当交由第一个reducer来处理。接下来，需要将数据写入内存缓冲区中，缓冲区的作用是批量收集map结果，减少磁盘IO的影响。我们的key/value对以及Partition的结果都会被写入缓冲区。当然写入之前，key与value值都会被序列化成字节数组。 </p>
+<p>​        整个内存缓冲区就是一个字节数组，它的字节索引及key/value存储结构我没有研究过。如果有朋友对它有研究，那么请大致描述下它的细节吧。 </p>
+<ol>
+<li>这个内存缓冲区是有大小限制的，默认是100MB。当map task的输出结果很多时，就可能会撑爆内存，所以需要在一定条件下将缓冲区中的数据临时写入磁盘，然后重新利用这块缓冲区。这个从内存往磁盘写数据的过程被称为Spill，中文可译为溢写，字面意思很直观。这个溢写是由单独线程来完成，不影响往缓冲区写map结果的线程。溢写线程启动时不应该阻止map的结果输出，所以整个缓冲区有个溢写的比例spill.percent。这个比例默认是0.8，也就是当缓冲区的数据已经达到阈值（buffer size <em> spill percent = 100MB </em> 0.8 = 80MB），溢写线程启动，锁定这80MB的内存，执行溢写过程。Map task的输出结果还可以往剩下的20MB内存中写，互不影响。 </li>
+</ol>
+<p>​        当溢写线程启动后，需要对这80MB空间内的key做排序(Sort)。排序是MapReduce模型默认的行为，这里的排序也是对序列化的字节做的排序。 </p>
+<p>​        在这里我们可以想想，因为map task的输出是需要发送到不同的reduce端去，而内存缓冲区没有对将发送到相同reduce端的数据做合并，那么这种合并应该是体现是磁盘文件中的。从官方图上也可以看到写到磁盘中的溢写文件是对不同的reduce端的数值做过合并。所以溢写过程一个很重要的细节在于，如果有很多个key/value对需要发送到某个reduce端去，那么需要将这些key/value值拼接到一块，减少与partition相关的索引记录。 </p>
+<p>​        在针对每个reduce端而合并数据时，有些数据可能像这样：“aaa”/1， “aaa”/1。对于WordCount例子，就是简单地统计单词出现的次数，如果在同一个map task的结果中有很多个像“aaa”一样出现多次的key，我们就应该把它们的值合并到一块，这个过程叫reduce也叫combine。但MapReduce的术语中，reduce只指reduce端执行从多个map task取数据做计算的过程。除reduce外，非正式地合并数据只能算做combine了。其实大家知道的，MapReduce中将Combiner等同于Reducer。 </p>
+<p>​        如果client设置过Combiner，那么现在就是使用Combiner的时候了。将有相同key的key/value对的value加起来，减少溢写到磁盘的数据量。Combiner会优化MapReduce的中间结果，所以它在整个模型中会多次使用。那哪些场景才能使用Combiner呢？从这里分析，Combiner的输出是Reducer的输入，Combiner绝不能改变最终的计算结果。所以从我的想法来看，Combiner只应该用于那种Reduce的输入key/value与输出key/value类型完全一致，且不影响最终结果的场景。比如累加，最大值等。Combiner的使用一定得慎重，如果用好，它对job执行效率有帮助，反之会影响reduce的最终结果。 </p>
+<ol>
+<li>每次溢写会在磁盘上生成一个溢写文件，如果map的输出结果真的很大，有多次这样的溢写发生，磁盘上相应的就会有多个溢写文件存在。当map task真正完成时，内存缓冲区中的数据也全部溢写到磁盘中形成一个溢写文件。最终磁盘中会至少有一个这样的溢写文件存在(如果map的输出结果很少，当map执行完成时，只会产生一个溢写文件)，因为最终的文件只有一个，所以需要将这些溢写文件归并到一起，这个过程就叫做Merge。Merge是怎样的？如前面的例子，“aaa”从某个map task读取过来时值是5，从另外一个map 读取时值是8，因为它们有相同的key，所以得merge成group。什么是group。对于“aaa”就是像这样的：{“aaa”, [5, 8, 2, …]}，数组中的值就是从不同溢写文件中读取出来的，然后再把这些值加起来。请注意，因为merge是将多个溢写文件合并到一个文件，所以可能也有相同的key存在，在这个过程中如果client设置过Combiner，也会使用Combiner来合并相同的key。 </li>
+</ol>
+<p>​        至此，map端的所有工作都已结束，最终生成的这个文件也存放在TaskTracker够得着的某个本地目录内。每个reduce task不断地通过RPC从JobTracker那里获取map task是否完成的信息，如果reduce task得到通知，获知某台TaskTracker上的map task执行完成，Shuffle的后半段过程开始启动。 </p>
+<p>​        简单地说，reduce task在执行之前的工作就是不断地拉取当前job里每个map task的最终结果，然后对从不同地方拉取过来的数据不断地做merge，也最终形成一个文件作为reduce task的输入文件。见下图：</p>
+<p><img src="http://dl.iteye.com/upload/attachment/456527/608c7e08-896d-3697-a57e-a8ca60cf79ea.jpg" alt="img"></p>
+<p>​        如map 端的细节图，Shuffle在reduce端的过程也能用图上标明的三点来概括。当前reduce copy数据的前提是它要从JobTracker获得有哪些map task已执行结束，这段过程不表，有兴趣的朋友可以关注下。Reducer真正运行之前，所有的时间都是在拉取数据，做merge，且不断重复地在做。如前面的方式一样，下面我也分段地描述reduce 端的Shuffle细节： </p>
+<ol>
+<li><p>Copy过程，简单地拉取数据。Reduce进程启动一些数据copy线程(Fetcher)，通过HTTP方式请求map task所在的TaskTracker获取map task的输出文件。因为map task早已结束，这些文件就归TaskTracker管理在本地磁盘中。 </p>
+</li>
+<li><p>Merge阶段。这里的merge如map端的merge动作，只是数组中存放的是不同map端copy来的数值。Copy过来的数据会先放入内存缓冲区中，这里的缓冲区大小要比map端的更为灵活，它基于JVM的heap size设置，因为Shuffle阶段Reducer不运行，所以应该把绝大部分的内存都给Shuffle用。这里需要强调的是，merge有三种形式：1)内存到内存  2)内存到磁盘  3)磁盘到磁盘。默认情况下第一种形式不启用，让人比较困惑，是吧。当内存中的数据量到达一定阈值，就启动内存到磁盘的merge。与map 端类似，这也是溢写的过程，这个过程中如果你设置有Combiner，也是会启用的，然后在磁盘中生成了众多的溢写文件。第二种merge方式一直在运行，直到没有map端的数据时才结束，然后启动第三种磁盘到磁盘的merge方式生成最终的那个文件。 </p>
+</li>
+<li><p>Reducer的输入文件。不断地merge后，最后会生成一个“最终文件”。为什么加引号？因为这个文件可能存在于磁盘上，也可能存在于内存中。对我们来说，当然希望它存放于内存中，直接作为Reducer的输入，但默认情况下，这个文件是存放于磁盘中的。至于怎样才能让这个文件出现在内存中，之后的<a href="http://langyu.iteye.com/blog/1341267" target="_blank" rel="noopener">性能优化篇</a>我再说。当Reducer的输入文件已定，整个Shuffle才最终结束。然后就是Reducer执行，把结果放到HDFS上。 </p>
+</li>
+</ol>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2018/06/19/数据倾斜的解决方法/" title="数据倾斜（转）" itemprop="url">数据倾斜（转）</a>
   </h1>
   <p class="article-author">By
@@ -704,189 +872,9 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/05/05/将中缀表达式转化为后缀表达式/" title="将中缀表达式转化为后缀表达式(转)" itemprop="url">将中缀表达式转化为后缀表达式(转)</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
-		
-  <p class="article-time">
-    <time datetime="2018-05-05T14:30:18.863Z" itemprop="datePublished"> 发表于 2018-05-05</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>我们把平时所用的标准四则运算表达式，即“9+(3-1)*3+10/2”叫做中缀表达式。因为所有的运算符号都在两数字的中间，现在我们的问题就是中缀到后缀的转化。</p>
-<p><a href="http://www.nowamagic.net/librarys/veda/tag/%E4%B8%AD%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F" target="_blank" rel="noopener">中缀表达式</a>“9+(3-1)<em>3+10/2”转化为后缀表达式“9 3 1-3</em>+ 10 2/+”</p>
-<ul>
-<li><p>​</p>
-<p>规则：从左到右遍历中缀表达式的每个数字和符号，若是数字就输出，即成为后缀表达式的一部分；若是符号，则判断其与栈顶符号的优先级，是右括号或优先级低于找顶符号（乘除优先加减）则栈顶元素依次出找并输出，并将当前符号进栈，一直到最终输出后缀表达式为止。</p>
-</li>
-</ul>
-<p>下面我们来具体看看这个过程。</p>
-<ol>
-<li>初始化一空栈，用来对符号进出栈使用。</li>
-<li>第一个字符是数字9，输出9，后面是符号“+”，进<a href="http://www.nowamagic.net/librarys/veda/tag/%E6%A0%88" target="_blank" rel="noopener">栈</a>。</li>
-</ol>
-<p><img src="http://www.nowamagic.net/librarys/images/201210/2012_10_22_08.jpg" alt="img"></p>
-<ol>
-<li>第三个字符是“(”,依然是符号，因其只是左括号，还未配对，故进栈。</li>
-<li>第四个字符是数字3，输出，总表达式为9 3,接着是“-”进栈。</li>
-</ol>
-<p><img src="http://www.nowamagic.net/librarys/images/201210/2012_10_22_09.jpg" alt="img"></p>
-<ol>
-<li>接下来是数字1，输出，总表达式为9 3 1，后面是符号“)”，此时，我们需要去匹配此前的“(”，所以栈顶依次出栈，并输出，直到“(”出栈为止。此时左括号上方只有“-”，因此输出“-”，总的输出表达式为9 3 1 -</li>
-<li>接着是数字3，输出，总的表达式为9 3 1 - 3 。紧接着是符号“<em>”，因为此时的栈顶符号为“+”号，优先级低于“</em>”，因此不输出，进栈。</li>
-</ol>
-<p><img src="http://www.nowamagic.net/librarys/images/201210/2012_10_22_10.jpg" alt="img"></p>
-<ol>
-<li>之后是符号“+”，此时当前栈顶元素比这个“+”的优先级高，因此栈中元素出栈并输出（没有比“+”号更低的优先级，所以全部出栈），总输出表达式为 9 3 1 - 3 <em> +.然后将当前这个符号“+”进栈。也就是说，前6张图的栈底的“+”是指中缀表达式中开头的9后面那个“+”，而下图中的栈底（也是栈顶）的“+”是指“9+(3-1)</em>3+”中的最后一个“+”。</li>
-<li>紧接着数字10，输出，总表达式变为9 3 1-3 * + 10。</li>
-</ol>
-<p><img src="http://www.nowamagic.net/librarys/images/201210/2012_10_22_11.jpg" alt="img"></p>
-<ol>
-<li>最后一个数字2,输出，总的表达式为 9 3 1-3*+ 10 2</li>
-<li>因已经到最后，所以将栈中符号全部出栈并输出。最终输出的后缀表达式结果为 9 3 1-3*+ 10 2/+</li>
-</ol>
-<p><img src="http://www.nowamagic.net/librarys/images/201210/2012_10_22_12.jpg" alt="img"></p>
-<ul>
-<li><p>​</p>
-<p>从刚才的推导中你会发现，要想让计算机具有处理我们通常的标准（中缀）表达式的能力，最重要的就是两步：</p>
-</li>
-</ul>
-<ol>
-<li>将中缀表达式转化为后缀表达式（栈用来进出运算的符号）。</li>
-<li>将后缀表达式进行运算得出结果（栈用来进出运算的数字）。</li>
-</ol>
-<p>整个过程，都充分利用了找的后进先出特性来处理，理解好它其实也就理解好了栈这个数据结构。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/05/05/图解后缀表达式的计算过程/" title="图解后缀表达式的计算过程(转)" itemprop="url">图解后缀表达式的计算过程(转)</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
-		
-  <p class="article-time">
-    <time datetime="2018-05-05T14:27:27.922Z" itemprop="datePublished"> 发表于 2018-05-05</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>为了解释后缀表达式的好处，我们先来看看，计算机如何应用<a href="http://www.nowamagic.net/librarys/veda/tag/%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F" target="_blank" rel="noopener">后缀表达式</a>计算出最终的结果20的。</p>
-<p>后缀表达式：9 3 1-3*+ 10 2/+</p>
-<p>规则：从左到右遍历表达式的每个数字和符号，遇到是数字就进栈，遇到是符号，就将处于栈顶两个数字出栈，进行运算，运算结果进栈，一直到最终获得结果。</p>
-<p>下面是详细的步骤：</p>
-<ol>
-<li>初始化一个空<a href="http://www.nowamagic.net/librarys/veda/tag/%E6%A0%88" target="_blank" rel="noopener">栈</a>。此桟用来对要运算的数字进出使用。</li>
-<li>后缀表达式中前三个都是数字，所以9、3、1进栈。</li>
-</ol>
-<p><img src="http://www.nowamagic.net/librarys/images/201210/2012_10_22_02.jpg" alt="img"></p>
-<ol>
-<li>接下来是减号“-”，所以将栈中的1出栈作为减数，3出栈作为被减数，并运算3-1得到2，再将2进栈。</li>
-<li>接着是数字3进栈。</li>
-</ol>
-<p><img src="http://www.nowamagic.net/librarys/images/201210/2012_10_22_03.jpg" alt="img"></p>
-<ol>
-<li>后面是乘法“*”，也就意味着栈中3和2出栈，2与3相乘，得到6，并将6进栈。</li>
-<li>下面是加法“+”，所以找中6和9出找，9与6相加，得到15，将15进栈。</li>
-</ol>
-<p><img src="http://www.nowamagic.net/librarys/images/201210/2012_10_22_04.jpg" alt="img"></p>
-<ol>
-<li>接着是10与2两数字进栈。</li>
-<li>接下来是符号因此，栈顶的2与10出栈，10与2相除，得到5，将5进栈。</li>
-</ol>
-<p><img src="http://www.nowamagic.net/librarys/images/201210/2012_10_22_05.jpg" alt="img"></p>
-<ol>
-<li>最后一个是符号“+”，所以15与5出找并相加，得到20，将20进栈。</li>
-<li>结果是20出栈，栈变为空。</li>
-</ol>
-<p><img src="http://www.nowamagic.net/librarys/images/201210/2012_10_22_06.jpg" alt="img"></p>
-<p>一、后缀表达式——-操作符位于操作数之后的表达式。（也叫逆波兰表达式）</p>
-<p>举个例子：</p>
-<p>中缀表达式 —– 9+(6+5)*2-7</p>
-<p>后缀表达式 —– 9 6 5 + 2 * + 7 -</p>
-<p>PS：文章末尾会附有中缀表达式转为后缀表达式的规则</p>
-<p>二、后缀表达式的计算</p>
-<p>简单来讲，后缀表达式的计算就是从左到右扫描表达式，遇到数字就将其压入栈，遇到操作符表示可以计算，这时取出栈顶的两个元素进行操作，然后再次将结果压入栈，最后栈里会留下一个元素，该元素就是运行结果（详解看图）</p>
-<p><img src="https://img-blog.csdn.net/20160911225209660?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="img"></p>
-<p>三、思路</p>
-<p>大体思路就是：需要一个结构体来存放标识符（标记这个数据是数字还是操作符），除此之外，就是需要一个结构体数组了，数组里边存放的是具体内容。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
   </nav>
 
 </div>
