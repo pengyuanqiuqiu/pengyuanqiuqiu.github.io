@@ -27,7 +27,7 @@
 <meta property="og:image" content="http://120.25.221.136/images/logistic/newcost2.png">
 <meta property="og:image" content="http://120.25.221.136/images/logistic/newcost4.png">
 <meta property="og:image" content="http://120.25.221.136/images/logistic/qiudao.jpg">
-<meta property="og:updated_time" content="2018-03-31T06:13:39.198Z">
+<meta property="og:updated_time" content="2018-06-20T02:10:55.468Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="解读逻辑回归">
 <meta name="twitter:description" content="1.定义logistic regression是统计学习中经典的分类算法。 线性回归的模型公式为 12 将线性回归转化为分类问题，利用sigmod激活函数转化为0到1之间的概率问题。   logistic的分类函数为：  从公式中可以发现 y=1   ——》z&amp;gt;0y=0  ——-》 z&amp;lt;0 2.代价函数在之前的线性回归模型，给出代价函数为：  而将sigmod函数袋鼠上面的公式中，代价">
@@ -157,6 +157,8 @@
 <p>值为0-1之间</p>
 </li>
 </ul>
+<p><strong>在解决非线性问题时，支持向量机采用核函数的机制，而LR通常不采用核函数的方法。</strong></p>
+<p>这个问题理解起来非常简单。分类模型的结果就是计算决策面，模型训练的过程就是决策面的计算过程。通过上面的第二点不同点可以了解，在计算决策面时，SVM算法里只有少数几个代表支持向量的样本参与了计算，也就是只有少数几个样本需要参与核计算（即kernal machine解的系数是稀疏的）。然而，LR算法里，每个样本点都必须参与决策面的计算过程，也就是说，假设我们在LR里也运用核函数的原理，那么每个样本点都必须参与核计算，这带来的计算复杂度是相当高的。所以，在具体应用时，LR很少运用核函数机制。</p>
   
 	</div>
 		<footer class="article-footer clearfix">

@@ -1,0 +1,616 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>SQL面试题集锦 | Jianyu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="PengYuan">
+    
+
+    
+    <meta name="description" content="1.有三个表，如果学生缺考，那么在成绩表中就不存在这个学生的这门课程成绩的记录，写一段SQL语句，检索出每个学生缺考的科目。A 学生表(student)字段1 学生号(sid)字段2 学生名(sname) B 科目表(course)字段1 科目号(cid)字段2 科目名(cname) C 成绩表(grade)字段1 成绩号(gid)字段2 学生号(sid)字段3 科目号(cid)字段4 成绩(sc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL面试题集锦">
+<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/06/21/sql面试题集锦/index.html">
+<meta property="og:site_name" content="Jianyu">
+<meta property="og:description" content="1.有三个表，如果学生缺考，那么在成绩表中就不存在这个学生的这门课程成绩的记录，写一段SQL语句，检索出每个学生缺考的科目。A 学生表(student)字段1 学生号(sid)字段2 学生名(sname) B 科目表(course)字段1 科目号(cid)字段2 科目名(cname) C 成绩表(grade)字段1 成绩号(gid)字段2 学生号(sid)字段3 科目号(cid)字段4 成绩(sc">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-06-21T13:06:43.391Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL面试题集锦">
+<meta name="twitter:description" content="1.有三个表，如果学生缺考，那么在成绩表中就不存在这个学生的这门课程成绩的记录，写一段SQL语句，检索出每个学生缺考的科目。A 学生表(student)字段1 学生号(sid)字段2 学生名(sname) B 科目表(course)字段1 科目号(cid)字段2 科目名(cname) C 成绩表(grade)字段1 成绩号(gid)字段2 学生号(sid)字段3 科目号(cid)字段4 成绩(sc">
+
+    
+    <link rel="alternative" href="http://www.163.com/rss/" title="Jianyu" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Jianyu" title="Jianyu"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Jianyu">Jianyu</a></h1>
+				<h2 class="blog-motto">Learn more and more</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:pengyuanqiuqiu.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/06/21/sql面试题集锦/" title="SQL面试题集锦" itemprop="url">SQL面试题集锦</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-06-21T12:32:58.331Z" itemprop="datePublished"> 发表于 2018-06-21</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-有三个表，如果学生缺考，那么在成绩表中就不存在这个学生的这门课程成绩的记录，写一段SQL语句，检索出每个学生缺考的科目。"><span class="toc-number">1.</span> <span class="toc-text">1.有三个表，如果学生缺考，那么在成绩表中就不存在这个学生的这门课程成绩的记录，写一段SQL语句，检索出每个学生缺考的科目。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-有如下表："><span class="toc-number">2.</span> <span class="toc-text">2.有如下表：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-原表："><span class="toc-number">3.</span> <span class="toc-text">3.原表：</span></a></li></ol>
+		
+		</div>
+		
+		<h4 id="1-有三个表，如果学生缺考，那么在成绩表中就不存在这个学生的这门课程成绩的记录，写一段SQL语句，检索出每个学生缺考的科目。"><a href="#1-有三个表，如果学生缺考，那么在成绩表中就不存在这个学生的这门课程成绩的记录，写一段SQL语句，检索出每个学生缺考的科目。" class="headerlink" title="1.有三个表，如果学生缺考，那么在成绩表中就不存在这个学生的这门课程成绩的记录，写一段SQL语句，检索出每个学生缺考的科目。"></a>1.有三个表，如果学生缺考，那么在成绩表中就不存在这个学生的这门课程成绩的记录，写一段SQL语句，检索出每个学生缺考的科目。</h4><p>A 学生表(student)<br>字段1 学生号(sid)<br>字段2 学生名(sname)</p>
+<p>B 科目表(course)<br>字段1 科目号(cid)<br>字段2 科目名(cname)</p>
+<p>C 成绩表(grade)<br>字段1 成绩号(gid)<br>字段2 学生号(sid)<br>字段3 科目号(cid)<br>字段4 成绩(score)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`student`</span> (</span><br><span class="line"><span class="string">`sid`</span>  <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> ,</span><br><span class="line"><span class="string">`sname`</span>  <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_general_ci <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> ,</span><br><span class="line">PRIMARY <span class="keyword">KEY</span> (<span class="string">`sid`</span>)</span><br><span class="line">)</span><br><span class="line"><span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span></span><br><span class="line"><span class="keyword">DEFAULT</span> <span class="built_in">CHARACTER</span> <span class="keyword">SET</span>=utf8 <span class="keyword">COLLATE</span>=utf8_general_ci</span><br><span class="line">ROW_FORMAT=<span class="keyword">COMPACT</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> cname ,t.sid <span class="keyword">from</span> grade <span class="keyword">RIGHT</span> <span class="keyword">JOIN</span>  (<span class="keyword">SELECT</span> * <span class="keyword">from</span>  student ,course)<span class="keyword">as</span> t <span class="keyword">on</span> grade.cid=t.cid <span class="keyword">and</span> grade.sid=t.sid <span class="keyword">where</span> grade.score <span class="keyword">is</span> <span class="literal">null</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-有如下表："><a href="#2-有如下表：" class="headerlink" title="2.有如下表："></a>2.有如下表：</h4><table>
+<thead>
+<tr>
+<th>日期(time)</th>
+<th>结果(result)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2005-05-09</td>
+<td>胜</td>
+</tr>
+<tr>
+<td>2005-05-09</td>
+<td>胜</td>
+</tr>
+<tr>
+<td>2005-05-09</td>
+<td>负</td>
+</tr>
+<tr>
+<td>2005-05-09</td>
+<td>负</td>
+</tr>
+<tr>
+<td>2005-05-10</td>
+<td>胜</td>
+</tr>
+<tr>
+<td>2005-05-10</td>
+<td>负</td>
+</tr>
+<tr>
+<td>2005-05-10</td>
+<td>负</td>
+</tr>
+</tbody>
+</table>
+<p>如果要生成下列结果，该如何写sql语句？</p>
+<table>
+<thead>
+<tr>
+<th>日期</th>
+<th>胜</th>
+<th>负</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2005-05-09</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>2005-05-10</td>
+<td>1</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`game`</span> (</span><br><span class="line"><span class="string">`time`</span>  <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_general_ci <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> ,</span><br><span class="line"><span class="string">`result`</span>  <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_general_ci <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> </span><br><span class="line">)</span><br><span class="line"><span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span></span><br><span class="line"><span class="keyword">DEFAULT</span> <span class="built_in">CHARACTER</span> <span class="keyword">SET</span>=utf8 <span class="keyword">COLLATE</span>=utf8_general_ci</span><br><span class="line">ROW_FORMAT=<span class="keyword">COMPACT</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">time</span> ,<span class="keyword">sum</span>(<span class="keyword">case</span> <span class="keyword">result</span> <span class="keyword">when</span> <span class="string">'胜'</span> <span class="keyword">then</span> <span class="number">1</span> <span class="keyword">ELSE</span> <span class="number">0</span> <span class="keyword">end</span> ) <span class="keyword">as</span> 胜,<span class="keyword">sum</span>(<span class="keyword">case</span> <span class="keyword">result</span> <span class="keyword">when</span> <span class="string">'负'</span> <span class="keyword">then</span> <span class="number">1</span> <span class="keyword">ELSE</span> <span class="number">0</span> <span class="keyword">end</span> ) <span class="keyword">as</span> 负 <span class="keyword">from</span> game <span class="keyword">GROUP</span> <span class="keyword">BY</span> game.time</span><br></pre></td></tr></table></figure>
+<h4 id="3-原表："><a href="#3-原表：" class="headerlink" title="3.原表："></a>3.原表：</h4><table>
+<thead>
+<tr>
+<th style="text-align:center">gid</th>
+<th style="text-align:center">sid</th>
+<th style="text-align:center">cid</th>
+<th style="text-align:center">score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">60</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">90</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">99</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">57</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">78</td>
+</tr>
+</tbody>
+</table>
+<p>为了方便阅读，查询此表后的显示结果如下（及格分数为60分）：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">gid</th>
+<th style="text-align:center">sid</th>
+<th style="text-align:center">cid</th>
+<th style="text-align:center">score</th>
+<th style="text-align:center">mark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">60</td>
+<td style="text-align:center">pass</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">90</td>
+<td style="text-align:center">pass</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">99</td>
+<td style="text-align:center">pass</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">57</td>
+<td style="text-align:center">failed</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">58</td>
+<td style="text-align:center">failed</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`garde`</span> (</span><br><span class="line"><span class="string">`gid`</span>  <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> ,</span><br><span class="line"><span class="string">`sid`</span>  <span class="built_in">int</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> ,</span><br><span class="line"><span class="string">`cid`</span>  <span class="built_in">int</span>(<span class="number">11</span>) <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> ,</span><br><span class="line"><span class="string">`score`</span>  <span class="built_in">int</span>(<span class="number">11</span>) <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> ,</span><br><span class="line">PRIMARY <span class="keyword">KEY</span> (<span class="string">`gid`</span>))</span><br><span class="line"><span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span></span><br><span class="line"><span class="keyword">DEFAULT</span> <span class="built_in">CHARACTER</span> <span class="keyword">SET</span>=utf8 <span class="keyword">COLLATE</span>=utf8_general_ci</span><br><span class="line">ROW_FORMAT=<span class="keyword">COMPACT</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> *,</span><br><span class="line"> <span class="keyword">case</span>  <span class="keyword">when</span> score &gt;<span class="string">'60'</span> <span class="keyword">then</span> <span class="string">'pass'</span> <span class="keyword">ELSE</span> <span class="string">"failed"</span></span><br><span class="line"><span class="keyword">end</span> <span class="keyword">as</span> <span class="string">"mark"</span></span><br><span class="line"><span class="keyword">from</span> grade</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">sid</span>,gid <span class="keyword">from</span>  grade  <span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="keyword">sid</span>  <span class="keyword">HAVING</span>  <span class="keyword">count</span>(<span class="keyword">sid</span>)=(<span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*) <span class="keyword">from</span> course)</span><br></pre></td></tr></table></figure>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://pengyuanqiuqiu.github.io/2018/06/21/sql面试题集锦/" data-title="SQL面试题集锦 | Jianyu" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/06/19/交叉验证的原因/"  title="交叉验证">
+ <strong>下一篇：</strong><br/> 
+ <span>交叉验证
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-有三个表，如果学生缺考，那么在成绩表中就不存在这个学生的这门课程成绩的记录，写一段SQL语句，检索出每个学生缺考的科目。"><span class="toc-number">1.</span> <span class="toc-text">1.有三个表，如果学生缺考，那么在成绩表中就不存在这个学生的这门课程成绩的记录，写一段SQL语句，检索出每个学生缺考的科目。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-有如下表："><span class="toc-number">2.</span> <span class="toc-text">2.有如下表：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-原表："><span class="toc-number">3.</span> <span class="toc-text">3.原表：</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github 名片</p>
+<div class="github-card" data-github="https://github.com/pengyuanqiuqiu" data-theme="medium"></div>
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
+</div>
+
+
+
+  
+
+  
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.nowcoder.com/" target="_blank" title="牛客网">牛客网</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.acmcoder.com/index" target="_blank" title="赛码网">赛码网</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="http://www.163.com/rss/" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="400" class="share_self"  frameborder="0" scrolling="no" src="https://widget.weibo.com/weiboshow/index.php?language=&width=0&height=400&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=2871001534&verifier=2889e96f&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m jianyu. <br/>
+			Let&#39;s go!</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2871001534" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/pengyuanqiuqiu" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		<a href="http://www.zhihu.com/people/peng-yuan-19-57?utm_source=qq&amp;utm_medium=social" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:987219258@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by © 2018 
+		
+		<a href="https://pengyuanqiuqiu.github.io/" target="_blank" title="PengYuan">PengYuan</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
