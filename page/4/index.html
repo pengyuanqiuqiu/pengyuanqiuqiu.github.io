@@ -79,6 +79,182 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2018/03/22/机器学习的降维为特征选择的区别/" title="特征选择和降维的区别" itemprop="url">特征选择和降维的区别</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-03-22T02:52:21.516Z" itemprop="datePublished"> 发表于 2018-03-22</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="特征选择"><a href="#特征选择" class="headerlink" title="特征选择"></a>特征选择</h1><p>原因：</p>
+<p>在现实应用中，数据特征属性很多，存在一部分属性与结果并不相关；而且特征的维度太高导致训练模型时间较长，模型更加复杂，泛化能力较低。</p>
+<p>方法：</p>
+<h2 id="1、过滤式选择-（Filter）"><a href="#1、过滤式选择-（Filter）" class="headerlink" title="1、过滤式选择 （Filter）"></a>1、过滤式选择 （Filter）</h2><p> 其主要思想是：对每一维的特征“打分”，即给每一维的特征赋予权重，这样的权重就代表着该维特征的重要性，然后依据权重排序。</p>
+<p>​    主要的方法有：</p>
+<ul>
+<li>卡方检验</li>
+<li>互信息法</li>
+<li>方差选择法</li>
+</ul>
+<h2 id="2、包裹式方法"><a href="#2、包裹式方法" class="headerlink" title="2、包裹式方法"></a>2、包裹式方法</h2><ul>
+<li><p>​     递归特征消除法</p>
+<p>递归消除特征法使用一个基模型来进行多轮训练，每轮训练后，消除若干权值系数的特征，再基于新的特征集进行下一轮训练。</p>
+</li>
+</ul>
+<h2 id="3、Embedded方法"><a href="#3、Embedded方法" class="headerlink" title="3、Embedded方法"></a>3、Embedded方法</h2><ul>
+<li>基于惩罚项的特征选择法</li>
+<li>基于树模型的特征选择法</li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/03/21/机器学习笔记/" title="机器学习笔记" itemprop="url">机器学习笔记</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-03-21T07:34:13.465Z" itemprop="datePublished"> 发表于 2018-03-21</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h3 id="机器学习的数据不平衡解决方法"><a href="#机器学习的数据不平衡解决方法" class="headerlink" title="机器学习的数据不平衡解决方法"></a>机器学习的数据不平衡解决方法</h3><p>理解：简单理解就是训练样本的得到的输出和期望输出基本一致，但是样本输出和测试样本的期望输出相差却很大 ，为了得到一致假设而使假设变得过度复杂称为过拟合。</p>
+<h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>数据不平衡指的是分类任务中不同类别的训练数据样本数目差别很大，失去一般性。如，一个样本中正例998个，负例2个，就会导致无论什么模型结果的准确率都会很高，现实生活中，样本应该平均分布。</p>
+<h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><h5 id="采样"><a href="#采样" class="headerlink" title="采样"></a>采样</h5><p>上采样：上采样是把小众类复制多份</p>
+<p>缺点：造成过拟合现象发生</p>
+<p>下采样：下采样是从大众类中剔除一些样本，或者说只从大众类中选取部分样本</p>
+<p>缺点：模拟数据量小，学习到总体模型的一部分。</p>
+<h5 id="加权"><a href="#加权" class="headerlink" title="加权"></a>加权</h5><p>通过加权的方式来解决数据不平衡问题，即对不同类别分错的代价不同，如下图：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>1</th>
+<th>2</th>
+<th>…</th>
+<th>k</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>C(1,2)</td>
+<td>…</td>
+<td>C(1,k)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>C(2,1)</td>
+<td>0</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr>
+<td>k</td>
+<td>C(k,1)</td>
+<td>C(k,2)</td>
+<td>…</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>横向是真实分类情况，纵向是预测分类情况，C(i,j)是把真实类别为j的样本预测为i时的损失，我们需要根据实际情况来设定它的值。</p>
+<h5 id="转化为一分类问题"><a href="#转化为一分类问题" class="headerlink" title="转化为一分类问题"></a>转化为一分类问题</h5><p>对于二分类问题，如果正负样本分布比例极不平衡，我们可以换一个完全不同的角度来看待问题：把它看做一分类（One Class Learning）或异常检测（Novelty Detection）问题。这类方法的重点不在于捕捉类间的差别，而是为其中一类进行建模。</p>
+<h3 id="多分类学习"><a href="#多分类学习" class="headerlink" title="多分类学习"></a>多分类学习</h3><p>理解：在现实生活中经常遇到多分类问题，而学习的分类模型大多为二分类模型，如LR，SVM。接下来基于策略，利用二分类解决多分类问题。</p>
+<p>策略：”拆解法”，将多分类问题拆分为多个二分类任务求解。</p>
+<p>经典的拆分策略分为：</p>
+<h5 id="一对一（one-vs-one）"><a href="#一对一（one-vs-one）" class="headerlink" title="一对一（one vs one）"></a>一对一（one vs one）</h5><p>将N个类别两两配对，产生，即N（N-1）/2个分类结果，最终结果通过投票产生，投票是把被预测的最多的类别作为最终分类结果。</p>
+<h5 id="一对其余（one-vs-rest）"><a href="#一对其余（one-vs-rest）" class="headerlink" title="一对其余（one vs rest）"></a>一对其余（one vs rest）</h5><p>每次将一个类的样例作为正样本，其他的作为负样本，训练N个分类器。选择预测置信度最大的标记类别作为分类结果。以上两种策略如图所示.</p>
+<p><img src="http://120.25.221.136/images/duofenlei.png" alt=""></p>
+<h5 id="多对多（Many-vs-Many）"><a href="#多对多（Many-vs-Many）" class="headerlink" title="多对多（Many vs Many）"></a>多对多（Many vs Many）</h5><p>每次将若干个类作为正样本，若干个类作为负样本，，MvM的正负样本设计必须有特殊的设计，最常用的是ECOC（Error Correcting Output Codes）分为编码阶段与解码阶段。</p>
+<p>编码阶段：对N个类别进行M次划分，每次将一部分类划分为正类，一部分类划分为反类，编码矩阵有两种形式：二元码和三元码，前者只有正类和反类，后者除了正类和和反类还有停用类，在解码阶段，各分类器的预测结果联合起来形成测试示例的编码，该编码与各类所对应的编码进行比较，将距离最小的编码所对应的类别作为预测结果。</p>
+<p><img src="http://120.25.221.136/images/ecos.png" alt=""></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2018/03/19/sql/" title="sql" itemprop="url">sql</a>
   </h1>
   <p class="article-author">By
@@ -649,120 +825,6 @@ WHEN &apos;2&apos; THEN &apos;女&apos;
 <p><img src="http://120.25.221.136/images/cname.png" alt=""></p>
 <p><img src="http://120.25.221.136/images/content.png" alt=""></p>
 <h4 id="最后访问域名，就可以访问成功。"><a href="#最后访问域名，就可以访问成功。" class="headerlink" title="最后访问域名，就可以访问成功。"></a>最后访问域名，就可以访问成功。</h4>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/01/26/python画图汇总/" title="python画图汇总" itemprop="url">python画图汇总</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
-		
-  <p class="article-time">
-    <time datetime="2018-01-26T08:28:26.817Z" itemprop="datePublished"> 发表于 2018-01-26</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h4 id="一、折线图"><a href="#一、折线图" class="headerlink" title="一、折线图"></a>一、折线图</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">import matplotlib.pyplot as plt #绘图模块</span><br><span class="line">import numpy as np#若导入失败需要pip install安装这两个模块</span><br><span class="line">plt.rcParams[&apos;font.sans-serif&apos;]=[&apos;SimHei&apos;] #用来正常显示中文标签</span><br><span class="line">plt.rcParams[&apos;axes.unicode_minus&apos;]=False </span><br><span class="line">x=np.linspace(-10,10,50)#从1到2区间</span><br><span class="line">y1=2*x</span><br><span class="line">y2=x**2</span><br><span class="line">plt.plot(x, y1, &quot;b-&quot;, linewidth=1,label=&apos;折线&apos;)#linewidth线的宽度，marker为点以什么形式展示，label为线标签</span><br><span class="line">plt.plot(x, y2, &quot;r-&quot;, linewidth=1,label=&apos;曲线&apos;)</span><br><span class="line">plt.savefig(&quot;1.jpg&quot;)#保存照片</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()#展示照片</span><br></pre></td></tr></table></figure>
-<p><img src="http://120.25.221.136/images/line.jpg" alt=""></p>
-<h4 id="二、显示多个画图窗口"><a href="#二、显示多个画图窗口" class="headerlink" title="二、显示多个画图窗口"></a>二、显示多个画图窗口</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import numpy as np</span><br><span class="line">x=np.linspace(-10,10,50)</span><br><span class="line">y1=2*x</span><br><span class="line">y2=x**2</span><br><span class="line">plt.figure()#第一个窗口</span><br><span class="line">plt.plot(x, y1, &quot;b-&quot;)</span><br><span class="line">plt.figure(number=2)</span><br><span class="line">plt.plot(x, y2, &quot;r-&quot;)#第二个窗口</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()#展示照片，出现两个窗口</span><br></pre></td></tr></table></figure>
-<p><img src="http://120.25.221.136/images/multine.png" alt=""></p>
-<h4 id="三、设置坐标轴"><a href="#三、设置坐标轴" class="headerlink" title="三、设置坐标轴"></a>三、设置坐标轴</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import numpy as np</span><br><span class="line">x=np.linspace(1,10,50)</span><br><span class="line">y=2*x</span><br><span class="line">plt.plot(x, y)</span><br><span class="line">plt.ylabel(&apos;y label&apos;)#x标签</span><br><span class="line">plt.xlabel(&apos;x label&apos;)#y标签</span><br><span class="line">plt.yticks([1,10,20],[&apos;low&apos;,&apos;middle&apos;,&apos;high&apos;])</span><br><span class="line">plt.xticks([1,5,10],[&apos;$ bad$&apos;,&apos;$good$&apos;,&apos;$really \ good$&apos;])#将x轴的数字替代</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="http://120.25.221.136/images/label.jpg" alt=""></p>
-<h4 id="三、增加图例"><a href="#三、增加图例" class="headerlink" title="三、增加图例"></a>三、增加图例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">import matplotlib.pyplot as plt #绘图模块</span><br><span class="line">import numpy as np#若导入失败需要pip install安装这两个模块</span><br><span class="line">plt.rcParams[&apos;font.sans-serif&apos;]=[&apos;SimHei&apos;] #用来正常显示中文标签</span><br><span class="line">plt.rcParams[&apos;axes.unicode_minus&apos;]=False</span><br><span class="line">x=np.linspace(-10,10,50)#从1到2区间</span><br><span class="line">y1=2*x</span><br><span class="line">y2=x**2</span><br><span class="line">l1=plt.plot(x, y1, &quot;b-&quot;, linewidth=1,label=&apos;l1&apos;)#linewidth线的宽度，marker为点以什么形式展示，label为线标签</span><br><span class="line">l2=plt.plot(x, y2, &quot;r-&quot;, linewidth=1,label=&apos;l2&apos;)</span><br><span class="line"># plt.savefig(&quot;2.jpg&quot;)#保存照片</span><br><span class="line"></span><br><span class="line">plt.legend(loc=&apos;upper right&apos;)#图标的位置</span><br><span class="line">plt.show()#展示照片</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">其中’loc’参数有多种，’best’表示自动分配最佳位置，其余的如下：</span><br><span class="line">&apos;best&apos; : 0,          </span><br><span class="line"> &apos;upper right&apos;  : 1,</span><br><span class="line"> &apos;upper left&apos;   : 2,</span><br><span class="line"> &apos;lower left&apos;   : 3,</span><br><span class="line"> &apos;lower right&apos;  : 4,</span><br><span class="line"> &apos;right&apos;        : 5,</span><br><span class="line"> &apos;center left&apos;  : 6,</span><br><span class="line"> &apos;center right&apos; : 7,</span><br><span class="line"> &apos;lower center&apos; : 8,</span><br><span class="line"> &apos;upper center&apos; : 9,</span><br><span class="line"> &apos;center&apos;       : 10,</span><br></pre></td></tr></table></figure>
-<p>loc=’upper right’,如图。</p>
-<p><img src="http://120.25.221.136/images/picture.jpg" alt=""></p>
-<p>loc=’center’,如图。</p>
-<p><img src="http://120.25.221.136/images/center.jpg" alt=""></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/01/23/nginx配置简单图片显示/" title="nginx配置简单图片显示" itemprop="url">nginx配置简单图片显示</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
-		
-  <p class="article-time">
-    <time datetime="2018-01-23T09:30:44.671Z" itemprop="datePublished"> 发表于 2018-01-23</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h5 id="配置conf文件"><a href="#配置conf文件" class="headerlink" title="配置conf文件"></a>配置conf文件</h5><p>在/usr/local/nginx/conf目录下修改nginx.conf文件。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"> server &#123;</span><br><span class="line"> listen 80;</span><br><span class="line"> server_name _;</span><br><span class="line"> access_log /data/wwwlogs/access_nginx.log combined;</span><br><span class="line"> root /data/wwwroot/default;</span><br><span class="line"> index index.html index.htm index.php;</span><br><span class="line"> location /nginx_status &#123;</span><br><span class="line">   stub_status on;</span><br><span class="line">   access_log off;</span><br><span class="line">   allow 127.0.0.1;</span><br><span class="line">   deny all;</span><br><span class="line">   &#125;</span><br><span class="line"> location ~ [^/]\.php(/|$) &#123;</span><br><span class="line">   #fastcgi_pass remote_php_ip:9000;</span><br><span class="line">   fastcgi_pass unix:/dev/shm/php-cgi.sock;</span><br><span class="line">   fastcgi_index index.php;</span><br><span class="line">   include fastcgi.conf;</span><br><span class="line">   &#125;</span><br><span class="line"> location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|flv|mp4|ico)$ &#123;</span><br><span class="line">   expires 30d;//浏览器缓存时间长度</span><br><span class="line">root /data/wwwroot/default;//放置路径</span><br><span class="line">   access_log off;//日志无</span><br><span class="line">proxy_temp_path /data/wwwroot/default;//图片访问路径</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p>配置成功可，重载nginx，nginx -s reload  ，最后成功访问图片。</p>
-<p><img src="http://120.25.221.136/images/jietu.png" alt=""></p>
-
         
         
         <p class="article-more-link">

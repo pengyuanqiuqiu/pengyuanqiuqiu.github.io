@@ -4,24 +4,24 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>处理数据中的缺失值 | Jianyu</title>
+    <title>hive 复合结构Map、Struct(转) | Jianyu</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="PengYuan">
     
 
     
-    <meta name="description" content="缺失值产生的原因缺失值的产生的原因多种多样，主要分为机械原因和人为原因。  机械原因是由于机械原因导致的数据收集或保存的失败造成的数据缺失，比如数据存储的失败，存储器损坏，机械故障导致某段时间数据未能收集（对于定时数据采集而言）。 人为原因是由于人的主观失误、历史局限或有意隐瞒造成的数据缺失，比如，在市场调查中被访人拒绝透露相关问题的答案，或者回答的问题是无效的，数据录入人员失误漏录了数据。">
+    <meta name="description" content="Map详解 hive里支持map的结构如下： (key1, value1, key2, value2, …) Creates a map with the given key/value pairs 建表语句： create table test_map(name string, score map) ROW FORMAT DELIMITED FIELDS TERMINATED BY ‘\t’ C">
 <meta property="og:type" content="article">
-<meta property="og:title" content="处理数据中的缺失值">
-<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/07/03/处理数据中的缺失值/index.html">
+<meta property="og:title" content="hive 复合结构Map、Struct(转)">
+<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/07/04/hive 复合结构Map、Struct/index.html">
 <meta property="og:site_name" content="Jianyu">
-<meta property="og:description" content="缺失值产生的原因缺失值的产生的原因多种多样，主要分为机械原因和人为原因。  机械原因是由于机械原因导致的数据收集或保存的失败造成的数据缺失，比如数据存储的失败，存储器损坏，机械故障导致某段时间数据未能收集（对于定时数据采集而言）。 人为原因是由于人的主观失误、历史局限或有意隐瞒造成的数据缺失，比如，在市场调查中被访人拒绝透露相关问题的答案，或者回答的问题是无效的，数据录入人员失误漏录了数据。">
+<meta property="og:description" content="Map详解 hive里支持map的结构如下： (key1, value1, key2, value2, …) Creates a map with the given key/value pairs 建表语句： create table test_map(name string, score map) ROW FORMAT DELIMITED FIELDS TERMINATED BY ‘\t’ C">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-03T02:36:08.998Z">
+<meta property="og:updated_time" content="2018-07-04T07:38:47.265Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="处理数据中的缺失值">
-<meta name="twitter:description" content="缺失值产生的原因缺失值的产生的原因多种多样，主要分为机械原因和人为原因。  机械原因是由于机械原因导致的数据收集或保存的失败造成的数据缺失，比如数据存储的失败，存储器损坏，机械故障导致某段时间数据未能收集（对于定时数据采集而言）。 人为原因是由于人的主观失误、历史局限或有意隐瞒造成的数据缺失，比如，在市场调查中被访人拒绝透露相关问题的答案，或者回答的问题是无效的，数据录入人员失误漏录了数据。">
+<meta name="twitter:title" content="hive 复合结构Map、Struct(转)">
+<meta name="twitter:description" content="Map详解 hive里支持map的结构如下： (key1, value1, key2, value2, …) Creates a map with the given key/value pairs 建表语句： create table test_map(name string, score map) ROW FORMAT DELIMITED FIELDS TERMINATED BY ‘\t’ C">
 
     
     <link rel="alternative" href="http://www.163.com/rss/" title="Jianyu" type="application/atom+xml">
@@ -81,14 +81,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/07/03/处理数据中的缺失值/" title="处理数据中的缺失值" itemprop="url">处理数据中的缺失值</a>
+      <a href="/2018/07/04/hive 复合结构Map、Struct/" title="hive 复合结构Map、Struct(转)" itemprop="url">hive 复合结构Map、Struct(转)</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
 		
   <p class="article-time">
-    <time datetime="2018-07-03T02:12:53.412Z" itemprop="datePublished"> 发表于 2018-07-03</time>
+    <time datetime="2018-07-04T07:37:08.038Z" itemprop="datePublished"> 发表于 2018-07-04</time>
     
   </p>
 </header>
@@ -97,16 +97,69 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#缺失值产生的原因"><span class="toc-number">1.</span> <span class="toc-text">缺失值产生的原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#处理缺失值的方法"><span class="toc-number">2.</span> <span class="toc-text">处理缺失值的方法</span></a></li></ol>
+			
 		
 		</div>
 		
-		<h3 id="缺失值产生的原因"><a href="#缺失值产生的原因" class="headerlink" title="缺失值产生的原因"></a>缺失值产生的原因</h3><p>缺失值的产生的原因多种多样，主要分为机械原因和人为原因。</p>
-<ul>
-<li>机械原因是由于机械原因导致的数据收集或保存的失败造成的数据缺失，比如数据存储的失败，存储器损坏，机械故障导致某段时间数据未能收集（对于定时数据采集而言）。</li>
-<li>人为原因是由于人的主观失误、历史局限或有意隐瞒造成的数据缺失，比如，在市场调查中被访人拒绝透露相关问题的答案，或者回答的问题是无效的，数据录入人员失误漏录了数据。 </li>
-</ul>
-<h3 id="处理缺失值的方法"><a href="#处理缺失值的方法" class="headerlink" title="处理缺失值的方法"></a>处理缺失值的方法</h3><p><strong>使用可用特征的均值来填补缺失值；</strong><br><strong> 使用特殊值来填补缺失值，如-1；</strong><br><strong> 忽略有缺失值的样本；</strong><br><strong> 使用相似样本的均值添补缺失值；</strong><br><strong> 使用另外的机器学习算法预测缺失值。</strong></p>
+		<p>Map详解</p>
+<p>hive里支持map的结构如下：</p>
+<p>(key1, value1, key2, value2, …) Creates a map with the given key/value pairs</p>
+<p>建表语句：</p>
+<p>create table test_map(name string, score map<string,int>)</string,int></p>
+<p>ROW FORMAT DELIMITED</p>
+<p>FIELDS TERMINATED BY ‘\t’</p>
+<p>COLLECTION ITEMS TERMINATED BY ‘,’</p>
+<p>MAP KEYS TERMINATED BY ‘:’</p>
+<p>测试数据</p>
+<p>cat test</p>
+<p>leilei 数学:99,语文:90,英语:96</p>
+<p>lucy 数学:100,语文:85,英语:91</p>
+<p>将数据导入表中：</p>
+<p>LOAD DATA LOCAL INPATH ‘/home/webopa/lei.wang/datas_test/test_map’ OVERWRITE INTO TABLE test_map;</p>
+<p>在表中查询：</p>
+<p>hive&gt; select * from test_map;</p>
+<p>OK</p>
+<p>leilei {“数学”:99,”语文”:90,”英语”:96}</p>
+<p>lucy {“数学”:100,”语文”:85,”英语”:91}</p>
+<p>Time taken: 0.052 seconds, Fetched: 2 row(s)</p>
+<p>hive&gt; select ts.name,ts.score[‘数学’] from test_map ts;</p>
+<p>Total jobs = 1</p>
+<p>Launching Job 1 out of 1</p>
+<p>…</p>
+<p>Total MapReduce CPU Time Spent: 3 seconds 280 msec</p>
+<p>OK</p>
+<p>leilei 99</p>
+<p>lucy 100</p>
+<p>Time taken: 26.072 seconds, Fetched: 2 row(s)</p>
+<p>Struct</p>
+<p>hive里支持的Struct结构：</p>
+<p>(val1, val2, val3, …) Creates a struct with the given field values. Struct field names will be col1, col2, …</p>
+<p>建表语句</p>
+<p>CREATE TABLE test_struct(name string,lable struct<price:string,pay:string,num:int>)</price:string,pay:string,num:int></p>
+<p>ROW FORMAT DELIMITED</p>
+<p>FIELDS TERMINATED BY ‘\t’</p>
+<p>COLLECTION ITEMS TERMINATED BY ‘,’</p>
+<p>测试数据</p>
+<p>cat test_struct</p>
+<p>aaa cheap,imm,1</p>
+<p>bbb high,imm,2</p>
+<p>将数据导入表中</p>
+<p>LOAD DATA LOCAL INPATH ‘/home/webopa/lei.wang/datas_test/test_struct’ OVERWRITE INTO TABLE test_struct</p>
+<p>在表中查询</p>
+<p>hive&gt; select * from test_struct;</p>
+<p>OK</p>
+<p>aaa {“price”:”cheap”,”pay”:”imm”,”num”:1}</p>
+<p>bbb {“price”:”high”,”pay”:”imm”,”num”:2}</p>
+<p>Time taken: 0.046 seconds, Fetched: 2 row(s)</p>
+<p>hive&gt; select name,lable.price from test_struct;</p>
+<p>Total jobs = 1</p>
+<p>Launching Job 1 out of 1</p>
+<p>…</p>
+<p>Total MapReduce CPU Time Spent: 1 seconds 270 msec</p>
+<p>OK</p>
+<p>aaa cheap</p>
+<p>bbb high</p>
+<p>Time taken: 20.054 seconds, Fetched: 2 row(s)</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -119,7 +172,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://pengyuanqiuqiu.github.io/2018/07/03/处理数据中的缺失值/" data-title="处理数据中的缺失值 | Jianyu" data-tsina="" class="share clearfix">
+	  <div data-url="https://pengyuanqiuqiu.github.io/2018/07/04/hive 复合结构Map、Struct/" data-title="hive 复合结构Map、Struct(转) | Jianyu" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -133,18 +186,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2018/07/04/hive 复合结构Map、Struct/" title="hive 复合结构Map、Struct(转)">
+ <a href="/2018/07/04/hello-world - 副本/" title="Hello World">
   <strong>上一篇：</strong><br/>
   <span>
-  hive 复合结构Map、Struct(转)</span>
+  Hello World</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2018/06/21/sql面试题集锦/"  title="SQL面试题集锦">
+<a href="/2018/07/03/处理数据中的缺失值/"  title="处理数据中的缺失值">
  <strong>下一篇：</strong><br/> 
- <span>SQL面试题集锦
+ <span>处理数据中的缺失值
 </span>
 </a>
 </div>
@@ -161,7 +214,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#缺失值产生的原因"><span class="toc-number">1.</span> <span class="toc-text">缺失值产生的原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#处理缺失值的方法"><span class="toc-number">2.</span> <span class="toc-text">处理缺失值的方法</span></a></li></ol>
+ 
  
   </div>
 
