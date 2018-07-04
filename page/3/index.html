@@ -79,61 +79,6 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/05/03/二叉树的深度/" title="二叉树的深度以及判断是否为平衡二叉树" itemprop="url">二叉树的深度以及判断是否为平衡二叉树</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
-		
-  <p class="article-time">
-    <time datetime="2018-05-03T08:45:08.983Z" itemprop="datePublished"> 发表于 2018-05-03</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>引言：昨天下午58面试什么都不用说，直接两个算法题。一脸懵逼，过程太艰难，题目不会做，自己太渣。感谢面试官让我终于清醒，认识到没有好好努力，认识到自己到底有多差。好好补算法，时间太短，尽力！！！</p>
-<h4 id="二叉树的深度"><a href="#二叉树的深度" class="headerlink" title="二叉树的深度"></a>二叉树的深度</h4><p>题目描述：输入一棵二叉树，求该树的深度。从根结点到叶结点依次经过的结点（含根、叶结点）形成树的一条路径，最长路径的长度为树的深度。</p>
-<p>使用递归，选最长路径</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, x):</span></span><br><span class="line"><span class="comment">#         self.val = x</span></span><br><span class="line"><span class="comment">#         self.left = None</span></span><br><span class="line"><span class="comment">#         self.right = None</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">TreeDepth</span><span class="params">(self, pRoot)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> pRoot <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        left=self.TreeDepth(pRoot.left)</span><br><span class="line">        right=self.TreeDepth(pRoot.right)</span><br><span class="line">        <span class="keyword">return</span> max(left,right)+<span class="number">1</span></span><br></pre></td></tr></table></figure>
-<h4 id="是否为平衡二叉树"><a href="#是否为平衡二叉树" class="headerlink" title="是否为平衡二叉树"></a>是否为平衡二叉树</h4><p>题目描述：输入一棵二叉树，判断该二叉树是否是平衡二叉树。判断规则是该二叉树的左右子树的深度相差不超过1，只有当树的所有子树满足平衡条件，该树才能称为平衡二叉树。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, x):</span></span><br><span class="line"><span class="comment">#         self.val = x</span></span><br><span class="line"><span class="comment">#         self.left = None</span></span><br><span class="line"><span class="comment">#         self.right = None</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">TreeDepth</span><span class="params">(self, pRoot)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> pRoot <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        left=self.TreeDepth(pRoot.left)</span><br><span class="line">        right=self.TreeDepth(pRoot.right)</span><br><span class="line">        <span class="keyword">return</span> max(left,right)+<span class="number">1</span> </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">IsBalanced_Solution</span><span class="params">(self, pRoot)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> pRoot <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">        left=self.TreeDepth(pRoot.left)</span><br><span class="line">        right=self.TreeDepth(pRoot.right)</span><br><span class="line">        <span class="keyword">if</span> abs(left-right)&gt;<span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">True</span></span><br></pre></td></tr></table></figure>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
       <a href="/2018/05/01/损失函数/" title="机器学习之损失函数" itemprop="url">机器学习之损失函数</a>
   </h1>
   <p class="article-author">By
@@ -725,6 +670,74 @@
 </ul>
 <p><strong>在解决非线性问题时，支持向量机采用核函数的机制，而LR通常不采用核函数的方法。</strong></p>
 <p>这个问题理解起来非常简单。分类模型的结果就是计算决策面，模型训练的过程就是决策面的计算过程。通过上面的第二点不同点可以了解，在计算决策面时，SVM算法里只有少数几个代表支持向量的样本参与了计算，也就是只有少数几个样本需要参与核计算（即kernal machine解的系数是稀疏的）。然而，LR算法里，每个样本点都必须参与决策面的计算过程，也就是说，假设我们在LR里也运用核函数的原理，那么每个样本点都必须参与核计算，这带来的计算复杂度是相当高的。所以，在具体应用时，LR很少运用核函数机制。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/03/22/机器学习的降维为特征选择的区别/" title="特征选择和降维的区别" itemprop="url">特征选择和降维的区别</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-03-22T02:52:21.516Z" itemprop="datePublished"> 发表于 2018-03-22</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="特征选择"><a href="#特征选择" class="headerlink" title="特征选择"></a>特征选择</h1><p>原因：</p>
+<p>在现实应用中，数据特征属性很多，存在一部分属性与结果并不相关；而且特征的维度太高导致训练模型时间较长，模型更加复杂，泛化能力较低。</p>
+<p>方法：</p>
+<h2 id="1、过滤式选择-（Filter）"><a href="#1、过滤式选择-（Filter）" class="headerlink" title="1、过滤式选择 （Filter）"></a>1、过滤式选择 （Filter）</h2><p> 其主要思想是：对每一维的特征“打分”，即给每一维的特征赋予权重，这样的权重就代表着该维特征的重要性，然后依据权重排序。</p>
+<p>​    主要的方法有：</p>
+<ul>
+<li>卡方检验</li>
+<li>互信息法</li>
+<li>方差选择法</li>
+</ul>
+<h2 id="2、包裹式方法"><a href="#2、包裹式方法" class="headerlink" title="2、包裹式方法"></a>2、包裹式方法</h2><ul>
+<li><p>​     递归特征消除法</p>
+<p>递归消除特征法使用一个基模型来进行多轮训练，每轮训练后，消除若干权值系数的特征，再基于新的特征集进行下一轮训练。</p>
+</li>
+</ul>
+<h2 id="3、Embedded方法"><a href="#3、Embedded方法" class="headerlink" title="3、Embedded方法"></a>3、Embedded方法</h2><ul>
+<li>基于惩罚项的特征选择法</li>
+<li>基于树模型的特征选择法</li>
+</ul>
 
         
         
