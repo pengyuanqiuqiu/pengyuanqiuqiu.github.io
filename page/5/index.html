@@ -79,6 +79,125 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2018/01/27/Hexo绑定域名/" title="Hexo绑定域名" itemprop="url">Hexo绑定域名</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-01-27T09:09:15.496Z" itemprop="datePublished"> 发表于 2018-01-27</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h4 id="一、购买域名"><a href="#一、购买域名" class="headerlink" title="一、购买域名"></a>一、购买域名</h4><p>可以在阿里云或者腾讯云购买域名，我的在腾讯云购买，域名为[pengyuan.ac.cn</p>
+<h4 id="二、解析域名"><a href="#二、解析域名" class="headerlink" title="二、解析域名"></a>二、解析域名</h4><p>登入腾讯云控制台，如图，找到域名管理，对你绑定的域名进行解析。</p>
+<p><img src="http://120.25.221.136/images/console.png" alt=""></p>
+<h4 id="三、添加解析记录"><a href="#三、添加解析记录" class="headerlink" title="三、添加解析记录"></a>三、添加解析记录</h4><p>点击添加解析，记录类型选A或CNAME，A记录的记录值就是ip地址，github(官方文档)提供了两个IP地址，<code>192.30.252.153和192.30.252.154</code>，这两个IP地址为github的服务器地址，两个都要解析。解析记录设置两个www和@，线路就默认就行，CNAME记录值填你的github博客网址。</p>
+<p><img src="http://120.25.221.136/images/jiexi.png" alt=""></p>
+<p><img src="http://120.25.221.136/images/git.png" alt=""></p>
+<h4 id="四、增加CNAME文件"><a href="#四、增加CNAME文件" class="headerlink" title="四、增加CNAME文件"></a>四、增加CNAME文件</h4><p>在Hexo的目录下的source文件夹下增加cname文件，文件的内容是你的域名我的是<a href="pengyuan.ac.cn">pengyuan.ac.cn</a></p>
+<p><img src="http://120.25.221.136/images/cname.png" alt=""></p>
+<p><img src="http://120.25.221.136/images/content.png" alt=""></p>
+<h4 id="最后访问域名，就可以访问成功。"><a href="#最后访问域名，就可以访问成功。" class="headerlink" title="最后访问域名，就可以访问成功。"></a>最后访问域名，就可以访问成功。</h4>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/01/26/python画图汇总/" title="python画图汇总" itemprop="url">python画图汇总</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-01-26T08:28:26.817Z" itemprop="datePublished"> 发表于 2018-01-26</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h4 id="一、折线图"><a href="#一、折线图" class="headerlink" title="一、折线图"></a>一、折线图</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">import matplotlib.pyplot as plt #绘图模块</span><br><span class="line">import numpy as np#若导入失败需要pip install安装这两个模块</span><br><span class="line">plt.rcParams[&apos;font.sans-serif&apos;]=[&apos;SimHei&apos;] #用来正常显示中文标签</span><br><span class="line">plt.rcParams[&apos;axes.unicode_minus&apos;]=False </span><br><span class="line">x=np.linspace(-10,10,50)#从1到2区间</span><br><span class="line">y1=2*x</span><br><span class="line">y2=x**2</span><br><span class="line">plt.plot(x, y1, &quot;b-&quot;, linewidth=1,label=&apos;折线&apos;)#linewidth线的宽度，marker为点以什么形式展示，label为线标签</span><br><span class="line">plt.plot(x, y2, &quot;r-&quot;, linewidth=1,label=&apos;曲线&apos;)</span><br><span class="line">plt.savefig(&quot;1.jpg&quot;)#保存照片</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()#展示照片</span><br></pre></td></tr></table></figure>
+<p><img src="http://120.25.221.136/images/line.jpg" alt=""></p>
+<h4 id="二、显示多个画图窗口"><a href="#二、显示多个画图窗口" class="headerlink" title="二、显示多个画图窗口"></a>二、显示多个画图窗口</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import numpy as np</span><br><span class="line">x=np.linspace(-10,10,50)</span><br><span class="line">y1=2*x</span><br><span class="line">y2=x**2</span><br><span class="line">plt.figure()#第一个窗口</span><br><span class="line">plt.plot(x, y1, &quot;b-&quot;)</span><br><span class="line">plt.figure(number=2)</span><br><span class="line">plt.plot(x, y2, &quot;r-&quot;)#第二个窗口</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()#展示照片，出现两个窗口</span><br></pre></td></tr></table></figure>
+<p><img src="http://120.25.221.136/images/multine.png" alt=""></p>
+<h4 id="三、设置坐标轴"><a href="#三、设置坐标轴" class="headerlink" title="三、设置坐标轴"></a>三、设置坐标轴</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import numpy as np</span><br><span class="line">x=np.linspace(1,10,50)</span><br><span class="line">y=2*x</span><br><span class="line">plt.plot(x, y)</span><br><span class="line">plt.ylabel(&apos;y label&apos;)#x标签</span><br><span class="line">plt.xlabel(&apos;x label&apos;)#y标签</span><br><span class="line">plt.yticks([1,10,20],[&apos;low&apos;,&apos;middle&apos;,&apos;high&apos;])</span><br><span class="line">plt.xticks([1,5,10],[&apos;$ bad$&apos;,&apos;$good$&apos;,&apos;$really \ good$&apos;])#将x轴的数字替代</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="http://120.25.221.136/images/label.jpg" alt=""></p>
+<h4 id="三、增加图例"><a href="#三、增加图例" class="headerlink" title="三、增加图例"></a>三、增加图例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">import matplotlib.pyplot as plt #绘图模块</span><br><span class="line">import numpy as np#若导入失败需要pip install安装这两个模块</span><br><span class="line">plt.rcParams[&apos;font.sans-serif&apos;]=[&apos;SimHei&apos;] #用来正常显示中文标签</span><br><span class="line">plt.rcParams[&apos;axes.unicode_minus&apos;]=False</span><br><span class="line">x=np.linspace(-10,10,50)#从1到2区间</span><br><span class="line">y1=2*x</span><br><span class="line">y2=x**2</span><br><span class="line">l1=plt.plot(x, y1, &quot;b-&quot;, linewidth=1,label=&apos;l1&apos;)#linewidth线的宽度，marker为点以什么形式展示，label为线标签</span><br><span class="line">l2=plt.plot(x, y2, &quot;r-&quot;, linewidth=1,label=&apos;l2&apos;)</span><br><span class="line"># plt.savefig(&quot;2.jpg&quot;)#保存照片</span><br><span class="line"></span><br><span class="line">plt.legend(loc=&apos;upper right&apos;)#图标的位置</span><br><span class="line">plt.show()#展示照片</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">其中’loc’参数有多种，’best’表示自动分配最佳位置，其余的如下：</span><br><span class="line">&apos;best&apos; : 0,          </span><br><span class="line"> &apos;upper right&apos;  : 1,</span><br><span class="line"> &apos;upper left&apos;   : 2,</span><br><span class="line"> &apos;lower left&apos;   : 3,</span><br><span class="line"> &apos;lower right&apos;  : 4,</span><br><span class="line"> &apos;right&apos;        : 5,</span><br><span class="line"> &apos;center left&apos;  : 6,</span><br><span class="line"> &apos;center right&apos; : 7,</span><br><span class="line"> &apos;lower center&apos; : 8,</span><br><span class="line"> &apos;upper center&apos; : 9,</span><br><span class="line"> &apos;center&apos;       : 10,</span><br></pre></td></tr></table></figure>
+<p>loc=’upper right’,如图。</p>
+<p><img src="http://120.25.221.136/images/picture.jpg" alt=""></p>
+<p>loc=’center’,如图。</p>
+<p><img src="http://120.25.221.136/images/center.jpg" alt=""></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2018/01/23/nginx配置简单图片显示/" title="nginx配置简单图片显示" itemprop="url">nginx配置简单图片显示</a>
   </h1>
   <p class="article-author">By

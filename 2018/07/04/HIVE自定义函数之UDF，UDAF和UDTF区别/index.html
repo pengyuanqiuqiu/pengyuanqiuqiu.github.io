@@ -4,24 +4,24 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>hive 复合结构Map、Struct(转) | Jianyu</title>
+    <title>HIVE自定义函数之UDF，UDAF和UDTF区别 | Jianyu</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="PengYuan">
     
 
     
-    <meta name="description" content="Map详解 hive里支持map的结构如下： (key1, value1, key2, value2, …) Creates a map with the given key/value pairs 建表语句： create table test_map(name string, score map) ROW FORMAT DELIMITED FIELDS TERMINATED BY ‘\t’ C">
+    <meta name="description" content="(1)udf(user defined function)：  自定义函数，特点是输入一行，输出一行   (2)udaf(user defined aggregation function)：自定义聚合函数，特点是输入多行，输出一行   (3)udtf(User-Defined Table-Generating Functions):自定义拆分函数，特点是输入一行，输出多行 2、使用 ​">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hive 复合结构Map、Struct(转)">
-<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/07/04/hive 复合结构Map、Struct/index.html">
+<meta property="og:title" content="HIVE自定义函数之UDF，UDAF和UDTF区别">
+<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/07/04/HIVE自定义函数之UDF，UDAF和UDTF区别/index.html">
 <meta property="og:site_name" content="Jianyu">
-<meta property="og:description" content="Map详解 hive里支持map的结构如下： (key1, value1, key2, value2, …) Creates a map with the given key/value pairs 建表语句： create table test_map(name string, score map) ROW FORMAT DELIMITED FIELDS TERMINATED BY ‘\t’ C">
+<meta property="og:description" content="(1)udf(user defined function)：  自定义函数，特点是输入一行，输出一行   (2)udaf(user defined aggregation function)：自定义聚合函数，特点是输入多行，输出一行   (3)udtf(User-Defined Table-Generating Functions):自定义拆分函数，特点是输入一行，输出多行 2、使用 ​">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-04T07:38:47.265Z">
+<meta property="og:updated_time" content="2018-07-04T13:08:09.236Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hive 复合结构Map、Struct(转)">
-<meta name="twitter:description" content="Map详解 hive里支持map的结构如下： (key1, value1, key2, value2, …) Creates a map with the given key/value pairs 建表语句： create table test_map(name string, score map) ROW FORMAT DELIMITED FIELDS TERMINATED BY ‘\t’ C">
+<meta name="twitter:title" content="HIVE自定义函数之UDF，UDAF和UDTF区别">
+<meta name="twitter:description" content="(1)udf(user defined function)：  自定义函数，特点是输入一行，输出一行   (2)udaf(user defined aggregation function)：自定义聚合函数，特点是输入多行，输出一行   (3)udtf(User-Defined Table-Generating Functions):自定义拆分函数，特点是输入一行，输出多行 2、使用 ​">
 
     
     <link rel="alternative" href="http://www.163.com/rss/" title="Jianyu" type="application/atom+xml">
@@ -81,14 +81,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/07/04/hive 复合结构Map、Struct/" title="hive 复合结构Map、Struct(转)" itemprop="url">hive 复合结构Map、Struct(转)</a>
+      <a href="/2018/07/04/HIVE自定义函数之UDF，UDAF和UDTF区别/" title="HIVE自定义函数之UDF，UDAF和UDTF区别" itemprop="url">HIVE自定义函数之UDF，UDAF和UDTF区别</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
 		
   <p class="article-time">
-    <time datetime="2018-07-04T07:37:08.038Z" itemprop="datePublished"> 发表于 2018-07-04</time>
+    <time datetime="2018-07-04T12:50:58.035Z" itemprop="datePublished"> 发表于 2018-07-04</time>
     
   </p>
 </header>
@@ -101,65 +101,31 @@
 		
 		</div>
 		
-		<p>Map详解</p>
-<p>hive里支持map的结构如下：</p>
-<p>(key1, value1, key2, value2, …) Creates a map with the given key/value pairs</p>
-<p>建表语句：</p>
-<p>create table test_map(name string, score map<string,int>)</string,int></p>
-<p>ROW FORMAT DELIMITED</p>
-<p>FIELDS TERMINATED BY ‘\t’</p>
-<p>COLLECTION ITEMS TERMINATED BY ‘,’</p>
-<p>MAP KEYS TERMINATED BY ‘:’</p>
-<p>测试数据</p>
-<p>cat test</p>
-<p>leilei 数学:99,语文:90,英语:96</p>
-<p>lucy 数学:100,语文:85,英语:91</p>
-<p>将数据导入表中：</p>
-<p>LOAD DATA LOCAL INPATH ‘/home/webopa/lei.wang/datas_test/test_map’ OVERWRITE INTO TABLE test_map;</p>
-<p>在表中查询：</p>
-<p>hive&gt; select * from test_map;</p>
-<p>OK</p>
-<p>leilei {“数学”:99,”语文”:90,”英语”:96}</p>
-<p>lucy {“数学”:100,”语文”:85,”英语”:91}</p>
-<p>Time taken: 0.052 seconds, Fetched: 2 row(s)</p>
-<p>hive&gt; select ts.name,ts.score[‘数学’] from test_map ts;</p>
-<p>Total jobs = 1</p>
-<p>Launching Job 1 out of 1</p>
-<p>…</p>
-<p>Total MapReduce CPU Time Spent: 3 seconds 280 msec</p>
-<p>OK</p>
-<p>leilei 99</p>
-<p>lucy 100</p>
-<p>Time taken: 26.072 seconds, Fetched: 2 row(s)</p>
-<p>Struct</p>
-<p>hive里支持的Struct结构：</p>
-<p>(val1, val2, val3, …) Creates a struct with the given field values. Struct field names will be col1, col2, …</p>
-<p>建表语句</p>
-<p>CREATE TABLE test_struct(name string,lable struct<price:string,pay:string,num:int>)</price:string,pay:string,num:int></p>
-<p>ROW FORMAT DELIMITED</p>
-<p>FIELDS TERMINATED BY ‘\t’</p>
-<p>COLLECTION ITEMS TERMINATED BY ‘,’</p>
-<p>测试数据</p>
-<p>cat test_struct</p>
-<p>aaa cheap,imm,1</p>
-<p>bbb high,imm,2</p>
-<p>将数据导入表中</p>
-<p>LOAD DATA LOCAL INPATH ‘/home/webopa/lei.wang/datas_test/test_struct’ OVERWRITE INTO TABLE test_struct</p>
-<p>在表中查询</p>
-<p>hive&gt; select * from test_struct;</p>
-<p>OK</p>
-<p>aaa {“price”:”cheap”,”pay”:”imm”,”num”:1}</p>
-<p>bbb {“price”:”high”,”pay”:”imm”,”num”:2}</p>
-<p>Time taken: 0.046 seconds, Fetched: 2 row(s)</p>
-<p>hive&gt; select name,lable.price from test_struct;</p>
-<p>Total jobs = 1</p>
-<p>Launching Job 1 out of 1</p>
-<p>…</p>
-<p>Total MapReduce CPU Time Spent: 1 seconds 270 msec</p>
-<p>OK</p>
-<p>aaa cheap</p>
-<p>bbb high</p>
-<p>Time taken: 20.054 seconds, Fetched: 2 row(s)</p>
+		<p> <strong>(1)udf(user defined function)：  自定义函数，特点是输入一行，输出一行</strong></p>
+<p>  <strong>(2)udaf(user defined aggregation function)：自定义聚合函数，特点是输入多行，输出一行</strong></p>
+<p>  <strong>(3)udtf(User-Defined Table-Generating Functions):自定义拆分函数，特点是输入一行，输出多行</strong></p>
+<p>2、使用</p>
+<p>​    (1)UDF开发和使用步骤</p>
+<p>​       创建函数流程<br>a、自定义一个Java类<br>b、继承UDF类<br>c、重写evaluate方法<br>d、打成jar包<br>e、在hive执行add jar方法 (临时使用)<br>f、在hive执行创建模板函数<br>g、hql中使用</p>
+<p>   (2)UDAF开发和使用步骤   </p>
+<p>​           a、顶层UDAF类继承<br>            org.apache.hadoop.hive.ql.udf.generic.GenericUDAFEvaluator里面编写嵌套类evaluator实现UDAF的逻辑。</p>
+<p>​           b、实现resolver :resolver负责类型检查，操作符重载<br>                 resolver通常继承<br>                 org.apache.hadoop.hive.ql.udf.GenericUDAFResolver2，但是更建议继承AbstractGenericUDAFResolver，</p>
+<p>​                  隔离将来hive接口的变化。<br>                 GenericUDAFResolver和GenericUDAFResolver2接口的区别是后面的允许evaluator实现可以访问更多的信息，</p>
+<p>​                 例如DISTINCT限定符，通配符FUNCTION(*)。</p>
+<p>​           c、实现evaluator :evaluator真正实现UDAF的逻辑<br>                 所有evaluators必须继承抽象类<br>                 org.apache.hadoop.hive.ql.udf.generic.GenericUDAFEvaluator。予类必须实现它的一些抽象方法，</p>
+<p>​                 实现UDAF的逻辑。</p>
+<p>​           d、打成jar包<br>   e、在hive执行add jar方法 (临时使用)<br>   f、在hive执行创建模板函数<br>   g、hql中使用</p>
+<p>​       (3)UDTF开发和使用</p>
+<p>​         a、 继承org.apache.hadoop.hive.ql.udf.generic.GenericUDTF,实现initialize, process, close三个方法。</p>
+<p>  b、UDTF首先会调用initialize方法，此方法返回UDTF的返回行的信息（返回个数，类型）。</p>
+<p>  c、初始化完成后，会调用process方法,真正的处理过程在process函数中，在process中，每一次forward()调用产生一行；</p>
+<p>​       如果产生多列可以将多个列的值放在一个数组中，然后将该数组传入到forward()函数。</p>
+<p>​      最后close()方法调用，对需要清理的方法进行清理。</p>
+<p>  d、打成jar包 </p>
+<p>  e、在hive执行add jar方法 (临时使用)</p>
+<p>  f、在hive执行创建模板函数 </p>
+<p>  g、hql中使用</p>
+<p>​     注意：UDTF有两种使用方法，一种直接放到select后面，一种和lateral view一起使用。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -172,7 +138,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://pengyuanqiuqiu.github.io/2018/07/04/hive 复合结构Map、Struct/" data-title="hive 复合结构Map、Struct(转) | Jianyu" data-tsina="" class="share clearfix">
+	  <div data-url="https://pengyuanqiuqiu.github.io/2018/07/04/HIVE自定义函数之UDF，UDAF和UDTF区别/" data-title="HIVE自定义函数之UDF，UDAF和UDTF区别 | Jianyu" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -186,18 +152,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2018/07/04/HIVE自定义函数之UDF，UDAF和UDTF区别/" title="HIVE自定义函数之UDF，UDAF和UDTF区别">
+ <a href="/2018/07/05/掌握Adaboost算法/" title="">
   <strong>上一篇：</strong><br/>
   <span>
-  HIVE自定义函数之UDF，UDAF和UDTF区别</span>
+  (no title)</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2018/07/03/处理数据中的缺失值/"  title="处理数据中的缺失值">
+<a href="/2018/07/04/hive 复合结构Map、Struct/"  title="hive 复合结构Map、Struct(转)">
  <strong>下一篇：</strong><br/> 
- <span>处理数据中的缺失值
+ <span>hive 复合结构Map、Struct(转)
 </span>
 </a>
 </div>

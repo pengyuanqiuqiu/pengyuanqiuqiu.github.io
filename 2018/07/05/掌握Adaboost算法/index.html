@@ -1,0 +1,565 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Jianyu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="PengYuan">
+    
+
+    
+    <meta name="description" content="title:掌握Adaboost算法Adaboost介绍AdaBoost，是英文”Adaptive Boosting”（自适应增强）的缩写，由Yoav Freund和Robert Schapire在1995年提出。它的自适应在于：前一个基本分类器分错的样本会得到加强，加权后的全体样本再次被用来训练下一个基本分类器。同时，在每一轮中加入一个新的弱分类器，直到达到某个预定的足够小的错误率或达到预先指">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jianyu">
+<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/07/05/掌握Adaboost算法/index.html">
+<meta property="og:site_name" content="Jianyu">
+<meta property="og:description" content="title:掌握Adaboost算法Adaboost介绍AdaBoost，是英文”Adaptive Boosting”（自适应增强）的缩写，由Yoav Freund和Robert Schapire在1995年提出。它的自适应在于：前一个基本分类器分错的样本会得到加强，加权后的全体样本再次被用来训练下一个基本分类器。同时，在每一轮中加入一个新的弱分类器，直到达到某个预定的足够小的错误率或达到预先指">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://120.25.221.136/images/adsboost/ada.jpg">
+<meta property="og:image" content="http://120.25.221.136/images/adsboost/yi.jpg">
+<meta property="og:image" content="http://120.25.221.136/images/adsboost/adaboost2.jpg">
+<meta property="og:image" content="http://120.25.221.136/images/adsboost/adaboost4.jpg">
+<meta property="og:image" content="http://120.25.221.136/images/adsboost/adaboost5.jpg">
+<meta property="og:image" content="http://120.25.221.136/images/adsboost/adaboost7.jpg">
+<meta property="og:image" content="http://120.25.221.136/images/adsboost/adaboost8.jpg">
+<meta property="og:image" content="http://120.25.221.136/images/adsboost/adaboost9.jpg">
+<meta property="og:image" content="http://120.25.221.136/images/adsboost/adaboost11.jpg">
+<meta property="og:image" content="http://120.25.221.136/images/adsboost/adaboost12.jpg">
+<meta property="og:image" content="http://120.25.221.136/images/adsboost/ada10.jpg">
+<meta property="og:image" content="http://120.25.221.136/images/adsboost/ada11.jpg">
+<meta property="og:image" content="http://note.youdao.com/yws/res/6483/5C64A40DBB6D4BA7892D2F552DB68105">
+<meta property="og:image" content="http://120.25.221.136/images/adsboost/adaboost12.jpg">
+<meta property="og:image" content="http://120.25.221.136/images/adsboost/adaboost13.jpg">
+<meta property="og:image" content="http://120.25.221.136/images/adsboost/adaboost14.jpg">
+<meta property="og:image" content="http://120.25.221.136/images/adsboost/adaboost15.jpg">
+<meta property="og:image" content="http://120.25.221.136/images/adsboost/adaboost17.jpg">
+<meta property="og:image" content="http://120.25.221.136/images/adsboost/adaboost18.jpg">
+<meta property="og:image" content="http://120.25.221.136/images/adsboost/adaboost19.jpg">
+<meta property="og:image" content="http://120.25.221.136/images/adsboost/adaboost20.jpg">
+<meta property="og:image" content="http://120.25.221.136/images/adsboost/adaboost21.jpg">
+<meta property="og:image" content="http://120.25.221.136/images/adsboost/adaboost22.jpg">
+<meta property="og:image" content="http://120.25.221.136/images/adsboost/adaboost23.jpg">
+<meta property="og:image" content="http://120.25.221.136/images/adsboost/adaboost24.jpg">
+<meta property="og:updated_time" content="2018-07-05T11:45:41.642Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Jianyu">
+<meta name="twitter:description" content="title:掌握Adaboost算法Adaboost介绍AdaBoost，是英文”Adaptive Boosting”（自适应增强）的缩写，由Yoav Freund和Robert Schapire在1995年提出。它的自适应在于：前一个基本分类器分错的样本会得到加强，加权后的全体样本再次被用来训练下一个基本分类器。同时，在每一轮中加入一个新的弱分类器，直到达到某个预定的足够小的错误率或达到预先指">
+<meta name="twitter:image" content="http://120.25.221.136/images/adsboost/ada.jpg">
+
+    
+    <link rel="alternative" href="http://www.163.com/rss/" title="Jianyu" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Jianyu" title="Jianyu"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Jianyu">Jianyu</a></h1>
+				<h2 class="blog-motto">Learn more and more</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:pengyuanqiuqiu.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/07/05/掌握Adaboost算法/" title="" itemprop="url"></a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-07-05T09:13:00.522Z" itemprop="datePublished"> 发表于 2018-07-05</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#title-掌握Adaboost算法"><span class="toc-number">1.</span> <span class="toc-text">title:掌握Adaboost算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Adaboost介绍"><span class="toc-number">1.1.</span> <span class="toc-text">Adaboost介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Adaboost算法步骤"><span class="toc-number">1.2.</span> <span class="toc-text">Adaboost算法步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AdaBoost实例讲解"><span class="toc-number">1.3.</span> <span class="toc-text">AdaBoost实例讲解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AdaBoost的优点和缺点"><span class="toc-number">1.4.</span> <span class="toc-text">AdaBoost的优点和缺点</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<hr>
+<h2 id="title-掌握Adaboost算法"><a href="#title-掌握Adaboost算法" class="headerlink" title="title:掌握Adaboost算法"></a>title:掌握Adaboost算法</h2><h3 id="Adaboost介绍"><a href="#Adaboost介绍" class="headerlink" title="Adaboost介绍"></a>Adaboost介绍</h3><p>AdaBoost，是英文”Adaptive Boosting”（自适应增强）的缩写，由Yoav Freund和Robert Schapire在1995年提出。它的自适应在于：前一个基本分类器分错的样本会得到加强，加权后的全体样本再次被用来训练下一个基本分类器。同时，在每一轮中加入一个新的弱分类器，直到达到某个预定的足够小的错误率或达到预先指定的最大迭代次数。</p>
+<h3 id="Adaboost算法步骤"><a href="#Adaboost算法步骤" class="headerlink" title="Adaboost算法步骤"></a>Adaboost算法步骤</h3><p>具体说来，整个Adaboost 迭代算法就3步：</p>
+<ol>
+<li>初始化训练数据的权值分布。如果有N个样本，则每一个训练样本最开始时都被赋予相同的权值：1/N。</li>
+<li>训练弱分类器。具体训练过程中，如果某个样本点已经被准确地分类，那么在构造下一个训练集中，它的权值就被降低；相反，如果某个样本点没有被准确地分类，那么它的权值就得到提高。然后，权值更新过的样本集被用于训练下一个分类器，整个训练过程如此迭代地进行下去。</li>
+<li>将各个训练得到的弱分类器组合成强分类器。各个弱分类器的训练过程结束后，加大分类误差率小的弱分类器的权重，使其在最终的分类函数中起着较大的决定作用，而降低分类误差率大的弱分类器的权重，使其在最终的分类函数中起着较小的决定作用。换言之，误差率低的弱分类器在最终分类器中占的权重较大，否则较小。</li>
+</ol>
+<p>AdaBoost算法过程</p>
+<p>​    给定训练数据集：<img src="http://120.25.221.136/images/adsboost/ada.jpg" alt="">，其中用于表示训练样本的类别标签<img src="http://120.25.221.136/images/adsboost/yi.jpg" alt="">，i=1,…,N。Adaboost的目的就是从训练数据中学习一系列弱分类器或基本分类器，然后将这些弱分类器组合成一个强分类器。</p>
+<p>相关符号定义：</p>
+<p><img src="http://120.25.221.136/images/adsboost/adaboost2.jpg" alt=""></p>
+<p>Adaboost的算法流程如下：</p>
+<p><img src="http://120.25.221.136/images/adsboost/adaboost4.jpg" alt=""></p>
+<p><img src="http://120.25.221.136/images/adsboost/adaboost5.jpg" alt=""></p>
+<p>相关说明：</p>
+<p><img src="http://120.25.221.136/images/adsboost/adaboost7.jpg" alt=""></p>
+<p>综合上面的推导，可得样本分错与分对时，其权值更新的公式为：</p>
+<p><img src="http://120.25.221.136/images/adsboost/adaboost8.jpg" alt=""></p>
+<h3 id="AdaBoost实例讲解"><a href="#AdaBoost实例讲解" class="headerlink" title="AdaBoost实例讲解"></a>AdaBoost实例讲解</h3><p>例：给定如图所示的训练样本，弱分类器采用平行于坐标轴的直线，用Adaboost算法的实现强分类过程。</p>
+<p><img src="http://120.25.221.136/images/adsboost/adaboost9.jpg" alt=""></p>
+<p><img src="http://120.25.221.136/images/adsboost/adaboost11.jpg" alt=""></p>
+<p>数据分析：</p>
+<p>   将这10个样本作为训练数据，根据X和Y的对应关系，可把这10个数据分为两类，图中用“+”表示类别1，用“O”表示类别-1。本例使用水平或者垂直的直线作为分类器，图中已经给出了三个弱分类器，即：</p>
+<p><img src="http://120.25.221.136/images/adsboost/adaboost12.jpg" alt=""></p>
+<p>初始化：</p>
+<p>   首先需要初始化训练样本数据的权值分布，每一个训练样本最开始时都被赋予相同的权值：wi=1/N，这样训练样本集的初始权值分布D1(i)：</p>
+<p>   令每个权值w1i= 1/N = 0.1，其中，N = 10，i = 1,2, …, 10，然后分别对于t= 1,2,3, …等值进行迭代（t表示迭代次数，表示第t轮），下表已经给出训练样本的权值分布情况：</p>
+<p><img src="http://120.25.221.136/images/adsboost/ada10.jpg" alt=""></p>
+<p>第1次迭代t=1：</p>
+<p>初试的权值分布D1为1/N（10个数据，每个数据的权值皆初始化为0.1），</p>
+<p>D1=[0.1,  0.1, 0.1, 0.1, 0.1, 0.1,0.1, 0.1, 0.1, 0.1]</p>
+<p>  在权值分布D1的情况下，取已知的三个弱分类器h1、h2和h3中误差率最小的分类器作为第1个基本分类器H1(x)（三个弱分类器的误差率都是0.3，那就取第1个吧）</p>
+<p><img src="http://120.25.221.136/images/adsboost/ada11.jpg" alt=""></p>
+<p>  在分类器H1(x)=h1情况下，样本点“5 7 8”被错分，因此基本分类器H1(x)的误差率为：</p>
+<p><img src="http://note.youdao.com/yws/res/6483/5C64A40DBB6D4BA7892D2F552DB68105" alt="img"></p>
+<p>  可见，被误分类样本的权值之和影响误差率e，误差率e影响基本<img src="http://120.25.221.136/images/adsboost/adaboost12.jpg" alt="img">分类器在最终分类器中所占的权重α。</p>
+<p><img src="http://120.25.221.136/images/adsboost/adaboost13.jpg" alt=""></p>
+<p>  然后，更新训练样本数据的权值分布，用于下一轮迭代，对于正确分类的训练样本“1 2 3 4 6 9 10”（共7个）的权值更新为：</p>
+<p><img src="http://120.25.221.136/images/adsboost/adaboost14.jpg" alt=""></p>
+<p>  这样，第1轮迭代后，最后得到各个样本数据新的权值分布：</p>
+<p>D2=[1/14,1/14,1/14,1/14,1/6,1/14,1/6,1/6,1/14,1/14]</p>
+<p>由于样本数据“5 7 8”被H1(x)分错了，所以它们的权值由之前的0.1增大到1/6；反之，其它数据皆被分正确，所以它们的权值皆由之前的0.1减小到1/14，下表给出了权值分布的变换情况：</p>
+<p><img src="http://120.25.221.136/images/adsboost/adaboost15.jpg" alt=""></p>
+<p>​    可得分类函数：f1(x)= α1H1(x) = 0.4236H1(x)。此时，组合一个基本分类器sign(f1(x))作为强分类器在训练数据集上有3个误分类点（即5 7 8），此时强分类器的训练错误为：0.3</p>
+<p>第二次迭代t=2：</p>
+<p>  在权值分布D2的情况下，再取三个弱分类器h1、h2和h3中误差率最小的分类器作为第2个基本分类器H2(x)：①　当取弱分类器h1=X1=2.5时，此时被错分的样本点为“5 7 8”：误差率e=1/6+1/6+1/6=3/6=1/2；</p>
+<p>②　当取弱分类器h2=X1=8.5时，此时被错分的样本点为“3 4 6”：误差率e=1/14+1/14+1/14=3/14；③　当取弱分类器h3=X2=6.5时，此时被错分的样本点为“1 2 9”：误差率e=1/14+1/14+1/14=3/14；   因此，取当前最小的分类器h2作为第2个基本分类器H2(x)：</p>
+<p><img src="http://120.25.221.136/images/adsboost/adaboost17.jpg" alt=""></p>
+<p><img src="http://120.25.221.136/images/adsboost/adaboost18.jpg" alt=""></p>
+<p>​    显然，H2(x)把样本“3 4 6”分错了，根据D2可知它们的权值为D2(3)=1/14，D2(4)=1/14， D2(6)=1/14，所以H2(x)在训练数据集上的误差率：</p>
+<p><img src="http://120.25.221.136/images/adsboost/adaboost19.jpg" alt=""></p>
+<p>  这样，第2轮迭代后，最后得到各个样本数据新的权值分布：</p>
+<p>D3=[1/22,1/22,1/6,1/6,7/66,1/6,7/66,7/66,1/22,1/22]</p>
+<p>  下表给出了权值分布的变换情况：</p>
+<p><img src="http://120.25.221.136/images/adsboost/adaboost20.jpg" alt=""></p>
+<p>   可得分类函数：f2(x)=0.4236H1(x) + 0.6496H2(x)。此时，组合两个基本分类器sign(f2(x))作为强分类器在训练数据集上有3个误分类点（即3 4 6），此时强分类器的训练错误为：0.3</p>
+<p>第三次迭代t=3:</p>
+<p>  在权值分布D3的情况下，再取三个弱分类器h1、h2和h3中误差率最小的分类器作为第3个基本分类器H3(x)：①　当取弱分类器h1=X1=2.5时，此时被错分的样本点为“5 7 8”：误差率e=7/66+7/66+7/66=7/22；</p>
+<p>②　当取弱分类器h2=X1=8.5时，此时被错分的样本点为“3 4 6”：误差率e=1/6+1/6+1/6=1/2=0.5；</p>
+<p>③　当取弱分类器h3=X2=6.5时，此时被错分的样本点为“1 2 9”：误差率e=1/22+1/22+1/22=3/22；</p>
+<p><img src="http://120.25.221.136/images/adsboost/adaboost21.jpg" alt=""></p>
+<p>   因此，取当前最小的分类器h3作为第3个基本分类器H3(x)：</p>
+<p><img src="http://120.25.221.136/images/adsboost/adaboost22.jpg" alt=""></p>
+<p>  这样，第3轮迭代后，得到各个样本数据新的权值分布为：</p>
+<p>D4=[1/6,1/6,11/114,11/114,7/114,11/114,7/114,7/114,1/6,1/38]</p>
+<p>  下表给出了权值分布的变换情况：</p>
+<p><img src="http://120.25.221.136/images/adsboost/adaboost23.jpg" alt=""></p>
+<p>​    可得分类函数：f3(x)=0.4236H1(x) + 0.6496H2(x)+0.9229H3(x)。此时，组合三个基本分类器sign(f3(x))作为强分类器，在训练数据集上有0个误分类点。至此，整个训练过程结束。</p>
+<p>  整合所有分类器，可得最终的强分类器为：</p>
+<p><img src="http://120.25.221.136/images/adsboost/adaboost24.jpg" alt=""></p>
+<p><strong>这个强分类器Hfinal对训练样本的错误率为0！</strong></p>
+<h3 id="AdaBoost的优点和缺点"><a href="#AdaBoost的优点和缺点" class="headerlink" title="AdaBoost的优点和缺点"></a>AdaBoost的优点和缺点</h3><p><strong>优点</strong></p>
+<p>​     （1）Adaboost提供一种框架，在框架内可以使用各种方法构建子分类器。可以使用简单的弱分类器，不用对特征进行筛选，也<strong>不存在过拟合的现象</strong>。<strong>(低偏差低方差)</strong></p>
+<p>​     （2）Adaboost算法不需要弱分类器的先验知识，最后得到的强分类器的分类精度依赖于所有弱分类器。无论是应用于人造数据还是真实数据，Adaboost都能显著的提高学习精度。</p>
+<p>​     （3）Adaboost算法不需要预先知道弱分类器的错误率上限，且最后得到的强分类器的分类精度依赖于所有弱分类器的分类精度，可以深挖分类器的能力。Adaboost可以根据弱分类器的反馈，自适应地调整假定的错误率，执行的效率高。</p>
+<p>​     （4）Adaboost对同一个训练样本集训练不同的弱分类器，按照一定的方法把这些弱分类器集合起来，构造一个分类能力很强的强分类器，即“三个臭皮匠赛过一个诸葛亮”。</p>
+<p><strong>缺点：</strong></p>
+<p>​     在Adaboost训练过程中，Adaboost会使得难于分类样本的权值呈指数增长，训练将会过于偏向这类困难的样本，导致Adaboost算法易受噪声干扰。此外，Adaboost依赖于弱分类器，而弱分类器的训练时间往往很长。</p>
+<p><strong>为什么AdaBoost不会过拟合？</strong></p>
+<p>　　关于Adaboost，它是boosting算法，从bias-variance（偏差-方差）的角度来看，boosting算法主要关注的是降低偏差</p>
+<p>　　而boosting算法每个分类器都是弱分类器，而弱分类器的特性就是high-bias &amp; low variance（高偏差-低方差），其与生俱来的优点就是泛化性能好</p>
+<p>　　因此，将多个算法组合起来之后，可以达到降偏差的效果，进而得到一个偏差小、方差小的泛化能力好的模型。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://pengyuanqiuqiu.github.io/2018/07/05/掌握Adaboost算法/" data-title="Jianyu" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/07/04/HIVE自定义函数之UDF，UDAF和UDTF区别/"  title="HIVE自定义函数之UDF，UDAF和UDTF区别">
+ <strong>下一篇：</strong><br/> 
+ <span>HIVE自定义函数之UDF，UDAF和UDTF区别
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#title-掌握Adaboost算法"><span class="toc-number">1.</span> <span class="toc-text">title:掌握Adaboost算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Adaboost介绍"><span class="toc-number">1.1.</span> <span class="toc-text">Adaboost介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Adaboost算法步骤"><span class="toc-number">1.2.</span> <span class="toc-text">Adaboost算法步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AdaBoost实例讲解"><span class="toc-number">1.3.</span> <span class="toc-text">AdaBoost实例讲解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AdaBoost的优点和缺点"><span class="toc-number">1.4.</span> <span class="toc-text">AdaBoost的优点和缺点</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github 名片</p>
+<div class="github-card" data-github="https://github.com/pengyuanqiuqiu" data-theme="medium"></div>
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
+</div>
+
+
+
+  
+
+  
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.nowcoder.com/" target="_blank" title="牛客网">牛客网</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.acmcoder.com/index" target="_blank" title="赛码网">赛码网</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="http://www.163.com/rss/" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="400" class="share_self"  frameborder="0" scrolling="no" src="https://widget.weibo.com/weiboshow/index.php?language=&width=0&height=400&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=2871001534&verifier=2889e96f&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m jianyu. <br/>
+			Let&#39;s go!</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2871001534" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/pengyuanqiuqiu" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		<a href="http://www.zhihu.com/people/peng-yuan-19-57?utm_source=qq&amp;utm_medium=social" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:987219258@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by © 2018 
+		
+		<a href="https://pengyuanqiuqiu.github.io/" target="_blank" title="PengYuan">PengYuan</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
