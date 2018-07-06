@@ -79,7 +79,82 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/07/05/掌握Adaboost算法/" title="" itemprop="url"></a>
+      <a href="/2018/07/06/决策树算法/" title="决策树ID3/C4.5/CART算法比较" itemprop="url">决策树ID3/C4.5/CART算法比较</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-07-06T02:31:04.711Z" itemprop="datePublished"> 发表于 2018-07-06</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h3 id="决策树介绍"><a href="#决策树介绍" class="headerlink" title="决策树介绍"></a>决策树介绍</h3><p>​          决策树模型在监督学习中非常常见，可用于分类（二分类、多分类）和回归。虽然将多棵弱决策树的Bagging、Random Forest、Boosting等tree ensembel 模型更为常见，但是“完全生长”决策树因为其简单直观，具有很强的解释性，一般而言一棵“完全生长”的决策树包含，<strong>特征选择、决策树构建、剪枝</strong>三个过程。决策树是一种<strong>贪心算法</strong>，每次选取的分割数据的特征都是当前的最佳选择，并不关心是否达到最优。</p>
+<h3 id="决策树的优缺点"><a href="#决策树的优缺点" class="headerlink" title="决策树的优缺点"></a>决策树的优缺点</h3><p>优点：</p>
+<ol>
+<li>决策树算法中学习简单的决策规则建立决策树模型的过程非常容易理解，</li>
+<li>决策树模型可以可视化，非常直观</li>
+<li>应用范围广，可用于分类和回归，而且非常容易做多类别的分类</li>
+<li>能够处理数值型和连续的样本特征</li>
+</ol>
+<p>​    缺点：</p>
+<ol>
+<li>很容易在训练数据中生成复杂的树结构，造成过拟合（overfitting）。剪枝可以缓解过拟合的负作用，常用方法是限制树的高度、叶子节点中的最少样本数量。</li>
+<li>学习一棵最优的决策树被认为是NP-Complete问题。实际中的决策树是基于启发式的贪心算法建立的，这种算法不能保证建立全局最优的决策树。Random Forest 引入随机能缓解这个问题</li>
+</ol>
+<h4 id="ID3算法"><a href="#ID3算法" class="headerlink" title="ID3算法"></a>ID3算法</h4><p>​        ID3决策树可以有多个分支，但是不能处理特征值为连续的情况。决策树是一种贪心算法，每次选取的分割数据的特征都是当前的最佳选择，并不关心是否达到最优。在ID3中，每次根据“最大信息熵增益”选取当前最佳的特征来分割数据，并按照该特征的所有取值来切分，也就是说如果一个特征有4种取值，数据将被切分4份，一旦按某特征切分后，该特征在之后的算法执行中，将不再起作用，所以有观点认为这种切分方式过于迅速。ID3算法十分简单，核心是根据“最大信息熵增益”原则选择划分当前数据集的最好特征，信息熵是信息论里面的概念，是信息的度量方式，不确定度越大或者说越混乱，熵就越大。在建立决策树的过程中，根据特征属性划分数据，使得原本“混乱”的数据的熵(混乱度)减少，按照不同特征划分数据熵减少的程度会不一样。在ID3中选择熵减少程度最大的特征来划分数据（贪心），也就是“最大信息熵增益”原则。</p>
+<p>缺点：①切分过于迅速；</p>
+<p>②不能直接处理特征值为连续的情况，只有事先将连续型特征转换成离散型，但这转换过程中会破坏连续型变量的内在性质;</p>
+<p>③ </p>
+<p><img src="http://120.25.221.136/images/dt/tree.png" alt=""></p>
+<h4 id="C4-5算法"><a href="#C4-5算法" class="headerlink" title="C4.5算法"></a><strong>C4.5算法</strong></h4><p>C4.5是Ross Quinlan在1993年在ID3的基础上改进而提出的。.ID3采用的信息增益度量存在一个缺点，它一般会优先选择有较多属性值的Feature,因为属性值多的Feature会有相对较大的信息增益?(信息增益反映的给定一个条件以后不确定性减少的程度,必然是分得越细的数据集确定性更高,也就是条件熵越小,信息增益越大).为了避免这个不足C4.5中是用信息增益比率(gain ratio)来作为选择分支的准则。信息增益比率通过引入一个被称作分裂信息(Split information)的项来惩罚取值较多的Feature。除此之外，C4.5还弥补了ID3中不能处理特征属性值连续的问题。<strong>信息增益比本质： 是在信息增益的基础之上乘上一个惩罚参数。特征个数较多时，惩罚参数较小；特征个数较少时，惩罚参数较大。一般为原集合信息熵。</strong></p>
+<p><img src="http://120.25.221.136/images/dt/tree2.png" alt=""></p>
+<h3 id="CART算法"><a href="#CART算法" class="headerlink" title="CART算法"></a><strong>CART算法</strong></h3><p>CART（Classification and Regression tree）分类回归树由L.Breiman,J.Friedman,R.Olshen和C.Stone于1984年提出。ID3中根据属性值分割数据，之后该特征不会再起作用，这种快速切割的方式会影响算法的准确率。CART是一棵二叉树，采用二元切分法，每次把数据切成两份，分别进入左子树、右子树。而且每个非叶子节点都有两个孩子，所以CART的叶子节点比非叶子多1。相比ID3和C4.5，CART应用要多一些，既可以用于分类也可以用于回归。CART分类时，使用基尼指数（Gini）来选择最好的数据分割的特征，gini描述的是纯度，与信息熵的含义相似。CART中每一次迭代都会降低GINI系数。下图显示信息熵增益的一半，Gini指数，分类误差率三种评价指标非常接近。回归时使用均方差作为loss function。基尼系数的计算与信息熵增益的方式非常类似，公式如下：</p>
+<p><img src="http://120.25.221.136/images/dt/tree3.png" alt=""></p>
+<p><strong>三种方法对比：</strong></p>
+<p><strong>ID3的缺点，倾向于选择水平数量较多的变量，可能导致训练得到一个庞大且深度浅的树；另外输入变量必须是分类变量（连续变量必须离散化）；最后无法处理空值。</strong></p>
+<p><strong>C4.5选择了信息增益率替代信息增益。</strong></p>
+<p><strong>CART以基尼系数替代熵；最小化不纯度而不是最大化信息增益。</strong></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/07/05/掌握Adaboost算法/" title="掌握Addaboost算法" itemprop="url">掌握Addaboost算法</a>
   </h1>
   <p class="article-author">By
        
@@ -92,8 +167,7 @@
 </header>
     <div class="article-content">
         
-        <hr>
-<h2 id="title-掌握Adaboost算法"><a href="#title-掌握Adaboost算法" class="headerlink" title="title:掌握Adaboost算法"></a>title:掌握Adaboost算法</h2><h3 id="Adaboost介绍"><a href="#Adaboost介绍" class="headerlink" title="Adaboost介绍"></a>Adaboost介绍</h3><p>AdaBoost，是英文”Adaptive Boosting”（自适应增强）的缩写，由Yoav Freund和Robert Schapire在1995年提出。它的自适应在于：前一个基本分类器分错的样本会得到加强，加权后的全体样本再次被用来训练下一个基本分类器。同时，在每一轮中加入一个新的弱分类器，直到达到某个预定的足够小的错误率或达到预先指定的最大迭代次数。</p>
+        <h3 id="Adaboost介绍"><a href="#Adaboost介绍" class="headerlink" title="Adaboost介绍"></a>Adaboost介绍</h3><p>AdaBoost，是英文”Adaptive Boosting”（自适应增强）的缩写，由Yoav Freund和Robert Schapire在1995年提出。它的自适应在于：前一个基本分类器分错的样本会得到加强，加权后的全体样本再次被用来训练下一个基本分类器。同时，在每一轮中加入一个新的弱分类器，直到达到某个预定的足够小的错误率或达到预先指定的最大迭代次数。</p>
 <h3 id="Adaboost算法步骤"><a href="#Adaboost算法步骤" class="headerlink" title="Adaboost算法步骤"></a>Adaboost算法步骤</h3><p>具体说来，整个Adaboost 迭代算法就3步：</p>
 <ol>
 <li>初始化训练数据的权值分布。如果有N个样本，则每一个训练样本最开始时都被赋予相同的权值：1/N。</li>
@@ -127,15 +201,13 @@
 <p>  在权值分布D1的情况下，取已知的三个弱分类器h1、h2和h3中误差率最小的分类器作为第1个基本分类器H1(x)（三个弱分类器的误差率都是0.3，那就取第1个吧）</p>
 <p><img src="http://120.25.221.136/images/adsboost/ada11.jpg" alt=""></p>
 <p>  在分类器H1(x)=h1情况下，样本点“5 7 8”被错分，因此基本分类器H1(x)的误差率为：</p>
-<p><img src="http://note.youdao.com/yws/res/6483/5C64A40DBB6D4BA7892D2F552DB68105" alt="img"></p>
-<p>  可见，被误分类样本的权值之和影响误差率e，误差率e影响基本<img src="http://120.25.221.136/images/adsboost/adaboost12.jpg" alt="img">分类器在最终分类器中所占的权重α。</p>
 <p><img src="http://120.25.221.136/images/adsboost/adaboost13.jpg" alt=""></p>
-<p>  然后，更新训练样本数据的权值分布，用于下一轮迭代，对于正确分类的训练样本“1 2 3 4 6 9 10”（共7个）的权值更新为：</p>
+<p>  可见，被误分类样本的权值之和影响误差率e，误差率e影响基本分类器在最终分类器中所占的权重α。</p>
 <p><img src="http://120.25.221.136/images/adsboost/adaboost14.jpg" alt=""></p>
+<p>  然后，更新训练样本数据的权值分布，用于下一轮迭代，对于正确分类的训练样本“1 2 3 4 6 9 10”（共7个）的权值更新为：<img src="http://120.25.221.136/images/adsboost/adaboost15.jpg" alt=""></p>
 <p>  这样，第1轮迭代后，最后得到各个样本数据新的权值分布：</p>
 <p>D2=[1/14,1/14,1/14,1/14,1/6,1/14,1/6,1/6,1/14,1/14]</p>
 <p>由于样本数据“5 7 8”被H1(x)分错了，所以它们的权值由之前的0.1增大到1/6；反之，其它数据皆被分正确，所以它们的权值皆由之前的0.1减小到1/14，下表给出了权值分布的变换情况：</p>
-<p><img src="http://120.25.221.136/images/adsboost/adaboost15.jpg" alt=""></p>
 <p>​    可得分类函数：f1(x)= α1H1(x) = 0.4236H1(x)。此时，组合一个基本分类器sign(f1(x))作为强分类器在训练数据集上有3个误分类点（即5 7 8），此时强分类器的训练错误为：0.3</p>
 <p>第二次迭代t=2：</p>
 <p>  在权值分布D2的情况下，再取三个弱分类器h1、h2和h3中误差率最小的分类器作为第2个基本分类器H2(x)：①　当取弱分类器h1=X1=2.5时，此时被错分的样本点为“5 7 8”：误差率e=1/6+1/6+1/6=3/6=1/2；</p>
@@ -973,68 +1045,6 @@
 <p><img src="http://120.25.221.136/images/svd/fenjie.png" alt=""></p>
 <p>在第二个矩阵中的矩阵特点是除了对角线不为0其余的元素都为0，并且对角线元素都是按照从大到小的排序。将上面中间矩阵只保存少数元素。</p>
 <p><img src="http://120.25.221.136/images/svd/fenjie2.png" alt="">实际应用中，我们仅需保留着三个比较小的矩阵，就能表示A，不仅节省存储量，在计算的时候更是减少了计算量。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/05/31/python定义私有变量/" title="python定义私有变量" itemprop="url">python定义私有变量</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
-		
-  <p class="article-time">
-    <time datetime="2018-05-31T12:09:32.565Z" itemprop="datePublished"> 发表于 2018-05-31</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <ul>
-<li><h2 id="python对象销毁-垃圾回收"><a href="#python对象销毁-垃圾回收" class="headerlink" title="python对象销毁(垃圾回收)"></a>python对象销毁(垃圾回收)</h2><p>Python 使用了引用计数这一简单技术来跟踪和回收垃圾。</p>
-<p>在 Python 内部记录着所有使用中的对象各有多少引用。</p>
-<p>一个内部跟踪变量，称为一个引用计数器。</p>
-<p>当对象被创建时， 就创建了一个引用计数， 当这个对象不再需要时， 也就是说， 这个对象的引用计数变为0 时， 它被垃圾回收。但是回收不是”立即”的， 由解释器在适当的时机，将垃圾对象占用的内存空间回收。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a = 40      # 创建对象  &lt;40&gt;</span><br><span class="line">b = a       # 增加引用， &lt;40&gt; 的计数</span><br><span class="line">c = [b]     # 增加引用.  &lt;40&gt; 的计数</span><br><span class="line"></span><br><span class="line">del a       # 减少引用 &lt;40&gt; 的计数</span><br><span class="line">b = 100     # 减少引用 &lt;40&gt; 的计数</span><br><span class="line">c[0] = -1   # 减少引用 &lt;40&gt; 的计数</span><br></pre></td></tr></table></figure>
-<p>垃圾回收机制不仅针对引用计数为0的对象，同样也可以处理循环引用的情况。循环引用指的是，两个对象相互引用，但是没有其他变量引用他们。这种情况下，仅使用引用计数是不够的。Python 的垃圾收集器实际上是一个引用计数器和一个循环垃圾收集器。作为引用计数的补充， 垃圾收集器也会留心被分配的总量很大（及未通过引用计数销毁的那些）的对象。 在这种情况下， 解释器会暂停下来， 试图清理所有未引用的循环。</p>
-</li>
-</ul>
-<h3 id="类的私有属性"><a href="#类的私有属性" class="headerlink" title="类的私有属性"></a>类的私有属性</h3><p><strong>__private_attrs</strong>：两个下划线开头，声明该属性为私有，不能在类的外部被使用或直接访问。在类内部的方法中使用时 <strong>self.__private_attrs</strong>。</p>
-<h3 id="类的方法"><a href="#类的方法" class="headerlink" title="类的方法"></a>类的方法</h3><p>在类的内部，使用 def 关键字可以为类定义一个方法，与一般函数定义不同，类方法必须包含参数 self,且为第一个参数</p>
-<h3 id="类的私有方法"><a href="#类的私有方法" class="headerlink" title="类的私有方法"></a>类的私有方法</h3><p><strong>__private_method</strong>：两个下划线开头，声明该方法为私有方法，不能在类地外部调用。在类的内部调用 <strong>self.__private_methods</strong></p>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">JustCounter</span>:</span></span><br><span class="line">    __secretCount = <span class="number">0</span>  <span class="comment"># 私有变量</span></span><br><span class="line">    publicCount = <span class="number">0</span>    <span class="comment"># 公开变量</span></span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">count</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.__secretCount += <span class="number">1</span></span><br><span class="line">        self.publicCount += <span class="number">1</span></span><br><span class="line">        <span class="keyword">print</span> self.__secretCount</span><br><span class="line"> </span><br><span class="line">counter = JustCounter()</span><br><span class="line">counter.count()</span><br><span class="line">counter.count()</span><br><span class="line"><span class="keyword">print</span> counter.publicCount</span><br><span class="line"><span class="keyword">print</span> counter.__secretCount  <span class="comment"># 报错，实例不能访问私有变量</span></span><br></pre></td></tr></table></figure>
 
         
         

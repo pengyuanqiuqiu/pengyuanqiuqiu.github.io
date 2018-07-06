@@ -4,19 +4,19 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Jianyu</title>
+    <title>掌握Addaboost算法 | Jianyu</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="PengYuan">
     
 
     
-    <meta name="description" content="title:掌握Adaboost算法Adaboost介绍AdaBoost，是英文”Adaptive Boosting”（自适应增强）的缩写，由Yoav Freund和Robert Schapire在1995年提出。它的自适应在于：前一个基本分类器分错的样本会得到加强，加权后的全体样本再次被用来训练下一个基本分类器。同时，在每一轮中加入一个新的弱分类器，直到达到某个预定的足够小的错误率或达到预先指">
+    <meta name="description" content="Adaboost介绍AdaBoost，是英文”Adaptive Boosting”（自适应增强）的缩写，由Yoav Freund和Robert Schapire在1995年提出。它的自适应在于：前一个基本分类器分错的样本会得到加强，加权后的全体样本再次被用来训练下一个基本分类器。同时，在每一轮中加入一个新的弱分类器，直到达到某个预定的足够小的错误率或达到预先指定的最大迭代次数。 Adaboost算">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Jianyu">
+<meta property="og:title" content="掌握Addaboost算法">
 <meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/07/05/掌握Adaboost算法/index.html">
 <meta property="og:site_name" content="Jianyu">
-<meta property="og:description" content="title:掌握Adaboost算法Adaboost介绍AdaBoost，是英文”Adaptive Boosting”（自适应增强）的缩写，由Yoav Freund和Robert Schapire在1995年提出。它的自适应在于：前一个基本分类器分错的样本会得到加强，加权后的全体样本再次被用来训练下一个基本分类器。同时，在每一轮中加入一个新的弱分类器，直到达到某个预定的足够小的错误率或达到预先指">
+<meta property="og:description" content="Adaboost介绍AdaBoost，是英文”Adaptive Boosting”（自适应增强）的缩写，由Yoav Freund和Robert Schapire在1995年提出。它的自适应在于：前一个基本分类器分错的样本会得到加强，加权后的全体样本再次被用来训练下一个基本分类器。同时，在每一轮中加入一个新的弱分类器，直到达到某个预定的足够小的错误率或达到预先指定的最大迭代次数。 Adaboost算">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://120.25.221.136/images/adsboost/ada.jpg">
 <meta property="og:image" content="http://120.25.221.136/images/adsboost/yi.jpg">
@@ -30,8 +30,6 @@
 <meta property="og:image" content="http://120.25.221.136/images/adsboost/adaboost12.jpg">
 <meta property="og:image" content="http://120.25.221.136/images/adsboost/ada10.jpg">
 <meta property="og:image" content="http://120.25.221.136/images/adsboost/ada11.jpg">
-<meta property="og:image" content="http://note.youdao.com/yws/res/6483/5C64A40DBB6D4BA7892D2F552DB68105">
-<meta property="og:image" content="http://120.25.221.136/images/adsboost/adaboost12.jpg">
 <meta property="og:image" content="http://120.25.221.136/images/adsboost/adaboost13.jpg">
 <meta property="og:image" content="http://120.25.221.136/images/adsboost/adaboost14.jpg">
 <meta property="og:image" content="http://120.25.221.136/images/adsboost/adaboost15.jpg">
@@ -43,10 +41,10 @@
 <meta property="og:image" content="http://120.25.221.136/images/adsboost/adaboost22.jpg">
 <meta property="og:image" content="http://120.25.221.136/images/adsboost/adaboost23.jpg">
 <meta property="og:image" content="http://120.25.221.136/images/adsboost/adaboost24.jpg">
-<meta property="og:updated_time" content="2018-07-05T11:45:41.642Z">
+<meta property="og:updated_time" content="2018-07-06T03:05:50.550Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jianyu">
-<meta name="twitter:description" content="title:掌握Adaboost算法Adaboost介绍AdaBoost，是英文”Adaptive Boosting”（自适应增强）的缩写，由Yoav Freund和Robert Schapire在1995年提出。它的自适应在于：前一个基本分类器分错的样本会得到加强，加权后的全体样本再次被用来训练下一个基本分类器。同时，在每一轮中加入一个新的弱分类器，直到达到某个预定的足够小的错误率或达到预先指">
+<meta name="twitter:title" content="掌握Addaboost算法">
+<meta name="twitter:description" content="Adaboost介绍AdaBoost，是英文”Adaptive Boosting”（自适应增强）的缩写，由Yoav Freund和Robert Schapire在1995年提出。它的自适应在于：前一个基本分类器分错的样本会得到加强，加权后的全体样本再次被用来训练下一个基本分类器。同时，在每一轮中加入一个新的弱分类器，直到达到某个预定的足够小的错误率或达到预先指定的最大迭代次数。 Adaboost算">
 <meta name="twitter:image" content="http://120.25.221.136/images/adsboost/ada.jpg">
 
     
@@ -107,7 +105,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/07/05/掌握Adaboost算法/" title="" itemprop="url"></a>
+      <a href="/2018/07/05/掌握Adaboost算法/" title="掌握Addaboost算法" itemprop="url">掌握Addaboost算法</a>
   </h1>
   <p class="article-author">By
        
@@ -123,12 +121,11 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#title-掌握Adaboost算法"><span class="toc-number">1.</span> <span class="toc-text">title:掌握Adaboost算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Adaboost介绍"><span class="toc-number">1.1.</span> <span class="toc-text">Adaboost介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Adaboost算法步骤"><span class="toc-number">1.2.</span> <span class="toc-text">Adaboost算法步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AdaBoost实例讲解"><span class="toc-number">1.3.</span> <span class="toc-text">AdaBoost实例讲解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AdaBoost的优点和缺点"><span class="toc-number">1.4.</span> <span class="toc-text">AdaBoost的优点和缺点</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Adaboost介绍"><span class="toc-number">1.</span> <span class="toc-text">Adaboost介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Adaboost算法步骤"><span class="toc-number">2.</span> <span class="toc-text">Adaboost算法步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AdaBoost实例讲解"><span class="toc-number">3.</span> <span class="toc-text">AdaBoost实例讲解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AdaBoost的优点和缺点"><span class="toc-number">4.</span> <span class="toc-text">AdaBoost的优点和缺点</span></a></li></ol>
 		
 		</div>
 		
-		<hr>
-<h2 id="title-掌握Adaboost算法"><a href="#title-掌握Adaboost算法" class="headerlink" title="title:掌握Adaboost算法"></a>title:掌握Adaboost算法</h2><h3 id="Adaboost介绍"><a href="#Adaboost介绍" class="headerlink" title="Adaboost介绍"></a>Adaboost介绍</h3><p>AdaBoost，是英文”Adaptive Boosting”（自适应增强）的缩写，由Yoav Freund和Robert Schapire在1995年提出。它的自适应在于：前一个基本分类器分错的样本会得到加强，加权后的全体样本再次被用来训练下一个基本分类器。同时，在每一轮中加入一个新的弱分类器，直到达到某个预定的足够小的错误率或达到预先指定的最大迭代次数。</p>
+		<h3 id="Adaboost介绍"><a href="#Adaboost介绍" class="headerlink" title="Adaboost介绍"></a>Adaboost介绍</h3><p>AdaBoost，是英文”Adaptive Boosting”（自适应增强）的缩写，由Yoav Freund和Robert Schapire在1995年提出。它的自适应在于：前一个基本分类器分错的样本会得到加强，加权后的全体样本再次被用来训练下一个基本分类器。同时，在每一轮中加入一个新的弱分类器，直到达到某个预定的足够小的错误率或达到预先指定的最大迭代次数。</p>
 <h3 id="Adaboost算法步骤"><a href="#Adaboost算法步骤" class="headerlink" title="Adaboost算法步骤"></a>Adaboost算法步骤</h3><p>具体说来，整个Adaboost 迭代算法就3步：</p>
 <ol>
 <li>初始化训练数据的权值分布。如果有N个样本，则每一个训练样本最开始时都被赋予相同的权值：1/N。</li>
@@ -162,15 +159,13 @@
 <p>  在权值分布D1的情况下，取已知的三个弱分类器h1、h2和h3中误差率最小的分类器作为第1个基本分类器H1(x)（三个弱分类器的误差率都是0.3，那就取第1个吧）</p>
 <p><img src="http://120.25.221.136/images/adsboost/ada11.jpg" alt=""></p>
 <p>  在分类器H1(x)=h1情况下，样本点“5 7 8”被错分，因此基本分类器H1(x)的误差率为：</p>
-<p><img src="http://note.youdao.com/yws/res/6483/5C64A40DBB6D4BA7892D2F552DB68105" alt="img"></p>
-<p>  可见，被误分类样本的权值之和影响误差率e，误差率e影响基本<img src="http://120.25.221.136/images/adsboost/adaboost12.jpg" alt="img">分类器在最终分类器中所占的权重α。</p>
 <p><img src="http://120.25.221.136/images/adsboost/adaboost13.jpg" alt=""></p>
-<p>  然后，更新训练样本数据的权值分布，用于下一轮迭代，对于正确分类的训练样本“1 2 3 4 6 9 10”（共7个）的权值更新为：</p>
+<p>  可见，被误分类样本的权值之和影响误差率e，误差率e影响基本分类器在最终分类器中所占的权重α。</p>
 <p><img src="http://120.25.221.136/images/adsboost/adaboost14.jpg" alt=""></p>
+<p>  然后，更新训练样本数据的权值分布，用于下一轮迭代，对于正确分类的训练样本“1 2 3 4 6 9 10”（共7个）的权值更新为：<img src="http://120.25.221.136/images/adsboost/adaboost15.jpg" alt=""></p>
 <p>  这样，第1轮迭代后，最后得到各个样本数据新的权值分布：</p>
 <p>D2=[1/14,1/14,1/14,1/14,1/6,1/14,1/6,1/6,1/14,1/14]</p>
 <p>由于样本数据“5 7 8”被H1(x)分错了，所以它们的权值由之前的0.1增大到1/6；反之，其它数据皆被分正确，所以它们的权值皆由之前的0.1减小到1/14，下表给出了权值分布的变换情况：</p>
-<p><img src="http://120.25.221.136/images/adsboost/adaboost15.jpg" alt=""></p>
 <p>​    可得分类函数：f1(x)= α1H1(x) = 0.4236H1(x)。此时，组合一个基本分类器sign(f1(x))作为强分类器在训练数据集上有3个误分类点（即5 7 8），此时强分类器的训练错误为：0.3</p>
 <p>第二次迭代t=2：</p>
 <p>  在权值分布D2的情况下，再取三个弱分类器h1、h2和h3中误差率最小的分类器作为第2个基本分类器H2(x)：①　当取弱分类器h1=X1=2.5时，此时被错分的样本点为“5 7 8”：误差率e=1/6+1/6+1/6=3/6=1/2；</p>
@@ -222,7 +217,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://pengyuanqiuqiu.github.io/2018/07/05/掌握Adaboost算法/" data-title="Jianyu" data-tsina="" class="share clearfix">
+	  <div data-url="https://pengyuanqiuqiu.github.io/2018/07/05/掌握Adaboost算法/" data-title="掌握Addaboost算法 | Jianyu" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -235,6 +230,14 @@
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2018/07/06/决策树算法/" title="决策树ID3/C4.5/CART算法比较">
+  <strong>上一篇：</strong><br/>
+  <span>
+  决策树ID3/C4.5/CART算法比较</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2018/07/04/HIVE自定义函数之UDF，UDAF和UDTF区别/"  title="HIVE自定义函数之UDF，UDAF和UDTF区别">
@@ -256,7 +259,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#title-掌握Adaboost算法"><span class="toc-number">1.</span> <span class="toc-text">title:掌握Adaboost算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Adaboost介绍"><span class="toc-number">1.1.</span> <span class="toc-text">Adaboost介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Adaboost算法步骤"><span class="toc-number">1.2.</span> <span class="toc-text">Adaboost算法步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AdaBoost实例讲解"><span class="toc-number">1.3.</span> <span class="toc-text">AdaBoost实例讲解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AdaBoost的优点和缺点"><span class="toc-number">1.4.</span> <span class="toc-text">AdaBoost的优点和缺点</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Adaboost介绍"><span class="toc-number">1.</span> <span class="toc-text">Adaboost介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Adaboost算法步骤"><span class="toc-number">2.</span> <span class="toc-text">Adaboost算法步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AdaBoost实例讲解"><span class="toc-number">3.</span> <span class="toc-text">AdaBoost实例讲解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AdaBoost的优点和缺点"><span class="toc-number">4.</span> <span class="toc-text">AdaBoost的优点和缺点</span></a></li></ol>
  
   </div>
 
