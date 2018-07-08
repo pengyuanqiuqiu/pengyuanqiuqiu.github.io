@@ -79,6 +79,73 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2018/07/08/深度学习权重初始化/" title="深度学习权重初始化(转)" itemprop="url">深度学习权重初始化(转)</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-07-08T05:32:19.166Z" itemprop="datePublished"> 发表于 2018-07-08</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>权值初始化的方法主要有：常量初始化（constant）、高斯分布初始化（gaussian）、positive_unitball初始化、均匀分布初始化（uniform）、xavier初始化、msra初始化、双线性初始化（bilinear）</p>
+<p><strong>常量初始化(constant)</strong></p>
+<p>​       把权值或者偏置初始化为一个常数，具体是什么常数，可以自己定义</p>
+<p><strong>高斯分布初始化（gaussian）</strong></p>
+<p>​        正态初始化   如：w = tf.Variable(tf.random_normal(shape, stddev=0.01))，缺点是：</p>
+<p>标准差太大，容易梯度消失和梯度爆炸，合适的标准差在深层网络中，容易出现梯度弥散。</p>
+<p>梯度弥散：</p>
+<p>​        靠近输出层的hidden layer 梯度大，参数更新快，所以很快就会收敛；而靠近输入层的hidden layer 梯度小，参数更新慢，几乎就和初始状态一样，随机分布。这种现象就是梯度弥散（vanishing gradient problem）。而在另一种情况中，前面layer的梯度通过训练变大，而后面layer的梯度指数级增大，这种现象又叫做梯度爆炸(exploding gradient problem)。总的来说，就是在这个深度网络中，梯度相当不稳定(unstable)。可以通过relu等激活函数替代，可以加上maxout层。</p>
+<p><strong>positive_unitball初始化</strong></p>
+<p>​       让每一个神经元的输入的权值和为 1，例如：一个神经元有100个输入，让这100个输入的权值和为1.  首先给这100个权值赋值为在（0，1）之间的均匀分布，然后，每一个权值再除以它们的和就可以啦。这么做，可以有助于防止权值初始化过大，从而防止激活函数（sigmoid函数）进入饱和区。所以，它应该比较适合simgmoid形的激活函数</p>
+<p><strong>均匀分布初始化（uniform）</strong></p>
+<p>​       将权值与偏置进行均匀分布的初始化，用min 与 max 来控制它们的的上下限，默认为（0，1）</p>
+<p><strong>xavier初始化</strong></p>
+<p>​       对于权值的分布：均值为0，方差为（1 / 输入的个数） 的 均匀分布。如果我们更注重前向传播的话，我们可以选择 fan_in，即正向传播的输入个数；如果更注重后向传播的话，我们选择 fan_out, 因为在反向传播的时候，fan_out就是神经元的输入个数；如果两者都考虑的话，就选  average = (fan_in + fan_out) /2。对于ReLU激活函数来说，XavierFiller初始化也是很适合。关于该初始化方法，具体可以参考<a href="https://zhuanlan.zhihu.com/p/22028079" target="_blank" rel="noopener">文章1</a>、<a href="https://zhuanlan.zhihu.com/p/22044472" target="_blank" rel="noopener">文章2</a>，该方法假定激活函数是线性的。</p>
+<p><strong>msra初始化</strong></p>
+<p>​       对于权值的分布：基于均值为0，方差为( 2/输入的个数)的高斯分布；它特别适合 ReLU激活函数，该方法主要是基于Relu函数提出的，推导过程类似于xavier，可以参考<a href="http://blog.csdn.net/shuzfan/article/details/51347572" target="_blank" rel="noopener">博客</a>。</p>
+<p><strong>双线性初始化（bilinear）</strong></p>
+<p>​      常用在反卷积神经网络里的权值初始化</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2018/07/06/决策树算法/" title="决策树ID3/C4.5/CART算法比较" itemprop="url">决策树ID3/C4.5/CART算法比较</a>
   </h1>
   <p class="article-author">By
@@ -112,7 +179,13 @@
 <p><img src="http://120.25.221.136/images/dt/tree.png" alt=""></p>
 <h4 id="C4-5算法"><a href="#C4-5算法" class="headerlink" title="C4.5算法"></a><strong>C4.5算法</strong></h4><p>C4.5是Ross Quinlan在1993年在ID3的基础上改进而提出的。.ID3采用的信息增益度量存在一个缺点，它一般会优先选择有较多属性值的Feature,因为属性值多的Feature会有相对较大的信息增益?(信息增益反映的给定一个条件以后不确定性减少的程度,必然是分得越细的数据集确定性更高,也就是条件熵越小,信息增益越大).为了避免这个不足C4.5中是用信息增益比率(gain ratio)来作为选择分支的准则。信息增益比率通过引入一个被称作分裂信息(Split information)的项来惩罚取值较多的Feature。除此之外，C4.5还弥补了ID3中不能处理特征属性值连续的问题。<strong>信息增益比本质： 是在信息增益的基础之上乘上一个惩罚参数。特征个数较多时，惩罚参数较小；特征个数较少时，惩罚参数较大。一般为原集合信息熵。</strong></p>
 <p><img src="http://120.25.221.136/images/dt/tree2.png" alt=""></p>
-<h3 id="CART算法"><a href="#CART算法" class="headerlink" title="CART算法"></a><strong>CART算法</strong></h3><p>CART（Classification and Regression tree）分类回归树由L.Breiman,J.Friedman,R.Olshen和C.Stone于1984年提出。ID3中根据属性值分割数据，之后该特征不会再起作用，这种快速切割的方式会影响算法的准确率。CART是一棵二叉树，采用二元切分法，每次把数据切成两份，分别进入左子树、右子树。而且每个非叶子节点都有两个孩子，所以CART的叶子节点比非叶子多1。相比ID3和C4.5，CART应用要多一些，既可以用于分类也可以用于回归。CART分类时，使用基尼指数（Gini）来选择最好的数据分割的特征，gini描述的是纯度，与信息熵的含义相似。CART中每一次迭代都会降低GINI系数。下图显示信息熵增益的一半，Gini指数，分类误差率三种评价指标非常接近。回归时使用均方差作为loss function。基尼系数的计算与信息熵增益的方式非常类似，公式如下：</p>
+<p><strong>C4.5算法能够处理不完整的数据，常用的处理方法有以下三种：</strong></p>
+<ul>
+<li>给缺失属性赋予最常见的值。</li>
+<li>丢弃含有缺失值的样本。</li>
+<li>根据节点的样例上该属性值出现的情况赋一个概率值。</li>
+</ul>
+<h4 id="CART算法"><a href="#CART算法" class="headerlink" title="CART算法"></a><strong>CART算法</strong></h4><p>CART（Classification and Regression tree）分类回归树由L.Breiman,J.Friedman,R.Olshen和C.Stone于1984年提出。ID3中根据属性值分割数据，之后该特征不会再起作用，这种快速切割的方式会影响算法的准确率。CART是一棵二叉树，采用二元切分法，每次把数据切成两份，分别进入左子树、右子树。而且每个非叶子节点都有两个孩子，所以CART的叶子节点比非叶子多1。相比ID3和C4.5，CART应用要多一些，既可以用于分类也可以用于回归。CART分类时，使用基尼指数（Gini）来选择最好的数据分割的特征，gini描述的是纯度，与信息熵的含义相似。CART中每一次迭代都会降低GINI系数。下图显示信息熵增益的一半，Gini指数，分类误差率三种评价指标非常接近。回归时使用均方差作为loss function。基尼系数的计算与信息熵增益的方式非常类似，公式如下：</p>
 <p><img src="http://120.25.221.136/images/dt/tree3.png" alt=""></p>
 <p><strong>三种方法对比：</strong></p>
 <p><strong>ID3的缺点，倾向于选择水平数量较多的变量，可能导致训练得到一个庞大且深度浅的树；另外输入变量必须是分类变量（连续变量必须离散化）；最后无法处理空值。</strong></p>
@@ -990,61 +1063,6 @@
 <p>  left outer join users b</p>
 <p>  on case when a.user_id is null then concat(‘hive’,rand() ) else a.user_id end = b.user_id;</p>
 <p>结论：方法2比方法1效率更好，不但io少了，而且作业数也少了。解决方法1中 log读取两次，jobs是2。解决方法2 job数是1 。这个优化适合无效 id (比如 -99 , ’’, null 等) 产生的倾斜问题。把空值的 key 变成一个字符串加上随机数，就能把倾斜的数据分到不同的reduce上 ,解决数据倾斜问题。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/05/31/奇异值分解(SVD)/" title="奇异值分解(SVD)" itemprop="url">奇异值分解(SVD)</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
-		
-  <p class="article-time">
-    <time datetime="2018-05-31T12:33:20.236Z" itemprop="datePublished"> 发表于 2018-05-31</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>奇异值分解（singular Value Decomposition），简称SVD，线性代数中矩阵分解的方法。假如有一个矩阵A，对它进行奇异值分解，可以得到三个矩阵：</p>
-<p><img src="http://120.25.221.136/images/svd/svd.png" alt=""></p>
-<p>分解矩阵的大小为下面：</p>
-<p><img src="http://120.25.221.136/images/svd/fenjie.png" alt=""></p>
-<p>在第二个矩阵中的矩阵特点是除了对角线不为0其余的元素都为0，并且对角线元素都是按照从大到小的排序。将上面中间矩阵只保存少数元素。</p>
-<p><img src="http://120.25.221.136/images/svd/fenjie2.png" alt="">实际应用中，我们仅需保留着三个比较小的矩阵，就能表示A，不仅节省存储量，在计算的时候更是减少了计算量。</p>
 
         
         

@@ -4,28 +4,24 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>决策树ID3/C4.5/CART算法比较 | Jianyu</title>
+    <title>深度学习权重初始化(转) | Jianyu</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="PengYuan">
     
 
     
-    <meta name="description" content="决策树介绍​          决策树模型在监督学习中非常常见，可用于分类（二分类、多分类）和回归。虽然将多棵弱决策树的Bagging、Random Forest、Boosting等tree ensembel 模型更为常见，但是“完全生长”决策树因为其简单直观，具有很强的解释性，一般而言一棵“完全生长”的决策树包含，特征选择、决策树构建、剪枝三个过程。决策树是一种贪心算法，每次选取的分割数据的特征">
+    <meta name="description" content="权值初始化的方法主要有：常量初始化（constant）、高斯分布初始化（gaussian）、positive_unitball初始化、均匀分布初始化（uniform）、xavier初始化、msra初始化、双线性初始化（bilinear） 常量初始化(constant) ​       把权值或者偏置初始化为一个常数，具体是什么常数，可以自己定义 高斯分布初始化（gaussian） ​">
 <meta property="og:type" content="article">
-<meta property="og:title" content="决策树ID3&#x2F;C4.5&#x2F;CART算法比较">
-<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/07/06/决策树算法/index.html">
+<meta property="og:title" content="深度学习权重初始化(转)">
+<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/07/08/深度学习权重初始化/index.html">
 <meta property="og:site_name" content="Jianyu">
-<meta property="og:description" content="决策树介绍​          决策树模型在监督学习中非常常见，可用于分类（二分类、多分类）和回归。虽然将多棵弱决策树的Bagging、Random Forest、Boosting等tree ensembel 模型更为常见，但是“完全生长”决策树因为其简单直观，具有很强的解释性，一般而言一棵“完全生长”的决策树包含，特征选择、决策树构建、剪枝三个过程。决策树是一种贪心算法，每次选取的分割数据的特征">
+<meta property="og:description" content="权值初始化的方法主要有：常量初始化（constant）、高斯分布初始化（gaussian）、positive_unitball初始化、均匀分布初始化（uniform）、xavier初始化、msra初始化、双线性初始化（bilinear） 常量初始化(constant) ​       把权值或者偏置初始化为一个常数，具体是什么常数，可以自己定义 高斯分布初始化（gaussian） ​">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://120.25.221.136/images/dt/tree.png">
-<meta property="og:image" content="http://120.25.221.136/images/dt/tree2.png">
-<meta property="og:image" content="http://120.25.221.136/images/dt/tree3.png">
-<meta property="og:updated_time" content="2018-07-06T06:53:33.285Z">
+<meta property="og:updated_time" content="2018-07-08T05:50:15.742Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="决策树ID3&#x2F;C4.5&#x2F;CART算法比较">
-<meta name="twitter:description" content="决策树介绍​          决策树模型在监督学习中非常常见，可用于分类（二分类、多分类）和回归。虽然将多棵弱决策树的Bagging、Random Forest、Boosting等tree ensembel 模型更为常见，但是“完全生长”决策树因为其简单直观，具有很强的解释性，一般而言一棵“完全生长”的决策树包含，特征选择、决策树构建、剪枝三个过程。决策树是一种贪心算法，每次选取的分割数据的特征">
-<meta name="twitter:image" content="http://120.25.221.136/images/dt/tree.png">
+<meta name="twitter:title" content="深度学习权重初始化(转)">
+<meta name="twitter:description" content="权值初始化的方法主要有：常量初始化（constant）、高斯分布初始化（gaussian）、positive_unitball初始化、均匀分布初始化（uniform）、xavier初始化、msra初始化、双线性初始化（bilinear） 常量初始化(constant) ​       把权值或者偏置初始化为一个常数，具体是什么常数，可以自己定义 高斯分布初始化（gaussian） ​">
 
     
     <link rel="alternative" href="http://www.163.com/rss/" title="Jianyu" type="application/atom+xml">
@@ -85,14 +81,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/07/06/决策树算法/" title="决策树ID3/C4.5/CART算法比较" itemprop="url">决策树ID3/C4.5/CART算法比较</a>
+      <a href="/2018/07/08/深度学习权重初始化/" title="深度学习权重初始化(转)" itemprop="url">深度学习权重初始化(转)</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
 		
   <p class="article-time">
-    <time datetime="2018-07-06T02:31:04.711Z" itemprop="datePublished"> 发表于 2018-07-06</time>
+    <time datetime="2018-07-08T05:32:19.166Z" itemprop="datePublished"> 发表于 2018-07-08</time>
     
   </p>
 </header>
@@ -101,42 +97,28 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#决策树介绍"><span class="toc-number">1.</span> <span class="toc-text">决策树介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#决策树的优缺点"><span class="toc-number">2.</span> <span class="toc-text">决策树的优缺点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ID3算法"><span class="toc-number">2.1.</span> <span class="toc-text">ID3算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#C4-5算法"><span class="toc-number">2.2.</span> <span class="toc-text">C4.5算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CART算法"><span class="toc-number">2.3.</span> <span class="toc-text">CART算法</span></a></li></ol></li></ol>
+			
 		
 		</div>
 		
-		<h3 id="决策树介绍"><a href="#决策树介绍" class="headerlink" title="决策树介绍"></a>决策树介绍</h3><p>​          决策树模型在监督学习中非常常见，可用于分类（二分类、多分类）和回归。虽然将多棵弱决策树的Bagging、Random Forest、Boosting等tree ensembel 模型更为常见，但是“完全生长”决策树因为其简单直观，具有很强的解释性，一般而言一棵“完全生长”的决策树包含，<strong>特征选择、决策树构建、剪枝</strong>三个过程。决策树是一种<strong>贪心算法</strong>，每次选取的分割数据的特征都是当前的最佳选择，并不关心是否达到最优。</p>
-<h3 id="决策树的优缺点"><a href="#决策树的优缺点" class="headerlink" title="决策树的优缺点"></a>决策树的优缺点</h3><p>优点：</p>
-<ol>
-<li>决策树算法中学习简单的决策规则建立决策树模型的过程非常容易理解，</li>
-<li>决策树模型可以可视化，非常直观</li>
-<li>应用范围广，可用于分类和回归，而且非常容易做多类别的分类</li>
-<li>能够处理数值型和连续的样本特征</li>
-</ol>
-<p>​    缺点：</p>
-<ol>
-<li>很容易在训练数据中生成复杂的树结构，造成过拟合（overfitting）。剪枝可以缓解过拟合的负作用，常用方法是限制树的高度、叶子节点中的最少样本数量。</li>
-<li>学习一棵最优的决策树被认为是NP-Complete问题。实际中的决策树是基于启发式的贪心算法建立的，这种算法不能保证建立全局最优的决策树。Random Forest 引入随机能缓解这个问题</li>
-</ol>
-<h4 id="ID3算法"><a href="#ID3算法" class="headerlink" title="ID3算法"></a>ID3算法</h4><p>​        ID3决策树可以有多个分支，但是不能处理特征值为连续的情况。决策树是一种贪心算法，每次选取的分割数据的特征都是当前的最佳选择，并不关心是否达到最优。在ID3中，每次根据“最大信息熵增益”选取当前最佳的特征来分割数据，并按照该特征的所有取值来切分，也就是说如果一个特征有4种取值，数据将被切分4份，一旦按某特征切分后，该特征在之后的算法执行中，将不再起作用，所以有观点认为这种切分方式过于迅速。ID3算法十分简单，核心是根据“最大信息熵增益”原则选择划分当前数据集的最好特征，信息熵是信息论里面的概念，是信息的度量方式，不确定度越大或者说越混乱，熵就越大。在建立决策树的过程中，根据特征属性划分数据，使得原本“混乱”的数据的熵(混乱度)减少，按照不同特征划分数据熵减少的程度会不一样。在ID3中选择熵减少程度最大的特征来划分数据（贪心），也就是“最大信息熵增益”原则。</p>
-<p>缺点：①切分过于迅速；</p>
-<p>②不能直接处理特征值为连续的情况，只有事先将连续型特征转换成离散型，但这转换过程中会破坏连续型变量的内在性质;</p>
-<p>③ </p>
-<p><img src="http://120.25.221.136/images/dt/tree.png" alt=""></p>
-<h4 id="C4-5算法"><a href="#C4-5算法" class="headerlink" title="C4.5算法"></a><strong>C4.5算法</strong></h4><p>C4.5是Ross Quinlan在1993年在ID3的基础上改进而提出的。.ID3采用的信息增益度量存在一个缺点，它一般会优先选择有较多属性值的Feature,因为属性值多的Feature会有相对较大的信息增益?(信息增益反映的给定一个条件以后不确定性减少的程度,必然是分得越细的数据集确定性更高,也就是条件熵越小,信息增益越大).为了避免这个不足C4.5中是用信息增益比率(gain ratio)来作为选择分支的准则。信息增益比率通过引入一个被称作分裂信息(Split information)的项来惩罚取值较多的Feature。除此之外，C4.5还弥补了ID3中不能处理特征属性值连续的问题。<strong>信息增益比本质： 是在信息增益的基础之上乘上一个惩罚参数。特征个数较多时，惩罚参数较小；特征个数较少时，惩罚参数较大。一般为原集合信息熵。</strong></p>
-<p><img src="http://120.25.221.136/images/dt/tree2.png" alt=""></p>
-<p><strong>C4.5算法能够处理不完整的数据，常用的处理方法有以下三种：</strong></p>
-<ul>
-<li>给缺失属性赋予最常见的值。</li>
-<li>丢弃含有缺失值的样本。</li>
-<li>根据节点的样例上该属性值出现的情况赋一个概率值。</li>
-</ul>
-<h4 id="CART算法"><a href="#CART算法" class="headerlink" title="CART算法"></a><strong>CART算法</strong></h4><p>CART（Classification and Regression tree）分类回归树由L.Breiman,J.Friedman,R.Olshen和C.Stone于1984年提出。ID3中根据属性值分割数据，之后该特征不会再起作用，这种快速切割的方式会影响算法的准确率。CART是一棵二叉树，采用二元切分法，每次把数据切成两份，分别进入左子树、右子树。而且每个非叶子节点都有两个孩子，所以CART的叶子节点比非叶子多1。相比ID3和C4.5，CART应用要多一些，既可以用于分类也可以用于回归。CART分类时，使用基尼指数（Gini）来选择最好的数据分割的特征，gini描述的是纯度，与信息熵的含义相似。CART中每一次迭代都会降低GINI系数。下图显示信息熵增益的一半，Gini指数，分类误差率三种评价指标非常接近。回归时使用均方差作为loss function。基尼系数的计算与信息熵增益的方式非常类似，公式如下：</p>
-<p><img src="http://120.25.221.136/images/dt/tree3.png" alt=""></p>
-<p><strong>三种方法对比：</strong></p>
-<p><strong>ID3的缺点，倾向于选择水平数量较多的变量，可能导致训练得到一个庞大且深度浅的树；另外输入变量必须是分类变量（连续变量必须离散化）；最后无法处理空值。</strong></p>
-<p><strong>C4.5选择了信息增益率替代信息增益。</strong></p>
-<p><strong>CART以基尼系数替代熵；最小化不纯度而不是最大化信息增益。</strong></p>
+		<p>权值初始化的方法主要有：常量初始化（constant）、高斯分布初始化（gaussian）、positive_unitball初始化、均匀分布初始化（uniform）、xavier初始化、msra初始化、双线性初始化（bilinear）</p>
+<p><strong>常量初始化(constant)</strong></p>
+<p>​       把权值或者偏置初始化为一个常数，具体是什么常数，可以自己定义</p>
+<p><strong>高斯分布初始化（gaussian）</strong></p>
+<p>​        正态初始化   如：w = tf.Variable(tf.random_normal(shape, stddev=0.01))，缺点是：</p>
+<p>标准差太大，容易梯度消失和梯度爆炸，合适的标准差在深层网络中，容易出现梯度弥散。</p>
+<p>梯度弥散：</p>
+<p>​        靠近输出层的hidden layer 梯度大，参数更新快，所以很快就会收敛；而靠近输入层的hidden layer 梯度小，参数更新慢，几乎就和初始状态一样，随机分布。这种现象就是梯度弥散（vanishing gradient problem）。而在另一种情况中，前面layer的梯度通过训练变大，而后面layer的梯度指数级增大，这种现象又叫做梯度爆炸(exploding gradient problem)。总的来说，就是在这个深度网络中，梯度相当不稳定(unstable)。可以通过relu等激活函数替代，可以加上maxout层。</p>
+<p><strong>positive_unitball初始化</strong></p>
+<p>​       让每一个神经元的输入的权值和为 1，例如：一个神经元有100个输入，让这100个输入的权值和为1.  首先给这100个权值赋值为在（0，1）之间的均匀分布，然后，每一个权值再除以它们的和就可以啦。这么做，可以有助于防止权值初始化过大，从而防止激活函数（sigmoid函数）进入饱和区。所以，它应该比较适合simgmoid形的激活函数</p>
+<p><strong>均匀分布初始化（uniform）</strong></p>
+<p>​       将权值与偏置进行均匀分布的初始化，用min 与 max 来控制它们的的上下限，默认为（0，1）</p>
+<p><strong>xavier初始化</strong></p>
+<p>​       对于权值的分布：均值为0，方差为（1 / 输入的个数） 的 均匀分布。如果我们更注重前向传播的话，我们可以选择 fan_in，即正向传播的输入个数；如果更注重后向传播的话，我们选择 fan_out, 因为在反向传播的时候，fan_out就是神经元的输入个数；如果两者都考虑的话，就选  average = (fan_in + fan_out) /2。对于ReLU激活函数来说，XavierFiller初始化也是很适合。关于该初始化方法，具体可以参考<a href="https://zhuanlan.zhihu.com/p/22028079" target="_blank" rel="noopener">文章1</a>、<a href="https://zhuanlan.zhihu.com/p/22044472" target="_blank" rel="noopener">文章2</a>，该方法假定激活函数是线性的。</p>
+<p><strong>msra初始化</strong></p>
+<p>​       对于权值的分布：基于均值为0，方差为( 2/输入的个数)的高斯分布；它特别适合 ReLU激活函数，该方法主要是基于Relu函数提出的，推导过程类似于xavier，可以参考<a href="http://blog.csdn.net/shuzfan/article/details/51347572" target="_blank" rel="noopener">博客</a>。</p>
+<p><strong>双线性初始化（bilinear）</strong></p>
+<p>​      常用在反卷积神经网络里的权值初始化</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -149,7 +131,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://pengyuanqiuqiu.github.io/2018/07/06/决策树算法/" data-title="决策树ID3/C4.5/CART算法比较 | Jianyu" data-tsina="" class="share clearfix">
+	  <div data-url="https://pengyuanqiuqiu.github.io/2018/07/08/深度学习权重初始化/" data-title="深度学习权重初始化(转) | Jianyu" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -162,19 +144,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2018/07/08/深度学习权重初始化/" title="深度学习权重初始化(转)">
-  <strong>上一篇：</strong><br/>
-  <span>
-  深度学习权重初始化(转)</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2018/07/05/掌握Adaboost算法/"  title="掌握Addaboost算法">
+<a href="/2018/07/06/决策树算法/"  title="决策树ID3/C4.5/CART算法比较">
  <strong>下一篇：</strong><br/> 
- <span>掌握Addaboost算法
+ <span>决策树ID3/C4.5/CART算法比较
 </span>
 </a>
 </div>
@@ -191,7 +165,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#决策树介绍"><span class="toc-number">1.</span> <span class="toc-text">决策树介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#决策树的优缺点"><span class="toc-number">2.</span> <span class="toc-text">决策树的优缺点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ID3算法"><span class="toc-number">2.1.</span> <span class="toc-text">ID3算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#C4-5算法"><span class="toc-number">2.2.</span> <span class="toc-text">C4.5算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CART算法"><span class="toc-number">2.3.</span> <span class="toc-text">CART算法</span></a></li></ol></li></ol>
+ 
  
   </div>
 
