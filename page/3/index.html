@@ -79,6 +79,60 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2018/05/05/字符串的排列/" title="" itemprop="url"></a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-05-05T07:33:31.857Z" itemprop="datePublished"> 发表于 2018-05-05</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <hr>
+<h2 id="title-字符串的排列"><a href="#title-字符串的排列" class="headerlink" title="title:字符串的排列"></a>title:字符串的排列</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>输入一个字符串,按字典序打印出该字符串中字符的所有排列。例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。</p>
+<p>python数组自带count函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="comment"># 返回[a,b] 其中ab是出现一次的两个数字</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">FindNumsAppearOnce</span><span class="params">(self, array)</span>:</span></span><br><span class="line">        res=[]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> array:</span><br><span class="line">            <span class="keyword">if</span> array.count(i)==<span class="number">1</span>:</span><br><span class="line">                res.append(i)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<h5 id="思路二"><a href="#思路二" class="headerlink" title="思路二"></a>思路二</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">###利用hashmap的方式，利用字典存放数字及个数</span></span><br><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">FindNumsAppearOnce</span><span class="params">(self, array)</span>:</span></span><br><span class="line">		hashMap = &#123;&#125;</span><br><span class="line">		<span class="keyword">for</span> i <span class="keyword">in</span> array:</span><br><span class="line">			<span class="keyword">if</span> str(i) <span class="keyword">in</span> hashMap:</span><br><span class="line">				hashMap[str(i)] += <span class="number">1</span></span><br><span class="line">			<span class="keyword">else</span>:</span><br><span class="line">				hashMap[str(i)] = <span class="number">1</span></span><br><span class="line">		res = []</span><br><span class="line">		<span class="keyword">for</span> k <span class="keyword">in</span> hashMap.keys():</span><br><span class="line">			<span class="keyword">if</span> hashMap[k] == <span class="number">1</span>:</span><br><span class="line">				res.append(int(k))</span><br><span class="line">		<span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2018/05/04/数组中值出现一次的数字/" title="数组中值出现一次的数字" itemprop="url">数组中值出现一次的数字</a>
   </h1>
   <p class="article-author">By
@@ -612,73 +666,6 @@
 <h3 id="小总结"><a href="#小总结" class="headerlink" title="小总结"></a>小总结</h3><ul>
 <li>对于小规模的数据，SVM的效果优于LR。LR可以在线训练。</li>
 </ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/04/04/Flask部署/" title="Falsk部署" itemprop="url">Falsk部署</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
-		
-  <p class="article-time">
-    <time datetime="2018-04-04T13:23:29.492Z" itemprop="datePublished"> 发表于 2018-04-04</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h4 id="Flask，Tornado和nginx"><a href="#Flask，Tornado和nginx" class="headerlink" title="Flask，Tornado和nginx"></a>Flask，Tornado和nginx</h4><p>Flask是Python的一个轻型的web框架，具有上手快，结构简单的优点，所以利用它来进行小型项目接口开发。</p>
-<p>但在开发环境下并发性较大，所以Flask内置的服务器不能很好的处理，所以需要采用一个强大、健壮的web服务器来处理复杂的情况，利用tornado和niginx来部署。</p>
-<p>Tornado性能比django和Flask高很多是因为Tornado在底层io处理机制上和django以及Flask有着根本的区别。Tornado拥有wsgi容器。</p>
-<p><img src="http://120.25.221.136/images/bushu/bushu1.png" alt=""></p>
-<ul>
-<li>在Flask的入口程序，代码为：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#coding=utf-8</span><br><span class="line">#!/usr/bin/python</span><br><span class="line"></span><br><span class="line">from somewhere import app  #somewhere 表示的包含Flask的实例，如app = Flask(__name__)</span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line"></span><br><span class="line">    app.run(debug=True)</span><br></pre></td></tr></table></figure>
-<h4 id="增加Tornado功能"><a href="#增加Tornado功能" class="headerlink" title="增加Tornado功能"></a>增加Tornado功能</h4><ul>
-<li>增加程序Tornado_server.py托管Flask。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">from tornado.wsgi import WSGIContainer</span><br><span class="line">from tornado.httpserver import HTTPServer  </span><br><span class="line">from tornado.ioloop import IOLoop</span><br><span class="line">from  manager import app</span><br><span class="line">from tornado.options import define, options,parse_command_line</span><br><span class="line"></span><br><span class="line">parse_command_line()</span><br><span class="line">container = WSGIContainer(app)</span><br><span class="line">http_server = HTTPServer(container)</span><br><span class="line">http_server.listen(5000)#对应flask的端口</span><br><span class="line">IOLoop.instance().start()</span><br><span class="line">define(&quot;log_file_prefix&quot;)</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>运行Tornado_server.py（注意：运行时发现并没有显示是否运行成功，还没摸透）</p>
-<h4 id="配置Nginx转发到Flask"><a href="#配置Nginx转发到Flask" class="headerlink" title="配置Nginx转发到Flask"></a>配置Nginx转发到Flask</h4></li>
-</ul>
-<p>配置文件为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">	listen 80 default_server;</span><br><span class="line">	listen [::]:80 default_server ipv6only=on;</span><br><span class="line"></span><br><span class="line">	root /usr/share/nginx/html;</span><br><span class="line">	index index.html index.htm;</span><br><span class="line"></span><br><span class="line">	# Make site accessible from http://localhost/</span><br><span class="line">	server_name localhost;</span><br><span class="line"></span><br><span class="line">	location / &#123;</span><br><span class="line">		# First attempt to serve request as file, then</span><br><span class="line">		# as directory, then fall back to displaying a 404.</span><br><span class="line">		#try_files $uri $uri/ =404;</span><br><span class="line">		# Uncomment to enable naxsi on this location</span><br><span class="line">		# include /etc/nginx/naxsi.rules</span><br><span class="line">		 proxy_pass http://127.0.0.1:5000;###转发功能 </span><br><span class="line">	&#125;</span><br><span class="line">	#error_page 404 /404.html;</span><br><span class="line">	# redirect server error pages to the static page /50x.html</span><br><span class="line">	#</span><br><span class="line">	#error_page 500 502 503 504 /50x.html;</span><br><span class="line">	#location = /50x.html &#123;</span><br><span class="line">	#	root /usr/share/nginx/html;</span><br><span class="line">	#&#125;</span><br><span class="line"></span><br><span class="line">	# pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000</span><br><span class="line">	#</span><br><span class="line">	#location ~ \.php$ &#123;</span><br><span class="line">	#	fastcgi_split_path_info ^(.+\.php)(/.+)$;</span><br><span class="line">	#	# NOTE: You should have &quot;cgi.fix_pathinfo = 0;&quot; in php.ini</span><br><span class="line">	#</span><br><span class="line">	#	# With php5-cgi alone:</span><br><span class="line">	#	fastcgi_pass 127.0.0.1:9000;</span><br><span class="line">	#	# With php5-fpm:</span><br><span class="line">	#	fastcgi_pass unix:/var/run/php5-fpm.sock;</span><br><span class="line">	#	fastcgi_index index.php;</span><br><span class="line">	#	include fastcgi_params;</span><br><span class="line">	#&#125;</span><br><span class="line"></span><br><span class="line">	# deny access to .htaccess files, if Apache&apos;s document root</span><br><span class="line">	# concurs with nginx&apos;s one</span><br><span class="line">	#</span><br><span class="line">	#location ~ /\.ht &#123;</span><br><span class="line">	#	deny all;</span><br><span class="line">	#&#125;</span><br><span class="line">        location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|flv|mp4|ico)$ &#123;#####静态文件</span><br><span class="line">         expires 30d;</span><br><span class="line">         root /home/jin/data;</span><br><span class="line">         access_log off;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
         
         

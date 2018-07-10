@@ -79,6 +79,70 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2018/02/02/剑指Offer编程题Python编写/" title="剑指Offer编程集合" itemprop="url">剑指Offer编程集合</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-02-02T08:32:35.488Z" itemprop="datePublished"> 发表于 2018-02-02</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>注意：所有题目使用Python语言实现</p>
+<h4 id="一、用两个栈实现队列"><a href="#一、用两个栈实现队列" class="headerlink" title="一、用两个栈实现队列"></a>一、<a href="https://www.nowcoder.com/practice/54275ddae22f475981afa2244dd448c6?tpId=13&amp;tqId=11158&amp;tPage=1&amp;rp=1&amp;ru=/ta/coding-interviews&amp;qru=/ta/coding-interviews/question-ranking" target="_blank" rel="noopener">用两个栈实现队列</a></h4><p>题目描述：用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">class Solution:</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.stack1 = [] #定义两个空数组</span><br><span class="line">        self.stack2 = []</span><br><span class="line">    def push(self, node):</span><br><span class="line">        self.stack1.append(node)#往数组中加入数据</span><br><span class="line">    def pop(self):</span><br><span class="line">        if self.stack1 == []:#判断栈1是否为空，若为空说明为空栈</span><br><span class="line">            return None</span><br><span class="line">        else:#否则利用两个数组实现先进先出</span><br><span class="line">            for i in range(0, len(self.stack1)):</span><br><span class="line">                self.stack2.append(self.stack1.pop())</span><br><span class="line">            res = self.stack2.pop()</span><br><span class="line">            while self.stack2:</span><br><span class="line">                self.stack1.append(self.stack2.pop())</span><br><span class="line">            return res</span><br></pre></td></tr></table></figure>
+<h4 id="二、斐波那契数列"><a href="#二、斐波那契数列" class="headerlink" title="二、斐波那契数列"></a>二、<a href="https://www.nowcoder.net/practice/c6c7742f5ba7442aada113136ddea0c3?tpId=13&amp;tqId=11160&amp;tPage=1&amp;rp=1&amp;ru=/ta/coding-interviews&amp;qru=/ta/coding-interviews/question-ranking" target="_blank" rel="noopener">斐波那契数列</a></h4><p>题目描述：大家都知道斐波那契数列，现在要求输入一个整数n，请你输出斐波那契数列的第n项。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">class Solution:</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.res=0</span><br><span class="line">        self.a=0</span><br><span class="line">        self.b=1</span><br><span class="line">    def Fibonacci(self, n):</span><br><span class="line">        if n&gt;1:</span><br><span class="line">            for i in range(2,n+1):</span><br><span class="line">                self.res=self.a+self.b</span><br><span class="line">                temp=self.b</span><br><span class="line">                self.b=self.res</span><br><span class="line">                self.a=temp</span><br><span class="line">        elif n==1:</span><br><span class="line">            return 1</span><br><span class="line">        elif n==0:</span><br><span class="line">            return 0</span><br><span class="line">        return self.res</span><br></pre></td></tr></table></figure>
+<h4 id="三、数值的整数次方"><a href="#三、数值的整数次方" class="headerlink" title="三、数值的整数次方"></a>三、<a href="https://www.nowcoder.net/practice/1a834e5e3e1a4b7ba251417554e07c00?tpId=13&amp;tqId=11165&amp;tPage=1&amp;rp=1&amp;ru=/ta/coding-interviews&amp;qru=/ta/coding-interviews/question-ranking" target="_blank" rel="noopener">数值的整数次方</a></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">class Solution:</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.res=1</span><br><span class="line">    def Power(self, base, exponent):</span><br><span class="line">        if exponent&gt;=0:</span><br><span class="line">            for i in range(1,exponent+1):</span><br><span class="line">                self.res=self.res*base</span><br><span class="line">        else:</span><br><span class="line">            for i in range(1,abs(exponent)+1):</span><br><span class="line">                self.res=self.res*(1/base)</span><br><span class="line">        return self.res</span><br><span class="line">注意：指数分为正整数与负整数，考虑不同情况。</span><br></pre></td></tr></table></figure>
+<h4 id="四、统计字符"><a href="#四、统计字符" class="headerlink" title="四、统计字符"></a>四、<a href="https://www.nowcoder.com/practice/e3f67da21c3f45bfb091cf0cabb9bb0f?tpId=85&amp;&amp;tqId=29889&amp;rp=1&amp;ru=/activity/oj&amp;qru=/ta/2017test/question-ranking" target="_blank" rel="noopener">统计字符</a></h4><p>题目描述：给定一个英文字符串,请写一段代码找出这个字符串中首先出现三次的那个英文字符。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">a = input()</span><br><span class="line">dic=&#123;&#125;</span><br><span class="line">num=[str(n) for n in a.split()]</span><br><span class="line">str=&apos;&apos;.join(num)</span><br><span class="line">for i in str:</span><br><span class="line">    dic[i] = 0</span><br><span class="line">for i in str:</span><br><span class="line">    if i.isalpha():</span><br><span class="line">        dic[i] += 1</span><br><span class="line">        if dic[i] == 3:</span><br><span class="line">            print(i)</span><br><span class="line">            break</span><br></pre></td></tr></table></figure>
+<h4 id="五、求1-2-3-…-n"><a href="#五、求1-2-3-…-n" class="headerlink" title="五、求1+2+3+…+n"></a>五、<a href="https://www.nowcoder.com/practice/7a0da8fc483247ff8800059e12d7caf1?tpId=13&amp;tqId=11200&amp;tPage=3&amp;rp=3&amp;ru=/ta/coding-interviews&amp;qru=/ta/coding-interviews/question-ranking" target="_blank" rel="noopener">求1+2+3+…+n</a></h4><p>题目描述：求1+2+3+…+n，要求不能使用乘除法、for、while、if、else、switch、case等关键字及条件判断语句（A?B:C）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">class Solution:</span><br><span class="line">    def Sum_Solution(self, n):</span><br><span class="line"></span><br><span class="line">        if n&gt;1:</span><br><span class="line">            return n + self.Sum_Solution(n - 1)</span><br><span class="line">        else:</span><br><span class="line">            return 1</span><br></pre></td></tr></table></figure>
+<h4 id="六、一个数组的值先从小到大递增后从大到小递减，找出最大的值"><a href="#六、一个数组的值先从小到大递增后从大到小递减，找出最大的值" class="headerlink" title="六、一个数组的值先从小到大递增后从大到小递减，找出最大的值"></a>六、一个数组的值先从小到大递增后从大到小递减，找出最大的值</h4><p>题目描述：一个数组的值先从小到大递增后从大到小递减，找出最大的值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">使用迭代</span><br><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">def sortList(array):</span><br><span class="line">    length=len(array)-1 </span><br><span class="line">    end=length-1</span><br><span class="line">    start=0</span><br><span class="line">    middle=int(start+(end-start)/2)</span><br><span class="line">    while(middle&gt;0and middle&lt;length-1):</span><br><span class="line">        print(middle)</span><br><span class="line">        if array[middle]&gt;array[middle-1] and array[middle]&gt;array[middle+1]:</span><br><span class="line">            return array[middle]</span><br><span class="line">        elif array[middle]&lt;array[middle-1]:</span><br><span class="line">            end=middle-1</span><br><span class="line">            middle = int(start+(end-start)/2)</span><br><span class="line">        else:</span><br><span class="line">            start = middle +1</span><br><span class="line">            middle =int(start+(end-start)/2)</span><br><span class="line">    return -1</span><br></pre></td></tr></table></figure>
+<h4 id="七、在有序数组中找到两个数和为n的数"><a href="#七、在有序数组中找到两个数和为n的数" class="headerlink" title="七、在有序数组中找到两个数和为n的数"></a>七、在有序数组中找到两个数和为n的数</h4><p>题目描述：在给定的有序数组中寻找两个之和为n的两个元素。因为数组有序，所以原理是用两个指针，一个指向起始，一个指向末尾，然后判断当前两个元素之和与目标sum的大小关系。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">def serarh(array,n):</span><br><span class="line">	start=0</span><br><span class="line">	end=len(array)-1</span><br><span class="line">	result=[]</span><br><span class="line">	while start&lt;end:</span><br><span class="line">		if array[start]+array[end]==n:</span><br><span class="line">			result.append((array[start],array[end]))</span><br><span class="line">			start=start+1</span><br><span class="line">			end=end-1</span><br><span class="line">		elif array[start]+array[end]&gt;n:</span><br><span class="line">			end=end+1</span><br><span class="line">		elif array[start]+array[end]&lt;n:</span><br><span class="line">			start=start+1</span><br><span class="line">	print(result)</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">	a=[1,2,3,4,5,6,7,8,9,10,11,12,13,15,17,18,19,20]</span><br><span class="line">	serarh(a,50)</span><br></pre></td></tr></table></figure>
+<p># </p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2018/01/29/hadoop安装hive/" title="Hadoop安装hive详细过程" itemprop="url">Hadoop安装hive详细过程</a>
   </h1>
   <p class="article-author">By
