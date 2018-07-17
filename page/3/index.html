@@ -79,6 +79,151 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2018/05/08/python实现pdf转word/" title="python实现pdf转word" itemprop="url">python实现pdf转word</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-05-08T12:42:35.541Z" itemprop="datePublished"> 发表于 2018-05-08</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h4 id="安装包"><a href="#安装包" class="headerlink" title="安装包"></a>安装包</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">PDF转Word功能所需的依赖包如下：</span><br><span class="line"></span><br><span class="line">PDFParser（文档分析器）</span><br><span class="line"></span><br><span class="line">PDFDocument（文档对象）</span><br><span class="line"></span><br><span class="line">PDFResourceManager（资源管理器）</span><br><span class="line"></span><br><span class="line">PDFPageInterpreter（解释器）</span><br><span class="line"></span><br><span class="line">PDFPageAggregator（聚合器）</span><br><span class="line"></span><br><span class="line">LAParams（参数分析器）</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">利用pip安装pdfminer3k，可导入上述的依赖包</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pdfminer.pdfparser <span class="keyword">import</span> PDFParser, PDFDocument</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pdfminer.pdfinterp <span class="keyword">import</span> PDFResourceManager, PDFPageInterpreter</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pdfminer.layout <span class="keyword">import</span> LAParams</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pdfminer.converter <span class="keyword">import</span> PDFPageAggregator</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> configparser <span class="keyword">import</span> ConfigParser</span><br><span class="line"><span class="keyword">from</span> io <span class="keyword">import</span> StringIO</span><br><span class="line"><span class="keyword">from</span> io <span class="keyword">import</span> open</span><br><span class="line"><span class="keyword">from</span> concurrent.futures <span class="keyword">import</span> ProcessPoolExecutor</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pdfminer.pdfinterp <span class="keyword">import</span> PDFResourceManager</span><br><span class="line"><span class="keyword">from</span> pdfminer.pdfinterp <span class="keyword">import</span> process_pdf</span><br><span class="line"><span class="keyword">from</span> pdfminer.converter <span class="keyword">import</span> TextConverter</span><br><span class="line"><span class="keyword">from</span> pdfminer.layout <span class="keyword">import</span> LAParams</span><br><span class="line"><span class="keyword">from</span> docx <span class="keyword">import</span> Document</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_from_pdf</span><span class="params">(file_path)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(file_path, <span class="string">'rb'</span>) <span class="keyword">as</span> file:</span><br><span class="line">        resource_manager = PDFResourceManager()</span><br><span class="line">        return_str = StringIO()</span><br><span class="line">        lap_params = LAParams()</span><br><span class="line"></span><br><span class="line">        device = TextConverter(</span><br><span class="line">            resource_manager, return_str, laparams=lap_params)</span><br><span class="line">        process_pdf(resource_manager, device, file)</span><br><span class="line">        device.close()</span><br><span class="line"></span><br><span class="line">        content = return_str.getvalue()</span><br><span class="line">        return_str.close()</span><br><span class="line">        <span class="keyword">return</span> content</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">save_text_to_word</span><span class="params">(content, file_path)</span>:</span></span><br><span class="line">    doc = Document()</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> content.split(<span class="string">'\n'</span>):</span><br><span class="line">        paragraph = doc.add_paragraph()</span><br><span class="line">        paragraph.add_run(remove_control_characters(line))</span><br><span class="line">    doc.save(file_path)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">remove_control_characters</span><span class="params">(content)</span>:</span></span><br><span class="line">    mpa = dict.fromkeys(range(<span class="number">32</span>))</span><br><span class="line">    <span class="keyword">return</span> content.translate(mpa)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pdf_to_word</span><span class="params">(pdf_file_path, word_file_path)</span>:</span></span><br><span class="line">    content = read_from_pdf(pdf_file_path)</span><br><span class="line">    save_text_to_word(content, word_file_path)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(k,)</span>:</span></span><br><span class="line">    wordker=k</span><br><span class="line">	pdf_folder=pdf路径</span><br><span class="line">    word_folder=word路径</span><br><span class="line">    tasks = []</span><br><span class="line">    <span class="keyword">with</span> ProcessPoolExecutor(max_workers=wordker) <span class="keyword">as</span> executor:</span><br><span class="line">        <span class="keyword">for</span> file <span class="keyword">in</span> os.listdir(pdf_folder):</span><br><span class="line">            extension_name = os.path.splitext(file)[<span class="number">1</span>]</span><br><span class="line">            <span class="keyword">if</span> extension_name != <span class="string">'.pdf'</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            file_name = os.path.splitext(file)[<span class="number">0</span>]</span><br><span class="line">            pdf_file = pdf_folder+ <span class="string">'/'</span> + file</span><br><span class="line">            word_file = word_folder + <span class="string">'/'</span> + file_name + <span class="string">'.docx'</span></span><br><span class="line">            print(<span class="string">'正在处理: '</span>, file)</span><br><span class="line">            result = executor.submit(pdf_to_word, pdf_file, word_file)</span><br><span class="line">            tasks.append(result)</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        exit_flag = <span class="keyword">True</span></span><br><span class="line">        <span class="keyword">for</span> task <span class="keyword">in</span> tasks:</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> task.done():</span><br><span class="line">                exit_flag = <span class="keyword">False</span></span><br><span class="line">        <span class="keyword">if</span> exit_flag:</span><br><span class="line">            print(<span class="string">'完成'</span>)</span><br><span class="line">            exit(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/05/05/将中缀表达式转化为后缀表达式/" title="将中缀表达式转化为后缀表达式(转)" itemprop="url">将中缀表达式转化为后缀表达式(转)</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-05-05T14:30:18.863Z" itemprop="datePublished"> 发表于 2018-05-05</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>我们把平时所用的标准四则运算表达式，即“9+(3-1)*3+10/2”叫做中缀表达式。因为所有的运算符号都在两数字的中间，现在我们的问题就是中缀到后缀的转化。</p>
+<p><a href="http://www.nowamagic.net/librarys/veda/tag/%E4%B8%AD%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F" target="_blank" rel="noopener">中缀表达式</a>“9+(3-1)<em>3+10/2”转化为后缀表达式“9 3 1-3</em>+ 10 2/+”</p>
+<ul>
+<li><p>​</p>
+<p>规则：从左到右遍历中缀表达式的每个数字和符号，若是数字就输出，即成为后缀表达式的一部分；若是符号，则判断其与栈顶符号的优先级，是右括号或优先级低于找顶符号（乘除优先加减）则栈顶元素依次出找并输出，并将当前符号进栈，一直到最终输出后缀表达式为止。</p>
+</li>
+</ul>
+<p>下面我们来具体看看这个过程。</p>
+<ol>
+<li>初始化一空栈，用来对符号进出栈使用。</li>
+<li>第一个字符是数字9，输出9，后面是符号“+”，进<a href="http://www.nowamagic.net/librarys/veda/tag/%E6%A0%88" target="_blank" rel="noopener">栈</a>。</li>
+</ol>
+<p><img src="http://www.nowamagic.net/librarys/images/201210/2012_10_22_08.jpg" alt="img"></p>
+<ol>
+<li>第三个字符是“(”,依然是符号，因其只是左括号，还未配对，故进栈。</li>
+<li>第四个字符是数字3，输出，总表达式为9 3,接着是“-”进栈。</li>
+</ol>
+<p><img src="http://www.nowamagic.net/librarys/images/201210/2012_10_22_09.jpg" alt="img"></p>
+<ol>
+<li>接下来是数字1，输出，总表达式为9 3 1，后面是符号“)”，此时，我们需要去匹配此前的“(”，所以栈顶依次出栈，并输出，直到“(”出栈为止。此时左括号上方只有“-”，因此输出“-”，总的输出表达式为9 3 1 -</li>
+<li>接着是数字3，输出，总的表达式为9 3 1 - 3 。紧接着是符号“<em>”，因为此时的栈顶符号为“+”号，优先级低于“</em>”，因此不输出，进栈。</li>
+</ol>
+<p><img src="http://www.nowamagic.net/librarys/images/201210/2012_10_22_10.jpg" alt="img"></p>
+<ol>
+<li>之后是符号“+”，此时当前栈顶元素比这个“+”的优先级高，因此栈中元素出栈并输出（没有比“+”号更低的优先级，所以全部出栈），总输出表达式为 9 3 1 - 3 <em> +.然后将当前这个符号“+”进栈。也就是说，前6张图的栈底的“+”是指中缀表达式中开头的9后面那个“+”，而下图中的栈底（也是栈顶）的“+”是指“9+(3-1)</em>3+”中的最后一个“+”。</li>
+<li>紧接着数字10，输出，总表达式变为9 3 1-3 * + 10。</li>
+</ol>
+<p><img src="http://www.nowamagic.net/librarys/images/201210/2012_10_22_11.jpg" alt="img"></p>
+<ol>
+<li>最后一个数字2,输出，总的表达式为 9 3 1-3*+ 10 2</li>
+<li>因已经到最后，所以将栈中符号全部出栈并输出。最终输出的后缀表达式结果为 9 3 1-3*+ 10 2/+</li>
+</ol>
+<p><img src="http://www.nowamagic.net/librarys/images/201210/2012_10_22_12.jpg" alt="img"></p>
+<ul>
+<li><p>​</p>
+<p>从刚才的推导中你会发现，要想让计算机具有处理我们通常的标准（中缀）表达式的能力，最重要的就是两步：</p>
+</li>
+</ul>
+<ol>
+<li>将中缀表达式转化为后缀表达式（栈用来进出运算的符号）。</li>
+<li>将后缀表达式进行运算得出结果（栈用来进出运算的数字）。</li>
+</ol>
+<p>整个过程，都充分利用了找的后进先出特性来处理，理解好它其实也就理解好了栈这个数据结构。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2018/05/05/图解后缀表达式的计算过程/" title="图解后缀表达式的计算过程(转)" itemprop="url">图解后缀表达式的计算过程(转)</a>
   </h1>
   <p class="article-author">By
@@ -572,145 +717,9 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/04/30/KNN算法/" title="KNN算法" itemprop="url">KNN算法</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
-		
-  <p class="article-time">
-    <time datetime="2018-04-30T12:59:54.326Z" itemprop="datePublished"> 发表于 2018-04-30</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h3 id="算法介绍"><a href="#算法介绍" class="headerlink" title="算法介绍"></a>算法介绍</h3><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><p>KNN（K-nearest neighbor-K近邻），为有监督的非线性分类算法。如果一个样本在特征空间中的k个最相似(即特征空间中最邻近)的样本中的大多数属于某一个类别，则该样本也属于这个类别，其中K通常是不大于20的整数。KNN算法中，所选择的邻居都是已经正确分类的对象。该方法在定类决策上只依据最邻近的一个或者几个样本的类别来决定待分样本所属的类别。</p>
-<p>给出一个栗子：</p>
-<p>在下图中的绿色圆圈不知道自己属于那个类别，是属于三角形还是正方形，所以我们设定k=3有两个三角形一个正方形多以我们判断绿色圆球为三角形，如果k=5，绿色圆圈为正方形。</p>
-<p><img src="http://120.25.221.136/images/knn/knn.jpg" alt=""></p>
-<h3 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h3><ul>
-<li>计算距离</li>
-<li>选择距离最小的K个点</li>
-<li>排序</li>
-</ul>
-<h3 id="算法优缺点"><a href="#算法优缺点" class="headerlink" title="算法优缺点"></a>算法优缺点</h3><p>优点</p>
-<ul>
-<li><p>理论成熟，思想简单</p>
-</li>
-<li><p>适应于非线性分类</p>
-</li>
-<li><p>训练时间复杂度为o(n)</p>
-</li>
-</ul>
-<p>缺点</p>
-<ul>
-<li><p>如果数据量大复杂度较大，计算时间长</p>
-</li>
-<li><p>样本不平衡，不仅有分布不平衡还有数量不平衡的问题</p>
-</li>
-<li><p>空间复杂度较高</p>
-<h3 id="算法特点"><a href="#算法特点" class="headerlink" title="算法特点"></a>算法特点</h3></li>
-</ul>
-<ol>
-<li><p>KNN属于惰性学习</p>
-<p>没有训练的过程，在分裂的时候直接进行计算</p>
-</li>
-</ol>
-<p>2.KNN的K选值的问题（一般选择奇数大小的值，适用于投票法）<br>   k的选值不一样得出的分类结果可能不一样</p>
-<p>  ​</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/04/24/安装dlib/" title="python安装dlib" itemprop="url">python安装dlib</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
-		
-  <p class="article-time">
-    <time datetime="2018-04-24T13:04:50.851Z" itemprop="datePublished"> 发表于 2018-04-24</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>放在site-packages文件夹中，执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install dlib-19.6.0-cp36-cp36m-win_amd64.whl</span><br></pre></td></tr></table></figure>
-<p>前提是你的pip是最新版哦，否则执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m pip install --upgrade pip</span><br></pre></td></tr></table></figure>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/">Next<span></span></a>
   </nav>
 
 </div>

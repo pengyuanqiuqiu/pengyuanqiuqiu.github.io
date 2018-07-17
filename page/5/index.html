@@ -79,6 +79,128 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2018/03/14/运行pyspark遇到的问题/" title="运行pyspark遇到的问题" itemprop="url">运行pyspark遇到的问题</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-03-14T08:54:38.033Z" itemprop="datePublished"> 发表于 2018-03-14</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>环境：spark-2.3.0-bin-hadoop2.7,python3.6</p>
+<p>问题：Unable to load native-hadoop library for your platform… using builtin-java classes where applicable<br>Stopping namenodes …</p>
+<p>解决方法：是因为不能加载本地库，在Java的$JAVA_HOME/jre/lib/amd64目录下缺少libhadoop.so和libsnappy.so文件。</p>
+<p>libhadoop.so可以在Hadoop目录下的Hadoop\lib\native找到，将它放入上述jre目录下。</p>
+<p><img src="http://120.25.221.136/images/libhadoop.png" alt=""></p>
+<p>可以从<a href="https://code.google.com/p/snappy/下载源码，通过编译源码安装，" target="_blank" rel="noopener">https://code.google.com/p/snappy/下载源码，通过编译源码安装，</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf snappy-1.1.1.tar.gz</span><br><span class="line"></span><br><span class="line">cd snappy-1.1.1</span><br><span class="line"></span><br><span class="line">./configure</span><br><span class="line"></span><br><span class="line">make</span><br><span class="line"></span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<p>安装完成之后，在usr/local/lib目录下找到libsnappy.so，放入jre目录下。重启spark就可以解决问题。</p>
+<p><img src="http://120.25.221.136/images/libsnappy.png" alt=""></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/03/03/机器学习的过拟合解决方法/" title="机器学习的过拟合解决方法" itemprop="url">机器学习的过拟合解决方法</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-03-03T12:38:06.757Z" itemprop="datePublished"> 发表于 2018-03-03</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>定义：简单理解就是训练样本的得到的输出和期望输出基本一致，但是样本输出和测试样本的期望输出相差却很大 ，为了得到一致假设而使假设变得过度复杂称为过拟合，如图：</p>
+<p><img src="http://120.25.221.136/images/overfitting.png" alt=""></p>
+<h3 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h3><h4 id="1-增加数据量"><a href="#1-增加数据量" class="headerlink" title="1. 增加数据量"></a>1. 增加数据量</h4><p>数据量增加会将模型适应更多的数据集，对测试集验证的更加准确。</p>
+<h4 id="2-正则化"><a href="#2-正则化" class="headerlink" title="2.正则化"></a>2.正则化</h4><p>拟合发生时，往往会出现拟合函数在训练数据点上的“曲率”很大。而这些“曲率”是由模型的参数近似表达出来的，因此通过对大值参数的惩罚来抑制这种曲率的发生。</p>
+<p><strong>正则化的作用：</strong></p>
+<ul>
+<li>L1正则化可以产生稀疏权值矩阵，即产生一个稀疏模型，可以用于特征选择</li>
+<li>L2正则化可以防止模型过拟合（overfitting）；一定程度上，L1也可以防止过拟合</li>
+</ul>
+<p><strong>L1正则化和L2正则化的说明如下：</strong></p>
+<ul>
+<li>L1正则化是指权值向量w中各个元素的<strong>绝对值之和</strong>，通常表示为||w||1</li>
+<li>L2正则化是指权值向量w中各个元素的<strong>平方和然后再求平方根</strong>（可以看到Ridge回归的L2正则化项有平方符号），通常表示为||w||2</li>
+</ul>
+<h4 id="3-Dropout"><a href="#3-Dropout" class="headerlink" title="3.Dropout"></a>3.Dropout</h4><p>在一次循环中我们先随机选择神经层中的一些单元并将其临时隐藏，然后再进行该次循环中神经网络的训练和优化过程。在下一次循环中，我们又将隐藏另外一些神经元，如此直至训练结束。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2018/03/02/学习tensorflow/" title="学习tensorflow" itemprop="url">学习tensorflow</a>
   </h1>
   <p class="article-author">By
@@ -615,136 +737,9 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/01/22/学习python的Flask框架（一）/" title="学习python的Flask框架（一）" itemprop="url">学习python的Flask框架（一）</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
-		
-  <p class="article-time">
-    <time datetime="2018-01-22T13:25:11.619Z" itemprop="datePublished"> 发表于 2018-01-22</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h4 id="一、安装Python"><a href="#一、安装Python" class="headerlink" title="一、安装Python"></a>一、安装Python</h4><p>在pyhton官网下载3.6版本的Python安装包，网址为：<a href="https://www.python.org/downloads/，下载后安装。" target="_blank" rel="noopener">https://www.python.org/downloads/，下载后安装。</a></p>
-<h4 id="二、安装PyCharm"><a href="#二、安装PyCharm" class="headerlink" title="二、安装PyCharm"></a>二、安装PyCharm</h4><p>PyCharm是一个功能强大，界面友好的编译器。下载网址为：<a href="https://www.jetbrains.com/pycharm/，建议下载专业版，下载完成后安装（Java编写可能需要装jdk）。" target="_blank" rel="noopener">https://www.jetbrains.com/pycharm/，建议下载专业版，下载完成后安装（Java编写可能需要装jdk）。</a></p>
-<h4 id="三、安装virtualenv"><a href="#三、安装virtualenv" class="headerlink" title="三、安装virtualenv"></a>三、安装virtualenv</h4><p>virtualenv是创建不同的虚拟环境供不同的系统使用，项目之间的运行环境保持独立性而相互不受影响的管理工具。</p>
-<p>$ cd \Scripts&gt; pip install virtualenv</p>
-<p>$ &gt;virtulenv venv</p>
-<p>cd venv /scripts </p>
-<p>$&gt;activate</p>
-<h4 id="四、创建项目"><a href="#四、创建项目" class="headerlink" title="四、创建项目"></a>四、创建项目</h4><p>利用PyCharm创建flask项目。</p>
-<ul>
-<li><img src="http://120.25.221.136/images/create.png" alt="img"></li>
-</ul>
-<h4 id="五、运行项目"><a href="#五、运行项目" class="headerlink" title="五、运行项目"></a>五、运行项目</h4><p><img src="http://120.25.221.136/images/start.png" alt="3"></p>
-<h4 id="六、程序演示"><a href="#六、程序演示" class="headerlink" title="六、程序演示"></a>六、程序演示</h4><ol>
-<li>​</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">from flask import Flask  #导入flask类</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)  #实例化flask对象</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&apos;/&apos;)  #route装饰器函数，定义路由规则，装饰器位于函数之上</span><br><span class="line">def hello_world():#视图函数，处理客户端发起的请求</span><br><span class="line">    return &apos;Hello World!&apos;#返回给浏览器</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:#运行路口</span><br><span class="line">    app.run(debug=True)#启动APP实例 debug调试模式</span><br></pre></td></tr></table></figure>
-<ol>
-<li>Jinja2是Python下一个被广泛应用的模版引擎，他的设计思想来源于Django的模板引擎，并扩展了其语法和一系列强大的功能。</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">from flask import Flask,render_template</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&apos;/&apos;)</span><br><span class="line">def hello_world():</span><br><span class="line">    return render_template(&apos;index.html&apos;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    app.run(debug=True)</span><br></pre></td></tr></table></figure>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/01/22/hello-world/" title="Hello World" itemprop="url">Hello World</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
-		
-  <p class="article-time">
-    <time datetime="2018-01-22T02:36:54.681Z" itemprop="datePublished"> 发表于 2018-01-22</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/page/4/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
+    <a class="extend prev" rel="prev" href="/page/4/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/">Next<span></span></a>
   </nav>
 
 </div>

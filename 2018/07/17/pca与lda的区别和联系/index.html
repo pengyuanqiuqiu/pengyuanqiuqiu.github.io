@@ -4,24 +4,24 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>随机森林之特征选择(转) | Jianyu</title>
+    <title>PCA与LDA的区别和联系 | Jianyu</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="PengYuan">
     
 
     
-    <meta name="description" content="摘要：在随机森林介绍中提到了随机森林一个重要特征：能够计算单个特征变量的重要性。并且这一特征在很多方面能够得到应用,例如在银行贷款业务中能否正确的评估一个企业的信用度,关系到是否能够有效地回收贷款。但是信用评估模型的数据特征有很多,其中不乏有很多噪音,所以需要计算出每一个特征的重要性并对这些特征进行一个排序,进而可以从所有特征中选择出重要性靠前的特征。 一：特征重要性在随机森林中某个特征X的重要性">
+    <meta name="description" content="1、PCA无需样本标签，属于无监督学习降维；LDA需要样本标签，属于有监督学习降维。二者均是寻找一定的特征向量w来降维的，其中，LDA抓住样本的判别特征，PCA则侧重描叙特征。概括来说，PCA选择样本点投影具有最大方差的方向，LDA选择分类性能最好的方向。 2、PCA降维是直接和特征维度相关的，比如原始数据是d维的，那么PCA后，可以任意选取1维、2维，一直到d维都行（当然是对应特征值大的那些）。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="随机森林之特征选择(转)">
-<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/07/11/随机森林之特征选择/index.html">
+<meta property="og:title" content="PCA与LDA的区别和联系">
+<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/07/17/pca与lda的区别和联系/index.html">
 <meta property="og:site_name" content="Jianyu">
-<meta property="og:description" content="摘要：在随机森林介绍中提到了随机森林一个重要特征：能够计算单个特征变量的重要性。并且这一特征在很多方面能够得到应用,例如在银行贷款业务中能否正确的评估一个企业的信用度,关系到是否能够有效地回收贷款。但是信用评估模型的数据特征有很多,其中不乏有很多噪音,所以需要计算出每一个特征的重要性并对这些特征进行一个排序,进而可以从所有特征中选择出重要性靠前的特征。 一：特征重要性在随机森林中某个特征X的重要性">
+<meta property="og:description" content="1、PCA无需样本标签，属于无监督学习降维；LDA需要样本标签，属于有监督学习降维。二者均是寻找一定的特征向量w来降维的，其中，LDA抓住样本的判别特征，PCA则侧重描叙特征。概括来说，PCA选择样本点投影具有最大方差的方向，LDA选择分类性能最好的方向。 2、PCA降维是直接和特征维度相关的，比如原始数据是d维的，那么PCA后，可以任意选取1维、2维，一直到d维都行（当然是对应特征值大的那些）。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-11T01:36:37.981Z">
+<meta property="og:updated_time" content="2018-07-17T08:36:29.767Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="随机森林之特征选择(转)">
-<meta name="twitter:description" content="摘要：在随机森林介绍中提到了随机森林一个重要特征：能够计算单个特征变量的重要性。并且这一特征在很多方面能够得到应用,例如在银行贷款业务中能否正确的评估一个企业的信用度,关系到是否能够有效地回收贷款。但是信用评估模型的数据特征有很多,其中不乏有很多噪音,所以需要计算出每一个特征的重要性并对这些特征进行一个排序,进而可以从所有特征中选择出重要性靠前的特征。 一：特征重要性在随机森林中某个特征X的重要性">
+<meta name="twitter:title" content="PCA与LDA的区别和联系">
+<meta name="twitter:description" content="1、PCA无需样本标签，属于无监督学习降维；LDA需要样本标签，属于有监督学习降维。二者均是寻找一定的特征向量w来降维的，其中，LDA抓住样本的判别特征，PCA则侧重描叙特征。概括来说，PCA选择样本点投影具有最大方差的方向，LDA选择分类性能最好的方向。 2、PCA降维是直接和特征维度相关的，比如原始数据是d维的，那么PCA后，可以任意选取1维、2维，一直到d维都行（当然是对应特征值大的那些）。">
 
     
     <link rel="alternative" href="http://www.163.com/rss/" title="Jianyu" type="application/atom+xml">
@@ -81,14 +81,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/07/11/随机森林之特征选择/" title="随机森林之特征选择(转)" itemprop="url">随机森林之特征选择(转)</a>
+      <a href="/2018/07/17/pca与lda的区别和联系/" title="PCA与LDA的区别和联系" itemprop="url">PCA与LDA的区别和联系</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
 		
   <p class="article-time">
-    <time datetime="2018-07-11T01:35:05.563Z" itemprop="datePublished"> 发表于 2018-07-11</time>
+    <time datetime="2018-07-17T08:22:26.710Z" itemprop="datePublished"> 发表于 2018-07-17</time>
     
   </p>
 </header>
@@ -97,28 +97,23 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#一：特征重要性"><span class="toc-number">1.</span> <span class="toc-text">一：特征重要性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二：特征选择"><span class="toc-number">2.</span> <span class="toc-text">二：特征选择</span></a></li></ol>
+			
 		
 		</div>
 		
-		<p><strong>摘要：</strong>在<a href="http://www.cnblogs.com/justcxtoworld/p/3420258.html" target="_blank" rel="noopener">随机森林介绍</a>中提到了随机森林一个重要特征：能够计算单个特征变量的重要性。并且这一特征在很多方面能够得到应用,例如在银行贷款业务中能否正确的评估一个企业的信用度,关系到是否能够有效地回收贷款。但是信用评估模型的数据特征有很多,其中不乏有很多噪音,所以需要计算出每一个特征的重要性并对这些特征进行一个排序,进而可以从所有特征中选择出重要性靠前的特征。</p>
-<h4 id="一：特征重要性"><a href="#一：特征重要性" class="headerlink" title="一：特征重要性"></a>一：特征重要性</h4><p>在随机森林中某个特征X的重要性的<strong>计算方法</strong>如下：</p>
-<p>1：对于随机森林中的每一颗决策树,使用相应的<a href="http://www.cnblogs.com/justcxtoworld/p/3434266.html" target="_blank" rel="noopener">OOB</a>(袋外数据)数据来计算它的<a href="http://www.cnblogs.com/justcxtoworld/p/3434266.html" target="_blank" rel="noopener">袋外数据误差</a>,记为<strong>errOOB1</strong>.</p>
-<p>2:  随机地对袋外数据OOB所有样本的特征X加入噪声干扰(就可以随机的改变样本在特征X处的值),再次计算它的袋外数据误差,记为<strong>errOOB2</strong>.</p>
-<p>3：假设随机森林中有Ntree棵树,那么对于<strong>特征X的重要性=∑(errOOB2-errOOB1)/Ntree</strong>,之所以可以用这个表达式来作为相应特征的重要性的度量值是因为：若给某个特征随机加入噪声之后,袋外的准确率大幅度降低,则说明这个特征对于样本的分类结果影响很大,也就是说它的重要程度比较高。</p>
-<h4 id="二：特征选择"><a href="#二：特征选择" class="headerlink" title="二：特征选择"></a>二：特征选择</h4><p>在论文 <a href="http://hal.archives-ouvertes.fr/docs/00/75/54/89/PDF/PRLv4.pdf" target="_blank" rel="noopener">Variable Selection using Random Forests</a>中详细的论述了基于随机森林的特征选择方法,这里我们进行一些回顾。</p>
-<p>首先特征选择的<strong>目标</strong>有两个：</p>
-<p>1：找到与应变量高度相关的特征变量。</p>
-<p>2：选择出数目较少的特征变量并且能够充分的预测应变量的结果。</p>
-<p>其次一般特征选择的<strong>步骤</strong>为：</p>
-<p>1：初步估计和排序</p>
-<blockquote>
-<p>a)对随机森林中的特征变量按照VI（Variable Importance）降序排序。</p>
-<p>b)确定删除比例,从当前的特征变量中剔除相应比例不重要的指标，从而得到一个新的特征集。</p>
-<p>c)用新的特征集建立新的随机森林,并计算特征集中每个特征的VI,并排序。</p>
-<p>d)重复以上步骤,直到剩下m个特征。</p>
-</blockquote>
-<p>2：根据1中得到的每个特征集和它们建立起来的随机森林,计算对应的袋外误差率(OOB err),将袋外误差率最低的特征集作为最后选定的特征集。</p>
+		<p>1、PCA无需样本标签，属于<strong>无监督学习降维</strong>；LDA需要样本标签，属于<strong>有监督学习降维</strong>。二者均是寻找一定的特征向量w来降维的，其中，LDA抓住样本的判别特征，PCA则侧重描叙特征。概括来说，PCA选择样本点投影具有最大方差的方向，LDA选择分类性能最好的方向。</p>
+<p>2、PCA降维是直接和特征维度相关的，比如原始数据是d维的，那么PCA后，可以任意选取1维、2维，一直到d维都行（当然是对应特征值大的那些）。LDA降维是直接和类别的个数C相关的，与数据本身的维度没关系，比如原始数据是d维的，一共有C个类别，那么LDA降维之后，一般就是1维，2维到C-1维进行选择（当然对应的特征值也是最大的一些）。要求降维后特征向量维度大于C-1的，不能使用LDA。<br>     对于很多两类分类的情况，LDA之后就剩下1维，找到分类效果最好的一个阈值貌似就可以了。举个例子，假设图象分类，两个类别正例反例，每个图象10000维特征，那么LDA之后，就只有1维特征，并且这维特征的分类能力最好。</p>
+<p>3、PCA投影的坐标系都是正交的，而LDA根据类别的标注关注分类能力，因此不保证投影到的坐标系是正交的（一般都不正交）</p>
+<p>LDA用于降维，和PCA有很多相同，也有很多不同的地方，因此值得好好的比较一下两者的降维异同点。</p>
+<p>　　　　首先我们看看相同点：</p>
+<p>　　　　1）两者均可以对数据进行降维。</p>
+<p>　　　　2）两者在降维时均使用了矩阵特征分解的思想。</p>
+<p>　　　　3）两者都假设数据符合高斯分布。</p>
+<p>　　　　我们接着看看不同点：</p>
+<p>　　　　1）LDA是有监督的降维方法，而PCA是无监督的降维方法</p>
+<p>　　　　2）LDA降维最多降到类别数k-1的维数，而PCA没有这个限制。</p>
+<p>　　　　3）LDA除了可以用于降维，还可以用于分类。</p>
+<p>　　　　4）LDA选择分类性能最好的投影方向，而PCA选择样本点投影具有最大方差的方向。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -131,7 +126,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://pengyuanqiuqiu.github.io/2018/07/11/随机森林之特征选择/" data-title="随机森林之特征选择(转) | Jianyu" data-tsina="" class="share clearfix">
+	  <div data-url="https://pengyuanqiuqiu.github.io/2018/07/17/pca与lda的区别和联系/" data-title="PCA与LDA的区别和联系 | Jianyu" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -144,19 +139,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2018/07/17/异常值分析/" title="异常值分析">
-  <strong>上一篇：</strong><br/>
-  <span>
-  异常值分析</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2018/07/09/PCA的数学原理/"  title="PCA的数学原理(转)">
+<a href="/2018/07/17/异常值分析/"  title="异常值分析">
  <strong>下一篇：</strong><br/> 
- <span>PCA的数学原理(转)
+ <span>异常值分析
 </span>
 </a>
 </div>
@@ -173,7 +160,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#一：特征重要性"><span class="toc-number">1.</span> <span class="toc-text">一：特征重要性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二：特征选择"><span class="toc-number">2.</span> <span class="toc-text">二：特征选择</span></a></li></ol>
+ 
  
   </div>
 

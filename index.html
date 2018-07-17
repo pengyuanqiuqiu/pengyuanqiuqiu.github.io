@@ -79,6 +79,164 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2018/07/17/pca与lda的区别和联系/" title="PCA与LDA的区别和联系" itemprop="url">PCA与LDA的区别和联系</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-07-17T08:22:26.710Z" itemprop="datePublished"> 发表于 2018-07-17</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>1、PCA无需样本标签，属于<strong>无监督学习降维</strong>；LDA需要样本标签，属于<strong>有监督学习降维</strong>。二者均是寻找一定的特征向量w来降维的，其中，LDA抓住样本的判别特征，PCA则侧重描叙特征。概括来说，PCA选择样本点投影具有最大方差的方向，LDA选择分类性能最好的方向。</p>
+<p>2、PCA降维是直接和特征维度相关的，比如原始数据是d维的，那么PCA后，可以任意选取1维、2维，一直到d维都行（当然是对应特征值大的那些）。LDA降维是直接和类别的个数C相关的，与数据本身的维度没关系，比如原始数据是d维的，一共有C个类别，那么LDA降维之后，一般就是1维，2维到C-1维进行选择（当然对应的特征值也是最大的一些）。要求降维后特征向量维度大于C-1的，不能使用LDA。<br>     对于很多两类分类的情况，LDA之后就剩下1维，找到分类效果最好的一个阈值貌似就可以了。举个例子，假设图象分类，两个类别正例反例，每个图象10000维特征，那么LDA之后，就只有1维特征，并且这维特征的分类能力最好。</p>
+<p>3、PCA投影的坐标系都是正交的，而LDA根据类别的标注关注分类能力，因此不保证投影到的坐标系是正交的（一般都不正交）</p>
+<p>LDA用于降维，和PCA有很多相同，也有很多不同的地方，因此值得好好的比较一下两者的降维异同点。</p>
+<p>　　　　首先我们看看相同点：</p>
+<p>　　　　1）两者均可以对数据进行降维。</p>
+<p>　　　　2）两者在降维时均使用了矩阵特征分解的思想。</p>
+<p>　　　　3）两者都假设数据符合高斯分布。</p>
+<p>　　　　我们接着看看不同点：</p>
+<p>　　　　1）LDA是有监督的降维方法，而PCA是无监督的降维方法</p>
+<p>　　　　2）LDA降维最多降到类别数k-1的维数，而PCA没有这个限制。</p>
+<p>　　　　3）LDA除了可以用于降维，还可以用于分类。</p>
+<p>　　　　4）LDA选择分类性能最好的投影方向，而PCA选择样本点投影具有最大方差的方向。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/07/17/异常值分析/" title="异常值分析" itemprop="url">异常值分析</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
+		
+  <p class="article-time">
+    <time datetime="2018-07-17T07:54:20.197Z" itemprop="datePublished"> 发表于 2018-07-17</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h3 id="异常值是什么？"><a href="#异常值是什么？" class="headerlink" title="异常值是什么？"></a>异常值是什么？</h3><p>残差很大的点，<strong>即在数据集中存在不合理的值，又称离群点</strong>；</p>
+<h3 id="缺失值产生的原因"><a href="#缺失值产生的原因" class="headerlink" title="缺失值产生的原因"></a>缺失值产生的原因</h3><p>每当我们遇到异常值时，处理这些异常值的理想方法就是找出引起这些异常值的原因。 处理它们的方法将取决于它们发生的原因， 异常值的原因可以分为两大类：</p>
+<blockquote>
+<ul>
+<li>人为错误</li>
+<li>自然错误</li>
+</ul>
+</blockquote>
+<h4 id="数据输入错误"><a href="#数据输入错误" class="headerlink" title="数据输入错误"></a>数据输入错误</h4><p>人为错误（如数据收集，记录或输入过程中导致的错误）会导致数据中的异常值。 例如：客户的年收入是10万美元，但意外地，数据输入操作附加一个零。 现在的收入就是100万美元，是10倍。 显然，与其他人相比，这将是异常值。</p>
+<h4 id="测量误差"><a href="#测量误差" class="headerlink" title="测量误差"></a>测量误差</h4><p>这是异常值最常见的来源。 当使用的测量仪器出现故障时，会引起这种情况。 例如：有10台称重机。 其中9个是正确的，1个是错误的。 故障机器上的人员测量重量将高于或低于组内其余人员。 在故障机器上测量的重量可能导致异常值。</p>
+<h4 id="实验误差"><a href="#实验误差" class="headerlink" title="实验误差"></a>实验误差</h4><p>异常值的另一个原因是实验误差。 例如：在7名跑步者的100米冲刺中，有一名选手错过了跑的口令，让他开始延迟。 因此，这使得跑步者的跑步时间比其他跑步者要多， 总运行时间可能是一个异常值。</p>
+<h4 id="故意异常值"><a href="#故意异常值" class="headerlink" title="故意异常值"></a>故意异常值</h4><p>通常在自我报告的措施中涉及敏感数据。 例如：通常青少年报告酒量，只有其中一小部分报告实际价值，这里的实际值可能看起来像异常值，因为其余的青少年正在假值。</p>
+<h4 id="数据处理错误"><a href="#数据处理错误" class="headerlink" title="数据处理错误"></a>数据处理错误</h4><p>无论何时执行数据挖掘，我们从多个来源提取数据。 某些操作或提取错误可能会导致数据集中的异常值。</p>
+<h4 id="抽样错误"><a href="#抽样错误" class="headerlink" title="抽样错误"></a>抽样错误</h4><p>例如，衡量运动员的身高，错误地在样品中包括几名篮球运动员。 这种包含可能会导致数据集中的异常值。</p>
+<h4 id="自然异常值"><a href="#自然异常值" class="headerlink" title="自然异常值"></a>自然异常值</h4><p>当异常值不是人为的（由于错误），它是一个自然的异常值。 例如：注意到其中一家著名的保险公司，前50名财务顾问的表现远远高于其他人。 令人惊讶的是，这不是由于任何错误。 因此，每当与顾问一起执行任何数据挖掘活动时，我们都会分别对待此细分。</p>
+<h2 id="异常值分析"><a href="#异常值分析" class="headerlink" title="异常值分析"></a>异常值分析</h2><ul>
+<li><p>基于统计的方法</p>
+</li>
+<li><p>基于距离的方法</p>
+</li>
+<li><p>基于密度的方法</p>
+</li>
+<li><p>基于聚类的方法</p>
+</li>
+<li><p>基于分类的方法</p>
+</li>
+<li><p>基于深度的方法</p>
+</li>
+<li><p>基于小波变换的方法</p>
+</li>
+<li><p>基于图的方法</p>
+</li>
+<li><p>基于模式的方法</p>
+</li>
+<li><p>基于神经网络的方法</p>
+</li>
+</ul>
+<p>1.简单统计分析<br>    对属性值进行一个描述性的统计，从而查看哪些值是不合理的。比如对年龄这个属性进行规约：年龄的区间在[0:200]，如果样本中的年龄值不再该区间范围内，则表示该样本的年龄属性属于异常值。</p>
+<ol>
+<li>3δ原则<br>当数据服从正态分布：<br> 根据正态分布的定义可知，距离平均值3δ之外的概率为 P(|x-μ|&gt;3δ) &lt;= 0.003 ，这属于极小概率事件，在默认情况下我们可以认定，距离超过平均值3δ的样本是不存在的。 因此，当样本距离平均值大于3δ，则认定该样本为异常值。</li>
+</ol>
+<p>这里写图片描述<br>当数据不服从正态分布：<br>当数据不服从正态分布，可以通过远离平均距离多少倍的标准差来判定，多少倍的取值需要根据经验和实际情况来决定。<br>3．箱型图分析<br>箱型图提供了一个识别异常值的标准，即大于或小于箱型图设定的上下界的数值即为异常值，箱型图如下图所示：<br>这里写图片描述<br>首先我们定义下上四分位和下四分位。<br>上四分位我们设为 U，表示的是所有样本中只有1/4的数值大于U<br>同理，下四分位我们设为 L，表示的是所有样本中只有1/4的数值小于L<br>那么，上下界又是什么呢？<br>我们设上四分位与下四分位的插值为IQR，即：IQR=U-L<br>那么，上界为 U+1.5IQR ，下界为： L - 1.5IQR<br>箱型图选取异常值比较客观，在识别异常值方面有一定的优越性。</p>
+<p><strong>异常值的处理方法常用有四种</strong>：</p>
+<p>1.删除含有异常值的记录</p>
+<p>2.将异常值视为缺失值，交给缺失值处理方法来处理</p>
+<p>3.用平均值来修正</p>
+<p>4.不处理</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2018/07/11/随机森林之特征选择/" title="随机森林之特征选择(转)" itemprop="url">随机森林之特征选择(转)</a>
   </h1>
   <p class="article-author">By
@@ -804,289 +962,9 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/06/21/sql面试题集锦/" title="SQL面试题集锦" itemprop="url">SQL面试题集锦</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
-		
-  <p class="article-time">
-    <time datetime="2018-06-21T12:32:58.331Z" itemprop="datePublished"> 发表于 2018-06-21</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h4 id="1-有三个表，如果学生缺考，那么在成绩表中就不存在这个学生的这门课程成绩的记录，写一段SQL语句，检索出每个学生缺考的科目。"><a href="#1-有三个表，如果学生缺考，那么在成绩表中就不存在这个学生的这门课程成绩的记录，写一段SQL语句，检索出每个学生缺考的科目。" class="headerlink" title="1.有三个表，如果学生缺考，那么在成绩表中就不存在这个学生的这门课程成绩的记录，写一段SQL语句，检索出每个学生缺考的科目。"></a>1.有三个表，如果学生缺考，那么在成绩表中就不存在这个学生的这门课程成绩的记录，写一段SQL语句，检索出每个学生缺考的科目。</h4><p>A 学生表(student)<br>字段1 学生号(sid)<br>字段2 学生名(sname)</p>
-<p>B 科目表(course)<br>字段1 科目号(cid)<br>字段2 科目名(cname)</p>
-<p>C 成绩表(grade)<br>字段1 成绩号(gid)<br>字段2 学生号(sid)<br>字段3 科目号(cid)<br>字段4 成绩(score)</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`student`</span> (</span><br><span class="line"><span class="string">`sid`</span>  <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> ,</span><br><span class="line"><span class="string">`sname`</span>  <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_general_ci <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> ,</span><br><span class="line">PRIMARY <span class="keyword">KEY</span> (<span class="string">`sid`</span>)</span><br><span class="line">)</span><br><span class="line"><span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span></span><br><span class="line"><span class="keyword">DEFAULT</span> <span class="built_in">CHARACTER</span> <span class="keyword">SET</span>=utf8 <span class="keyword">COLLATE</span>=utf8_general_ci</span><br><span class="line">ROW_FORMAT=<span class="keyword">COMPACT</span>;</span><br></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> cname ,t.sid <span class="keyword">from</span> grade <span class="keyword">RIGHT</span> <span class="keyword">JOIN</span>  (<span class="keyword">SELECT</span> * <span class="keyword">from</span>  student ,course)<span class="keyword">as</span> t <span class="keyword">on</span> grade.cid=t.cid <span class="keyword">and</span> grade.sid=t.sid <span class="keyword">where</span> grade.score <span class="keyword">is</span> <span class="literal">null</span></span><br></pre></td></tr></table></figure>
-<h4 id="2-有如下表："><a href="#2-有如下表：" class="headerlink" title="2.有如下表："></a>2.有如下表：</h4><table>
-<thead>
-<tr>
-<th>日期(time)</th>
-<th>结果(result)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>2005-05-09</td>
-<td>胜</td>
-</tr>
-<tr>
-<td>2005-05-09</td>
-<td>胜</td>
-</tr>
-<tr>
-<td>2005-05-09</td>
-<td>负</td>
-</tr>
-<tr>
-<td>2005-05-09</td>
-<td>负</td>
-</tr>
-<tr>
-<td>2005-05-10</td>
-<td>胜</td>
-</tr>
-<tr>
-<td>2005-05-10</td>
-<td>负</td>
-</tr>
-<tr>
-<td>2005-05-10</td>
-<td>负</td>
-</tr>
-</tbody>
-</table>
-<p>如果要生成下列结果，该如何写sql语句？</p>
-<table>
-<thead>
-<tr>
-<th>日期</th>
-<th>胜</th>
-<th>负</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>2005-05-09</td>
-<td>2</td>
-<td>2</td>
-</tr>
-<tr>
-<td>2005-05-10</td>
-<td>1</td>
-<td>2</td>
-</tr>
-</tbody>
-</table>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`game`</span> (</span><br><span class="line"><span class="string">`time`</span>  <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_general_ci <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> ,</span><br><span class="line"><span class="string">`result`</span>  <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_general_ci <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> </span><br><span class="line">)</span><br><span class="line"><span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span></span><br><span class="line"><span class="keyword">DEFAULT</span> <span class="built_in">CHARACTER</span> <span class="keyword">SET</span>=utf8 <span class="keyword">COLLATE</span>=utf8_general_ci</span><br><span class="line">ROW_FORMAT=<span class="keyword">COMPACT</span>;</span><br></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">time</span> ,<span class="keyword">sum</span>(<span class="keyword">case</span> <span class="keyword">result</span> <span class="keyword">when</span> <span class="string">'胜'</span> <span class="keyword">then</span> <span class="number">1</span> <span class="keyword">ELSE</span> <span class="number">0</span> <span class="keyword">end</span> ) <span class="keyword">as</span> 胜,<span class="keyword">sum</span>(<span class="keyword">case</span> <span class="keyword">result</span> <span class="keyword">when</span> <span class="string">'负'</span> <span class="keyword">then</span> <span class="number">1</span> <span class="keyword">ELSE</span> <span class="number">0</span> <span class="keyword">end</span> ) <span class="keyword">as</span> 负 <span class="keyword">from</span> game <span class="keyword">GROUP</span> <span class="keyword">BY</span> game.time</span><br></pre></td></tr></table></figure>
-<h4 id="3-原表："><a href="#3-原表：" class="headerlink" title="3.原表："></a>3.原表：</h4><table>
-<thead>
-<tr>
-<th style="text-align:center">gid</th>
-<th style="text-align:center">sid</th>
-<th style="text-align:center">cid</th>
-<th style="text-align:center">score</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">60</td>
-</tr>
-<tr>
-<td style="text-align:center">2</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">90</td>
-</tr>
-<tr>
-<td style="text-align:center">3</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">3</td>
-<td style="text-align:center">99</td>
-</tr>
-<tr>
-<td style="text-align:center">4</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">57</td>
-</tr>
-<tr>
-<td style="text-align:center">5</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">78</td>
-</tr>
-</tbody>
-</table>
-<p>为了方便阅读，查询此表后的显示结果如下（及格分数为60分）：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">gid</th>
-<th style="text-align:center">sid</th>
-<th style="text-align:center">cid</th>
-<th style="text-align:center">score</th>
-<th style="text-align:center">mark</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">60</td>
-<td style="text-align:center">pass</td>
-</tr>
-<tr>
-<td style="text-align:center">2</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">90</td>
-<td style="text-align:center">pass</td>
-</tr>
-<tr>
-<td style="text-align:center">3</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">3</td>
-<td style="text-align:center">99</td>
-<td style="text-align:center">pass</td>
-</tr>
-<tr>
-<td style="text-align:center">4</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">57</td>
-<td style="text-align:center">failed</td>
-</tr>
-<tr>
-<td style="text-align:center">5</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">58</td>
-<td style="text-align:center">failed</td>
-</tr>
-</tbody>
-</table>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`garde`</span> (</span><br><span class="line"><span class="string">`gid`</span>  <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> ,</span><br><span class="line"><span class="string">`sid`</span>  <span class="built_in">int</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> ,</span><br><span class="line"><span class="string">`cid`</span>  <span class="built_in">int</span>(<span class="number">11</span>) <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> ,</span><br><span class="line"><span class="string">`score`</span>  <span class="built_in">int</span>(<span class="number">11</span>) <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> ,</span><br><span class="line">PRIMARY <span class="keyword">KEY</span> (<span class="string">`gid`</span>))</span><br><span class="line"><span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span></span><br><span class="line"><span class="keyword">DEFAULT</span> <span class="built_in">CHARACTER</span> <span class="keyword">SET</span>=utf8 <span class="keyword">COLLATE</span>=utf8_general_ci</span><br><span class="line">ROW_FORMAT=<span class="keyword">COMPACT</span>;</span><br></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> *,</span><br><span class="line"> <span class="keyword">case</span>  <span class="keyword">when</span> score &gt;<span class="string">'60'</span> <span class="keyword">then</span> <span class="string">'pass'</span> <span class="keyword">ELSE</span> <span class="string">"failed"</span></span><br><span class="line"><span class="keyword">end</span> <span class="keyword">as</span> <span class="string">"mark"</span></span><br><span class="line"><span class="keyword">from</span> grade</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">sid</span>,gid <span class="keyword">from</span>  grade  <span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="keyword">sid</span>  <span class="keyword">HAVING</span>  <span class="keyword">count</span>(<span class="keyword">sid</span>)=(<span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*) <span class="keyword">from</span> course)</span><br></pre></td></tr></table></figure>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/06/19/交叉验证的原因/" title="交叉验证" itemprop="url">交叉验证</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
-		
-  <p class="article-time">
-    <time datetime="2018-06-19T12:32:46.224Z" itemprop="datePublished"> 发表于 2018-06-19</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><ul>
-<li>训练过程中模型在训练集表现的很好，但在训练数据外的话对数据的拟合程度并不高，造成过拟合现象。素银使用交叉验证评估模型的预测能力，在一定的程度上减少过拟合，拥有更好的泛化能力。</li>
-<li>在有限的数据中尽可能的获取更多的有效信息。</li>
-</ul>
-<h3 id="交叉验证的思想"><a href="#交叉验证的思想" class="headerlink" title="交叉验证的思想"></a>交叉验证的思想</h3><p>将原始数据进行分组，一部分作为训练集一部分作为测试集，首先用训练集对模型进行训练,再利用验证集来测试模型的泛化误差。</p>
-<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><ul>
-<li><p>留出法</p>
-<p>在机器学习任务中，拿到数据后，我们首先会将原始数据集分为三部分：<strong>训练集、验证集和测试集</strong>。<br>训练集用于训练模型，验证集用于模型的参数选择配置，测试集对于模型来说是未知数据，用于评估模型的泛化能力。</p>
-</li>
-</ul>
-<ul>
-<li>k 折交叉验证（k-fold cross validation）</li>
-</ul>
-<p>​        k 折交叉验证通过对 k 个不同分组训练的结果进行平均来减少方差，因此模型的性能对数据的划分就不那么敏感。</p>
-<ul>
-<li>第一步，不重复抽样将原始数据随机分为 k 份。</li>
-<li>第二步，每一次挑选其中 1 份作为测试集，剩余 k-1 份作为训练集用于模型训练。</li>
-<li>第三步，重复第二步 k 次，这样每个子集都有一次机会作为测试集，其余机会作为训练集。</li>
-<li>在每个训练集上训练后得到一个模型，</li>
-<li>用这个模型在相应的测试集上测试，计算并保存模型的评估指标，</li>
-<li>第四步，计算 k 组测试结果的平均值作为模型精度的估计，并作为当前 k 折交叉验证下模型的性能指标。</li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
   </nav>
 
 </div>
