@@ -18,7 +18,7 @@
 <meta property="og:site_name" content="Jianyu">
 <meta property="og:description" content="介绍数据倾斜介绍简单的讲，数据倾斜就是我们在计算数据的时候，数据的分散度不够，导致大量的数据集中到了一台或者几台机器上计算，这些数据的计算速度远远低于平均计算速度，导致整个计算过程过慢。  在做Shuffle阶段的优化过程中，遇到了数据倾斜的问题，造成了对一些情况下优化效果不明显。主要是因为在Job完成后的所得到的Counters是整个Job的总和，优化是基于这些Counters得出的平均值，而由">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-06-19T09:10:08.496Z">
+<meta property="og:updated_time" content="2018-07-26T14:06:55.090Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据倾斜（转）">
 <meta name="twitter:description" content="介绍数据倾斜介绍简单的讲，数据倾斜就是我们在计算数据的时候，数据的分散度不够，导致大量的数据集中到了一台或者几台机器上计算，这些数据的计算速度远远低于平均计算速度，导致整个计算过程过慢。  在做Shuffle阶段的优化过程中，遇到了数据倾斜的问题，造成了对一些情况下优化效果不明显。主要是因为在Job完成后的所得到的Counters是整个Job的总和，优化是基于这些Counters得出的平均值，而由">
@@ -181,6 +181,8 @@
 <p>  left outer join users b</p>
 <p>  on case when a.user_id is null then concat(‘hive’,rand() ) else a.user_id end = b.user_id;</p>
 <p>结论：方法2比方法1效率更好，不但io少了，而且作业数也少了。解决方法1中 log读取两次，jobs是2。解决方法2 job数是1 。这个优化适合无效 id (比如 -99 , ’’, null 等) 产生的倾斜问题。把空值的 key 变成一个字符串加上随机数，就能把倾斜的数据分到不同的reduce上 ,解决数据倾斜问题。</p>
+<p>问题：在训练的时候已经采取上采样的方式来训练，那测试的时候还是按照一比一还是之前的倾斜比例来验证？</p>
+<p>答：按照倾斜的比例来测试数据，数据出现倾斜不是偶然事件，是根据某个事件出现的真实情况，所以还是按照数据集的原始比例来保持真实性。</p>
   
 	</div>
 		<footer class="article-footer clearfix">

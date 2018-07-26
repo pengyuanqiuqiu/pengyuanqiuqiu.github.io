@@ -4,24 +4,24 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>PCA与LDA的区别和联系 | Jianyu</title>
+    <title>回文数的判断和括号的匹配 | Jianyu</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="PengYuan">
     
 
     
-    <meta name="description" content="1、PCA无需样本标签，属于无监督学习降维；LDA需要样本标签，属于有监督学习降维。二者均是寻找一定的特征向量w来降维的，其中，LDA抓住样本的判别特征，PCA则侧重描叙特征。概括来说，PCA选择样本点投影具有最大方差的方向，LDA选择分类性能最好的方向。 2、PCA降维是直接和特征维度相关的，比如原始数据是d维的，那么PCA后，可以任意选取1维、2维，一直到d维都行（当然是对应特征值大的那些）。">
+    <meta name="description" content="回文数回文数的概念：即是给定一个数，这个数顺读和逆读都是一样的。例如：121，1221是回文数，123，1231不是回文数。 123456789101112131415161718192021222324252627282930# -*- coding: utf-8 -*-    import math    def huiwen(chuan):        length=len(chuan)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PCA与LDA的区别和联系">
-<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/07/17/pca与lda的区别和联系/index.html">
+<meta property="og:title" content="回文数的判断和括号的匹配">
+<meta property="og:url" content="https://pengyuanqiuqiu.github.io/2018/07/26/回文数的判断和括号的匹配/index.html">
 <meta property="og:site_name" content="Jianyu">
-<meta property="og:description" content="1、PCA无需样本标签，属于无监督学习降维；LDA需要样本标签，属于有监督学习降维。二者均是寻找一定的特征向量w来降维的，其中，LDA抓住样本的判别特征，PCA则侧重描叙特征。概括来说，PCA选择样本点投影具有最大方差的方向，LDA选择分类性能最好的方向。 2、PCA降维是直接和特征维度相关的，比如原始数据是d维的，那么PCA后，可以任意选取1维、2维，一直到d维都行（当然是对应特征值大的那些）。">
+<meta property="og:description" content="回文数回文数的概念：即是给定一个数，这个数顺读和逆读都是一样的。例如：121，1221是回文数，123，1231不是回文数。 123456789101112131415161718192021222324252627282930# -*- coding: utf-8 -*-    import math    def huiwen(chuan):        length=len(chuan)">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-17T08:36:29.767Z">
+<meta property="og:updated_time" content="2018-07-26T10:53:34.506Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PCA与LDA的区别和联系">
-<meta name="twitter:description" content="1、PCA无需样本标签，属于无监督学习降维；LDA需要样本标签，属于有监督学习降维。二者均是寻找一定的特征向量w来降维的，其中，LDA抓住样本的判别特征，PCA则侧重描叙特征。概括来说，PCA选择样本点投影具有最大方差的方向，LDA选择分类性能最好的方向。 2、PCA降维是直接和特征维度相关的，比如原始数据是d维的，那么PCA后，可以任意选取1维、2维，一直到d维都行（当然是对应特征值大的那些）。">
+<meta name="twitter:title" content="回文数的判断和括号的匹配">
+<meta name="twitter:description" content="回文数回文数的概念：即是给定一个数，这个数顺读和逆读都是一样的。例如：121，1221是回文数，123，1231不是回文数。 123456789101112131415161718192021222324252627282930# -*- coding: utf-8 -*-    import math    def huiwen(chuan):        length=len(chuan)">
 
     
     <link rel="alternative" href="http://www.163.com/rss/" title="Jianyu" type="application/atom+xml">
@@ -81,14 +81,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/07/17/pca与lda的区别和联系/" title="PCA与LDA的区别和联系" itemprop="url">PCA与LDA的区别和联系</a>
+      <a href="/2018/07/26/回文数的判断和括号的匹配/" title="回文数的判断和括号的匹配" itemprop="url">回文数的判断和括号的匹配</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="PengYuan" target="_blank" itemprop="author">PengYuan</a>
 		
   <p class="article-time">
-    <time datetime="2018-07-17T08:22:26.710Z" itemprop="datePublished"> 发表于 2018-07-17</time>
+    <time datetime="2018-07-26T10:41:33.092Z" itemprop="datePublished"> 发表于 2018-07-26</time>
     
   </p>
 </header>
@@ -97,23 +97,13 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#回文数"><span class="toc-number">1.</span> <span class="toc-text">回文数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#括号的匹配"><span class="toc-number">2.</span> <span class="toc-text">括号的匹配</span></a></li></ol>
 		
 		</div>
 		
-		<p>1、PCA无需样本标签，属于<strong>无监督学习降维</strong>；LDA需要样本标签，属于<strong>有监督学习降维</strong>。二者均是寻找一定的特征向量w来降维的，其中，LDA抓住样本的判别特征，PCA则侧重描叙特征。概括来说，PCA选择样本点投影具有最大方差的方向，LDA选择分类性能最好的方向。</p>
-<p>2、PCA降维是直接和特征维度相关的，比如原始数据是d维的，那么PCA后，可以任意选取1维、2维，一直到d维都行（当然是对应特征值大的那些）。LDA降维是直接和类别的个数C相关的，与数据本身的维度没关系，比如原始数据是d维的，一共有C个类别，那么LDA降维之后，一般就是1维，2维到C-1维进行选择（当然对应的特征值也是最大的一些）。要求降维后特征向量维度大于C-1的，不能使用LDA。<br>     对于很多两类分类的情况，LDA之后就剩下1维，找到分类效果最好的一个阈值貌似就可以了。举个例子，假设图象分类，两个类别正例反例，每个图象10000维特征，那么LDA之后，就只有1维特征，并且这维特征的分类能力最好。</p>
-<p>3、PCA投影的坐标系都是正交的，而LDA根据类别的标注关注分类能力，因此不保证投影到的坐标系是正交的（一般都不正交）</p>
-<p>LDA用于降维，和PCA有很多相同，也有很多不同的地方，因此值得好好的比较一下两者的降维异同点。</p>
-<p>　　　　首先我们看看相同点：</p>
-<p>　　　　1）两者均可以对数据进行降维。</p>
-<p>　　　　2）两者在降维时均使用了矩阵特征分解的思想。</p>
-<p>　　　　3）两者都假设数据符合高斯分布。</p>
-<p>　　　　我们接着看看不同点：</p>
-<p>　　　　1）LDA是有监督的降维方法，而PCA是无监督的降维方法</p>
-<p>　　　　2）LDA降维最多降到类别数k-1的维数，而PCA没有这个限制。</p>
-<p>　　　　3）LDA除了可以用于降维，还可以用于分类。</p>
-<p>　　　　4）LDA选择分类性能最好的投影方向，而PCA选择样本点投影具有最大方差的方向。</p>
+		<h3 id="回文数"><a href="#回文数" class="headerlink" title="回文数"></a>回文数</h3><p><strong>回文数的概念：</strong>即是给定一个数，这个数顺读和逆读都是一样的。例如：121，1221是回文数，123，1231不是回文数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line">    <span class="keyword">import</span> math</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">huiwen</span><span class="params">(chuan)</span>:</span></span><br><span class="line">        length=len(chuan)</span><br><span class="line">        half=math.floor(length/<span class="number">2</span>)</span><br><span class="line">    </span><br><span class="line">        top=<span class="number">0</span></span><br><span class="line">        res=[]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span>  range(half):</span><br><span class="line">            res.append(chuan[i])</span><br><span class="line">    </span><br><span class="line">            top=top+<span class="number">1</span></span><br><span class="line">        top=top<span class="number">-1</span></span><br><span class="line">        <span class="keyword">if</span> length%<span class="number">2</span>==<span class="number">0</span>:</span><br><span class="line">            next=half</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            next=half+<span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> top&gt;=<span class="number">0</span>:</span><br><span class="line">            <span class="keyword">if</span> res[top]==chuan[next]:</span><br><span class="line">                top-=<span class="number">1</span></span><br><span class="line">                next+=<span class="number">1</span></span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> __name__==<span class="string">"__main__"</span>:</span><br><span class="line">        hh=<span class="string">"ahah"</span></span><br><span class="line">        result=huiwen(hh)</span><br><span class="line">        print(result)</span><br></pre></td></tr></table></figure>
+<h3 id="括号的匹配"><a href="#括号的匹配" class="headerlink" title="括号的匹配"></a>括号的匹配</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">SYMBOLS = &#123;<span class="string">'&#125;'</span>: <span class="string">'&#123;'</span>, <span class="string">']'</span>: <span class="string">'['</span>, <span class="string">')'</span>: <span class="string">'('</span>, <span class="string">'&gt;'</span>: <span class="string">'&lt;'</span>&#125;</span><br><span class="line">SYMBOLS_L, SYMBOLS_R = SYMBOLS.values(), SYMBOLS.keys()</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">check</span><span class="params">(s)</span>:</span></span><br><span class="line">    arr = []</span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">        <span class="keyword">if</span> c <span class="keyword">in</span> SYMBOLS_L:</span><br><span class="line">            <span class="comment"># 左符号入栈</span></span><br><span class="line">            arr.append(c)</span><br><span class="line">        <span class="keyword">elif</span> c <span class="keyword">in</span> SYMBOLS_R:</span><br><span class="line">            <span class="comment"># 右符号要么出栈，要么匹配失败</span></span><br><span class="line">            <span class="keyword">if</span> arr <span class="keyword">and</span> arr[<span class="number">-1</span>] == SYMBOLS[c]:</span><br><span class="line">                arr.pop()</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">True</span></span><br></pre></td></tr></table></figure>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -126,7 +116,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://pengyuanqiuqiu.github.io/2018/07/17/pca与lda的区别和联系/" data-title="PCA与LDA的区别和联系 | Jianyu" data-tsina="" class="share clearfix">
+	  <div data-url="https://pengyuanqiuqiu.github.io/2018/07/26/回文数的判断和括号的匹配/" data-title="回文数的判断和括号的匹配 | Jianyu" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -139,19 +129,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2018/07/26/回文数的判断和括号的匹配/" title="回文数的判断和括号的匹配">
-  <strong>上一篇：</strong><br/>
-  <span>
-  回文数的判断和括号的匹配</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2018/07/17/异常值分析/"  title="异常值分析">
+<a href="/2018/07/17/pca与lda的区别和联系/"  title="PCA与LDA的区别和联系">
  <strong>下一篇：</strong><br/> 
- <span>异常值分析
+ <span>PCA与LDA的区别和联系
 </span>
 </a>
 </div>
@@ -168,7 +150,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#回文数"><span class="toc-number">1.</span> <span class="toc-text">回文数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#括号的匹配"><span class="toc-number">2.</span> <span class="toc-text">括号的匹配</span></a></li></ol>
  
   </div>
 
